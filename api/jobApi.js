@@ -6,7 +6,7 @@ export const fecthSerarchResult = (data) => {
 }
 //首页列表接口
 export const fecthIndexTabList = (data) => {
- return  ajax.request('/client/noauth/positionOrders/inquiry',data,'POST',false);
+ return  ajax.request('/client/orders/inquiry',data,'POST',false);
 }
 //获取个人要素
 export const fetchSignUpInfo = () => {

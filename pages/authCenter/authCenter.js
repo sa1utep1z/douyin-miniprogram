@@ -1,5 +1,6 @@
 // pages/authCenter/AuthCenter.js
 import { fetchAuthInfo, twoFactorAuthentication, sendCode } from '../../api/userApi'
+import {idCardNoCheck} from '../../utils/util'
 Page({
 
   /**
@@ -52,19 +53,26 @@ Page({
         });
         return;
       }
-      if(idCard===null || idCard.length===0){
+      if(idCard===null || idCard.length===0 || !idCardNoCheck(idCard)){
         wx.showToast({
-          title: '请输入身份证号',
+          title: '请输入有效身份证号',
           icon:'none',
           duration: 1800
         });
         return;
       }
-      await twoFactorAuthentication({
+      const res = await twoFactorAuthentication({
         name,
         idNo: idCard
       });
-      wx.showToast({
+      if (res.code !== 0) {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'error',
+          duration: 1500
+        });
+      } else {
+        wx.showToast({
         title: '提交成功',
         icon: 'success',
         duration: 1500
@@ -72,6 +80,8 @@ Page({
       wx.navigateBack({
         delta: 0,
       })
+      }
+      
   },
    jumpPrivacy(){
     wx.navigateTo({

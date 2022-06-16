@@ -39,13 +39,21 @@ App({
           }
           const result = await wxCodeAutoLogin(res.code,params)
           if (result.code === 0) {
-            wx.setStorageSync('openId', result.data.openId)
-            wx.setStorageSync('unionId', result.data.unionId)
-            wx.setStorageSync('mobile', result.data.mobile)
-            wx.setStorageSync('userId', result.data.userId)
-            wx.setStorageSync('token', result.data.jwt)
-            console.log("token",result.data.jwt);
-            // this.getGenerateId(result.data.openId);
+            const token = result.data.jwt;
+            if (!token) {
+              // 这里说明是新用户，需要注册
+              wx.navigateTo({
+                url: '../login/login',
+              })
+            } else {
+              wx.setStorageSync('openId', result.data.openId)
+              wx.setStorageSync('unionId', result.data.unionId)
+              wx.setStorageSync('mobile', result.data.mobile)
+              wx.setStorageSync('userId', result.data.userId)
+              wx.setStorageSync('token', result.data.jwt)
+              console.log("token",result.data.jwt);
+              // this.getGenerateId(result.data.openId);
+            }
             resolve(result)
           }
         }

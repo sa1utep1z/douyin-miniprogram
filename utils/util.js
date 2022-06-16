@@ -35,8 +35,17 @@ const  throttle = (fn, gapTime) => {
   }
 }
 
+const idCardNoCheck = (idNo) => {
+  if (!idNo) {
+    return false
+  }
+  const pattern = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+  return pattern.test(idNo)
+}
+
 
 module.exports = {
   formatTime,
-  throttle
+  throttle,
+  idCardNoCheck,
 }

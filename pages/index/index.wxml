@@ -65,7 +65,7 @@
   </block >
   <block wx:if="{{loadingStatus === 2}}">
     <view class="status-finish">
-        <van-divider hairline  contentPosition="center" >{{jobList.length===0?'暂无数据':'由慕慕工主提供技术支持'}}</van-divider>
+        <van-divider hairline  contentPosition="center" >{{jobList.length===0?'暂无数据':'由众鼎提供技术支持'}}</van-divider>
     </view>
   </block>
   </view>
