@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "Item": "../../components/registrationItem/registrationItem",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

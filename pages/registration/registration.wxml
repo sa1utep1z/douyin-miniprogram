@@ -1,0 +1,24 @@
+<!--pages/registration/registration.wxml-->
+<scroll-view 
+  enhanced="{{true}}"  
+  show-scrollbar="{{false}}" 
+  scroll-y="true" style="height:100%;" 
+  class="scroll-view" 
+  lower-threshol="50"  
+  bindscrolltolower="onLoadMore">
+  <view class="container">
+  <block wx:for="{{signUpList}}" wx:key="item">
+    <Item item = "{{item}}"></Item>
+  </block>
+  <block wx:if="{{loadingStatus === 1}}">
+    <view class="status-loading" id="status-loading">
+      <van-loading type="spinner" size="24rpx" color="#999999" >加载中...</van-loading>
+    </view>
+  </block >
+  <block wx:if="{{loadingStatus === 2}}">
+    <view class="status-finish">
+        <van-divider hairline  contentPosition="center" >{{signUpList.length==0?'未查询到记录':'由慕慕工主提供技术支持'}}</van-divider>
+    </view>
+  </block>
+</view>
+</scroll-view>

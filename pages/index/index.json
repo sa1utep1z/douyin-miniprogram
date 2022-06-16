@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-divider": "@vant/weapp/divider/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "SignUpInfo": "../../components/SignUpInfoDialog/SignUpInfoDialog"
+  },
+  "navigationStyle":"custom"
+}

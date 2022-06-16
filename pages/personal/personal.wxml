@@ -1,0 +1,81 @@
+<!--pages/personal/personal.wxml-->
+<view class="container">
+  <view class="block-info">
+    <view class="flex-row">
+      <image class="info-avatar" src="{{userInfo.weChatIconUrl===null?'../../assets/images/public/icon_default_head.png':userInfo.weChatIconUrl}}"></image>
+      <view class="info-column">
+        <view type="userNickName" class="info-name"><text>{{userInfo.weChatName===null?'微信用户':userInfo.weChatName}}</text></view>
+        <view class="info-slogan">天天领日薪</view>
+      </view>
+      <view class="info-auth" wx:if="{{false}}">去实名认证></view>
+    </view>
+  </view>
+  <view class="block-wallet">
+    <image src="../../assets/images/personal/img_personal_bg.png" class="block-wallet-bg"/>
+    <view class="wallet-title">我的余额(元)</view>
+    <view class="wallet-amount">{{showAmt===true?userInfo.balance:'****'}}</view>
+    <image class="wallet-eye" src="{{showAmt?'../../assets/images/personal/icon_eye_show.png':'../../assets/images/personal/icon_eye_hide.png'}}" bindtap="handleEye"/>
+    <view class="wallet-widthdraw" bindtap="handleWithdraw">
+      <text>提现</text><image class="wallet-widthdraw-arrow" src="../../assets/images/personal/icon_right_arrrow.png"/>
+    </view>
+  </view>
+  <view class="block-manager" wx:if="{{userInfo.recruiter===false&&userInfo.recruiterName!==null}}">
+    <view class="manager-title">客服专员</view>
+    <view class="flex-row">
+      <image class="manager-avatar" src="{{userInfo.recruiterAvatar===null?'../../assets/images/public/icon_default_head.png':userInfo.recruiterAvatar}}"></image>
+      <view class="manager-column">
+        <view class="manager-name">{{userInfo.recruiterName}}</view>
+        <view class="manager-company">众鼎直聘</view>
+      </view>
+      <view class="manager-phone" bindtap="handelPhoneCall">电话咨询</view>
+      <view class="manager-wechat" bindtap="handelCopyWechat">添加微信</view>
+    </view>
+  </view>
+  <view class="block-action">
+    <view class="action-title">常用功能</view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="auth">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_auth.png"/>
+      <view class="action-lable">实名认证</view>
+      <view class="action-tag" wx:if="{{userInfo.validation}}">已认证</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
+    <van-divider hairline />
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="recruiter-verify">
+      <image class="action-icon" src="../../assets/images/personal/icon_recruiter_verify.png"/>
+      <view class="action-lable">招聘员认证</view>
+      <view class="action-tag" wx:if="{{userInfo.recruiter}}">已认证</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
+    <van-divider hairline />
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="member">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_staff.png"/>
+      <view class="action-lable">邀请记录</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
+    <van-divider hairline  wx:if="{{userInfo.recruiter===true}}" />
+    <view class="action-row" wx:if="{{userInfo.recruiter===true}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="staff">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_member.png"/>
+      <view class="action-lable">成员信息</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
+    <van-divider hairline  wx:if="{{userInfo.recruiter===false}}"/>
+    <view class="action-row"  wx:if="{{userInfo.recruiter===false}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="registration">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_register.png"/>
+      <view class="action-lable">我的报名</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
+    <van-divider hairline  />
+    <view class="action-row"   bindtap="handelMenuClick" hover-class="hover-class" data-tag="balance">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_blance.png"/>
+      <view class="action-lable">账单明细</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
+    <van-divider hairline />
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="feedback">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_suggestion.png"/>
+      <view class="action-lable">意见反馈</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
+  </view>
+</view>
+

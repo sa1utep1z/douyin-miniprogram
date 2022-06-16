@@ -1,0 +1,30 @@
+<!--pages/privacyProtocol/privacyProtocol.wxml-->
+<view class="container">
+  <view class="p_head">
+    <view class="text1" style="text-align:right">版本号：202111V1</view>
+    <view class="text1" style="text-align:right">本版本实行日期：2021年11月25日</view>
+    <view class="p_txt">尊敬的众鼎直聘用户：</view>
+    <view class="p_txt">众鼎直聘（包括网站、APP、H5）由本公司深圳市众鼎人力资源有限公司（以下简称
+      “我们”）运营，<text>我们将通过本政策向您说明在您使用众鼎直聘时，我们会如何收集、保存、使用、共享、转让、披露及保护您的个人信息（个人信息的定义及举例可在本政策的最后部分查看），并说明您享有的权利及需承担的义务。本政策适用于我们为您提供的所有相关服务。</text>如您不同意本政策授权条款的部分或全部，应当停止使用众鼎直聘或注销众鼎直聘账户。
+    </view>
+    <view class="p_txt">本政策将帮助您了解以下内容：</view>
+    <view class="p_txt"><text>1. 我们如何收集、使用您的个人信息</text></view>
+    <view class="p_txt"><text>2. 我们如何使用 Cookie 和同类技术</text></view>
+    <view class="p_txt"><text>3. 我们如何共享、转让、披露您的个人信息</text></view>
+    <view class="p_txt"><text>4. 我们如何保护您的个人信息</text></view>
+    <view class="p_txt"><text>5. 您的权利</text></view>
+    <view class="p_txt"><text>6. 关于无民事行为能力人或限制民事行为能力人的个人信息保护</text></view>
+    <view class="p_txt"><text>7. 本政策如何更新</text></view>
+    <view class="p_txt"><text>8. 如何联系我们</text></view>
+    <view class="p_txt"><text>9. 效力和法律适用</text></view>
+    <view class="p_txt"></view>
+    <view class="p_txt">
+      <view>
+        我们深知个人信息对您的重要性，并会全力保护您的个人信息安全。我们致力于维持您对我们的信任，恪守以下原则，保护您的个人信息：权责一致原则、目的明确原则、选择同意原则、最少够用原则、公开透明原则、确保安全原则、主体参与原则等。同时，我们承诺，我们将按业界成熟的安全标准，采取相应的安全保护措施来保护您的个人信息。
+      </view>
+      <view>
+        您在使用众鼎直聘时，我们将按照本政策收集、保存、使用、共享、转让、披露及保护您的个人信息，因此<text>我们强列建议您认真完整地阅读本政策的所有条款，做出您认为适当的选择。我们努力用通俗易懂、简明扼要的文字表达，并对本政策中与您个人信息及权利义务存在重大关系的内容采用加粗的形式提示您注意，请您重点阅读。一旦您使用或继续使用众鼎直聘，即表示您同意我们按照本政策（含更新版本）处理您的个人信息。如对本政策有任何疑问，您可以通过本政策中「如何联系我们」一节提供的联系方式/客服系统与我们联系。</text>
+      </view>
+    </view>
+  </view>
+</view>

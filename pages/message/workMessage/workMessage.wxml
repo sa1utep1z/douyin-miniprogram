@@ -1,0 +1,28 @@
+<!--pages/workMessage/workMessage.wxml-->
+<wxs module="tools" src="../../../utils/util.wxs"></wxs>
+<view class="container">
+<scroll-view  wx:if="{{!showEmptyView}}" scroll-y="{{true}}" show-scrollbar="{{false}}" class="scroll-view " show-scrollbar="{{false}}" lower-threshold="50" bindscrolltolower="onLoadMore">
+  <view class="message-box" wx:for="{{messageList}}" wx:key="index"  bindtap="handleItemTab" data-index="{{index}}">
+    <view class="message-row">
+      <view class="message-titile">{{item.title}}</view>
+      <view class="message-date">{{tools.formatMessageTime(item.createdDate)}}</view>
+    </view>
+    <text class="message-content">{{item.content}}</text>
+    <view class="{{item.hasRead === false? 'read-dot':''}}"></view>
+  </view>
+  <block wx:if="{{loadingStatus === 1}}">
+    <view class="status-loading" id="status-loading">
+      <van-loading type="spinner" size="24rpx" color="#999999" >加载中...</van-loading>
+    </view>
+  </block >
+  <block wx:if="{{loadingStatus === 2}}">
+    <view class="status-finish">
+        <van-divider hairline  contentPosition="center" >{{messageList.length>10?'由慕慕工主提供技术支持':'没有更多了'}}</van-divider>
+    </view>
+  </block>
+</scroll-view>
+  <view class="empty-view" wx:if="{{showEmptyView}}">
+    <image src="../../../assets/images/public/img_empty.png" class="empty-image"></image>
+    <view class="empty-text">暂无工作通知</view>
+  </view>
+</view>

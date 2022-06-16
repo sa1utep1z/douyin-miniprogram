@@ -1,0 +1,90 @@
+/* pages/login/login.wxss */
+page {
+  width: 100%;
+  height: 100%;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.brand {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 32rpx;
+}
+.brand-company {
+  height: 60rpx;
+  font-size: 44rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  text-align: left;
+  color: #333333;
+  line-height: 60rpx;
+}
+.brand-slogan {
+  height: 40rpx;
+  font-size: 28rpx;
+  text-align: left;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+  line-height: 40rpx;
+  margin-top: 12rpx;
+  margin-bottom: 86rpx;
+}
+.logo {
+  width: 630rpx;
+  height: 468rpx;
+  margin-bottom: 120rpx;
+}
+.login-wechat-btn {
+  width: 622rpx !important;
+  height: 92rpx !important;
+  background: #018EFF;
+  border-radius: 46rpx;
+  height: 92rpx !important;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 92rpx ;
+}
+.login-mobile-btn {
+  width: 622rpx !important;
+  height: 92rpx !important;
+  border-radius: 46rpx;
+  border: 1rpx solid #F1F1F1;
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #999999 !important;
+  background-color: white !important;
+  line-height: 92rpx;
+}
+button::after {
+  border: none;
+}
+
+.law_text {
+  width: 100%;
+  height: 30rpx;
+  font-size: 24rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #999999;
+  line-height: 30rpx;
+  position:absolute;
+  bottom: 80rpx;
+  left: 0;
+}
+.law-text-blue {
+  color: #018EFF;
+  margin-left: 2rpx;
+  text-decoration:underline; 
+}

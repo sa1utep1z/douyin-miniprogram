@@ -1,0 +1,24 @@
+<!--pages/withdraw/withdraw.wxml-->
+<view>
+  <view class="container">
+    <view class="view-target">
+      <view class="view-target-title"><text>提现至</text></view>
+      <view class="view-target-row">
+        <image src="../../assets/images/public/ic_wx_logo.png" class="view-target-img"></image>
+        <view>
+          <view class="view-target-account"><text>微信零钱账户</text></view>
+          <view class="view-target-time"><text>预计2小时内到账</text></view>
+        </view>
+      </view>
+    </view>
+    <view class="amt-view">
+      <view class="amt-title"><text>提现金额</text></view>
+      <view class="amt-row">
+        <view class="amt-label"><text>￥</text></view>
+        <input bindinput="onInputValue" type="digit" class="amt-input" placeholder="请输入提现金额（满50元可提现）" value="{{inputValue}}" placeholder-style="input-placeholder"></input>
+      </view>
+      <view class="amt-tip-row amt-tip" ><text>当前钱包余额{{totalAmt}}元，</text><text class="action-all" bindtap="handleWithdrawAll">全部提现</text></view>
+    </view>
+    <button class="action-btn" disabled="{{inputValue===null||inputValue<=0}}" bindtap="handleWithdraw">确定</button>
+  </view>
+</view>

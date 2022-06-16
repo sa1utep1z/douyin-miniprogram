@@ -1,0 +1,2 @@
+<!--components/CustomButton/CustomButton.wxml-->
+<button class="custom-button" bindtap="handleClick" disabled="{{ disabled }}">{{ text }}</button>

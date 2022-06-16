@@ -1,0 +1,53 @@
+/* pages/privacyProtocol/privacyProtocol.wxss */
+.container{
+  background: #fff;
+  padding: 30rpx;
+  line-height: 1.6;
+  text-align: justify;
+  color: #5b6975;
+  font-size: 24rpx;
+}
+.text1 {
+  font-weight: bold;
+}
+.bold-underline {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.mt {
+  margin-top: 20rpx;
+}
+.mt1 {
+  margin-top: 40rpx;
+}
+.p_txt {
+  margin-top: 20rpx;
+}
+.table{
+  display: table;
+  border: 1px solid #cccccc;
+  font-size: 24rpx;
+}
+.table-head{
+  display: table-row;
+  border-collapse: collapse;
+  border: 1rpx solid #586975;
+}
+.text_center {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #cccccc;
+}
+.text_center>text{
+  font-weight: bold;
+}
+.table-td{
+  width: 230rpx;
+}
+.th_left{
+  width: 100rpx;
+}
+.strong_underline{
+  text-decoration: underline;
+}

@@ -1,0 +1,21 @@
+/* components/CustomButton/CustomButton.wxss */
+/* components/MyButton.wxss */
+button[disabled]:not([type]){
+  background: #018EFF;
+  opacity: 0.6;
+  color: #fff;
+}
+
+.custom-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100% !important;
+  height: 90rpx;
+  background-color: #018EFF;
+  color: #fff;
+  border-radius: 50rpx;
+  font-weight: normal;
+  font-size: 36rpx;
+  padding: 0;
+}

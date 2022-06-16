@@ -1,0 +1,79 @@
+<!--index.wxml-->
+<view style= "height: {{statusNavBarHeight}}px;" class="navigator">
+  <view class="search-box" style="height: {{height}}px; margin-top: {{top}}px;" bindtap="handleSearch">
+    <image class="search-icon" src="../../assets/images/public/icon_search.png"></image>
+    <view class="search-text">职位或公司</view>
+  </view>
+</view>
+<scroll-view  enhanced="{{true}}"  show-scrollbar="{{false}}" scroll-y="true" class="scroll-view" lower-threshol="50"  bindscrolltolower="onLoadMore">
+  <view class="container"  style="padding-top: {{statusNavBarHeight}}px;">
+  <view class="swipe-view">
+    <swiper indicator-dots autoplay interval="{{4000}}" indicator-color="rgba(255,255,255, .5)" indicator-active-color="#ffffff">
+      <block wx:for="{{bannerList}}" wx:key="*this">
+        <swiper-item>
+          <image class="swiper-item" src="{{item}}" bindtap="onBannerClick" data-bean="{{item}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="tab-view">
+    <block wx:for="{{workType}}" wx:key="index">
+      <view class="tab-item" bindtap="onTabClicked" data-index="{{index}}">
+        <view class="tab-item-title {{listSearchType===index?'tab-title-active':'tab-title-normal'}}">{{item.title}}</view>
+        <view class="{{listSearchType===index?'tab-item-sub-active':'tab-item-sub'}}">{{item.subTitle}}</view>
+      </view>
+    </block>
+  </view>
+  <block wx:for="{{jobList}}" wx:key="index">
+    <view class="job-view" bindtap="handleItemClick" data-item="{{item}}" >
+      <view class="job-head-row">
+        <image class="job-image" src="{{item.positionImage}}"></image>
+        <view class="job-right-column">
+          <view class="job-title">{{item.jobName}}</view>
+          <block wx:if="{{item.tags.length<=3}}">
+            <view class="job-tag-row" >
+              <view class="job-tag" wx:for="{{item.tags}}" wx:key="index">{{item}}</view>
+            </view>
+          </block>
+          <block wx:if="{{item.tags.length>3}}">
+            <view class="job-tag-row" >
+              <view class="job-tag">{{item.tags[0]}}</view>
+              <view class="job-tag" >{{item.tags[1]}}</view>
+              <view class="job-tag" >{{item.tags[2]}}</view>
+            </view>
+          </block>
+         
+          <view class="job-price-row">
+            <view class="job-price">{{item.salaryStart}}-{{item.salaryEnd}}<text class="job-price-unit">元/月</text></view>
+            <view class="job-position">{{item.area}}</view>
+          </view>
+        </view>
+      </view>
+      <van-divider hairline  class="van-divider-item"/>
+      <view class="job-action-row">
+        <view class="job-des">天天好工作，天天领日薪</view>
+        <view class="job-inner-row">
+          <view class="job-register" catchtap="onSignUp" data-id="{{item.id}}">立即报名</view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{loadingStatus === 1}}">
+    <view class="status-loading" id="status-loading">
+      <van-loading type="spinner" size="24rpx" color="#999999" >加载中...</van-loading>
+    </view>
+  </block >
+  <block wx:if="{{loadingStatus === 2}}">
+    <view class="status-finish">
+        <van-divider hairline  contentPosition="center" >{{jobList.length===0?'暂无数据':'由慕慕工主提供技术支持'}}</van-divider>
+    </view>
+  </block>
+  </view>
+  <van-overlay show="{{ showSuccess }}" bind:click="onClickHide">
+    <view class="wrapper">
+      <image class="success"src="https://shanks-prod.oss-cn-shenzhen.aliyuncs.com/shanks-manager/labor/public/img_register_success.png" />
+    </view>
+  </van-overlay>
+</scroll-view>
+<SignUpInfo show="{{showSignDialog}}" position="{{jobId}}" bind:showSignInfo= "onChangeDialog"></SignUpInfo>
+

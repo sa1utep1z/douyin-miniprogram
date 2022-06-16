@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-divider": "@vant/weapp/divider/index",
+    "SignUpInfo": "../../components/SignUpInfoDialog/SignUpInfoDialog",
+    "van-popup": "@vant/weapp/popup/index"
+  },
+  "navigationBarTitleText": "岗位详情"
+}
