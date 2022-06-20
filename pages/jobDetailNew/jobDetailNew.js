@@ -3,6 +3,7 @@ import { fetchJobDetail, fetchSignUpInfo } from '../../api/jobApi'
 import urlConfig from '../../utils/urlConfig';
 import { fetchShareUrlParam ,fetchShareImgCode, fetchPostArguments} from '../../api/userApi'
 import GPS from '../../utils/map';
+import { parseWorkerType, parseWorkEvnConstants, parseEmployRequiredConstants } from './constants'
 Page({
 
   /**
@@ -14,6 +15,9 @@ Page({
       showShareDialog: false,
       detailBean: null,
       isHide: false,
+      workerType: '',
+      workEvnInfo: [],
+      employRequired: []
   },
 
   /**
@@ -56,8 +60,12 @@ Page({
       gps,
     }
     const res = await fetchJobDetail( jobId, params );
+    const resData = res.data;
     this.setData({
-      detailBean: res.data,
+      detailBean: resData,
+      workerType: parseWorkerType(resData),
+      workEvnInfo: parseWorkEvnConstants(resData),
+      employRequired: parseEmployRequiredConstants(resData)
     });
   },
   getLocation: function () { 
@@ -126,6 +134,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.info('adfdffsdf')
     //从其他页面回来之后刷新
     const { isHide } = this.data;
     if (isHide) {

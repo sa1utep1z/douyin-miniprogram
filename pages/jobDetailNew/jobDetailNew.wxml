@@ -20,9 +20,11 @@
       <text class="job-des-text">{{util.formatTimeYMD(detailBean.orderDate)}}</text>
     </view>
     <view class="job-tag-row">
-      <view class="job-type-tag">{{detailBean.typeOfWork==='FORMAL_WORKER'?'正式工':'小时工'}}</view>
+      <view class="job-type-tag">{{workerType}}</view>
       <view class="job-type-tag">招{{detailBean.wantedNum}}人</view>
-      <view class="job-tag" wx:for="{{detailBean.tags}}" wx:key="index">{{item}}</view>
+    </view>
+    <view class="job-tag-row-block">
+      <view class="job-tag-block" wx:for="{{detailBean.tags}}" wx:key="index">{{item}}</view>
     </view>
   </view>
   <view class="manager-view" wx:if="{{detailBean.recruiterInfo}}" >
@@ -35,20 +37,6 @@
     <view class="manager-wechat" bindtap="handelCopyWechat">添加微信</view>
   </view>
   <view class="detail-block">
-    <view class="detail-item-request">招聘要求</view>
-    <view wx:for="{{detailBean.jobRequest}}" class="detail-item">
-      <view class="detail-item-name">{{item.name}}</view>
-      <view class="detail-item-value"><rich-text nodes="{{item.value}}" space="nbsp" /></view>
-    </view>
-  </view>
-  <view class="detail-block">
-    <view class="detail-item-request">岗位描述</view>
-    <view wx:for="{{detailBean.positionDescribe}}" class="detail-item">
-      <view class="detail-item-name">{{item.name}}</view>
-      <view class="detail-item-value"><rich-text nodes="{{item.value}}" space="nbsp" /></view>
-    </view>
-  </view>
-  <view class="detail-block">
     <view class="detail-item-request">薪资待遇</view>
     <view  class="detail-item">
       <view class="detail-item-name">发薪日</view>
@@ -56,14 +44,50 @@
     </view>
     <view  class="detail-item">
       <view class="detail-item-name">薪资详情</view>
-      <view class="detail-item-value"><rich-text nodes="{{detailBean.treatment}}" space="nbsp" /></view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.salaryDetails || '无'}}" space="nbsp" /></view>
+    </view>
+  </view>
+  <view class="detail-block">
+    <view class="detail-item-request">工作环境</view>
+    <view wx:for="{{workEvnInfo}}" class="detail-item">
+      <view class="detail-item-name">{{item.name}}</view>
+      <view class="detail-item-value"><rich-text nodes="{{item.value || '无'}}" space="nbsp" /></view>
+    </view>
+  </view>
+  <view class="detail-block">
+    <view class="detail-item-request">录用要求</view>
+    <view class="detail-item">
+      <view class="detail-item-name">年龄</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.ageRequired || '无'}}" space="nbsp" /></view>
+    </view>
+    <view wx:for="{{employRequired}}" class="detail-item">
+      <view class="detail-item-name">{{item.name}}</view>
+      <view class="detail-item-value"><rich-text nodes="{{item.value || '无'}}" space="nbsp" /></view>
+    </view>
+    <view class="detail-item">
+      <view class="detail-item-name">行程码</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.itineraryCode || '无'}}" space="nbsp" /></view>
+    </view>
+    <view class="detail-item">
+      <view class="detail-item-name">核酸</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.nucleicAcid || '无'}}" space="nbsp" /></view>
+    </view>
+    <view class="detail-item">
+      <view class="detail-item-name">疫苗接种</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.vaccination || '无'}}" space="nbsp" /></view>
+    </view>
+  </view>
+  <view class="detail-block">
+    <view class="detail-item-request">企业简介</view>
+    <view  class="detail-item">
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.companyIntroduction || '无'}}" space="nbsp" /></view>
     </view>
   </view>
   <view class="detail-block">
     <view class="detail-item-request">工作地点</view>
     <view  class="detail-item">
       <view class="detail-item-name">厂址</view>
-      <view class="detail-item-value" bindtap="handleNav"><text style="color: #67B0F2;">{{detailBean.city}}{{detailBean.area}}{{detailBean.addressDetail}}</text></view>
+      <view class="detail-item-value" bindtap="handleNav"><text style="color: #67B0F2;">{{detailBean.companyAddress}}</text></view>
     </view>
   </view>
   
@@ -92,11 +116,11 @@
   <view class="share-title">立即分享给好友</view>
   <view class="dialog-share">
     <button open-type="share" class="btn-share" plain="{{true}}">
-      <image src="https://shanks-prod.oss-cn-shenzhen.aliyuncs.com/shanks-manager/labor/public/icon_wx_logo.png" class="share-icon"></image>
+      <image src="https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/icon_wx_logo.png" class="share-icon" />
       <view>分享好友</view>
     </button>
     <button  class="btn-share" bindtap="onCreateCode" plain="{{true}}">
-      <image src="https://shanks-prod.oss-cn-shenzhen.aliyuncs.com/shanks-manager/labor/public/icon_linetime_logo.png" class="share-icon"></image>
+      <image src="https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/icon_linetime_logo.png" class="share-icon" />
       <view>分享朋友圈</view>
     </button>
   </view>

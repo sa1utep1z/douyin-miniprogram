@@ -40,12 +40,12 @@
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
     <van-divider hairline />
-    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="recruiter-verify">
+    <!-- <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="recruiter-verify">
       <image class="action-icon" src="../../assets/images/personal/icon_recruiter_verify.png"/>
       <view class="action-lable">招聘员认证</view>
       <view class="action-tag" wx:if="{{userInfo.recruiter}}">已认证</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
-    </view>
+    </view> -->
     <van-divider hairline />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="member">
       <image class="action-icon" src="../../assets/images/personal/icon_action_staff.png"/>

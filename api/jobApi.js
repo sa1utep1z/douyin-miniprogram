@@ -37,5 +37,5 @@ export const userSignUp = (id,data) => {
 
   //岗位详情
 export const fetchJobDetail = (id,data) => {
-  return  ajax.request(`/client/noauth/positionOrders/${id}`,data,'POST');
+  return  ajax.request(`/client/orders/${id}`,data,'GET');
  }

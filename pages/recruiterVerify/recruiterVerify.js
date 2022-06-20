@@ -7,6 +7,7 @@ Page({
    */
   data: {
     mobile: '',
+    oldMobile: '',
     smsCode: '',
     sendBtnText: '获取验证码',
     timer: null,
@@ -25,6 +26,7 @@ Page({
     const res = await fetchRecruiterAuthInfo();
     this.setData({
       mobile: res.data.recruiterMobile,
+      oldMobile: res.data.recruiterMobile,
     });
   },
 
@@ -90,7 +92,7 @@ Page({
   },
 
   handleSendCode: async function () {
-    const {  mobile, sendBtnText } = this.data;
+    const {  mobile, oldMobile, sendBtnText } = this.data;
     const reg_tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
      if (!reg_tel.test(mobile)) {
        wx.showToast({
@@ -100,6 +102,14 @@ Page({
        });
        return;
      }
+     if (oldMobile && oldMobile === mobile) {
+      wx.showToast({
+        title: '手机号一致，无法获取',
+        icon:'none',
+        duration: 1500
+      });
+      return
+    }
      const res = await sendCode(mobile);
      if (res.code === 0) {
        this.onSendCodeSuccess();

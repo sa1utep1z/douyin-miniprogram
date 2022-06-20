@@ -79,6 +79,15 @@ page{
   box-sizing: border-box;
   margin-top: 12rpx;
 }
+.job-tag-row-block {
+  width: 100%;
+  display: block;
+  align-items: center;
+  padding-left: 24rpx;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
+  margin-top: 12rpx;
+}
 .job-type-tag {
   height: 34rpx;
   font-size: 24rpx;
@@ -112,6 +121,21 @@ page{
   line-height: 34rpx;
   border-radius: 4rpx;
   margin-left: 12rpx;
+}
+.job-tag-block {
+  display: block;
+  float: left;
+  height: 34rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  padding: 0 8rpx;
+  background: #F5F5F5;
+  color: #666666;
+  line-height: 34rpx;
+  border-radius: 4rpx;
+  margin-right: 12rpx;
+  margin-bottom: 12rpx;
 }
 .job-title {
   width: 100%;

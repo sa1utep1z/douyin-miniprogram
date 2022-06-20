@@ -71,7 +71,7 @@
   </view>
   <van-overlay show="{{ showSuccess }}" bind:click="onClickHide">
     <view class="wrapper">
-      <image class="success"src="https://shanks-prod.oss-cn-shenzhen.aliyuncs.com/shanks-manager/labor/public/img_register_success.png" />
+      <image class="success"src="https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/img_register_success.png" />
     </view>
   </van-overlay>
 </scroll-view>
