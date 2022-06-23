@@ -1,22 +1,8 @@
 <!--index.wxml-->
 <view style= "height: {{statusNavBarHeight}}px;" class="navigator">
-  <view  style="height: {{height}}px; margin-top: {{top}}px;" class="title-bar">
-    <view class="search-box" style="height: {{height}}px">
-      <image class="search-icon" src="../../assets/images/public/icon_search.png"/>
-      <input 
-        value="{{keyWord}}"
-        class="search-text" 
-        placeholder="请输入职位或公司"
-        type="number"
-        bindconfirm="handleSearchConfirm"
-        bindinput="handleSearchInput"
-        ></input>
-      <image 
-        src="../../assets/images/public/icon_delete.png"
-        wx:if="{{keyWord.length>0}}"
-        class="clear-text"
-        bindtap="handleRest"/>
-    </view>
+  <view class="search-box" style="height: {{height}}px; margin-top: {{top}}px;" bindtap="handleSearch">
+    <image class="search-icon" src="../../assets/images/public/icon_search.png"></image>
+    <view class="search-text">职位或公司</view>
   </view>
 </view>
 <scroll-view  enhanced="{{true}}"  show-scrollbar="{{false}}" scroll-y="true" class="scroll-view" lower-threshol="50"  bindscrolltolower="onLoadMore">
@@ -90,3 +76,4 @@
     </view>
   </van-overlay>
 </scroll-view>
+<SignUpInfo show="{{showSignDialog}}" position="{{jobId}}" bind:showSignInfo= "onChangeDialog"></SignUpInfo>

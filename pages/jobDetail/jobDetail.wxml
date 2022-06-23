@@ -104,7 +104,6 @@
   </view>
 </view>
 </view>
-<SignUpInfo show="{{showSignDialog}}" position="{{jobId}}" bind:showSignInfo= "onChangeDialog"></SignUpInfo>
 <van-popup
   show="{{ showShareDialog }}"
   position="bottom"

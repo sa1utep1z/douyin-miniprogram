@@ -258,8 +258,13 @@ page{
   top: 0;
   z-index: 99;
 }
+.title-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .search-box {
-  width: 488rpx;
+  width: 424rpx;
   background: rgba(0, 0, 0,0.07);
   border-radius: 32rpx;
   display: flex;
@@ -268,7 +273,6 @@ page{
   align-items: center;
 }
 .search-text {
-  width: 250rpx;
   height: 40rpx;
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
@@ -281,6 +285,12 @@ page{
   height: 32rpx;
   margin-left: 24rpx;
   margin-right: 4rpx;
+}
+
+.clear-text {
+  width: 32rpx;
+  height: 32rpx;
+  padding: 0 24rpx;
 }
 
 

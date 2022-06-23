@@ -11,7 +11,6 @@ Page({
    */
   data: {
       jobId: '',
-      showSignDialog: false,
       showShareDialog: false,
       detailBean: null,
       isHide: false,
@@ -201,14 +200,9 @@ Page({
   
   },
   handleRegister: async function (e) {
-    const { showSignDialog } = this.data; 
     const res = await fetchSignUpInfo();
     if (res.data.enable) {
-      if( !showSignDialog ) {
-        this.setData({
-          showSignDialog: true,
-        });
-      }   
+      console.info('点击了报名。。。。')  
     } else {
       wx.showToast({
         title: '您有正在报名中的岗位，暂时无法报名',
@@ -216,12 +210,6 @@ Page({
         duration: 2500,
       });
     } 
-  },
-
-  onChangeDialog: function (e) {
-    this.setData(({
-      showSignDialog: e.detail,
-    }))
   },
   /**
    * 生命周期函数--监听页面隐藏
