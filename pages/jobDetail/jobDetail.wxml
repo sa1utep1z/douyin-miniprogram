@@ -12,27 +12,23 @@
     </swiper>
   </view>
   <view class="job-view">
-    <view class="job-price">{{detailBean.salaryStart}}-{{detailBean.salaryEnd}}元</view>
-    <view class="job-tag-row">
-      <view class="job-type-tag">{{detailBean.typeOfWork==='FORMAL_WORKER'?'正式工':'小时工'}}</view>
-      <view class="job-des-tag">{{util.formatTags(detailBean.tags)}}</view>
-    </view>
     <view class="job-title">{{detailBean.jobName}}</view>
     <view class="horizontal-divider"></view>
-    <view class="job-action-row">
-      <view class="job-des">
-        <image class="job-des-icon" src="../../assets/images/index/icon_man.png"></image>
-        <text class="job-des-text">招聘{{detailBean.wantedNum}}人</text>
-      </view>
-      <view class="job-divider"/>
-      <view class="job-des">
-        <image class="job-des-icon" src="../../assets/images/index/icon_time.png"/>
-        <text class="job-des-text">{{util.formatTimeYMD(detailBean.orderDate)}}</text>
-      </view>
+    <view class="job-price-row">
+      <view class="job-tip">综合薪资</view>
+      <view class="job-price">{{detailBean.salaryStart}}-{{detailBean.salaryEnd}}元</view>
+      <text class="job-des-text">{{util.formatTimeYMD(detailBean.orderDate)}}</text>
+    </view>
+    <view class="job-tag-row">
+      <view class="job-type-tag">{{workerType}}</view>
+      <view class="job-type-tag">招{{detailBean.wantedNum}}人</view>
+    </view>
+    <view class="job-tag-row-block">
+      <view class="job-tag-block" wx:for="{{detailBean.tags}}" wx:key="index">{{item}}</view>
     </view>
   </view>
-  <view class="manager-view" wx:if="{{detailBean.recruiterInfo}}">
-    <image class="manager-avatar" src="{{detailBean.avatar === ''||detailBean.avatar ===null?'../../assets/images/personal/img_head.png':detailBean.avatar}}"></image>
+  <view class="manager-view" wx:if="{{detailBean.recruiterInfo}}" >
+    <image class="manager-avatar" src="{{detailBean.recruiterInfo.avatar ===null?'../../assets/images/public/icon_default_head.png' : detailBean.recruiterInfo.avatar}}"></image>
     <view class="manager-column">
       <view class="manager-name">{{detailBean.recruiterInfo.name}}</view>
       <view class="manager-company">众鼎直聘</view>
@@ -40,30 +36,61 @@
     <view class="manager-phone" bindtap="handelPhoneCall">电话咨询</view>
     <view class="manager-wechat" bindtap="handelCopyWechat">添加微信</view>
   </view>
-  <view class="detail-view">
-    <view class="detail-view-title">岗位详情</view>
-      <view class="detail-title">薪资待遇</view>
-      <rich-text nodes="{{detailBean.treatment}}" space="nbsp" class="detail-content"/>
-      <view class="detail-title" wx:if="{{detailBean.jobRequest}}">任职要求</view>
-      <text class="detail-content" wx:if="{{detailBean.jobRequest}}">{{detailBean.jobRequest}}</text>
-      <view class="detail-title">企业简介</view>
-      <text class="detail-content" style="text-indent:2em">{{detailBean.companyIntroduction}}</text>
+  <view class="detail-block">
+    <view class="detail-item-request">薪资待遇</view>
+    <view  class="detail-item">
+      <view class="detail-item-name">发薪日</view>
+      <view class="detail-item-value">{{detailBean.payday}}日</view>
+    </view>
+    <view  class="detail-item">
+      <view class="detail-item-name">薪资详情</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.salaryDetails || '/'}}" space="nbsp" /></view>
+    </view>
   </view>
-  <view class="address-view">
-    <view class="address-title">工作地点</view>
-    <view class="address-row">
-      <view class="address-column">
-        <view class="address-content">{{detailBean.city}}{{detailBean.area}}{{detailBean.addressDetail}}</view>
-        <view class="address-detail">
-          <text class="address-detail-text">距你{{util.formatDistance(detailBean.distance)}}</text>
-        </view>
-      </view>
-      <view class="address-nav" bindtap="handleNav" hover-class="common-hover-class">
-        <image class="address-nav-icon" src="../../assets/images/index/icon_navgition.png"></image>
-        <view class="address-nav-text">去这里</view>
-      </view>
-      </view>
+  <view class="detail-block">
+    <view class="detail-item-request">工作环境</view>
+    <view wx:for="{{workEvnInfo}}" class="detail-item">
+      <view class="detail-item-name">{{item.name}}</view>
+      <view class="detail-item-value"><rich-text nodes="{{item.value || '/'}}" space="nbsp" /></view>
+    </view>
   </view>
+  <view class="detail-block">
+    <view class="detail-item-request">录用要求</view>
+    <view class="detail-item">
+      <view class="detail-item-name">年龄</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.ageRequired || '/'}}" space="nbsp" /></view>
+    </view>
+    <view wx:for="{{employRequired}}" class="detail-item">
+      <view class="detail-item-name">{{item.name}}</view>
+      <view class="detail-item-value"><rich-text nodes="{{item.value || '/'}}" space="nbsp" /></view>
+    </view>
+    <view class="detail-item">
+      <view class="detail-item-name">行程码</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.itineraryCode || '/'}}" space="nbsp" /></view>
+    </view>
+    <view class="detail-item">
+      <view class="detail-item-name">核酸</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.nucleicAcid || '/'}}" space="nbsp" /></view>
+    </view>
+    <view class="detail-item">
+      <view class="detail-item-name">疫苗接种</view>
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.vaccination || '/'}}" space="nbsp" /></view>
+    </view>
+  </view>
+  <view class="detail-block">
+    <view class="detail-item-request">企业简介</view>
+    <view  class="detail-item">
+      <view class="detail-item-value"><rich-text nodes="{{detailBean.companyIntroduction || '/'}}" space="nbsp" /></view>
+    </view>
+  </view>
+  <view class="detail-block">
+    <view class="detail-item-request">工作地点</view>
+    <view  class="detail-item">
+      <view class="detail-item-name">厂址</view>
+      <view class="detail-item-value" bindtap="handleNav"><text style="color: #67B0F2;">{{detailBean.companyAddress}}</text></view>
+    </view>
+  </view>
+  
   <view class="float-view">
     <view class="float-column" bindtap="handleQuestion">
       <image class="float-icon" src="../../assets/images/index/icon_phone.png"></image>

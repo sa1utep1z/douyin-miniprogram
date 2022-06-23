@@ -67,13 +67,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
   handleItemTab: async function (e) {
     const { index } = e.currentTarget.dataset;
     const { messageList } = this.data;

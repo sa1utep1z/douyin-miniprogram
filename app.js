@@ -18,9 +18,15 @@ App({
   },
 
   parseScene: async  function (scene) {
+    wx.setStorageSync('shareSceneId', scene);
     const res =  await  fetchPostArguments(scene);
-    wx.setStorageSync('recommendId', res.data.recommendId);
-    wx.setStorageSync('jobId', res.data.jobId);
+    const {recommendId, jobId} = res.data;
+    if (recommendId) {
+      wx.setStorageSync('recommendId', recommendId);
+    }
+    if (jobId) {
+      wx.setStorageSync('jobId', jobId);
+    }
    },
 
 
@@ -30,14 +36,7 @@ App({
       wx.login({
         success: async (res) => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          const recommendId = wx.getStorageSync('recommendId');
-          let params = { };
-          if (recommendId) {
-            params = {
-              recommendId,
-            }
-          }
-          const result = await wxCodeAutoLogin(res.code,params)
+          const result = await wxCodeAutoLogin(res.code)
           if (result.code === 0) {
             const token = result.data.jwt;
             if (!token) {

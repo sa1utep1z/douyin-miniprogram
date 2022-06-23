@@ -5,8 +5,8 @@ export const wxBindPhoneLogin = (data) => {
   return ajax.authRequest(`/client/noauth/login/wxBuildInPhone`, 'POST', data);
 };
 // 微信自动登录
-export const wxCodeAutoLogin = (code, data) => {
-  return ajax.authRequest(`/client/noauth/login/code/${code}`, 'POST',data);
+export const wxCodeAutoLogin = (code) => {
+  return ajax.authRequest(`/client/noauth/login/code/${code}`, 'POST');
 };
 // 微信手机号验证码登录
 export const wxCustomPhoneLogin = (data) => {

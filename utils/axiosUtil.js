@@ -17,7 +17,7 @@ const handleLoginInvalid = () => {
   wx.removeStorageSync('userId');
   wx.removeStorageSync('openId');
   wx.navigateTo({
-    url: '/pages/login/login'
+    url: '/pages/index/index'
   });
 }
 function _showToast(title = '网络错误', duration = 2000) {

@@ -61,6 +61,7 @@ Page({
       const { code } = this.data;
       const channelCode = wx.getStorageSync('channelCode') || null;
       const recommendId = wx.getStorageSync('recommendId')||null;
+      const shareSceneId = wx.getStorageSync('shareSceneId')||null;
       const longitude = wx.getStorageSync('longitude');
       const latitude = wx.getStorageSync('latitude');
       let gps = null;
@@ -70,8 +71,7 @@ Page({
           latitude
         }
       }
-      console.log("recommendId:",recommendId);
-      const params = { code, encryptedData, iv, channelCode, recommendId, gps };
+      const params = { code, encryptedData, iv, channelCode, recommendId, shareSceneId, gps };
       try {
         const result = await wxBindPhoneLogin(params);
         wx.hideLoading();

@@ -33,14 +33,16 @@
     <view class="title-orange">邀请好友列表</view>
     <view class="share-row">
       <text class="record-title" >手机尾号</text>
-      <text class="record-title" >注册时间</text>
+      <text class="record-title" >邀请时间</text>
+      <text class="record-title" >注册成功</text>
       <text class="record-title" >红包发放</text>
     </view> 
     <scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" lower-threshold="50" bindscrolltolower="onLoadMore" class="scroll-view" >
       <view class="list-row" wx:for="{{memberList}}" wx:key="registerTime"> 
-            <text class="list-name">{{item.mobile}}</text>
-            <text class="list-date">{{util.formatTimeYMD(item.registerTime)}}</text>
-            <text class="list-amt">{{item.reward}}</text>
+        <text class="list-name">{{item.mobile}}</text>
+        <text class="list-date">{{util.formatTimeYMD(item.registerTime)}}</text>
+        <text class="list-name">{{item.validation ? '是' : '否'}}</text>
+        <text class="list-amt">{{item.reward}}</text>
       </view>
       <block wx:if="{{loadingStatus === 1}}">
         <view class="status-loading" id="status-loading">

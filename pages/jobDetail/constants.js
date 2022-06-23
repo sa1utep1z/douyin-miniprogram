@@ -89,7 +89,7 @@ const parseWorkerType = (dataBean) => {
 
 // 定义解析bean的工作环境信息
 const parseWorkEvnConstants = (dataBean) => {
-  return employRequired.map((constant) => {
+  return workEnv.map((constant) => {
     const result = {name: constant.value, value: ''}
     if (dataBean[constant.key]) {
       result.value = constant.options.find((val) => val.value === dataBean[constant.key])?.label;
@@ -100,7 +100,7 @@ const parseWorkEvnConstants = (dataBean) => {
 
 // 定义解析bean的录用要求信息
 const parseEmployRequiredConstants = (dataBean) => {
-  return workEnv.map((constant) => {
+  return employRequired.map((constant) => {
     const result = {name: constant.value, value: ''}
     if (dataBean[constant.key]) {
       result.value = constant.options.find((val) => val.value === dataBean[constant.key])?.label;

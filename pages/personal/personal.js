@@ -71,9 +71,14 @@ Page({
     const { tag } = e.currentTarget.dataset;
     switch(tag) {
       case 'registration':
-        wx.navigateTo({
-          url: '../../pages/registration/registration',
-        })
+        wx.showToast({
+          title: '系统升级中，请稍后提现，给您造成不便，请见谅！',
+          duration: 3000,
+          icon: 'none',
+        });
+        // wx.navigateTo({
+        //   url: '../../pages/registration/registration',
+        // })
         break;
       case 'member':
         wx.navigateTo({
@@ -81,19 +86,6 @@ Page({
         })
         break;
       case 'feedback':
-
-        // wx.navigateToMiniProgram({
-        //   appId: 'wxd24d9057cd83d47a',
-        //   path: '/pages/card/auth?mchid=1616301928&sub_mchid=1616820741&sub_appid=wx759361aec0212f93&token=23a81826-95a2-46cd-b6e9-18a041823baf&openid=oFPUB4_DnnAPwSZWW7_q4cVqw7Hc',
-        //   success: (res) => {
-        //     wx.showToast({
-        //       title: '授权成功',
-        //     });
-        //     console.log(res);
-        //   },
-        //   fail: (res) => {},
-        //   complete: (res) => {},
-        // })
         wx.navigateTo({
           url: '../../pages/feedback/feedback',
         })
@@ -194,13 +186,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   },
 

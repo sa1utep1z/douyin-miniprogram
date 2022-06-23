@@ -3,6 +3,7 @@ import { fetchJobDetail, fetchSignUpInfo } from '../../api/jobApi'
 import urlConfig from '../../utils/urlConfig';
 import { fetchShareUrlParam ,fetchShareImgCode, fetchPostArguments} from '../../api/userApi'
 import GPS from '../../utils/map';
+import { parseWorkerType, parseWorkEvnConstants, parseEmployRequiredConstants } from './constants'
 Page({
 
   /**
@@ -14,22 +15,31 @@ Page({
       showShareDialog: false,
       detailBean: null,
       isHide: false,
+      workerType: '',
+      workEvnInfo: [],
+      employRequired: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { jobId, recommendId } = options;
+    const { jobId, recommendId, shareSceneId } = options;
     if (recommendId) {
       wx.setStorageSync('recommendId', recommendId);
       wx.setStorageSync('isSharePosition', true);
+    }
+    // 这个是分享参数id
+    if (shareSceneId) {
+      wx.setStorageSync('isSharePosition', true);
+      wx.setStorageSync('shareSceneId', shareSceneId);
     }
     if(jobId){
       this.setData({
         jobId,
       });
     }
+    // 这个是分享海报携带的分享参数id
     if (options.scene){
       wx.setStorageSync('isSharePosition', true);
       this.parseScene(options.scene);
@@ -56,8 +66,12 @@ Page({
       gps,
     }
     const res = await fetchJobDetail( jobId, params );
+    const resData = res.data;
     this.setData({
-      detailBean: res.data,
+      detailBean: resData,
+      workerType: parseWorkerType(resData),
+      workEvnInfo: parseWorkEvnConstants(resData),
+      employRequired: parseEmployRequiredConstants(resData)
     });
   },
   getLocation: function () { 
@@ -242,23 +256,38 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: async function () {
-    const res = await fetchShareUrlParam();
-    const { jobId, detailBean } = this.data;
-    this.setData({
-      showShareDialog: false,
-    })
-    return  {
-      imageUrl: detailBean.companyImages[0],
-      title: `${detailBean.jobName},好岗位，一起来`,
-      path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${res.data.memberId}`, 
-    }
-  },
+//   onShareAppMessage: async function () {
+//     const longitude = wx.getStorageSync('longitude');
+//     const latitude = wx.getStorageSync('latitude');
+//     let gps = null;
+//     if (longitude && latitude){
+//        gps = {
+//         longitude,
+//         latitude
+//       }
+//     }
+//     const res = await fetchShareUrlParam(gps);
+//     const {shareSceneId, memberId} = res.data;
+//     const { jobId, detailBean } = this.data;
+//     this.setData({
+//       showShareDialog: false,
+//     })
+//     return  {
+//       imageUrl: detailBean.companyImages[0],
+//       title: `${detailBean.jobName},好岗位，一起来`,
+//       path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
+//     }
+//   },
   
   onShare: function (e) {
-    this.setData({
-      showShareDialog: true,
-    })
+    wx.showToast({
+      title: '暂不支持岗位分享！敬请谅解',
+      duration: 3000,
+      icon: 'none',
+    });
+    // this.setData({
+    //   showShareDialog: true,
+    // })
   },
   onClose: function (e) {
     this.setData({
@@ -276,9 +305,14 @@ Page({
   },
   parseScene: async  function (scene) {
     try {
-      const res =  await  fetchPostArguments(scene);
-      wx.setStorageSync('recommendId', res.data.recommendId);
-      wx.setStorageSync('jobId', res.data.jobId);
+      const res =  await fetchPostArguments(scene);
+      const {recommendId, jobId} = res.data;
+      if (recommendId) {
+        wx.setStorageSync('recommendId', recommendId);
+      }
+      if (jobId) {
+        wx.setStorageSync('jobId', jobId);
+      }
       console.log("获取到海报参数");
       console.log("res.data.jobId");
       this.setData({

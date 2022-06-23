@@ -66,13 +66,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
   handleCall: function (event) {
     const { phone } = event.currentTarget.dataset;
     if( phone ) {

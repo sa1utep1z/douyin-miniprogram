@@ -17,11 +17,15 @@
       <van-divider hairline/>
     </view>
     <view class="member-row">
-      <view class="member-text">注册时间</view>
+      <view class="member-text">邀请时间</view>
       <view class="member-text">{{util.formatTimeYMD(item.registerTime)}}</view>
     </view>
     <view class="van-divider-container">
       <van-divider hairline />
+    </view>
+    <view class="member-row">
+      <view class="member-text">注册成功</view>
+      <view class="member-text">{{item.validation ? '是' : '否'}}</view>
     </view>
     <view class="member-row">
       <view class="member-text">获得奖励</view>

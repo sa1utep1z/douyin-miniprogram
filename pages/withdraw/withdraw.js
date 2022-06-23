@@ -64,12 +64,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   onInputValue: function (e) {
     let price = e.detail.value;
     price = price.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符

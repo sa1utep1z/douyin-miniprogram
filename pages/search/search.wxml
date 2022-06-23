@@ -40,11 +40,18 @@
               <image class="job-image" src="{{item.positionImage}}"></image>
               <view class="job-right-column">
                 <view class="job-title">{{item.jobName}}</view>
-                <view class="job-tag-row">
-                  <view class="job-tag">宿舍</view>
-                  <view class="job-tag">长白班</view>
-                  <view class="job-tag">包吃包住</view>
-                </view>
+                <block wx:if="{{item.tags.length<=3}}">
+                  <view class="job-tag-row" >
+                    <view class="job-tag" wx:for="{{item.tags}}" wx:key="index">{{item}}</view>
+                  </view>
+                </block>
+                <block wx:if="{{item.tags.length>3}}">
+                  <view class="job-tag-row" >
+                    <view class="job-tag">{{item.tags[0]}}</view>
+                    <view class="job-tag" >{{item.tags[1]}}</view>
+                    <view class="job-tag" >{{item.tags[2]}}</view>
+                  </view>
+                </block>
                 <view class="job-price-row">
                   <view class="job-price">{{item.salaryStart}}-{{item.salaryEnd}}<text class="job-price-unit">元/月</text></view>
                   <view class="job-position">{{item.area}}</view>
@@ -53,7 +60,8 @@
             </view>
             <van-divider hairline  class="van-divider-item"/>
             <view class="job-action-row">
-              <view class="job-des">推荐奖励:200   日薪借支:150</view>
+              <view class="job-des">{{item.recommendExplain || ''}}<span style="color: red;">{{item.recommendAmount || ''}}</span></view>
+              <view class="job-des">{{item.debtExplain || ''}}<span style="color: red;">{{item.debtAmount || ''}}</span></view>
               <view class="job-inner-row">
                 <view class="job-register" catchtap="onSignUp" data-id="{{item.id}}">立即报名</view>
               </view>

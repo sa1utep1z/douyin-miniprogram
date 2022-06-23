@@ -27,10 +27,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     const { recommendId } =  options;
+     const { recommendId, shareSceneId } =  options;
      if (recommendId) {
        wx.setStorageSync('recommendId', recommendId);
      }
+     if (shareSceneId) {
+      wx.setStorageSync('shareSceneId', shareSceneId);
+    }
     //  if (options.scene) {
     //    console.log(options.scene);
     //    const scene = decodeURIComponent(options.scene);
@@ -56,8 +59,12 @@ Page({
     // if (needParseArg) {
     // const res =   await fetchShareScene();
     // }
-    this.onRefresh();
-    this.getSharedRecord();
+    // 用登录信息才获取
+    const userId = wx.getStorageSync('userId')
+    if (userId) {
+      this.onRefresh();
+      this.getSharedRecord();
+    }
   },
 
   /**
@@ -146,9 +153,10 @@ Page({
       }
     }
     const res = await fetchShareUrlParam(gps);
+    const {memberId, shareSceneId} = res.data;
     return  {
       title: '注册有好礼哦，好工作一起来！',
-      path: `/pages/money/money?recommendId=${res.data.memberId}`, 
+      path: `/pages/money/money?recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
     }
   },
 
@@ -175,33 +183,33 @@ Page({
     }
     this.setLoadingStart();
     const params = {
-      pageNumber,
-      pageSize,
+      pageNumber: pageNumber,
+      pageSize: pageSize,
     };
-      const res = await fetchShareList(params);
-      const totalPages = res.data.totalPages;
-      if(pageNumber === 0) {
-        this.setData({
-          memberList: res.data.content,
-        })
-      } else {
-        this.setData({
-          memberList: memberList.concat(res.data.content),
-        })
-      }
-      if(pageNumber < totalPages-1){
-        this.setLoadingReady();
-        this.setData({
-          pageNumber: pageNumber + 1,
-        });
-      } else {
-        this.setLoadingNoMore();
-      }
+    const res = await fetchShareList(params);
+    const totalPages = res.data.totalPages;
+    if(pageNumber === 0) {
+      this.setData({
+        memberList: res.data.content,
+      })
+    } else {
+      this.setData({
+        memberList: memberList.concat(res.data.content),
+      })
+    }
+    if(pageNumber < totalPages-1){
+      this.setLoadingReady();
+      this.setData({
+        pageNumber: pageNumber + 1,
+      });
+    } else {
+      this.setLoadingNoMore();
+    }
   },
   onRefresh: function (e) {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,   
+      pageNumber: 0,
     });
     this.onLoadMore();
   },

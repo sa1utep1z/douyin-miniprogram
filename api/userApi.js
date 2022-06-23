@@ -22,8 +22,8 @@ export const fetchShareUrlParam = (data) => {
    }
 
   //领钱推荐页展示的已推荐列表（领钱页面的统计）
-  export const fetchShareList = () => {
-    return  ajax.request('/client/member/invitation/list',null,'POST',false);
+  export const fetchShareList = (data) => {
+    return  ajax.request('/client/member/invitation/list',data,'POST',false);
    }
   //存入分享记录
   export const countInviteRecord = () => {

@@ -81,12 +81,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   onLoadMore: async function (e) {
     const { pageNumber, pageSize, loadingStatus, recordList, type} = this.data;
     if ( loadingStatus!==0 ) {

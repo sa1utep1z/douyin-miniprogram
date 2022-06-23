@@ -2,7 +2,7 @@
 import ajax from '../utils/axiosUtil';
 //搜索接口
 export const fecthSerarchResult = (data) => {
- return  ajax.request('/client/noauth/positionOrders/search',data,'POST');
+ return  ajax.request('/client/orders/search',data,'POST');
 }
 //首页列表接口
 export const fecthIndexTabList = (data) => {
@@ -10,7 +10,7 @@ export const fecthIndexTabList = (data) => {
 }
 //获取个人要素
 export const fetchSignUpInfo = () => {
-  return  ajax.request('/client/jobHunter/info',null,'GET');
+  return  ajax.request('/client/member/signUp/pre/info',null,'GET');
  }
 //报名前校验手机号
 export const sendValidCode = (mobile) => {
@@ -27,7 +27,7 @@ export const userCancelSignUp = (id) => {
  }
  //获取用户报名列表
 export const fetchUserSignUpList = (data) => {
-  return  ajax.request('/client/signUp/info',data,'POST');
+  return  ajax.request('/client/member/signUp/list',data,'POST');
  }
 
  //用户报名

@@ -11,7 +11,6 @@
     "pages/message/workMessage/workMessage",
     "pages/message/accountMessage/accountMessage",
     "pages/jobDetail/jobDetail",
-    "pages/jobDetailNew/jobDetailNew",
     "pages/registration/registration",
     "pages/search/search",
     "components/SignUpInfoDialog/SignUpInfoDialog",

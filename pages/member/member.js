@@ -63,13 +63,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
   // 拨打推荐人电话
   handlePhoneCall: function (e) {
     const { recommendMobile } = this.data;

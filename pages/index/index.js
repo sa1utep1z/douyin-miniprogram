@@ -27,13 +27,13 @@ Page({
   },
 
   onLoad: function (options) {
-    const { recommendId } =  options;
+    const { recommendId, scene } =  options;
     if (recommendId) {
       wx.setStorageSync('recommendId', recommendId);
     }
-    console.log(options);
-    if (options.scene) {
-      this.parseScene(options.scene);
+    console.log('options', options);
+    if (scene) {
+      this.parseScene(scene);
     }
     wx.getLocation({
       type: 'wgs84',
@@ -93,7 +93,7 @@ Page({
   onJobClicked: function (e) {
     const { bean } = e.currentTarget.dataset;
     wx.navigateTo({
-      url: '../../pages/jobDetailNew/jobDetailNew',
+      url: '../../pages/jobDetail/jobDetail',
     })
   },
   onLoadMore: async function (e) {
@@ -185,7 +185,7 @@ Page({
   handleItemClick: function (e) {
     const { item } = e.currentTarget.dataset;
     wx.navigateTo({
-      url: `../../pages/jobDetailNew/jobDetailNew?jobId=${item.id}`,
+      url: `../../pages/jobDetail/jobDetail?jobId=${item.id}`,
     });
   }, 
   handleSearch: function (e) {
@@ -219,9 +219,16 @@ Page({
   },
 
   parseScene: async  function (scene) {
-   const res =  await  fetchPostArguments(scene);
-   wx.setStorageSync('recommendId', res.data.recommendId);
-   wx.setStorageSync('jobId', res.data.jobId);
+    // 缓存分享参数id
+    wx.setStorageSync('shareSceneId', scene);
+    const res =  await  fetchPostArguments(scene);
+    const {recommendId, jobId} = res.data;
+    if (recommendId) {
+      wx.setStorageSync('recommendId', recommendId);
+    }
+    if (jobId) {
+      wx.setStorageSync('jobId', jobId);
+    }
   },
    /**
    * 生命周期函数--监听页面隐藏

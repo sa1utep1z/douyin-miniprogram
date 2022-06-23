@@ -66,12 +66,6 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   downloadPost: function () {
     const { postUrl } = this.data;
     wx.saveImageToPhotosAlbum({
@@ -102,10 +96,13 @@ Page({
       api = '/client/member/invite/qrcode';
     }
     const url =  baseUrl+ api;
+    const longitude = wx.getStorageSync('longitude');
+    const latitude = wx.getStorageSync('latitude');
     wx.downloadFile({
-      url:  url,
+      url: `${url}?longitude=${longitude}&latitude=${latitude}`,
       header: {
         'X-User-Token': wx.getStorageSync('token') || '',
+        'userId':  wx.getStorageSync('userId') || '',
       },
       success: (res)=> {
         console.log(res);
