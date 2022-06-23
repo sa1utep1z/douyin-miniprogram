@@ -3,8 +3,10 @@ import { fetchPostArguments } from '../../api/userApi'
 Page({
   data: {
     bannerList: [
-      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner%402x.png',
-      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner%402x.png',],
+      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner1.jpg',
+      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner2.png',
+      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner3.png'
+    ],
     listSearchType: 0,
     workType: [
       { title: '全部', subTitle: '高薪名企', value: 'ALL'},

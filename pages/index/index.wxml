@@ -7,7 +7,7 @@
         value="{{keyWord}}"
         class="search-text" 
         placeholder="请输入职位或公司"
-        type="number"
+        type="text"
         bindconfirm="handleSearchConfirm"
         bindinput="handleSearchInput"
         ></input>
