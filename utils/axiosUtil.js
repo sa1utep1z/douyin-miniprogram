@@ -45,6 +45,7 @@ function ajaxInterceptorsRequest(needLoading = true, loadingTitle = '加载中')
   initHeader['X-User-Token'] = wx.getStorageSync('token') || '';
   initHeader['userId'] = wx.getStorageSync('userId') || '';
   initHeader['X-User-Platform'] = 'wechat';
+  initHeader['X-Device'] = 'mini_program'
 }
 
 function formatResponse(response) {

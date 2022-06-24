@@ -11,7 +11,7 @@ Page({
     pageNumber: 0,
     pageSize: 15,
     loadingStatus: 0,
-    typeArr: ['','INCOME','EXPENSES'],
+    typeArr: ['','PAYOFF','WITHDRAW'],
     type: '',
   },
 
