@@ -1,5 +1,5 @@
 // components/SignUpInfoDialog/SignUpInfoDialog.js
-import { fetchSignUpInfo, sendValidCode, userSignUp} from '../../api/jobApi'
+import { signUpClick, sendValidCode, userSignUp} from '../../api/jobApi'
 Component({
   /**
    * 组件的属性列表

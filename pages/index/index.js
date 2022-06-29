@@ -1,4 +1,4 @@
-import { fecthIndexTabList, fetchSignUpInfo } from '../../api/jobApi'
+import { fecthIndexTabList, signUpClick } from '../../api/jobApi'
 import { fetchPostArguments } from '../../api/userApi'
 Page({
   data: {
@@ -220,16 +220,19 @@ Page({
     });
   },
   onSignUp: async function (e) {
-    const res = await fetchSignUpInfo();
-    if (res.data.enable) {
-      console.info('点击了报名。。。。');
-    } else {
+    const { id } = e.currentTarget.dataset;
+    const params = {orderId: id};
+    const res = await signUpClick(params);
+    if (res.code !== 0) {
       wx.showToast({
-        title: '您有正在报名中的岗位，暂时无法报名',
-        icon: 'none',
-        duration: 2500,
-      })
-    }  
+        title: res.msg,
+        icon: 'error',
+      }); 
+    }
+    wx.showToast({
+      title: '报名成功',
+      icon: 'success',
+    }); 
   },
 
   parseScene: async  function (scene) {
