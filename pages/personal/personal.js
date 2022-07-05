@@ -97,7 +97,7 @@ Page({
       break;
       case 'auth':
         wx.navigateTo({
-          url: '../../pages/authDisplay/authDisplay',
+          url: '../../pages/authDisplayNew/authDisplayNew',
         });
         break;
       case 'staff':

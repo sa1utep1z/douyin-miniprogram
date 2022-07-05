@@ -77,7 +77,7 @@ export const fetchShareUrlParam = (data) => {
 
   //实名获取验证码
   export const sendCode = (mobile) => {
-    return  ajax.request(`/client/recruiterAuth/${mobile}/validCode`,null,'GET');
+    return  ajax.request(`/sms/sendSmsCode/auth/${mobile}`,null,'GET');
    }
 
 //获取成员信息列表
