@@ -11,6 +11,7 @@ Page({
     mobile: '',
     idCard: '',
     smsCode: '',
+    validation: false,
     timer: null,
     sendBtnText: '获取验证码',
   },
@@ -28,6 +29,7 @@ Page({
       name: res.data.name,
       idCard: res.data.idNo,
       mobile: res.data.mobile,
+      validation: res.data.validation,
     });
   },
 
