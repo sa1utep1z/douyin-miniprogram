@@ -2,7 +2,7 @@
 <wxs src="../../utils/util.wxs" module="util"></wxs>
 <scroll-view scroll-y="{{true}}" class="scroll-view " show-scrollbar="{{false}}" lower-threshold="50" bindscrolltolower="onLoadMore">
   <view class="recommend-view" wx:if="{{recommendMobile}}">
-    <view class="recommend-title">推荐人</view>
+    <view class="recommend-title">客服专员</view>
     <view class="recommend-row">
       <view class="member-text">联系电话</view>
       <view class="member-phone" bindtap="handlePhoneCall">{{recommendMobile}}</view>
