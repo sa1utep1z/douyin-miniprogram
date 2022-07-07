@@ -42,7 +42,7 @@ Component({
     onCancelSignUp: async function (e) {
       const { item } = this.data;
       await userCancelSignUp(item.id);
-      item.status = 'SIGN_UP_NO_INTENTION';
+      item.canCancelSignUp = false;
       this.setData({
         item,
       });

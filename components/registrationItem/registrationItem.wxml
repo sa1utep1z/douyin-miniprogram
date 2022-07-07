@@ -1,16 +1,23 @@
 <!--pages/registration/registrationItem/registrationItem.wxml-->
 <wxs src="./registration.wxs" module="tool"></wxs>
 
-<view class="list-item" bindtap="onItemClick">
+<view class="list-item">
   <view class="item-row">
     <view class="job-title">{{item.jobName}}</view>
     <view class="job-price">{{item.salaryStart}}-{{item.salaryEnd}}<text class="job-price-unit">元/月</text></view>
   </view>
-  <view class="job-tag-row">
-    <block wx:for="{{item.tags}}" wx:key="index">
-      <view class="job-tag">{{item}}</view>
-    </block>
-  </view>
+  <block wx:if="{{item.tags.length<=3}}">
+    <view class="job-tag-row" >
+      <view class="job-tag" wx:for="{{item.tags}}" wx:key="index">{{item}}</view>
+    </view>
+  </block>
+  <block wx:if="{{item.tags.length>3}}">
+    <view class="job-tag-row" >
+      <view class="job-tag">{{item.tags[0]}}</view>
+      <view class="job-tag" >{{item.tags[1]}}</view>
+      <view class="job-tag" >{{item.tags[2]}}</view>
+    </view>
+  </block>
   <view class="item-row item-row-company">
     <view class="company-name">{{item.companyName}}</view>
     <view class="company-address">{{item.city}}·{{item.area}}</view>
@@ -18,6 +25,6 @@
   <van-divider hairline></van-divider>
   <view class="time-view">
     <view class="time-text">{{tool.formatTime(item.signUpTime)}}</view>
-    <view class="confirm-btn" catchtap="onCancelSignUp" wx:if="{{item.status === 'SIGN_UP_PENDING'||item.status === 'SIGN_UP_CONSIDER'}}">取消报名</view>
+    <view class="confirm-btn" catchtap="onCancelSignUp" wx:if="{{item.canCancelSignUp}}">取消报名</view>
   </view>
 </view>

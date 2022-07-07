@@ -23,7 +23,7 @@ export const userConfirmSignUp = (id) => {
  }
   //用户在报名列表取消报名
 export const userCancelSignUp = (id) => {
-  return  ajax.request(`/client/${id}/none/desire`,'','PUT');
+  return  ajax.request(`/client/member/signUp/${id}/cancelSignUp`,'','PUT');
  }
  //获取用户报名列表
 export const fetchUserSignUpList = (data) => {
