@@ -124,7 +124,6 @@ Page({
     this.onRefresh();
   },
   onLoadMore: async function (e) {
-    console.info('加载更多。。')
     const { pageNumber, memberList, pageSize, loadingStatus, listSearchType, returnVisitType} = this.data;
     if ( loadingStatus!==0 ) {
       console.log('过滤无效请求');

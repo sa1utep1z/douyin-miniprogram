@@ -2,17 +2,15 @@
 page{
   width: 100%;
   height: 100%;
-  background-color:#f8f8f8;
+  background-color:#FFFFFF;
 }
 .member-container {
-  width: 686rpx;
+  width: 100%;
   background: #FFFFFF;
-  padding:12rpx 24rpx;
 }
 /* tab样式 开始 */
 .tab-view {
-  z-index: 999999;
-  position:fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -48,8 +46,10 @@ page{
 /* tab样式 结束 */
 
 .scroll-view {
+  position: fixed;
+  top: 130rpx;
+  left: 0;
   width: 100%;
-  margin-top: 130rpx;
   max-height: 1600rpx;
 }
 
@@ -143,7 +143,6 @@ page{
 }
 
 
-/* components/SignUpInfoDialog/SignUpInfoDialog.wxss */
 .container {
   width: 100%;
   height: 100%;
