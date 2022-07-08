@@ -1,10 +1,12 @@
-import { fecthIndexTabList, fetchSignUpInfo } from '../../api/jobApi'
+import { fecthIndexTabList, signUpClick } from '../../api/jobApi'
 import { fetchPostArguments } from '../../api/userApi'
 Page({
   data: {
     bannerList: [
-      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner%402x.png',
-      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner%402x.png',],
+      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner1.jpg',
+      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner2.png',
+      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner3.png'
+    ],
     listSearchType: 0,
     workType: [
       { title: '全部', subTitle: '高薪名企', value: 'ALL'},
@@ -22,8 +24,9 @@ Page({
     navBarHeight: 0,
     height: 0,
     top: 0,
-    showSignDialog: false,
     jobId: '',
+    keyWord: '',
+    oldKeyWord: '', // 用于防止重复提交相同筛选条件
   },
 
   onLoad: function (options) {
@@ -97,7 +100,7 @@ Page({
     })
   },
   onLoadMore: async function (e) {
-    const { pageNumber, jobList, pageSize, listSearchType, workType, loadingStatus} = this.data;
+    const { pageNumber, jobList, pageSize, listSearchType, workType, loadingStatus, keyWord} = this.data;
     if ( loadingStatus!==0 ) {
       console.log('过滤无效请求');
       return;
@@ -114,35 +117,63 @@ Page({
       }
     }
     const params = {
+      keyWord,
       pageNumber,
       pageSize,
       searchEnum,
       gps: gps,
     };
-      const res = await fecthIndexTabList(params);
-      const totalPages = res.data.totalPages;
-      if(pageNumber === 0) {
-        this.setData({
-          jobList: res.data.content,
-        })
-      } else {
-        this.setData({
-          jobList: jobList.concat(res.data.content),
-        })
-      }
-      if(pageNumber < totalPages-1){
-        this.setLoadingReady();
-        this.setData({
-          pageNumber: pageNumber + 1,
-        });
-      } else {
-        this.setLoadingNoMore();
-      }
+    const res = await fecthIndexTabList(params);
+    const totalPages = res.data.totalPages;
+    if(pageNumber === 0) {
+      this.setData({
+        jobList: res.data.content,
+      })
+    } else {
+      this.setData({
+        jobList: jobList.concat(res.data.content),
+      })
+    }
+    if(pageNumber < totalPages-1){
+      this.setLoadingReady();
+      this.setData({
+        pageNumber: pageNumber + 1,
+      });
+    } else {
+      this.setLoadingNoMore();
+    }
+  },
+  //处理输入
+  handleSearchInput: function (e) {
+    const { value } = e.detail;
+    this.setData({
+      keyWord: value,
+    });
+  },
+  handleSearchConfirm: async function (e) {
+    const { oldKeyWord } = this.data;
+    const { value } = e.detail
+    console.info(e.detail)
+    if (value && oldKeyWord !== value) {
+      this.setLoadingReady();
+      this.setData({
+        pageNumber: 0,
+        oldKeyWord: value,
+      });
+      this.onLoadMore();
+    }
+  },
+  //重置输入框内容
+  handleRest: function (e) {
+    console.log(e);
+    this.setData({
+      keyWord: '',
+    });
   },
   onRefresh: function (e) {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,   
+      pageNumber: 0,
     });
     this.onLoadMore();
   },
@@ -187,35 +218,21 @@ Page({
     wx.navigateTo({
       url: `../../pages/jobDetail/jobDetail?jobId=${item.id}`,
     });
-  }, 
-  handleSearch: function (e) {
-    wx.navigateTo({
-      url: '../../pages/search/search',
-    });
-  },
-  onChangeDialog: function (e) {
-    this.setData(({
-      showSignDialog: e.detail,
-    }))
   },
   onSignUp: async function (e) {
     const { id } = e.currentTarget.dataset;
-    const { showSignDialog } = this.data;
-    const res = await fetchSignUpInfo();
-    if (res.data.enable) {
-      if( !showSignDialog ) {
-        this.setData({
-          jobId: id,
-          showSignDialog: true,
-        });
-      } 
-    } else {
+    const params = {orderId: id};
+    const res = await signUpClick(params);
+    if (res.code !== 0) {
       wx.showToast({
-        title: '您有正在报名中的岗位，暂时无法报名',
-        icon: 'none',
-        duration: 2500,
-      })
-    }  
+        title: res.msg,
+        icon: 'error',
+      }); 
+    }
+    wx.showToast({
+      title: '报名成功',
+      icon: 'success',
+    }); 
   },
 
   parseScene: async  function (scene) {
@@ -234,13 +251,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    //优化 如果弹框途中 切换了tab，则隐藏弹框
-    const { showSignDialog } = this.data;
-    if (showSignDialog) {
-      this.setData(({
-        showSignDialog: false,
-      }))
-    }
+    
   },
 
 })

@@ -9,8 +9,8 @@ export const fecthIndexTabList = (data) => {
  return  ajax.request('/client/orders/inquiry',data,'POST',false);
 }
 //获取个人要素
-export const fetchSignUpInfo = () => {
-  return  ajax.request('/client/member/signUp/pre/info',null,'GET');
+export const signUpClick = (data) => {
+  return  ajax.request('/client/member/signUp',data,'POST');
  }
 //报名前校验手机号
 export const sendValidCode = (mobile) => {
@@ -23,7 +23,7 @@ export const userConfirmSignUp = (id) => {
  }
   //用户在报名列表取消报名
 export const userCancelSignUp = (id) => {
-  return  ajax.request(`/client/${id}/none/desire`,'','PUT');
+  return  ajax.request(`/client/member/signUp/${id}/cancelSignUp`,'','PUT');
  }
  //获取用户报名列表
 export const fetchUserSignUpList = (data) => {

@@ -18,12 +18,20 @@ export const fetchShareUrlParam = (data) => {
 
   //我的邀请记录（领钱页面的统计）
   export const fetchShareRecord = () => {
-    return  ajax.request('/client/member/myInviteRecord',null,'GET',false);
+    return  ajax.request('/client/invite/myInviteRecord',null,'GET',false);
    }
 
   //领钱推荐页展示的已推荐列表（领钱页面的统计）
   export const fetchShareList = (data) => {
-    return  ajax.request('/client/member/invitation/list',data,'POST',false);
+    return  ajax.request('/client/invite/invitation/list',data,'POST',false);
+   }
+   // 招聘员获取归属会员信息，需回访
+  export const fetchBelongPersonList = (data) => {
+    return  ajax.request('/client/invite/belong/list',data,'POST',false);
+   }
+   // 更新回访验证
+  export const updateReturnVisit = (returnVisitId, data) => {
+    return  ajax.request(`/client/invite/returnVisit/${returnVisitId}`,data,'PUT',false);
    }
   //存入分享记录
   export const countInviteRecord = () => {
@@ -57,7 +65,7 @@ export const fetchShareUrlParam = (data) => {
 
   // 用户二要素认证
   export const twoFactorAuthentication = (payload) => {
-    return ajax.request('/client/certification/twoElement', payload, 'POST');
+    return ajax.request('/client/certification/verifyAuth', payload, 'POST');
   }
 
   // 获取用户二要素认证信息
@@ -77,7 +85,7 @@ export const fetchShareUrlParam = (data) => {
 
   //实名获取验证码
   export const sendCode = (mobile) => {
-    return  ajax.request(`/client/recruiterAuth/${mobile}/validCode`,null,'GET');
+    return  ajax.request(`/sms/sendSmsCode/auth/${mobile}`,null,'GET');
    }
 
 //获取成员信息列表

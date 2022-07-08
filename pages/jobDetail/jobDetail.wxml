@@ -104,7 +104,6 @@
   </view>
 </view>
 </view>
-<SignUpInfo show="{{showSignDialog}}" position="{{jobId}}" bind:showSignInfo= "onChangeDialog"></SignUpInfo>
 <van-popup
   show="{{ showShareDialog }}"
   position="bottom"
@@ -113,15 +112,15 @@
   round
   >
 <view class="share-container">
-  <view class="share-title">立即分享给好友</view>
+  <view class="share-title">邀请注册</view>
   <view class="dialog-share">
     <button open-type="share" class="btn-share" plain="{{true}}">
       <image src="https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/icon_wx_logo.png" class="share-icon" />
-      <view>分享好友</view>
+      <view>微信好友</view>
     </button>
     <button  class="btn-share" bindtap="onCreateCode" plain="{{true}}">
       <image src="https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/icon_linetime_logo.png" class="share-icon" />
-      <view>分享朋友圈</view>
+      <view>保存图片</view>
     </button>
   </view>
 </view>

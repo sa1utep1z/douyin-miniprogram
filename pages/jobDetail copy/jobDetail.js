@@ -1,5 +1,5 @@
 // pages/index/jobDetail/jobDetail.js
-import { fetchJobDetail, fetchSignUpInfo } from '../../api/jobApi'
+import { fetchJobDetail, signUpClick } from '../../api/jobApi'
 import urlConfig from '../../utils/urlConfig';
 import { fetchShareUrlParam ,fetchShareImgCode, fetchPostArguments} from '../../api/userApi'
 import GPS from '../../utils/map';
@@ -188,7 +188,7 @@ Page({
   },
   handleRegister: async function (e) {
     const { showSignDialog } = this.data; 
-    const res = await fetchSignUpInfo();
+    const res = await signUpClick();
     if (res.data.enable) {
       if( !showSignDialog ) {
         this.setData({

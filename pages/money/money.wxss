@@ -27,6 +27,9 @@ page::-webkit-scrollbar{
 .image-bg{
   width: 750rpx;
   height: 1124rpx;
+  position: absolute;
+  left: 0;
+  bottom: 220rpx;
  }
  .share-btn{
    width: 100%;

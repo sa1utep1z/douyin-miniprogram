@@ -20,6 +20,10 @@
 .mt1 {
   margin-top: 40rpx;
 }
+.p_title {
+  margin-top: 20rpx;
+  font-weight: bolder;
+}
 .p_txt {
   margin-top: 20rpx;
 }

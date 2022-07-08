@@ -71,14 +71,14 @@ Page({
     const { tag } = e.currentTarget.dataset;
     switch(tag) {
       case 'registration':
-        wx.showToast({
-          title: '系统升级中，请稍后提现，给您造成不便，请见谅！',
-          duration: 3000,
-          icon: 'none',
-        });
-        // wx.navigateTo({
-        //   url: '../../pages/registration/registration',
-        // })
+        // wx.showToast({
+        //   title: '系统升级中，请稍后提现，给您造成不便，请见谅！',
+        //   duration: 3000,
+        //   icon: 'none',
+        // });
+        wx.navigateTo({
+          url: '../../pages/registration/registration',
+        })
         break;
       case 'member':
         wx.navigateTo({
@@ -97,7 +97,7 @@ Page({
       break;
       case 'auth':
         wx.navigateTo({
-          url: '../../pages/authDisplay/authDisplay',
+          url: '../../pages/authDisplayNew/authDisplayNew',
         });
         break;
       case 'staff':

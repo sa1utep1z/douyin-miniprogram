@@ -1,5 +1,5 @@
 // pages/index/jobDetail/jobDetail.js
-import { fetchJobDetail, fetchSignUpInfo } from '../../api/jobApi'
+import { fetchJobDetail, signUpClick } from '../../api/jobApi'
 import urlConfig from '../../utils/urlConfig';
 import { fetchShareUrlParam ,fetchShareImgCode, fetchPostArguments} from '../../api/userApi'
 import GPS from '../../utils/map';
@@ -11,7 +11,6 @@ Page({
    */
   data: {
       jobId: '',
-      showSignDialog: false,
       showShareDialog: false,
       detailBean: null,
       isHide: false,
@@ -201,27 +200,19 @@ Page({
   
   },
   handleRegister: async function (e) {
-    const { showSignDialog } = this.data; 
-    const res = await fetchSignUpInfo();
-    if (res.data.enable) {
-      if( !showSignDialog ) {
-        this.setData({
-          showSignDialog: true,
-        });
-      }   
-    } else {
+    const { jobId } = this.data;
+    const params = {orderId: jobId};
+    const res = await signUpClick(params);
+    if (res.code !== 0) {
       wx.showToast({
-        title: '您有正在报名中的岗位，暂时无法报名',
-        icon: 'none',
-        duration: 2500,
-      });
-    } 
-  },
-
-  onChangeDialog: function (e) {
-    this.setData(({
-      showSignDialog: e.detail,
-    }))
+        title: res.msg,
+        icon: 'error',
+      }); 
+    }
+    wx.showToast({
+      title: '报名成功',
+      icon: 'success',
+    }); 
   },
   /**
    * 生命周期函数--监听页面隐藏
