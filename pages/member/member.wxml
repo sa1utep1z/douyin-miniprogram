@@ -1,45 +1,81 @@
 <!--pages/member/member.wxml-->
 <wxs src="../../utils/util.wxs" module="util"></wxs>
-<scroll-view scroll-y="{{true}}" class="scroll-view " show-scrollbar="{{false}}" lower-threshold="50" bindscrolltolower="onLoadMore">
-  <view class="recommend-view" wx:if="{{recommendMobile}}">
-    <view class="recommend-title">客服专员</view>
-    <view class="recommend-row">
-      <view class="member-text">联系电话</view>
-      <view class="member-phone" bindtap="handlePhoneCall">{{recommendMobile}}</view>
+<view class="member-container">
+  <view class="tab-view">
+    <block wx:for="{{returnVisitType}}" wx:key="index">
+      <view class="tab-item" bindtap="onTabClicked" data-index="{{index}}">
+        <view class="tab-item-title {{listSearchType===index?'tab-title-active':'tab-title-normal'}}">{{item.title}}</view>
+      </view>
+    </block>
+  </view>
+  <scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" lower-threshold="50" bindscrolltolower="onLoadMore" class="scroll-view" >
+    <view class="member-view" wx:for="{{memberList}}" wx:key="{{item}}">
+      <view class="member-row">
+        <view class="member-text">微信昵称</view>
+        <view class="member-text">{{item.weChatName}}</view>
+      </view>
+      <view class="member-row">
+        <view class="member-text">手机号</view>
+        <view class="member-phone" data-item="{{item.mobile}}" bindtap="handlePhoneCall">{{item.mobile}}</view>
+      </view>
+      <view class="member-row">
+        <view class="member-text">注册时间</view>
+        <view class="member-text">{{util.formatTimeYMD(item.registerTime)}}</view>
+      </view>
+      <view class="member-row" style="min-height: 60rpx; height: auto;">
+        <view class="member-text">授权位置</view>
+        <view class="member-text" style="height: auto;">{{item.location}}</view>
+      </view>
+      <view class="member-row">
+        <view class="member-text">获得奖励</view>
+        <view class="member-text">{{item.reward}}</view>
+      </view>
+      <view class="member-row" bindtap="showReturnVisitVerify" data-item="{{item}}">
+        <block wx:if="{{'PREPARING' === item.returnVisitVerify}}">
+          <view class="member-text">回访验证（<span style="color: red; font-weight: bolder;">点击编辑</span>）</view>
+          <view class="member-text">待回访</view>
+        </block>
+        <block wx:if="{{'PASS' === item.returnVisitVerify}}">
+          <view class="member-text">回访验证</view>
+          <view class="member-text" style="color: #00b26a;">通过</view>
+        </block>
+        <block wx:if="{{'NO_PASS' === item.returnVisitVerify}}">
+          <view class="member-text">回访验证</view>
+          <view class="member-text" style="color: red;">不通过</view>
+        </block>
+      </view>
+    </view>
+    <block wx:if="{{loadingStatus === 1}}">
+      <view class="status-loading" id="status-loading">
+        <van-loading type="spinner" size="24rpx" color="#999999" >加载中...</van-loading>
+      </view>
+    </block >
+    <block wx:if="{{loadingStatus === 2}}">
+      <view class="status-finish">
+          <van-divider hairline  contentPosition="center" >{{memberList.length===0?'暂无记录':'由众鼎提供技术支持'}}</van-divider>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+<van-overlay show ="{{showChangeDialog}}"  custom-style="background: rgba(0,0,0,0.5) ">
+  <view class="container">
+    <view class="dialog">
+      <view class="dialog-content">
+        <view class="dialog-title">编辑信息</view>
+        <view class="input-view-required">
+            <text class="input-view-label">回访验证</text>
+            <radio-group class="edit-return-visit-switch" bindchange="changeReturnVisitVerify">
+              <radio value="false" /> 不通过
+              <radio value="true" style="margin-left: 30rpx;" /> 通过
+            </radio-group>
+          </view>
+      </view>
+      <view class="van-divider"></view>
+      <view class="btn-row">
+        <view class="btn-cancel" bindtap="handleCancel">取消</view>
+        <view class="divider"></view>
+        <view class="btn-confirm" bindtap="handleConfirm">确认</view>
+      </view>
     </view>
   </view>
-  <view class="member-view" wx:for="{{memberList}}" wx:key="{{item}}">
-    <view class="member-row">
-      <view class="member-text">手机号</view>
-      <view class="member-text">{{item.mobile}}</view>
-    </view>
-    <view class="van-divider-container">
-      <van-divider hairline/>
-    </view>
-    <view class="member-row">
-      <view class="member-text">邀请时间</view>
-      <view class="member-text">{{util.formatTimeYMD(item.registerTime)}}</view>
-    </view>
-    <view class="van-divider-container">
-      <van-divider hairline />
-    </view>
-    <view class="member-row">
-      <view class="member-text">注册成功</view>
-      <view class="member-text">{{item.validation ? '是' : '否'}}</view>
-    </view>
-    <view class="member-row">
-      <view class="member-text">获得奖励</view>
-      <view class="member-text">{{item.reward}}</view>
-    </view>
-  </view>
-  <block wx:if="{{loadingStatus === 1}}">
-    <view class="status-loading" id="status-loading">
-      <van-loading type="spinner" size="24rpx" color="#999999" >加载中...</van-loading>
-    </view>
-  </block >
-  <block wx:if="{{loadingStatus === 2}}">
-    <view class="status-finish">
-        <van-divider hairline  contentPosition="center" >{{memberList.length===0?'暂无记录':'由众鼎提供技术支持'}}</van-divider>
-    </view>
-  </block>
-</scroll-view>
+</van-overlay>

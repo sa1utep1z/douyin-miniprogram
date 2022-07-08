@@ -9,7 +9,9 @@ Page({
   data: {
     name: '',
     mobile: '',
+    oldMobile: '',
     idCard: '',
+    oldIdCard: '',
     smsCode: '',
     validation: false,
     timer: null,
@@ -28,7 +30,9 @@ Page({
     this.setData({
       name: res.data.name,
       idCard: res.data.idNo,
+      oldIdCard: res.data.idNo,
       mobile: res.data.mobile,
+      oldMobile: res.data.mobile,
       validation: res.data.validation,
     });
   },
@@ -118,7 +122,14 @@ Page({
     }
   },
   handleSendCode: async function () {
-    const {  mobile, sendBtnText } = this.data;
+    const {  mobile, oldMobile, oldIdCard } = this.data;
+    if (oldIdCard && mobile === oldMobile) {
+      wx.showToast({
+        title: '手机号一致，勿重复操作',
+        icon: 'none',
+      });
+      return;
+    }
     const reg_tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
      if (!reg_tel.test(mobile)) {
        wx.showToast({
