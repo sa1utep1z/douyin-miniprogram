@@ -10,8 +10,8 @@ Page({
     returnVisitType: [
       { title: '全部', value: ''},
       { title: '待回访', value: 'PREPARING'},
-      { title: '通过', value: 'PASS' },
       { title: '不通过', value: 'NO_PASS' },
+      { title: '通过', value: 'PASS' },
     ],
     pageSize: 15,
     pageNumber: 0,
