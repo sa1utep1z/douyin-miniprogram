@@ -12,8 +12,8 @@ const urlUat = {
 };
 // 生产环境地址
 const urlProd = {
-  authUrl: '',
-  baseUrl: '', 
+  authUrl: 'https://gateway-external.qiyebaobao.com/labormgt-backend',
+  baseUrl: 'https://gateway-external.qiyebaobao.com/labormgt-backend', 
   traceUrl: '',
 };
 let env = (wx.getAccountInfoSync()).miniProgram.envVersion || '';
