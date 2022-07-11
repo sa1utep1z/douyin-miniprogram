@@ -68,6 +68,11 @@ export const fetchShareUrlParam = (data) => {
     return ajax.request('/client/certification/verifyAuth', payload, 'POST');
   }
 
+  // 更新实名认证信息中的手机号
+  export const updateMobile = (payload) => {
+    return ajax.request('/client/certification/mobile', payload, 'PUT');
+  }
+
   // 获取用户二要素认证信息
   export const fetchCertificationInfo = (payload) => {
     return ajax.request('/client/certification/info', null, 'GET');

@@ -65,8 +65,8 @@
       </view>
       <van-divider hairline  class="van-divider-item"/>
       <view class="job-action-row">
-        <view class="job-des">{{item.recommendExplain || ''}}<span style="color: red;">{{item.recommendAmount || ''}}</span></view>
-        <view class="job-des">{{item.debtExplain || ''}}<span style="color: red;">{{item.debtAmount || ''}}</span></view>
+        <view class="job-des">{{item.recommendExplain || ''}}<span style="color: red; margin-right: 50rpx;">{{item.recommendAmount || ''}}</span>{{item.debtExplain || ''}}<span style="color: red;">{{item.debtAmount || ''}}</span></view>
+        <view class="job-des"></view>
         <view class="job-inner-row">
           <view class="job-register" catchtap="onSignUp" data-id="{{item.id}}">立即报名</view>
         </view>

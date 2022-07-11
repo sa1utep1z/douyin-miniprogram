@@ -1,5 +1,5 @@
 // pages/authCenter/AuthCenter.js
-import { fetchAuthInfo, twoFactorAuthentication, sendCode, fetchCertificationInfo } from '../../api/userApi'
+import { fetchAuthInfo, twoFactorAuthentication, updateMobile, sendCode, fetchCertificationInfo } from '../../api/userApi'
 import {idCardNoCheck} from '../../utils/util'
 Page({
 
@@ -64,7 +64,7 @@ Page({
    * @param {*} e 
    */
   handleConfirm: async function (e) {
-    const { name, mobile, smsCode, idCard } = this.data;
+    const { name, mobile, smsCode, idCard, oldMobile, oldIdCard } = this.data;
     if(name===null||name.length===0){
       wx.showToast({
         title: '请输入真实姓名',
@@ -98,27 +98,59 @@ Page({
       });
       return;
     }
-    const res = await twoFactorAuthentication({
-      name,
-      idNo: idCard,
-      mobile,
-      smsCode
-    });
-    if (res.code !== 0) {
+    if (oldIdCard && mobile === oldMobile) {
       wx.showToast({
-        title: res.msg,
-        icon: 'error',
-        duration: 1500
+        title: '手机号一致，勿重复操作',
+        icon: 'none',
       });
-    } else {
-      wx.showToast({
-        title: '提交成功',
-        icon: 'success',
-        duration: 1500
+      return;
+    }
+    // 第一次实名认证
+    // 后续更新手机号
+    if (!oldIdCard) {
+      const res = await twoFactorAuthentication({
+        name,
+        idNo: idCard,
+        mobile,
+        smsCode
       });
-      wx.navigateBack({
-        delta: 0,
-      })
+      if (res.code !== 0) {
+        wx.showToast({
+          title: res.msg,
+          icon: 'error',
+          duration: 1500
+        });
+      } else {
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 1500
+        });
+        wx.navigateBack({
+          delta: 0,
+        })
+      }
+    } else if (oldIdCard && mobile !== oldMobile) {
+      const res = await updateMobile({
+        mobile,
+        smsCode
+      });
+      if (res.code !== 0) {
+        wx.showToast({
+          title: res.msg,
+          icon: 'error',
+          duration: 1500
+        });
+      } else {
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 1500
+        });
+        wx.navigateBack({
+          delta: 0,
+        })
+      }
     }
   },
   handleSendCode: async function () {

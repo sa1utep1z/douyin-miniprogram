@@ -130,8 +130,8 @@ page{
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   padding: 0 8rpx;
-  background: #F5F5F5;
-  color: #666666;
+  background: #E1F2FF;
+  color: #018EFF;
   line-height: 34rpx;
   border-radius: 4rpx;
   margin-right: 12rpx;
