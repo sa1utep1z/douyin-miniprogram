@@ -1,11 +1,5 @@
 <!--pages/registration/registration.wxml-->
-<scroll-view 
-  enhanced="{{true}}"  
-  show-scrollbar="{{false}}" 
-  scroll-y="true" style="height:100%;" 
-  class="scroll-view" 
-  lower-threshol="50"  
-  bindscrolltolower="onLoadMore">
+<scroll-view style="max-height: 1600rpx;" show-scrollbar="{{false}}" scroll-y="{{true}}" lower-threshold="50" bindscrolltolower="onLoadMore" class="scroll-view">
   <view class="container">
   <block wx:for="{{signUpList}}" wx:key="item">
     <Item item = "{{item}}"></Item>

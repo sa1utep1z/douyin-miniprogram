@@ -19,10 +19,6 @@
       <view class="job-price">{{detailBean.salaryStart}}-{{detailBean.salaryEnd}}元</view>
       <text class="job-des-text">{{util.formatTimeYMD(detailBean.orderDate)}}</text>
     </view>
-    <view class="job-tag-row">
-      <view class="job-type-tag">{{workerType}}</view>
-      <view class="job-type-tag">招{{detailBean.wantedNum}}人</view>
-    </view>
     <view class="job-tag-row-block">
       <view class="job-tag-block" wx:for="{{detailBean.tags}}" wx:key="index">{{item}}</view>
     </view>
@@ -87,7 +83,8 @@
     <view class="detail-item-request">工作地点</view>
     <view  class="detail-item">
       <view class="detail-item-name">厂址</view>
-      <view class="detail-item-value" bindtap="handleNav"><text style="color: #67B0F2;">{{detailBean.companyAddress}}</text></view>
+      <!-- bindtap="handleNav" -->
+      <view class="detail-item-value" data-text="{{detailBean.companyAddress}}" bindtap="copyText"><text style="color: #67B0F2;">{{detailBean.companyAddress}}</text></view>
     </view>
   </view>
   

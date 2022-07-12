@@ -103,6 +103,7 @@ Page({
       header: {
         'X-User-Token': wx.getStorageSync('token') || '',
         'userId':  wx.getStorageSync('userId') || '',
+        'X-Device': 'mini_program',
       },
       success: (res)=> {
         console.log(res);

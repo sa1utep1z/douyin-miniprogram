@@ -199,6 +199,18 @@ Page({
     }
   
   },
+  copyText: function (e) {
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.text,
+      success (res) {
+        wx.showToast({
+          title: '复制成功',
+          icon:'none',
+          duration: 1800
+        });
+      }
+    })
+  },
   handleRegister: async function (e) {
     const { jobId } = this.data;
     const params = {orderId: jobId};
@@ -247,38 +259,38 @@ Page({
   /**
    * 用户点击右上角分享
    */
-//   onShareAppMessage: async function () {
-//     const longitude = wx.getStorageSync('longitude');
-//     const latitude = wx.getStorageSync('latitude');
-//     let gps = null;
-//     if (longitude && latitude){
-//        gps = {
-//         longitude,
-//         latitude
-//       }
-//     }
-//     const res = await fetchShareUrlParam(gps);
-//     const {shareSceneId, memberId} = res.data;
-//     const { jobId, detailBean } = this.data;
-//     this.setData({
-//       showShareDialog: false,
-//     })
-//     return  {
-//       imageUrl: detailBean.companyImages[0],
-//       title: `${detailBean.jobName},好岗位，一起来`,
-//       path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
-//     }
-//   },
+  onShareAppMessage: async function () {
+    const longitude = wx.getStorageSync('longitude');
+    const latitude = wx.getStorageSync('latitude');
+    let gps = null;
+    if (longitude && latitude){
+       gps = {
+        longitude,
+        latitude
+      }
+    }
+    const res = await fetchShareUrlParam(gps);
+    const {shareSceneId, memberId} = res.data;
+    const { jobId, detailBean } = this.data;
+    this.setData({
+      showShareDialog: false,
+    })
+    return  {
+      imageUrl: detailBean.companyImages[0],
+      title: `${detailBean.jobName},好岗位，一起来`,
+      path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
+    }
+  },
   
   onShare: function (e) {
-    wx.showToast({
-      title: '暂不支持岗位分享！敬请谅解',
-      duration: 3000,
-      icon: 'none',
-    });
-    // this.setData({
-    //   showShareDialog: true,
-    // })
+    // wx.showToast({
+    //   title: '暂不支持岗位分享！敬请谅解',
+    //   duration: 3000,
+    //   icon: 'none',
+    // });
+    this.setData({
+      showShareDialog: true,
+    })
   },
   onClose: function (e) {
     this.setData({
