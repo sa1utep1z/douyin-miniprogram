@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/bannerView/bannerView",
     "pages/login/login",
     "pages/logs/logs",
     "pages/login/loginMobile",
