@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/bannerView/bannerView",
     "pages/login/login",
     "pages/logs/logs",
     "pages/login/loginMobile",
@@ -26,6 +27,9 @@
     "pages/authDisplay/authDisplay",
     "pages/authDisplayNew/authDisplayNew",
     "pages/privacyProtocol/privacyProtocol"
+  ],
+  "requiredPrivateInfos": [
+    "getLocation"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

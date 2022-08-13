@@ -16,3 +16,8 @@ export const fetchFeedbackCategories = (data) => {
   return ajax.request('/client/member/feedback/categories/inquiry', null,'GET');
 };
 
+// banner
+export const listBanners = () => {
+  return ajax.request('/client/noauth/banner/list', null, 'GET', false);
+};
+

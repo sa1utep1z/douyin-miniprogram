@@ -1,12 +1,9 @@
 import { fecthIndexTabList, signUpClick } from '../../api/jobApi'
 import { fetchPostArguments } from '../../api/userApi'
+import { listBanners } from '../../api/commonApi'
 Page({
   data: {
-    bannerList: [
-      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner1.jpg',
-      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner2.png',
-      'https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/banner3.png'
-    ],
+    bannerList: [],
     listSearchType: 0,
     workType: [
       { title: '全部', subTitle: '高薪名企', value: 'ALL'},
@@ -30,6 +27,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.getBannerList();
     const { recommendId, scene } =  options;
     if (recommendId) {
       wx.setStorageSync('recommendId', recommendId);
@@ -55,7 +53,14 @@ Page({
   onShow: function () {
     this.getStatusBarHeight();
   },
-
+  getBannerList: async function () {
+    const res = await listBanners();
+    if (res && res.code === 0) {
+      this.setData({
+        bannerList: res.data
+      })
+    }
+  },
   getStatusBarHeight: function () {
     // 获取状态栏高度
     const { statusBarHeight } = wx.getSystemInfoSync();
@@ -84,7 +89,12 @@ Page({
     this.onLoadMore();
   },
   onBannerClick: function (e) {
-   const { bean } = e.currentTarget.dataset;
+    const { bean } = e.currentTarget.dataset;
+    if (bean && bean.jumpType) {
+      wx.navigateTo({
+        url: '/pages/bannerView/bannerView?pageBean=' + encodeURIComponent(JSON.stringify(bean)),
+      })
+    }
   },
   onTabClicked: function (e) {
    const { index } = e.currentTarget.dataset;

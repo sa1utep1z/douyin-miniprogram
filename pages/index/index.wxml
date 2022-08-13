@@ -25,7 +25,7 @@
     <swiper indicator-dots autoplay interval="{{4000}}" indicator-color="rgba(255,255,255, .5)" indicator-active-color="#ffffff">
       <block wx:for="{{bannerList}}" wx:key="*this">
         <swiper-item>
-          <image class="swiper-item" src="{{item}}" bindtap="onBannerClick" data-bean="{{item}}"></image>
+          <image class="swiper-item" src="{{item.coverImage.url}}" bindtap="onBannerClick" data-bean="{{item}}"></image>
         </swiper-item>
       </block>
     </swiper>
