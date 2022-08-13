@@ -329,10 +329,7 @@ Page({
    handleQuestion: function (e) {
      //todo 处理电话咨询
       const { detailBean } = this.data;
-      if(detailBean.recruiterInfo===null){   
-        wx.makePhoneCall({
-          phoneNumber: "15986689858",
-        });
+      if(detailBean.recruiterInfo===null){
         return;
       }
       wx.makePhoneCall({
