@@ -28,6 +28,9 @@
     "pages/authDisplayNew/authDisplayNew",
     "pages/privacyProtocol/privacyProtocol"
   ],
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
   "window": {
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",
