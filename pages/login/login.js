@@ -31,6 +31,7 @@ Page({
    * wx.login获取code
    */
   wxLogin: function () {
+    console.info('cuole...')
     wx.showLoading({
       title: '加载中',
       mask: true,
@@ -88,6 +89,14 @@ Page({
         console.log('err', err)
         //如果报错 重新获取code
         this.wxLogin();
+        if (err.code !== 0) {
+          wx.showToast({
+            title: err.msg,
+            icon: 'error',
+            duration: 3000,
+            icon: 'none'
+          });
+        }
       } finally {
         this.setData({ loading: false });
       }
