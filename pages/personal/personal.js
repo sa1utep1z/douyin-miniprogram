@@ -85,6 +85,11 @@ Page({
           url: '../../pages/member/member',
         })
         break;
+      case 'resignApply':
+        wx.navigateTo({
+          url: '../../pages/resignApply/resignApply',
+        })
+        break;
       case 'feedback':
         wx.navigateTo({
           url: '../../pages/feedback/feedback',
