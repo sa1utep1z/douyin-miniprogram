@@ -16,3 +16,6 @@
   </block>
 </view>
 </scroll-view>
+<view class="round-click">
+  <navigator url='/pages/resignApplyDetail/resignApplyDetail?pageBean={}'>离职报备</navigator>
+</view>
