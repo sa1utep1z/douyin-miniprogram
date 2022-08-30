@@ -92,7 +92,7 @@ Page({
         break;
       case 'feedback':
         wx.navigateTo({
-          url: '../../pages/feedback/feedback',
+          url: '../../pages/feedback2/feedback2',
         })
         break;
     case 'share':

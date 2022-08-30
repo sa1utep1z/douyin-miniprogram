@@ -17,6 +17,7 @@
     "components/SignUpInfoDialog/SignUpInfoDialog",
     "pages/member/member",
     "pages/feedback/feedback",
+    "pages/feedback2/feedback2",
     "pages/sharePost/sharePost",
     "pages/authCenter/authCenter",
     "pages/authCenterNew/authCenterNew",

@@ -1,0 +1,25 @@
+<view style="width: {{_width}};" class="inputContainer">
+  <view class="picker" style="color: #4fa1f4;" bindtap="clickShow">
+    {{selectedName === '' ? '请选择' : selectedName}}
+  </view>
+  <view style="display: {{scrollShow ? 'block' : 'none'}};">
+    <view class="input-img">
+      <input
+        placeholder="请输入筛选"
+        value="{{ selectedName }}"
+        bindinput="bindInput"
+      />
+    </view>
+    <scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" class="scroll-view">
+      <view
+        class="scroll-view-item"
+        wx:for="{{ listOptions }}"
+        wx:key="{{ item }}"
+        data-item="{{ item }}"
+        bindtap="bindScrollChange"
+      >
+        {{ item[showField] }}
+      </view>
+    </scroll-view>
+  </view>
+</view>
