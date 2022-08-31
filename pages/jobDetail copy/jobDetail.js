@@ -43,19 +43,19 @@ Page({
   getData: async function () {
 
     const { jobId } = this.data;
-    const longitude = wx.getStorageSync('longitude');
-    const latitude = wx.getStorageSync('latitude');
-    let gps = null;
-    if (longitude && latitude){
-       gps = {
-        longitude,
-        latitude
-      }
-    }
-    const params =  {
-      gps,
-    }
-    const res = await fetchJobDetail( jobId, params );
+    // const longitude = wx.getStorageSync('longitude');
+    // const latitude = wx.getStorageSync('latitude');
+    // let gps = null;
+    // if (longitude && latitude){
+    //    gps = {
+    //     longitude,
+    //     latitude
+    //   }
+    // }
+    // const params =  {
+    //   gps,
+    // }
+    const res = await fetchJobDetail( jobId );
     this.setData({
       detailBean: res.data,
     });
