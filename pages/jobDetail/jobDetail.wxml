@@ -90,14 +90,14 @@
   
   <view class="float-view">
     <view class="float-column" bindtap="handleQuestion">
-      <image class="float-icon" src="../../assets/images/index/icon_phone.png"></image>
+      <image class="float-icon" src="../../assets/images/index/icon_phone2.png"></image>
       <text class="float-text">电话咨询</text>
     </view>
     <view class="float-column" bindtap="onShare">
-      <image class="float-icon" src="../../assets/images/index/icon_share_gift.png"></image>
+      <image class="float-icon" src="../../assets/images/index/icon_share_gift2.png"></image>
       <text class="float-text">分享有礼</text>
     </view>
-    <view bindtap="handleRegister" class="float-button" hover-class="float-button-hover" hover-stay-time="100">立即报名</view>
+    <view bindtap="handleRegister" class="float-button" hover-class="float-button-hover" hover-stay-time="100">报名<span class="float-button-text">+</span></view>
   </view>
 </view>
 </view>

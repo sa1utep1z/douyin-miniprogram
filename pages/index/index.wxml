@@ -34,7 +34,6 @@
     <block wx:for="{{workType}}" wx:key="index">
       <view class="tab-item" bindtap="onTabClicked" data-index="{{index}}">
         <view class="tab-item-title {{listSearchType===index?'tab-title-active':'tab-title-normal'}}">{{item.title}}</view>
-        <view class="{{listSearchType===index?'tab-item-sub-active':'tab-item-sub'}}">{{item.subTitle}}</view>
       </view>
     </block>
   </view>
@@ -68,7 +67,7 @@
         <view class="job-des">{{item.recommendExplain || ''}}<span style="{{item.recommendAmount ? 'color: red; margin-right: 50rpx;' : 'color: red; margin-right: 0rpx;'}}">{{item.recommendAmount || ''}}</span>{{item.debtExplain || ''}}<span style="color: red;">{{item.debtAmount || ''}}</span></view>
         <view class="job-des"></view>
         <view class="job-inner-row">
-          <view class="job-register" catchtap="onSignUp" data-id="{{item.id}}">立即报名</view>
+          <view class="job-register" catchtap="onSignUp" data-id="{{item.id}}">报名<span class="job-register-text">+</span></view>
         </view>
       </view>
     </view>

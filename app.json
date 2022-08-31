@@ -30,9 +30,6 @@
     "pages/resignApply/resignApply",
     "pages/resignApplyDetail/resignApplyDetail"
   ],
-  "requiredPrivateInfos": [
-    "getLocation"
-  ],
   "window": {
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",
@@ -42,33 +39,33 @@
   },
   "tabBar": {
     "color": "#CDCDCD",
-    "selectedColor": "#018EFF",
+    "selectedColor": "#409eff",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "/assets/images/tabbar/index.png",
-        "selectedIconPath": "/assets/images/tabbar/index_active.png"
+        "iconPath": "/assets/images/tabbar/index2.png",
+        "selectedIconPath": "/assets/images/tabbar/index2_active.png"
       },
       {
         "pagePath": "pages/money/money",
         "text": "领钱",
-        "iconPath": "/assets/images/tabbar/money.png",
-        "selectedIconPath": "/assets/images/tabbar/money_active.png"
+        "iconPath": "/assets/images/tabbar/money2.png",
+        "selectedIconPath": "/assets/images/tabbar/money2_active.png"
       },
       {
         "pagePath": "pages/message/message",
         "text": "消息",
-        "iconPath": "/assets/images/tabbar/message.png",
-        "selectedIconPath": "/assets/images/tabbar/message_active.png"
+        "iconPath": "/assets/images/tabbar/message2.png",
+        "selectedIconPath": "/assets/images/tabbar/message2_active.png"
       },
       {
         "pagePath": "pages/personal/personal",
         "text": "我的",
-        "iconPath": "/assets/images/tabbar/personal.png",
-        "selectedIconPath": "/assets/images/tabbar/personal_active.png"
+        "iconPath": "/assets/images/tabbar/personal2.png",
+        "selectedIconPath": "/assets/images/tabbar/personal2_active.png"
       }
     ]
   },

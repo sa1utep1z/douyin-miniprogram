@@ -213,9 +213,18 @@ page{
   color: #ffffff;
   text-align: center;
   line-height: 46rpx;
-  background: #018EFF;
+  background: linear-gradient(#018eff, #51bcff);
   border-radius: 4rpx;
-  border: 2rpx solid #018EFF;
+}
+.job-register-text {
+  height: 46rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  line-height: 46rpx;
+  border-radius: 4rpx;
 }
 .status-loading {
   width: 100%;
