@@ -70,12 +70,12 @@
       <view class="action-lable">账单明细</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  wx:if="{{userInfo.recruiter===false}}"/>
+    <!-- <van-divider hairline  wx:if="{{userInfo.recruiter===false}}"/>
     <view class="action-row"  wx:if="{{userInfo.recruiter===false}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="resignApply">
       <image class="action-icon" src="../../assets/images/personal/icon_action_register.png"/>
       <view class="action-lable">离职申请</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
-    </view>
+    </view> -->
     <van-divider hairline />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="feedback">
       <image class="action-icon" src="../../assets/images/personal/icon_action_suggestion.png"/>
