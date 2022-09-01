@@ -6,8 +6,8 @@ const urlDev = {
 };
 // uat环境地址 体验版
 const urlUat = {
-  authUrl: 'http://192.168.110.79:8316',// https://laborgateway.uat.bt.com/labormgt-backend
-  baseUrl: 'http://192.168.110.79:8316', // https://laborgateway.uat.bt.com/labormgt-backend
+  authUrl: 'http://192.168.110.79:8315',// https://laborgateway.uat.bt.com/labormgt-backend
+  baseUrl: 'http://192.168.110.79:8315', // https://laborgateway.uat.bt.com/labormgt-backend
   traceUrl: '', 
 };
 // 生产环境地址
