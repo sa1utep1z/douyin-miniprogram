@@ -1,7 +1,7 @@
 // 开发环境地址
 const urlDev = { 
-  authUrl: 'http://192.168.110.79:8315',
-  baseUrl: 'http://192.168.110.79:8315', // 鉴权 192.168.110.79
+  authUrl: 'http://192.168.110.79:8317/labormgt-backend',
+  baseUrl: 'http://192.168.110.79:8317/labormgt-backend', // 鉴权 192.168.110.79
   traceUrl: '', // 埋点接口地址
 };
 // uat环境地址 体验版
