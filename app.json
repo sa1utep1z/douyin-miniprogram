@@ -18,6 +18,7 @@
     "pages/member/member",
     "pages/feedback/feedback",
     "pages/feedback2/feedback2",
+    "pages/feedbackDetail/feedbackDetail",
     "pages/sharePost/sharePost",
     "pages/authCenter/authCenter",
     "pages/authCenterNew/authCenterNew",

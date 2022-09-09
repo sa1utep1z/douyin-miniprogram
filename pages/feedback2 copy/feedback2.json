@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-divider": "@vant/weapp/divider/index",
+    "v-button": "../../components/CustomButton/CustomButton",
+    "pickerinput": "../../components/PickerInput/PickerInput"
+  },
+  "navigationBarTitleText": "意见反馈"
+}

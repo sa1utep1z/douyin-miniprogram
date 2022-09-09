@@ -1,17 +1,53 @@
 .inputContainer {
-  z-index: 999;
   height: 680rpx;
+  width: 480rpx;
+  position: relative;
+  z-index: 99999;
+  background: #f5f6f7;
+  margin-bottom: 30rpx;
+}
+.input-cancel {
+  float: right;
+  color: #4fa1f4;
+  position: absolute;
+  right: 10rpx;
+  top: 0;
+  height: 50rpx;
+  width: 60rpx;
+  font-size: 24rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-weight: bolder;
+}
+.input-scroll {
+  position: absolute;
+  right: 0;
+  top: 50rpx;
 }
 .input-img {
   float: left;
-  width: 100%;
+  width: 480rpx;
   height: 120rpx;
-  padding: 30rpx 0;
 }
 .input-img>input {
-  width: 100%;
+  display: inline-block;
+  border-radius: 25rpx;
+  width: 400rpx;
+  height: 46rpx;
+  font-size: 28rpx;
+  line-height: 46rpx;
+  padding: 10rpx 40rpx;
+  background: #ededed;
+}
+.scroll-view-none {
+  height: 46rpx;
+  line-height: 46rpx;
+  text-align: center;
+  color: #87ceeb;
 }
 .scroll-view {
+  margin-top: -40rpx;
+  float: left;
   display: flex;
   width: 100%;
   max-height: 480rpx;

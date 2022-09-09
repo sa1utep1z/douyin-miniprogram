@@ -1,8 +1,8 @@
 {
   "usingComponents": {
+    "FeedbackItem": "../../components/feedbackItem/feedbackItem",
     "van-divider": "@vant/weapp/divider/index",
-    "v-button": "../../components/CustomButton/CustomButton",
-    "pickerinput": "../../components/PickerInput/PickerInput"
+    "van-loading": "@vant/weapp/loading/index"
   },
   "navigationBarTitleText": "意见反馈"
 }

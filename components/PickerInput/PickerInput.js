@@ -7,61 +7,70 @@ Component({
     dataList: {//下拉框数据来源
       type: Array,
       value: [],
-    },
-    _width: {//组件宽度
-      type: String,
-      value: "100%"
-    },
-    actualField: { // 实际属性
-      type: String,
-      value: "id"
+      observer: function (dataList) {
+        this.setData({
+          listOptions: dataList,
+          initListOptions: dataList,
+        })
+      },
     },
     showField: { // 显示属性
       type: String,
-      value: "name"
+      value: "name",
+      observer: function(showField) {
+        this.setData({
+          showField: showField
+        })
+      },
+    },
+    scrollShow: { // 组件是否显示
+      type: Boolean,
+      value: false,
+      observer: function(scrollShow) {
+        this.setData({
+          scrollShow: scrollShow
+        })
+      }
     }
   },
-  observers: {
-    'dataList': function(dataList) {
-      // const newList = dataList.map((e) => e[showvalue]);
-      // console.info(newList);
-      this.setData({
-        listOptions: dataList,
-        initListOptions: dataList,
-      })
-    },
-    'showField': function(showField) {
-      this.setData({
-        showField: showField
-      })
-    },
-    'actualField': function(actualField) {
-      this.setData({
-        actualField: actualField
-      })
-    }
-  },
+  // observers: {
+  //   'dataList': function(dataList) {
+  //     this.setData({
+  //       listOptions: dataList,
+  //       initListOptions: dataList,
+  //     })
+  //   },
+  //   'showField': function(showField) {
+  //     this.setData({
+  //       showField: showField
+  //     })
+  //   },
+  //   'scrollShow': function(scrollShow) {
+  //     this.setData({
+  //       scrollShow: scrollShow
+  //     })
+  //   }
+  // },
 
   /**
    * 组件的初始数据
    */
   data: {
-    selectedName: '',//输入框值
     index: 0,//下拉框下标
     listOptions: [],//下拉框数据,
     initListOptions: [], // 初始数据，为了回显搜索空字符展示初始下拉选项
     showField: '',
-    actualField: '',
     scrollShow: false,
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    clickShow(e) {
+    cancelSelect: function(e) {
       this.setData({
-        scrollShow: true,
+        scrollShow: false,
       });
+      this.triggerEvent('cancel', {});
     },
     //文本框输入事件
     bindInput(e) {
@@ -80,12 +89,12 @@ Component({
     },
     //下拉框选择事件
     bindScrollChange(e) {
+      const { showField } = this.data;
+      const { item } = e.currentTarget.dataset;
       this.setData({
         scrollShow: false,
       });
-      const { item } = e.currentTarget.dataset;
-      console.info(item);
-      this.triggerEvent('fetch', {}, {bubbles: true});
+      this.triggerEvent('fetch', item);
     },
   }
 })

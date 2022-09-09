@@ -1,63 +1,21 @@
-<!--pages/resignApplyDetail/resignApplyDetail.wxml-->
-<wxs src="../../utils/util.wxs" module="tool"></wxs>
-<view class="container">
-  <view class="auth-display">
-    <view class="row">
-      <view><span class="requiredColor">*</span><text>反馈类型</text></view>
-      <view>
-        <picker mode="selector" value="{{typeIndex}}" range="{{typeOptions}}" bindchange="bindPickerType">
-          <view class="picker" style="color: #4fa1f4;">
-            {{typeIndex === '' ? '请选择' : typeOptions[typeIndex]}}
-          </view>
-        </picker>
-      </view>
+<!--pages/resignApply/resignApply.wxml-->
+<scroll-view style="max-height: 1600rpx;" show-scrollbar="{{false}}" scroll-y="{{true}}" lower-threshold="50" bindscrolltolower="onLoadMore" class="scroll-view">
+  <view class="container">
+  <block wx:for="{{feedbackList}}" wx:key="item">
+    <FeedbackItem item = "{{item}}" />
+  </block>
+  <block wx:if="{{loadingStatus === 1}}">
+    <view class="status-loading" id="status-loading">
+      <van-loading type="spinner" size="24rpx" color="#999999" >加载中...</van-loading>
     </view>
-    <van-divider hairline />
-    <view class="row" style="height: 240rpx; margin-bottom: 20rpx;">
-      <view><span class="requiredColor">*</span><text>反馈内容</text></view>
-      <view>
-        <textarea disabled="{{isShow}}" value="{{pageBean.resignExplain}}" name="resignExplain" style="width: 480rpx;height: 240rpx;" maxlength="-1" placeholder="请输入反馈内容..." />
-      </view>
+  </block >
+  <block wx:if="{{loadingStatus === 2}}">
+    <view class="status-finish">
+        <van-divider hairline  contentPosition="center" >{{applyList.length==0?'未查询到记录':'由众鼎提供技术支持'}}</van-divider>
     </view>
-    <van-divider hairline />
-    <view class="row" style="height: 260rpx; margin-bottom: 20rpx;">
-      <view><text style="display:block; margin-right: 10rpx; width: 130rpx !important;">相关截图({{imageList.length}}/5)</text></view>
-      <view>
-        <block wx:for="{{imageList}}" wx:key="index">
-          <view class="image-view">
-            <image src="{{item}}" mode="aspectFill" class="active-img"></image>
-            <image src="/assets/images/public/icon_delete.png" class="delete-img" bindtap="deleteImg" data-index="{{index}}"></image>
-          </view>
-        </block>
-        <view class="chooseImage" bindtap="chooseImage">
-          <image src="/assets/images/public/icon_add.png"></image>
-        </view>
-      </view>
-    </view>
-    <van-divider hairline />
-    <view class="row">
-      <view><span class="requiredColor">*</span><text>姓名</text></view>
-      <view>
-        <input bindinput="bindUserName" placeholder="请输入姓名"/>
-      </view>
-    </view>
-    <van-divider hairline />
-    <view class="row">
-      <view><span class="requiredColor">*</span><text>企业</text></view>
-      <view>
-        <!-- <input bindinput="bindUserName" placeholder="请选择企业"/> -->
-      </view>
-    </view>
-    <van-divider hairline />
-    <view class="row">
-      <view><span class="requiredColor">*</span><text>联系方式</text></view>
-      <view>
-        <input bindinput="bindUserName" placeholder="请输入联系方式"/>
-      </view>
-    </view>
-    <view class="feedback-sub">
-      <v-button text="提交" disabled="{{ content.length=='' }}" bindclick="feedbackSub"></v-button>
-    </view>
-    <pickerinput dataList="{{companyOptions}}"></pickerinput>
-  </view>
+  </block>
+</view>
+</scroll-view>
+<view class="round-click">
+  <navigator url='/pages/feedbackDetail/feedbackDetail'>提交反馈</navigator>
 </view>
