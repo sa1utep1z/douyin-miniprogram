@@ -58,6 +58,12 @@
       <view class="action-lable">成员信息</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view> -->
+    <van-divider hairline  />
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="contacts">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_contacts.png"/>
+      <view class="action-lable">紧急联系人</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
     <van-divider hairline  wx:if="{{userInfo.recruiter===false}}"/>
     <view class="action-row"  wx:if="{{userInfo.recruiter===false}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="registration">
       <image class="action-icon" src="../../assets/images/personal/icon_action_register2.png"/>
@@ -70,9 +76,9 @@
       <view class="action-lable">账单明细</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  wx:if="{{userInfo.recruiter===false}}"/>
-    <view class="action-row"  wx:if="{{userInfo.recruiter===false}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="resignApply">
-      <image class="action-icon" src="../../assets/images/personal/icon_action_register2.png"/>
+    <van-divider hairline  wx:if="{{userInfo.memberStatus==='PREPARE_JOB_RESIGN' || userInfo.memberStatus===' JOB_ON'}}"/>
+    <view class="action-row"  wx:if="{{userInfo.memberStatus==='PREPARE_JOB_RESIGN' || userInfo.memberStatus===' JOB_ON'}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="resignApply">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_resign.png"/>
       <view class="action-lable">离职申请</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>

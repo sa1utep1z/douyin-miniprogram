@@ -5,10 +5,10 @@
   <view class="{{tool.getShapeType(item.status)}}" />
   <view class="item-position-text">{{tool.getShapeText(item.status)}}</view>
   <view class="item-row">
-    <view class="job-title">{{item.orderTitle}}</view>
+    <view class="job-title">{{item.orderTitle || '无'}}</view>
   </view>
   <view class="item-row item-row-company">
-    <view class="company-name">{{item.companyShortName}} · <span style="color: #3999dd; font-weight: bolder;">{{tool.getWorkType(item.typeOfWork)}}</span></view>
+    <view class="company-name">{{item.companyShortName || '无'}} · <span style="color: #3999dd; font-weight: bolder;">{{tool.getWorkType(item.typeOfWork)}}</span></view>
   </view>
   <view class="time-view">
     <view class="time-text time-text-content">入职日期：{{tool.formatTime2(item.jobDate)}}</view>
