@@ -28,7 +28,9 @@
     "pages/authDisplayNew/authDisplayNew",
     "pages/privacyProtocol/privacyProtocol",
     "pages/resignApply/resignApply",
-    "pages/resignApplyDetail/resignApplyDetail"
+    "pages/resignApplyDetail/resignApplyDetail",
+    "pages/contacts/contacts",
+    "pages/bankCard/bankCard"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

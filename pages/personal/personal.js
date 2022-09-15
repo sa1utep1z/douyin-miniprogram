@@ -95,14 +95,24 @@ Page({
           url: '../../pages/feedback/feedback',
         })
         break;
-    case 'share':
-      wx.navigateTo({
-        url: '../../pages/sharePost/sharePost',
-      })
-      break;
+      case 'share':
+        wx.navigateTo({
+          url: '../../pages/sharePost/sharePost',
+        })
+        break;
       case 'auth':
         wx.navigateTo({
           url: '../../pages/authDisplayNew/authDisplayNew',
+        });
+        break;
+      case 'contacts':
+        wx.navigateTo({
+          url: '../../pages/contacts/contacts',
+        });
+        break;
+      case 'bankCard':
+        wx.navigateTo({
+          url: '../../pages/bankCard/bankCard',
         });
         break;
       case 'staff':

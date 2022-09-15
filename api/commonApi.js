@@ -21,3 +21,8 @@ export const listBanners = () => {
   return ajax.request('/client/noauth/banner/list', null, 'GET', false);
 };
 
+// 银行卡ocr识别
+export const ocrBank = (data) => {
+  return ajax.uploadRequest('/ocr/bank', data);
+};
+

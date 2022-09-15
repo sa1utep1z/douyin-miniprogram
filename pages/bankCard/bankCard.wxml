@@ -1,0 +1,20 @@
+<!--pages/authDisplay/authDisplay.wxml-->
+<view class="container">
+  <view class="auth-display">
+    <view class="row">
+      <view><text>银行账号</text></view>
+      <view style="width: 60%;">
+        <input adjust-position="{{false}}"  bindinput="onInputBankAccount" placeholder="请输入银行账号" value="{{bankAccount}}" class="input-view-input" />
+        <image mode="heightFix" bindtap="ocrClick" show-menu-by-longpress="true" class="ocr-img" src="../../assets/images/public/camera.png"></image>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>银行名称</text></view>
+      <view style="width: 60%;">
+        <input adjust-position="{{false}}" type="number" bindinput="onInputBankName" placeholder="请输入银行名称" value="{{bankName}}" class="input-view-input" />
+      </view>
+    </view>
+    <button type="primary" style="margin-top: 40rpx;" bindtap="submitData" plain="true">提交</button>
+  </view>
+</view>
