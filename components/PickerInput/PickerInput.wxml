@@ -1,0 +1,27 @@
+<view class="inputContainer" style="display: {{scrollShow ? 'block' : 'none'}};">
+  <view class="input-cancel" bindtap="cancelSelect">取消</view>
+  <view class="input-scroll">
+    <view class="input-img">
+      <input
+        placeholder="请输入筛选"
+        bindinput="bindInput"
+      />
+    </view>
+    <block wx:if="{{ listOptions.length > 0 }}">
+      <scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" class="scroll-view">
+        <view
+          class="scroll-view-item"
+          wx:for="{{ listOptions }}"
+          wx:key="{{ item }}"
+          data-item="{{ item }}"
+          bindtap="bindScrollChange"
+        >
+          {{ item[showField] }}
+        </view>
+      </scroll-view>
+    </block>
+    <block wx:if="{{ listOptions.length === 0 }}">
+      <view class="scroll-view-none">暂无数据</view>
+    </block>
+  </view>
+</view>

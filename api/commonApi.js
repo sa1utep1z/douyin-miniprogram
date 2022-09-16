@@ -12,6 +12,11 @@ export const submitSuggestion = (data) => {
 };
 
 // 提交反馈意见
+export const listFeedback = (data) => {
+  return ajax.request('/client/member/feedback/list', data, 'POST');
+};
+
+// 提交反馈意见
 export const fetchFeedbackCategories = (data) => {
   return ajax.request('/client/member/feedback/categories/inquiry', null,'GET');
 };

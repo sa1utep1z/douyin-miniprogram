@@ -132,9 +132,11 @@ Page({
       icon:'none',
       duration: 3000
     });
-    wx.navigateBack({
-      delta: 0,
-    })
+    setTimeout(function() {
+      wx.navigateBack({
+        delta: 0,
+      })
+    }, 2500);
   },
 
   /**

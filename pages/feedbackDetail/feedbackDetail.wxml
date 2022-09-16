@@ -1,0 +1,65 @@
+<!--pages/resignApplyDetail/resignApplyDetail.wxml-->
+<wxs src="../../utils/util.wxs" module="tool"></wxs>
+<view class="container">
+  <view class="auth-display">
+    <view class="row">
+      <view><span class="requiredColor">*</span><text>反馈类型</text></view>
+      <view>
+        <picker mode="selector" value="{{typeIndex}}" range="{{typeOptions}}" range-key="title" bindchange="bindPickerType">
+          <view class="picker" style="color: #4fa1f4;">
+            {{typeIndex === '' ? '请选择' : typeOptions[typeIndex].title}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row" style="height: 240rpx; margin-bottom: 20rpx; position: relative;">
+      <view style="position: absolute; top: 10rpx; left: 0;"><span class="requiredColor">*</span><text>反馈内容</text></view>
+      <view style="position: absolute; top: 10rpx; left: 150rpx;">
+        <textarea disabled="{{isShow}}" value="{{pageBean.resignExplain}}" name="resignExplain" style="width: 480rpx;height: 240rpx;" bindinput="bindContent" maxlength="-1" placeholder="请输入反馈内容..." />
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row" style="height: 260rpx; margin-bottom: 20rpx;">
+      <view><text style="display:block; margin-right: 10rpx; width: 130rpx !important;">相关截图({{imageList.length}}/5)</text></view>
+      <view>
+        <block wx:for="{{imageList}}" wx:key="index">
+          <view class="image-view">
+            <image src="{{item}}" mode="aspectFill" class="active-img"></image>
+            <image src="/assets/images/public/icon_delete.png" class="delete-img" bindtap="deleteImg" data-index="{{index}}"></image>
+          </view>
+        </block>
+        <view class="chooseImage" bindtap="chooseImage">
+          <image src="/assets/images/public/icon_add.png"></image>
+        </view>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><span class="requiredColor">*</span><text>姓名</text></view>
+      <view style="width: 220rpx">
+        <input bindinput="bindUserName" placeholder="请输入姓名"/>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row" style="position: relative;">
+      <view><span class="requiredColor">*</span><text>企业</text></view>
+      <view style="position:absolute; top: 12rpx; right: 0;">
+        <view class="picker" bindtap="clickShow" style="display: {{companyScrollShow ? 'none' : 'block'}};">
+          {{companySelectedName === '' ? '请选择' : companySelectedName}}
+        </view>
+        <pickerinput dataList="{{companyOptions}}" bind:fetch="selectCallBack" bind:cancel="cancelSelect" scrollShow="{{companyScrollShow}}" showField="label" />
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><span class="requiredColor">*</span><text>联系方式</text></view>
+      <view style="width: 220rpx">
+        <input maxlength="11" type="number" bindinput="bindMobile" placeholder="请输入联系方式"/>
+      </view>
+    </view>
+    <view class="feedback-sub">
+      <v-button text="提交" disabled="{{ typeIndex === '' || content === '' || userName === '' || mobile === '' || companySelectedId === '' }}" bindclick="feedbackSub"></v-button>
+    </view>
+  </view>
+</view>
