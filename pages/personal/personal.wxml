@@ -82,12 +82,12 @@
       <view class="action-lable">发薪卡</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <!-- <van-divider hairline  wx:if="{{userInfo.memberStatus==='PREPARE_JOB_RESIGN' || userInfo.memberStatus===' JOB_ON'}}"/>
-    <view class="action-row"  wx:if="{{userInfo.memberStatus==='PREPARE_JOB_RESIGN' || userInfo.memberStatus===' JOB_ON'}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="resignApply">
+    <van-divider hairline  wx:if="{{userInfo.memberStatus === 'PREPARE_JOB_RESIGN' || userInfo.memberStatus === 'JOB_ON'}}"/>
+    <view class="action-row"  wx:if="{{userInfo.memberStatus === 'PREPARE_JOB_RESIGN' || userInfo.memberStatus === 'JOB_ON'}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="resignApply">
       <image class="action-icon" src="../../assets/images/personal/icon_action_resign.png"/>
       <view class="action-lable">离职申请</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
-    </view> -->
+    </view>
     <van-divider hairline />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="feedback">
       <image class="action-icon" src="../../assets/images/personal/icon_action_suggestion2.png"/>
