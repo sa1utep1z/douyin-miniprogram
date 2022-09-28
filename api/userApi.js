@@ -123,3 +123,7 @@ export const updateNickName = (data) => {
  export const submitBankCardInfo = (data) => {
   return ajax.request('/client/member/bankCard', data, 'POST', false);
  }
+
+ export const fetchBankUserName = () => {
+  return ajax.request('/client/member/bankUserName', null, 'GET');
+ }

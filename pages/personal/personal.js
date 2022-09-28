@@ -112,7 +112,7 @@ Page({
         break;
       case 'bankCard':
         wx.navigateTo({
-          url: '../../pages/bankCard/bankCard',
+          url: '../../pages/bankCardView/bankCardView',
         });
         break;
       case 'staff':

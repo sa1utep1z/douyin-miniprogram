@@ -32,7 +32,8 @@
     "pages/resignApply/resignApply",
     "pages/resignApplyDetail/resignApplyDetail",
     "pages/contacts/contacts",
-    "pages/bankCard/bankCard"
+    "pages/bankCard/bankCard",
+    "pages/bankCardView/bankCardView"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

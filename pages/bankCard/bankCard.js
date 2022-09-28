@@ -1,5 +1,5 @@
 // pages/authDisplay/authDisplay.js
-import { fetchBankCardInfo, submitBankCardInfo } from '../../api/userApi'
+import { fetchBankUserName, submitBankCardInfo } from '../../api/userApi'
 import { ocrBank } from '../../api/commonApi'
 Page({
 
@@ -9,6 +9,8 @@ Page({
   data: {
     bankAccount: '',
     bankName: '',
+    bankUserName: '',
+    bankCardTypeName: '',
   },
 
   /**
@@ -29,15 +31,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getBankCardInfo();
+    this.getBankUserNameInfo();
   },
 
-  getBankCardInfo: async function (e) {
-    const res = await fetchBankCardInfo();
-    const { bankAccount, bankName } = res.data;
+  getBankUserNameInfo: async function (e) {
+    const res = await fetchBankUserName();
     this.setData({
-      bankAccount,
-      bankName,
+      bankUserName: res.data,
     });
   },
   ocrClick: async function(e) {
@@ -70,32 +70,45 @@ Page({
     console.info(data);
     const res = await ocrBank(data);
     if (res.code == 0) { 
-      const { bankAccount, bankName } = res.data;
+      const { bankAccount, bankName, bankCardTypeName } = res.data;
       this.setData({
         bankAccount,
         bankName,
+        bankCardTypeName
       });
     }
   },
-  submitData: async function (e) {
-    const { bankAccount, bankName } = this.data;
+  submitData: function (e) {
+    const { bankAccount, bankName, bankCardTypeName, bankUserName } = this.data;
     const params = { 
       bankAccount, 
-      bankName
+      bankName,
+      bankCardTypeName,
+      bankUserName
     };
-    await submitBankCardInfo(params);
-    wx.showToast({
-      title: '提交成功',
-      icon:'none',
-      duration: 2500
+    submitBankCardInfo(params).then((res)=>{
+      wx.showToast({
+        title: '提交成功',
+        icon:'none',
+        duration: 2500
+      });
+      setTimeout(function() {
+        wx.navigateBack({
+          delta: 0,
+        })
+      }, 2000);
+    }).catch((err) => {
+      if (err.code !== 0) {
+        wx.showModal({
+          title: '提示',
+          content: err.msg,
+          success: function (sm) {
+            return;
+          }
+        });
+        return;
+      }
     });
-    setTimeout(function() {
-      wx.navigateBack({
-        delta: 0,
-      })
-    }, 2000);
-
-
   },
   onInputBankAccount: function (e) {
     this.setData({
@@ -105,6 +118,11 @@ Page({
   onInputBankName: function (e) {
     this.setData({
       bankName: e.detail.value,
+    })
+  },
+  onInputBankUserName: function(e) {
+    this.setData({
+      bankUserName: e.detail.value,
     })
   },
 

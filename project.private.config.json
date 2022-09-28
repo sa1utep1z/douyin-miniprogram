@@ -125,6 +125,13 @@
           "pathName": "pages/authDisplay/authDisplay",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/bankCardView/bankCardView",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
