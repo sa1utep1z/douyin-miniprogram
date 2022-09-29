@@ -5,10 +5,9 @@
         <image mode="widthFix" show-menu-by-longpress="true" src="{{backImageUrl}}" class="bank-img-bg"/>
         <view class="bankName">{{bankName}}</view>
         <view class="bankType">{{bankCardTypeName}}</view>
-        <view class="bankAccount bankAccount-1">. . . .</view>
-        <view class="bankAccount bankAccount-2">. . . .</view>
-        <view class="bankAccount bankAccount-3">. . . .</view>
-        <view class="bankAccount bankAccount-num">{{bankAccount}}</view>
+        <view class="bankAccount bankAccount-num" bindtap="copyAccount">{{showAccount ? intactBankAccount : '**** ' + bankAccount}}</view>
+        <image class="bankCard-eye" src="{{showAccount?'../../assets/images/personal/icon_eye_show.png':'../../assets/images/personal/icon_eye_hide.png'}}" bindtap="handleEye"/>
+        <view class="bankCard-tip">{{showAccount ? '点击卡号可复制' : ''}}</view>
       </view>
     </block>
     <block wx:else="">

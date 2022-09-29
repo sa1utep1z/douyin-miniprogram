@@ -62,6 +62,22 @@ page{
   right: 410rpx;
 }
 
+.bankCard-eye {
+  position: absolute;
+  width: 52rpx;
+  height: 52rpx;
+  right: 50rpx;
+  top: 40rpx;
+}
+
+.bankCard-tip {
+  position: absolute;
+  color: #e4e4e4;
+  font-size: 18rpx;
+  right: 10rpx;
+  top: 90rpx;
+}
+
 .submit-button {
   position: relative;
   width: 646rpx;

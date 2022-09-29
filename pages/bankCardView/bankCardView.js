@@ -7,9 +7,11 @@ Page({
    */
   data: {
     bankAccount: '',
+    intactBankAccount: '',
     bankCardTypeName: '',
     bankName: '',
     backImageUrl: '',
+    showAccount: false,
   },
 
   /**
@@ -36,14 +38,15 @@ Page({
   getBankCardInfo: async function (e) {
     const res = await fetchBankCardInfo();
     const { bankName, bankAccount, bankCardTypeName } = res.data;
-    console.info(res.data);
     const backImageUrl = this.getBackImageByBankName(bankName);
+    const intactBankAccount = bankAccount || '';
     let bankAccount_ = '';
     if (bankAccount) {
       bankAccount_ = bankAccount.substring(bankAccount.length - 4, bankAccount.length)
     }
     this.setData({
       backImageUrl,
+      intactBankAccount,
       bankCardTypeName: bankCardTypeName || '',
       bankAccount: bankAccount_,
       bankName: bankName || '',
@@ -103,6 +106,28 @@ Page({
       wx.navigateTo({
         url: '../../pages/bankCard/bankCard',
       });
+    }
+  },
+  handleEye: async function (e) {
+    const { showAccount } = this.data;
+    this.setData({
+      showAccount: !showAccount,
+    });
+  },
+
+  copyAccount: function (e) {
+    const { showAccount, intactBankAccount } = this.data;
+    if (showAccount) {
+      wx.setClipboardData({
+        data: intactBankAccount,
+        success (res) {
+          wx.showToast({
+            title: '复制成功',
+            icon:'none',
+            duration: 1800
+          });
+        }
+      })
     }
   },
 
