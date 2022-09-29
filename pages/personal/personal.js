@@ -69,6 +69,7 @@ Page({
 
   handelMenuClick: function (e) {
     const { tag } = e.currentTarget.dataset;
+    const { userInfo } = this.data;
     switch(tag) {
       case 'registration':
         // wx.showToast({
@@ -111,7 +112,6 @@ Page({
         });
         break;
       case 'bankCard':
-        const { userInfo } = this.data;
         if (!userInfo.validation) {
           wx.showModal({
             title: '温馨提示',
@@ -129,6 +129,27 @@ Page({
         } else {
           wx.navigateTo({
             url: '../../pages/bankCardView/bankCardView',
+          });
+        }
+        break;
+      case 'payslip':
+        if (!userInfo.validation) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '请先进行实名认证',
+            confirmText: '去实名',
+            success: (res)=> {
+              if (res.confirm) {
+                //未实名 进入实名页面
+                wx.navigateTo({
+                  url: '../../pages/authCenterNew/authCenterNew',
+                });
+              } 
+            }
+          })
+        } else {
+          wx.navigateTo({
+            url: '../../pages/payslip/payslip',
           });
         }
         break;

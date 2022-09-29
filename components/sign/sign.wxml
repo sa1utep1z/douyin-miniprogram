@@ -1,0 +1,11 @@
+<view>
+  <view class="popcont">
+      <view class="wricont">
+        <canvas class="canvastyle" canvas-id="canvasId" id='canvasId' bindtouchstart="bindtouchstart" bindtouchmove="bindtouchmove"></canvas>
+      </view>
+      <view class="writebox">
+        <van-button type="info" custom-class="cusstyle" plain round bindtap="clear">重写</van-button>
+        <van-button type="info" custom-class="cusstyle" round bindtap="export">确认</van-button>
+      </view>
+    </view>
+</view>

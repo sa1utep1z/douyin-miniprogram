@@ -33,7 +33,8 @@
     "pages/resignApplyDetail/resignApplyDetail",
     "pages/contacts/contacts",
     "pages/bankCard/bankCard",
-    "pages/bankCardView/bankCardView"
+    "pages/bankCardView/bankCardView",
+    "pages/payslip/payslip"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",
