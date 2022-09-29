@@ -80,6 +80,22 @@ Page({
   },
   submitData: function (e) {
     const { bankAccount, bankName, bankCardTypeName, bankUserName } = this.data;
+    if (!/^[0-9]*$/.test(bankAccount)) {
+      wx.showToast({
+        title: '银行账号格式错误',
+        icon:'fail',
+        duration: 3000
+      });
+      return;
+    }
+    if (!/^[\u4e00-\u9fa5]*$/.test(bankName)) {
+      wx.showToast({
+        title: '银行名称格式错误',
+        icon:'fail',
+        duration: 3000
+      });
+      return;
+    }
     const params = { 
       bankAccount, 
       bankName,
