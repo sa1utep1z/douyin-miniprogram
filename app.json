@@ -34,7 +34,8 @@
     "pages/contacts/contacts",
     "pages/bankCard/bankCard",
     "pages/bankCardView/bankCardView",
-    "pages/payslip/payslip"
+    "pages/payslip/payslip",
+    "pages/sign/sign"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

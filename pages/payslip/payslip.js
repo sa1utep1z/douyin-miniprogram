@@ -5,28 +5,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    imgInfo: {}, // 表示的是签字生成的图片对象信息，由签完字返回。
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
+  },
 
+  signClick: function (e) {
+    wx.navigateTo({
+      url: '../../pages/sign/sign',
+    });
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
   },
 
   /**

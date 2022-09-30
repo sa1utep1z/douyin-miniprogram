@@ -1,6 +1,4 @@
 {
-  "usingComponents": {
-    "sign": "../../components/sign/sign"
-  },
+  "usingComponents": {},
   "navigationBarTitleText": "薪资条"
 }

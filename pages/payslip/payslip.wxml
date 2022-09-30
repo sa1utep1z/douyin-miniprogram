@@ -1,2 +1,3 @@
 <!--pages/payslip/payslip.wxml-->
-<sign />
+<image mode="heightFix" bindtap="ocrClick" show-menu-by-longpress="true" style="height: 200px;" src="{{imgInfo.url}}"></image>
+<button type="primary" style="margin-top: 40rpx;" bindtap="signClick" plain="true">提交</button>
