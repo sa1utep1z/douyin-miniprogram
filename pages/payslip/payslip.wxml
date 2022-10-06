@@ -1,3 +1,87 @@
 <!--pages/payslip/payslip.wxml-->
-<image mode="heightFix" bindtap="ocrClick" show-menu-by-longpress="true" style="height: 200px;" src="{{imgInfo.url}}"></image>
-<button type="primary" style="margin-top: 40rpx;" bindtap="signClick" plain="true">提交</button>
+<view class="container">
+  <view class="block-manager">
+    <view class="flex-row">
+      <image class="manager-avatar" src="../../assets/images/public/icon_default_head.png"></image>
+      <view class="manager-column">
+        <view class="name-status">
+          <view class="manager-name">张三</view>
+          <view class="manager-status">在职</view>
+        </view>
+        <view class="manager-company">工作辛苦了~</view>
+      </view>
+      <view class="manager-query">
+          <picker disabled="{{isShow}}" mode="date" fields="month" start="{{tool.formatTimeYMD(startDateLimit)}}" bindchange="bindQueryDateChange">
+            <view class="picker" style="color: #4fa1f4;">
+              {{queryYear === '' && queryMonth === '' ? '请选择' : queryYear +'年' + queryMonth + '月'}}
+            </view>
+          </picker>
+        </view>
+    </view>
+  </view>
+  <view class="block-manager block-scroll">
+    <block wx:if="{{dataList.length === 0}}">
+      <view class="data-none">暂无薪资信息</view>
+    </block>
+    <block wx:else="{{dataList.length > 0}}">
+      <view class="manager-title">薪资详情</view>
+      <view class="auth-display" wx:for="{{dataList}}" wx:key="id" wx:for-item="dataObj">
+        <view class="salary-title">薪资单{{index+1}}</view>
+        <van-divider hairline />
+        <view class="row">
+          <view><text>薪资单编号</text></view>
+          <view><text>{{dataObj.no}}</text></view>
+        </view>
+        <van-divider hairline />
+        <view class="row">
+          <view><text>会员工号</text></view>
+          <view><text>ZD154154615111</text></view>
+        </view>
+        <van-divider hairline />
+        <view class="row">
+          <view><text>姓名</text></view>
+          <view><text>ZD154154615111</text></view>
+        </view>
+        <van-divider hairline />
+        <view class="row">
+          <view><text>身份证号</text></view>
+          <view><text>ZD154154615111</text></view>
+        </view>
+        <van-divider hairline />
+        <view class="row">
+          <view><text>入职企业</text></view>
+          <view><text>龙华AC</text></view>
+        </view>
+        <van-divider hairline />
+        <view class="row">
+          <view><text>结算年份</text></view>
+          <view><text>2022年</text></view>
+        </view>
+        <van-divider hairline />
+        <view class="row">
+          <view><text>结算月份</text></view>
+          <view><text>10月</text></view>
+        </view>
+        <van-divider hairline />
+        <view class="row">
+          <view><text>发薪日期</text></view>
+          <view><text>2022-10-05</text></view>
+        </view>
+        <block wx:for="{{dataObj.detailItems}}" wx:key="index" wx:for-item="objItem">
+          <van-divider hairline />
+          <view class="row">
+            <view><text>{{objItem.title}}</text></view>
+            <view><text>{{objItem.value}}</text></view>
+          </view>
+        </block>
+        <van-divider hairline />
+        <view>
+          <button type="{{dataObj.sign ? 'default' : 'primary'}}" class="sign-btn" bindtap="signClick" disabled="{{dataObj.sign}}">{{dataObj.sign ? '已签收' : '签收'}}</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+
+<!-- <image mode="heightFix" bindtap="ocrClick" show-menu-by-longpress="true" style="height: 200px;" src="{{imgInfo.url}}"></image>
+<button type="primary" style="margin-top: 40rpx;" bindtap="signClick" plain="true">提交</button> -->
