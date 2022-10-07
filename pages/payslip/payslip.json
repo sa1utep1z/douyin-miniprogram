@@ -2,5 +2,5 @@
   "usingComponents": {
     "van-divider": "@vant/weapp/divider/index"
   },
-  "navigationBarTitleText": "薪资条"
+  "navigationBarTitleText": "工资条"
 }

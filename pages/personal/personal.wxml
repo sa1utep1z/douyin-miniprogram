@@ -85,7 +85,7 @@
     <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="payslip">
       <image class="action-icon" src="../../assets/images/personal/icon_action_bankCard.png"/>
-      <view class="action-lable">薪资条</view>
+      <view class="action-lable">工资条</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
     <van-divider hairline />
