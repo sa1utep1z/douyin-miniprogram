@@ -68,16 +68,6 @@
           <view><text>发薪日期</text></view>
           <view><text>{{tool.formatTimeYMD(dataObj.date)||'无'}}</text></view>
         </view>
-        <van-divider hairline />
-        <view class="row">
-          <view><text>起算日期</text></view>
-          <view><text>{{tool.formatTimeYMD(dataObj.startDate)||'无'}}</text></view>
-        </view>
-        <van-divider hairline />
-        <view class="row">
-          <view><text>结算日期</text></view>
-          <view><text>{{tool.formatTimeYMD(dataObj.endDate)||'无'}}</text></view>
-        </view>
         <block wx:for="{{dataObj.detailItems}}" wx:key="index" wx:for-item="objItem">
           <van-divider hairline />
           <view class="row">

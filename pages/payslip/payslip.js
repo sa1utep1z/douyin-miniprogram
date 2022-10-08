@@ -17,8 +17,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // 查询最新工资条的年月
-    this.getNewestYM();
+    console.info(options);
+    const {year, month} = options;
+    if (year && month) { // 说明是消息跳转过来的
+      this.setData({
+        queryYear: year,
+        queryMonth: month,
+      });
+      this.getData();
+    } else {
+      // 查询最新工资条的年月
+      this.getNewestYM();
+    }
   }, 
   getNewestYM: async function() {
     const res = await newestYM();
@@ -66,7 +76,7 @@ Page({
           queryYear: arr[0],
           queryMonth: arr[1],
         })
-        this.getData(arr[0], arr[1]);
+        this.getData();
       }
     }
   },
