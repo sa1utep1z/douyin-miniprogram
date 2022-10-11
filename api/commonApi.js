@@ -6,6 +6,10 @@ export const uploadImage = (data) => {
   return ajax.uploadRequest('/client/member/feedback/image', data);
 };
 
+export const uploadCommonImage = (data) => {
+  return ajax.uploadRequest('/admin/file/upload', data);
+};
+
 // 提交反馈意见
 export const submitSuggestion = (data) => {
   return ajax.request('/client/member/feedback/submit', data, 'POST');

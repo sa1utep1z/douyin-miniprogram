@@ -132,6 +132,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/payslip2/payslip2",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/payslip/payslip",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
