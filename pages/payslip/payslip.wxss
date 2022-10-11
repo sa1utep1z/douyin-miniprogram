@@ -1,0 +1,146 @@
+/* pages/payslip/payslip.wxss */
+page {
+  width: 100%;
+  height: 100%;
+  background-color: #F8F8F8;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  overflow:scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+.block-manager {
+  width: 688rpx;
+  background: #FFFFFF;
+  border-radius: 12rpx;
+  margin-top: 20rpx;
+  padding-bottom: 40rpx;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.block-scroll {
+  max-height: 1600rpx;
+  overflow-y: auto;
+}
+.manager-title {
+  font-size: 32rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #333333;
+  line-height: 44rpx;
+  margin: 24rpx 0 0 24rpx;
+}
+.flex-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24rpx;
+}
+.manager-avatar {
+  width: 104rpx;
+  height: 104rpx;
+  margin-left: 24rpx;
+  border-radius: 50%;
+}
+.manager-column {
+  flex: 1;
+  margin-left: 16rpx;
+}
+.name-status {
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bolder;
+}
+.manager-name {
+  font-size: 28rpx;
+  display: inline;
+  margin-right: 10rpx;
+  color: #333333;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.manager-status {
+  font-size: 20rpx;
+  padding: 1rpx 6rpx;
+  display: inline;
+  color: #ffdebb;
+  background-color: #f69246;
+  border-radius: 8rpx;
+  height: 30rpx;
+  line-height: 40rpx;
+}
+.manager-company {
+  height: 40rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #999999;
+  line-height: 40rpx;
+  margin-top: 4rpx;
+}
+.manager-query {
+  width: 162rpx;
+  height: 46rpx;
+  margin-right: 24rpx;
+  text-align: center;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  background-color: #24bfe8;
+  line-height: 46rpx;
+  border-radius: 4rpx;
+  box-sizing: border-box;
+}
+.manager-query .picker {
+  color: #f1f3f5 !important;
+}
+.auth-display {
+  background: #FFFFFF;
+  border-radius: 8rpx;
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+  border: #2e2e2e;
+}
+.row {
+  height: 28rpx;
+  line-height: 28rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+}
+.sign-btn {
+  font-size: 32rpx;
+  width: 90%;
+  margin-bottom: 40rpx;
+}
+.data-none {
+  color: #999999;
+  height: 40rpx;
+  font-size: 32rpx;
+  line-height: 40rpx;
+  text-align: center;
+  padding-top: 30rpx;
+}
+.salary-title {
+  height: 40rpx;
+  font-size: 32rpx;
+  line-height: 40rpx;
+  text-align: center;
+  margin-top: 40rpx;
+  color: #3f9edf;
+  font-weight: bolder;
+}
