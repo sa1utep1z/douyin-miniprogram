@@ -142,16 +142,9 @@ Page({
       companyId: companySelectedId,
     };
     await submitSuggestion(params);
-    wx.showToast({
-      title: '反馈成功',
-      icon: 'success',
-      duration: 2500,
-    });
-    setTimeout(function() {
-      wx.navigateBack({
-        delta: 0,
-      })
-    }, 2000);
+    wx.navigateBack({
+      delta: 0,
+    })
   },
 
   /**
