@@ -1,5 +1,5 @@
 // pages/resignApplyDetail/resignApplyDetail.js
-import { fetchJobData, getResignApproveForm, submitResignApprove } from '../../api/applyApi'
+import { fetchJobData, getResignApproveForm, submitApprove } from '../../api/applyApi'
 Page({
 
   /**

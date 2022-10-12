@@ -176,6 +176,27 @@ Page({
           });
         }
         break;
+      case 'advance':
+        if (!userInfo.validation) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '请先进行实名认证',
+            confirmText: '去实名',
+            success: (res)=> {
+              if (res.confirm) {
+                //未实名 进入实名页面
+                wx.navigateTo({
+                  url: '../../pages/authCenterNew/authCenterNew',
+                });
+              } 
+            }
+          })
+        } else {
+          wx.navigateTo({
+            url: '../../pages/advanceDetail/advanceDetail',
+          });
+        }
+        break;
       case 'staff':
         wx.navigateTo({
           url: '../../pages/staffList/staffList',

@@ -22,6 +22,7 @@
         <image mode="heightFix" bindtap="ocrClick" show-menu-by-longpress="true" class="ocr-img" src="../../assets/images/public/camera.png"></image>
       </view>
     </view>
+    <van-divider hairline />
     <view style="font-size: 24rpx; color: #f30808; margin-top: 15rpx; line-height: 32rpx;">
       温馨提示：为了便于发放个人薪资，请上传本人真实有效的银行卡。目前发薪卡仅支持上传以下储蓄银行卡【中国银行、工商银行、建设银行、招商银行、平安银行、交通银行、农业银行、邮政储蓄银行、浦发银行、华夏银行、中信银行、广发银行、光大银行】，其他地方银行卡和信用卡暂不支持上传。
     </view>
