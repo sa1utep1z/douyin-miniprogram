@@ -26,3 +26,13 @@ export const cancelApprove = (flowId) => {
 export const fetchAdvanceMemberInfo = () => {
   return ajax.request('/client/advance/member/info', null, 'GET');
 }
+
+// 预支薪资-获取会员预支列表
+export const listMemberAdvance = (data) => {
+  return ajax.request('/client/advance/list', data, 'POST');
+}
+
+// 预支薪资-获取会员预支列表统计
+export const statisticsMemberAdvance = (data) => {
+  return ajax.request('/client/advance/list/statistics', data, 'POST');
+}

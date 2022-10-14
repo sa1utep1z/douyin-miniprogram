@@ -42,7 +42,11 @@ Page({
   onShow: function () {
     
   },
-
+  clickList: function(e) {
+    wx.navigateTo({
+      url: '../../pages/advance/advance',
+    });
+  },
   bindPickerAmount: function(e) {
     this.setData({
       amountIndex: e.detail.value
@@ -53,10 +57,10 @@ Page({
     await getResignApproveForm(submitType).then((res) => {
       this.setData({
         formFields: res.data,
-        canSubmit: true,
       })
     }).catch((err) => {
       this.setData({
+        canSubmit: false,
         submitBtnName: '获取模板失败',
       })
     });
@@ -70,6 +74,7 @@ Page({
       })
     }).catch((err) => {
       this.setData({
+        canSubmit: false,
         submitBtnName: err.msg,
       })
     });

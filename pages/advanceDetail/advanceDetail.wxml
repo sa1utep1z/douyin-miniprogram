@@ -1,5 +1,8 @@
 <!--pages/authDisplay/authDisplay.wxml-->
 <view class="container">
+  <view class="list-title">
+    <view class="list-text" bindtap="clickList">预支记录</view>
+  </view>
   <view class="auth-display">
     <view class="row">
       <view><text>入职企业</text></view>

@@ -10,7 +10,19 @@ page{
   flex-direction: column;
   align-items: center;
 }
-
+.list-title {
+  width: 686rpx;
+  height: 80rpx;
+  background: #FFFFFF;
+  margin-bottom: -20rpx;
+}
+.list-text {
+  font-size: 28rpx;
+  line-height: 80rpx;
+  color: #4faaf7;
+  float: right;
+  margin-right: 24rpx;
+}
 .auth-display {
   width: 686rpx;
   background: #FFFFFF;

@@ -1,0 +1,19 @@
+// 定义解析状态
+function parseStatusType(status) {
+  if ('PENDING' === status) {
+    return '审核中';
+  } else if ('PASS' === status) {
+    return '通过';
+  } else if ('FAIL' === status) {
+    return '拒绝';
+  } else if ('CANCEL' === status) {
+    return '撤销';
+  } else if ('INVALID' === status) {
+    return '废弃';
+  }
+  return '无'
+}
+
+module.exports = {
+  parseStatusType: parseStatusType,
+}
