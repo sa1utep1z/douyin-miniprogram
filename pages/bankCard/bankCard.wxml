@@ -4,14 +4,14 @@
     <view class="row">
       <view><text>持卡人</text></view>
       <view style="width: 60%;">
-        <input adjust-position="{{false}}" bindinput="onInputBankUserName" placeholder="请输入持卡人" value="{{bankUserName}}" class="input-view-input" />
+        <input adjust-position="{{false}}" type="text" bindinput="onInputBankUserName" placeholder="请输入持卡人" value="{{bankUserName}}" class="input-view-input" />
       </view>
     </view>
     <van-divider hairline />
     <view class="row">
       <view><text>银行名称</text></view>
       <view style="width: 60%;">
-        <input adjust-position="{{false}}" bindinput="onInputBankName" placeholder="请输入银行名称" value="{{bankName}}" class="input-view-input" />
+        <input adjust-position="{{false}}" type="text" bindinput="onInputBankName" placeholder="请输入银行名称" value="{{bankName}}" class="input-view-input" />
       </view>
     </view>
     <van-divider hairline />
