@@ -8,12 +8,12 @@ Page({
    */
   data: {
     name: '',
+    oldName: '',
     mobile: '',
     oldMobile: '',
     idCard: '',
     oldIdCard: '',
     smsCode: '',
-    validation: false,
     timer: null,
     sendBtnText: '获取验证码',
   },
@@ -29,11 +29,11 @@ Page({
     const res = await fetchCertificationInfo();
     this.setData({
       name: res.data.name,
+      oldName: res.data.name,
       idCard: res.data.idNo,
       oldIdCard: res.data.idNo,
       mobile: res.data.mobile,
       oldMobile: res.data.mobile,
-      validation: res.data.validation,
     });
   },
 
@@ -64,7 +64,15 @@ Page({
    * @param {*} e 
    */
   handleConfirm: async function (e) {
-    const { name, mobile, smsCode, idCard, oldMobile, oldIdCard } = this.data;
+    const { name, mobile, smsCode, idCard, oldName, oldMobile, oldIdCard } = this.data;
+    if (name === oldName && mobile === oldMobile && idCard === oldIdCard) {
+      wx.showToast({
+        title: '信息未变更',
+        icon:'none',
+        duration: 1800
+      });
+      return;
+    }
     if(name===null||name.length===0){
       wx.showToast({
         title: '请输入真实姓名',
@@ -98,67 +106,37 @@ Page({
       });
       return;
     }
-    if (oldIdCard && mobile === oldMobile) {
+    // 接口
+    const res = await twoFactorAuthentication({
+      name,
+      idNo: idCard,
+      mobile,
+      smsCode
+    });
+    if (res.code !== 0) {
       wx.showToast({
-        title: '手机号一致，勿重复操作',
-        icon: 'none',
+        title: res.msg,
+        icon: 'error',
+        duration: 1500
       });
-      return;
-    }
-    // 第一次实名认证
-    // 后续更新手机号
-    if (!oldIdCard) {
-      const res = await twoFactorAuthentication({
-        name,
-        idNo: idCard,
-        mobile,
-        smsCode
+    } else {
+      wx.showToast({
+        title: '提交成功',
+        icon: 'success',
+        duration: 1500
       });
-      if (res.code !== 0) {
-        wx.showToast({
-          title: res.msg,
-          icon: 'error',
-          duration: 1500
-        });
-      } else {
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 1500
-        });
-        wx.navigateBack({
-          delta: 0,
-        })
-      }
-    } else if (oldIdCard && mobile !== oldMobile) {
-      const res = await updateMobile({
-        mobile,
-        smsCode
-      });
-      if (res.code !== 0) {
-        wx.showToast({
-          title: res.msg,
-          icon: 'error',
-          duration: 1500
-        });
-      } else {
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 1500
-        });
-        wx.navigateBack({
-          delta: 0,
-        })
-      }
+      wx.navigateBack({
+        delta: 0,
+      })
     }
   },
   handleSendCode: async function () {
-    const {  mobile, oldMobile, oldIdCard } = this.data;
-    if (oldIdCard && mobile === oldMobile) {
+    const { name, mobile, idCard, oldName, oldMobile, oldIdCard } = this.data;
+    if (name === oldName && mobile === oldMobile && idCard === oldIdCard) {
       wx.showToast({
-        title: '手机号一致，勿重复操作',
-        icon: 'none',
+        title: '信息未变更',
+        icon:'none',
+        duration: 1800
       });
       return;
     }
