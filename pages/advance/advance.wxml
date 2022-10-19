@@ -23,7 +23,7 @@
         <text class="record-text record-content" style="color: #4fa1f4;" bindtap="clickUserName" data-index="{{index}}">{{item.userName}}</text>
         <text class="record-text record-content">{{item.companyShortName}}</text>
         <text class="record-text record-content">{{item.advanceAmount}}</text>
-        <text class="record-text record-content" style="color: #4fa1f4;" bindtap="clickStatus">{{parse.parseStatusType(item.status)}}</text>
+        <text class="record-text record-content" style="color: #4fa1f4;" bindtap="clickStatus" data-id="{{item.applyId}}">{{parse.parseStatusType(item.status)}}</text>
         <text class="record-text record-content">{{util.formatTimeYMD(item.createDate)}}</text>
       </view>
       <block wx:if="{{loadingStatus === 1}}">
@@ -94,7 +94,38 @@
     <view class="dialog">
       <view class="dialog-content">
         <view class="dialog-title">审核进度</view>
-        <view></view>
+        <view class="cardBox">
+          <view class="stepBox">
+            <view class="step">
+              <view class="stepLeft">
+                <view class="num">会员</view>
+                <block wx:if="{{approveDetailObj.flowDetails.length > 0}}"><view class="line"></view></block>
+              </view>
+              <view class="stepRight">
+                <view class="title" style="background-color: #D0E8FF;">提交申请</view>
+                <view class="content">
+                  会员【<span class="text-focus">{{approveDetailObj.userName}}</span>】<span class="text-focus" data-mobile="{{approveDetailObj.mobile}}" bindtap="callMobile">{{approveDetailObj.mobile}}</span> {{util.formatTime(approveDetailObj.createDate)}}
+                </view>
+              </view>
+            </view>
+            <view class="step" wx:for="{{approveDetailObj.flowDetails}}" wx:key="index">
+              <view class="stepLeft">
+                <view class="num">
+                  {{parse.parseApproveRole(item.role)}}
+                </view>
+                <block wx:if="{{index != approveDetailObj.flowDetails.length - 1}}"><view class="line"></view></block>
+              </view>
+              <view class="stepRight">
+                <view class="title" style="background-color: {{item.pass == null ? '#fde498' : '#D0E8FF'}};">{{parse.parseApproveRole(item.role)}}{{item.pass === null ? '待审核' : '审核'}} {{parse.parseApproveResult(item)}}</view>
+                <view class="content">
+                  {{parse.parseApproveRole(item.role)}}
+                  <block wx:if="{{'BELONG_RESIDENT_SINGLE' === item.role}}">【<span class="text-focus">{{item.userName}}</span>】<span class="text-focus" data-mobile="{{item.mobile}}" bindtap="callMobile">{{item.mobile}}</span></block>
+                  {{util.formatTime(item.time)}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
       </view>
       <view class="van-divider"></view>
       <view class="btn-row">

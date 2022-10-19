@@ -201,3 +201,82 @@ page{
   text-align: center;
   letter-spacing: 2rpx;
 }
+/* 进度弹窗 */
+.cardBox {
+  width: 640rpx;
+  min-height: 75px;
+  max-height: 800rpx;
+  overflow-y: auto;
+	margin: 0 auto;
+	color: #000000;
+	font-size: 14px;
+	display: flex;
+	flex-direction: column;
+  position: relative;
+  margin-top: 20rpx;
+}
+.stepBox {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  font-size: 12px;
+}
+.step {
+  display: flex;
+  height: 100%;
+}
+.stepLeft {
+  position: relative;
+  z-index: 99;
+}
+.stepLeft .num{
+  position: relative;
+  height: 60rpx;
+  width: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #1890FF;
+  background-color: #D0E8FF;
+  z-index: 999;
+}
+.stepLeft .line{
+  height: 100%;
+  background-color: #D0E8FF;
+  width: 1px;
+  z-index: 98;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(0%, 0%);
+}
+.stepRight {
+  height: 100%;
+	margin-left: 20rpx;
+}
+.stepRight .title{
+  width: fit-content;
+  padding: 3px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1890FF;
+  border-radius: 5px;
+}
+.stepRight .content {
+  font-size: 12px;
+  height: 100%;
+  color: #666666;
+  padding: 5rpx 0 50rpx 0;
+}
+.text-focus {
+  color: #1890FF;
+}
+.num-img {
+  width: 48rpx;
+  height: 48rpx;
+}

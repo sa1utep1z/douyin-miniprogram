@@ -36,3 +36,8 @@ export const listMemberAdvance = (data) => {
 export const statisticsMemberAdvance = (data) => {
   return ajax.request('/client/advance/list/statistics', data, 'POST');
 }
+
+// 预支薪资-获取会员预支审核进度详情
+export const fetchAdvanceApproveInfo = (applyId) => {
+  return ajax.request(`/advance/${applyId}/flow`, null, 'GET');
+}

@@ -1,5 +1,5 @@
 // pages/advance/advance.js
-import { listMemberAdvance, statisticsMemberAdvance } from '../../api/applyApi'
+import { listMemberAdvance, statisticsMemberAdvance, fetchAdvanceApproveInfo } from '../../api/applyApi'
 Page({
 
   /**
@@ -19,7 +19,8 @@ Page({
     loadingStatus: 0,
     showDetailDialog: false,
     applyDetailDialog: false,
-    detailObj: {},
+    detailObj: {}, // 详情弹窗的内容
+    approveDetailObj: {}, // 审核进度详情弹窗的内容
   },
 
   /**
@@ -51,6 +52,8 @@ Page({
     });
   },
   clickStatus: function(e) {
+    const { id } = e.currentTarget.dataset;
+    this.getAdvanceApproveInfo(id);
     this.setData({
       applyDetailDialog: true,
     })
@@ -63,7 +66,14 @@ Page({
   },
   handleConfirmApply: function(e) {
     this.setData({
-      applyDetailDialog: false
+      applyDetailDialog: false,
+      approveDetailObj: {}
+    });
+  },
+  callMobile: function(e) {
+    const { mobile } = e.currentTarget.dataset;
+    wx.makePhoneCall({
+      phoneNumber: mobile,
     });
   },
   onTabClicked: function (e) {
@@ -98,6 +108,14 @@ Page({
       })
       this.setData({
         applyStatusList: newArr
+      });
+    }
+  },
+  getAdvanceApproveInfo: async function(applyId) {
+    const res = await fetchAdvanceApproveInfo(applyId);
+    if (res.code === 0) {
+      this.setData({
+        approveDetailObj: res.data
       });
     }
   },
