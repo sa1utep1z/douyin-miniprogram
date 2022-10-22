@@ -104,8 +104,19 @@ Page({
       };
       return res;
     })
-    console.info(submitList);
     await submitApprove(submitType, submitList); // JSON.stringify(params)
+    this.setData({
+      canSubmit: false,
+    })
+    wx.showToast({
+      title: '提交成功',
+      icon:'none',
+    });
+    setTimeout(function() {
+      wx.navigateTo({
+        url: '../../pages/advance/advance',
+      });
+    }, 2000);
   },
 
   /**
