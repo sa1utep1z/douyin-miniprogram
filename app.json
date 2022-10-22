@@ -35,7 +35,9 @@
     "pages/bankCard/bankCard",
     "pages/bankCardView/bankCardView",
     "pages/payslip/payslip",
-    "pages/sign/sign"
+    "pages/sign/sign",
+    "pages/advanceDetail/advanceDetail",
+    "pages/advance/advance"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",
