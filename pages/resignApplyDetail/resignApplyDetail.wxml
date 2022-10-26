@@ -1,0 +1,70 @@
+<!--pages/resignApplyDetail/resignApplyDetail.wxml-->
+<wxs src="../../utils/util.wxs" module="tool"></wxs>
+<view class="container">
+  <view class="auth-display">
+    <view class="row">
+      <view><text>姓名</text></view>
+      <view><text>{{pageBean.userName||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>身份证号码</text></view>
+      <view><text>{{pageBean.idNo||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>手机号码</text></view>
+      <view><text>{{pageBean.mobile||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>所在工厂</text></view>
+      <view><text>{{pageBean.companyShortName||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>订单名称</text></view>
+      <view><text>{{pageBean.orderTitle||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>入职日期</text></view>
+      <view><text>{{tool.formatTimeYMD(pageBean.jobDate)||'无'}}</text></view>
+    </view>
+    <form bindsubmit="bindFormSubmit">
+      <van-divider hairline />
+      <view class="row">
+        <view><text>预离职日期</text></view>
+        <view>
+          <picker disabled="{{isShow}}" mode="date" start="{{tool.formatTimeYMD(startDateLimit)}}" bindchange="bindExpectResignDateChange">
+            <view class="picker" style="color: #4fa1f4;">
+              {{expectResignDate === '' ? '请选择' : tool.formatTimeYMD(expectResignDate)}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <van-divider hairline />
+      <view class="row" style="height: 240rpx;">
+        <view><text style="display:block; margin-right: 10rpx; width: 130rpx !important;">离职原因</text></view>
+        <view>
+          <checkbox-group bindchange="checkboxChange" name="resignReasons">
+            <block wx:for="{{resignReasonOptions}}" wx:key="{{item.value}}">
+              <label style="display:block;margin: 5rpx 10rpx; float: left;">
+                  <checkbox disabled="{{isShow}}" value="{{item.value}}" checked="{{item.checked}}"/>
+                  {{item.name}}
+                </label>
+            </block>
+          </checkbox-group>
+        </view>
+      </view>
+      <van-divider hairline />
+      <view class="row" style="height: 240rpx; margin-bottom: 20rpx;">
+        <view><text style="display:block; margin-right: 10rpx; width: 130rpx !important;">离职说明</text></view>
+        <view>
+          <textarea disabled="{{isShow}}" value="{{pageBean.resignExplain}}" name="resignExplain" style="height: 240rpx;" maxlength="-1" placeholder="请输入离职说明" />
+        </view>
+      </view>
+      <button style="{{isShow ? 'display: none;' : 'display: block;'}}" disabled="{{!canSubmit}}" type="primary" form-type="submit" plain="true">{{submitBtnName}}</button>
+    </form>
+  </view>
+</view>

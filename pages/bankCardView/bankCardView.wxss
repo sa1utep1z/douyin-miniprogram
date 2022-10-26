@@ -1,0 +1,91 @@
+/* pages/authDisplay/authDisplay.wxss */
+page{
+  width: 100%;
+  height: 100%;
+  background-color: FFFFFF;
+}
+.container {
+  margin-top: 50rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bank-container {
+  width: 686rpx;
+  height: 142px;
+  position: relative;
+}
+
+.bank-img-bg {
+  display: block;
+  margin: 0 auto;
+  width: 686rpx;
+}
+
+.bankName {
+  position: absolute;
+  top: 40rpx;
+  left: 50rpx;
+  color: #e4e4e4;
+  font-size: 38rpx;
+  font-weight: bolder;
+}
+
+.bankType {
+  position: absolute;
+  top: 90rpx;
+  left: 50rpx;
+  color: #e4e4e4;
+  font-size: 22rpx;
+}
+
+.bankAccount {
+  position: absolute;
+  top: 150rpx;
+  color: #e4e4e4;
+  font-size: 38rpx;
+  font-weight: bolder;
+}
+
+.bankAccount-num {
+  right: 50rpx;
+}
+.bankAccount-3 {
+  right: 170rpx;
+}
+.bankAccount-2 {
+  right: 290rpx;
+}
+.bankAccount-1 {
+  right: 410rpx;
+}
+
+.bankCard-eye {
+  position: absolute;
+  width: 52rpx;
+  height: 52rpx;
+  right: 50rpx;
+  top: 40rpx;
+}
+
+.bankCard-tip {
+  position: absolute;
+  color: #e4e4e4;
+  font-size: 18rpx;
+  right: 10rpx;
+  top: 90rpx;
+}
+
+.submit-button {
+  position: relative;
+  width: 646rpx;
+  height: 82rpx;
+  line-height: 82rpx;
+  text-align: center;
+  margin-top: 40rpx;
+  font-weight: 500;
+  background-color: #409eff;
+  color: white;
+}

@@ -36,6 +36,6 @@ export const userSignUp = (id,data) => {
  }
 
   //岗位详情
-export const fetchJobDetail = (id,data) => {
-  return  ajax.request(`/client/orders/${id}`,data,'GET');
+export const fetchJobDetail = (id) => {
+  return  ajax.request(`/client/orders/${id}`,null,'GET');
  }

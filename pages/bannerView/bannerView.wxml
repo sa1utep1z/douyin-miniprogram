@@ -2,7 +2,7 @@
   <web-view src="{{pageBean.url}}"></web-view>
 </view>
 <block wx:elif="{{pageBean.jumpType === 'image'}}">
-  <view style="width: 98%; margin: 0 auto;" wx:for="{{pageBean.contentImage}}" wx:key="index">
-    <image style="width: 100%;" src="{{item.url}}" />
+  <view class="img-container">
+    <image mode="widthFix" show-menu-by-longpress="true" class="content-img" wx:for="{{pageBean.contentImage}}" wx:key="index" src="{{item.url}}" />
   </view>
 </block>

@@ -69,6 +69,7 @@ Page({
 
   handelMenuClick: function (e) {
     const { tag } = e.currentTarget.dataset;
+    const { userInfo } = this.data;
     switch(tag) {
       case 'registration':
         // wx.showToast({
@@ -85,20 +86,116 @@ Page({
           url: '../../pages/member/member',
         })
         break;
+      case 'resignApply':
+        if (!userInfo.validation) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '请先进行实名认证',
+            confirmText: '去实名',
+            success: (res)=> {
+              if (res.confirm) {
+                //未实名 进入实名页面
+                wx.navigateTo({
+                  url: '../../pages/authCenterNew/authCenterNew',
+                });
+              } 
+            }
+          })
+        } else {
+          if (userInfo.memberStatus !== 'PREPARE_JOB_RESIGN' && userInfo.memberStatus !== 'JOB_ON') {
+            wx.showToast({
+              title: '您还未入职',
+              icon: 'none',
+            });
+            return;
+          }
+          wx.navigateTo({
+            url: '../../pages/resignApply/resignApply',
+          });
+        }
+        break;
       case 'feedback':
         wx.navigateTo({
-          url: '../../pages/feedback/feedback',
+          url: '../../pages/feedback2/feedback2',
         })
         break;
-    case 'share':
-      wx.navigateTo({
-        url: '../../pages/sharePost/sharePost',
-      })
-      break;
+      case 'share':
+        wx.navigateTo({
+          url: '../../pages/sharePost/sharePost',
+        })
+        break;
       case 'auth':
         wx.navigateTo({
           url: '../../pages/authDisplayNew/authDisplayNew',
         });
+        break;
+      case 'contacts':
+        wx.navigateTo({
+          url: '../../pages/contacts/contacts',
+        });
+        break;
+      case 'bankCard':
+        if (!userInfo.validation) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '请先进行实名认证',
+            confirmText: '去实名',
+            success: (res)=> {
+              if (res.confirm) {
+                //未实名 进入实名页面
+                wx.navigateTo({
+                  url: '../../pages/authCenterNew/authCenterNew',
+                });
+              } 
+            }
+          })
+        } else {
+          wx.navigateTo({
+            url: '../../pages/bankCardView/bankCardView',
+          });
+        }
+        break;
+      case 'payslip':
+        if (!userInfo.validation) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '请先进行实名认证',
+            confirmText: '去实名',
+            success: (res)=> {
+              if (res.confirm) {
+                //未实名 进入实名页面
+                wx.navigateTo({
+                  url: '../../pages/authCenterNew/authCenterNew',
+                });
+              } 
+            }
+          })
+        } else {
+          wx.navigateTo({
+            url: '../../pages/payslip/payslip',
+          });
+        }
+        break;
+      case 'advance':
+        if (!userInfo.validation) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '请先进行实名认证',
+            confirmText: '去实名',
+            success: (res)=> {
+              if (res.confirm) {
+                //未实名 进入实名页面
+                wx.navigateTo({
+                  url: '../../pages/authCenterNew/authCenterNew',
+                });
+              } 
+            }
+          })
+        } else {
+          wx.navigateTo({
+            url: '../../pages/advanceDetail/advanceDetail',
+          });
+        }
         break;
       case 'staff':
         wx.navigateTo({

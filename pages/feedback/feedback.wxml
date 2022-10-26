@@ -9,7 +9,7 @@
     </block>
   </view>
   <view class="feedback-areaBox">  
-    <textarea class="feedback-area" value="{{content}}" bindinput="inputChange" maxlength="500" placeholder="请输入意见反馈..." />
+    <textarea class="feedback-area" value="{{content}}" bindinput="inputChange" maxlength="500" placeholder="请输入反馈内容..." />
     <text class="feedback-areaLength">{{content.length}}/500</text>
   </view>
   <view class="chooseImage-box">

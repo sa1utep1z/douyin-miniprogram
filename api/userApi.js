@@ -108,3 +108,22 @@ export const updateNickName = (data) => {
   return  ajax.request('/client/member/updateMemberUsername', data, 'PUT',false);
  }
 
+ export const fetchContactsInfo = () => {
+  return ajax.request('/client/member/contacts', null, 'GET');
+ }
+
+ export const submitContactsInfo = (data) => {
+  return ajax.request('/client/member/contacts', data, 'POST', false);
+ }
+
+ export const fetchBankCardInfo = () => {
+  return ajax.request('/client/member/bankCard', null, 'GET');
+ }
+
+ export const submitBankCardInfo = (data) => {
+  return ajax.request('/client/member/bankCard', data, 'POST', false);
+ }
+
+ export const fetchBankUserName = () => {
+  return ajax.request('/client/member/bankUserName', null, 'GET');
+ }

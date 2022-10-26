@@ -77,6 +77,14 @@ Page({
        })
       await readMessage(messageList[index].messageId);
      }
+     // 判断是否跳转
+     const messObj = messageList[index];
+     const {redirectKey, redirectParam} = messObj;
+     if (redirectKey === 'salary') {
+      wx.navigateTo({
+        url: `../../../pages/payslip/payslip?year=${redirectParam.year}&month=${redirectParam.month}`,
+      });
+     }
   },
 
   onLoadMore: async function (e) {

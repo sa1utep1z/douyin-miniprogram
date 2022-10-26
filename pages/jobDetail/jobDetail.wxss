@@ -345,8 +345,9 @@ page{
 .float-button {
   width: 380rpx;
   height: 92rpx;
-  background: linear-gradient(167deg, #36E8FE 0%, #1283E9 100%);
-  border-radius: 48rpx;
+  /* background: linear-gradient(167deg, #36E8FE 0%, #1283E9 100%); */
+  background: linear-gradient(#018eff, #51bcff);
+  border-radius: 10rpx;
   font-size: 36rpx;
   text-align: center;
   font-family: PingFangSC-Regular, PingFang SC;
@@ -356,6 +357,9 @@ page{
 }
 .float-button-hover {
   background: #018dffb0;
+}
+.float-button-text {
+  font-size: 42rpx;
 }
 .float-icon {
   width: 60rpx;
