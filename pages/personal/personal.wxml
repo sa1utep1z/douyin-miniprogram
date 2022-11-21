@@ -4,10 +4,12 @@
     <view class="flex-row">
       <image class="info-avatar" src="{{userInfo.weChatIconUrl===null?'../../assets/images/public/icon_default_head.png':userInfo.weChatIconUrl}}"></image>
       <view class="info-column">
-        <view type="userNickName" class="info-name"><text>{{userInfo.weChatName===null?'微信用户':userInfo.weChatName}}</text></view>
+        <view type="userNickName" class="info-name">
+          <text>{{userInfo.weChatName===null?'微信用户':userInfo.weChatName}}</text>
+        </view>
         <view class="info-slogan">众鼎日薪 天天发薪</view>
       </view>
-      <view class="info-auth" wx:if="{{false}}">去实名认证></view>
+      <image mode="heightFix" bindtap="qrCodeScan" show-menu-by-longpress="true" class="scan-img" src="../../assets/images/public/scan.png"></image>
     </view>
   </view>
   <view class="block-wallet">
@@ -92,6 +94,12 @@
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="advance">
       <image class="action-icon" src="../../assets/images/personal/icon_action_advance.png"/>
       <view class="action-lable">预支薪资</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view>
+    <van-divider hairline  />
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="dorm">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_dorm.png"/>
+      <view class="action-lable">宿舍服务</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
     <van-divider hairline />

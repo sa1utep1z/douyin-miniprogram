@@ -88,19 +88,7 @@ Page({
         break;
       case 'resignApply':
         if (!userInfo.validation) {
-          wx.showModal({
-            title: '温馨提示',
-            content: '请先进行实名认证',
-            confirmText: '去实名',
-            success: (res)=> {
-              if (res.confirm) {
-                //未实名 进入实名页面
-                wx.navigateTo({
-                  url: '../../pages/authCenterNew/authCenterNew',
-                });
-              } 
-            }
-          })
+          this.noVerifyRediect();
         } else {
           if (userInfo.memberStatus !== 'PREPARE_JOB_RESIGN' && userInfo.memberStatus !== 'JOB_ON') {
             wx.showToast({
@@ -136,19 +124,7 @@ Page({
         break;
       case 'bankCard':
         if (!userInfo.validation) {
-          wx.showModal({
-            title: '温馨提示',
-            content: '请先进行实名认证',
-            confirmText: '去实名',
-            success: (res)=> {
-              if (res.confirm) {
-                //未实名 进入实名页面
-                wx.navigateTo({
-                  url: '../../pages/authCenterNew/authCenterNew',
-                });
-              } 
-            }
-          })
+          this.noVerifyRediect();
         } else {
           wx.navigateTo({
             url: '../../pages/bankCardView/bankCardView',
@@ -157,19 +133,7 @@ Page({
         break;
       case 'payslip':
         if (!userInfo.validation) {
-          wx.showModal({
-            title: '温馨提示',
-            content: '请先进行实名认证',
-            confirmText: '去实名',
-            success: (res)=> {
-              if (res.confirm) {
-                //未实名 进入实名页面
-                wx.navigateTo({
-                  url: '../../pages/authCenterNew/authCenterNew',
-                });
-              } 
-            }
-          })
+          this.noVerifyRediect();
         } else {
           wx.navigateTo({
             url: '../../pages/payslip/payslip',
@@ -178,22 +142,19 @@ Page({
         break;
       case 'advance':
         if (!userInfo.validation) {
-          wx.showModal({
-            title: '温馨提示',
-            content: '请先进行实名认证',
-            confirmText: '去实名',
-            success: (res)=> {
-              if (res.confirm) {
-                //未实名 进入实名页面
-                wx.navigateTo({
-                  url: '../../pages/authCenterNew/authCenterNew',
-                });
-              } 
-            }
-          })
+          this.noVerifyRediect();
         } else {
           wx.navigateTo({
             url: '../../pages/advanceDetail/advanceDetail',
+          });
+        }
+        break;
+      case 'dorm':
+        if (!userInfo.validation) {
+          this.noVerifyRediect();
+        } else {
+          wx.navigateTo({
+            url: '../../pages/dorm/dorm',
           });
         }
         break;
@@ -219,7 +180,21 @@ Page({
         });
     }
   },
-
+  noVerifyRediect: function() {
+    wx.showModal({
+      title: '温馨提示',
+      content: '请先进行实名认证',
+      confirmText: '去实名',
+      success: (res)=> {
+        if (res.confirm) {
+          //未实名 进入实名页面
+          wx.navigateTo({
+            url: '../../pages/authCenterNew/authCenterNew',
+          });
+        } 
+      }
+    })
+  },
   handelPhoneCall: function (e) {
     const { userInfo } = this.data;
     if (!userInfo.recruiterMobile) { 
@@ -335,5 +310,33 @@ Page({
     //   })
      
     // }
+  },
+  qrCodeScan: function(e) {
+    wx.scanCode({
+      success(res) {
+        console.info(res);
+        const { scanType, result } = res;
+        if (scanType !== 'QR_CODE') {
+          wx.showToast({
+            title: '不支持该二维码',
+            duration: 3000,
+            icon: 'none',
+          });
+          return;
+        }
+        if (!result) {
+          wx.showToast({
+            title: '二维码信息缺失',
+            duration: 3000,
+            icon: 'none',
+          });
+          return;
+        }
+        // 根绝类型做页面跳转
+        wx.navigateTo({
+          url: '../../pages/dorm/scanBed/scanBed?bedId=' + result,
+        });
+      },
+    })
   },
 })

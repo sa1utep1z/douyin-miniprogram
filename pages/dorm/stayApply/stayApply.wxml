@@ -1,0 +1,120 @@
+<!--pages/dorm/stayApply/stayApply.wxml-->
+<view class="container">
+  <view class="apply-title">住宿申请</view>
+  <view class="auth-display">
+    <view class="row row-first">
+      <view class="row-left"><text>姓名</text></view>
+      <view class="row-right"><text>{{returnInfo.userName||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>工号</text></view>
+      <view class="row-right"><text>{{returnInfo.jobNo||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>手机号</text></view>
+      <view class="row-right"><text>{{returnInfo.mobile||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>身份证</text></view>
+      <view class="row-right"><text>{{returnInfo.idNo||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>籍贯</text></view>
+      <view class="row-right canEdit">
+        <input bindinput="bindHometown" value="{{editHometown}}" placeholder="请输入籍贯"/>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>渠道来源</text></view>
+      <view class="row-right"><text>{{returnInfo.signUpType||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>所属部门</text></view>
+      <view class="row-right"><text>{{returnInfo.storeName||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>归属招聘员</text></view>
+      <view class="row-right"><text>{{returnInfo.recruiterName||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>供应商</text></view>
+      <view class="row-right"><text>{{returnInfo.supplierName||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>企业简称</text></view>
+      <view class="row-right"><text>{{returnInfo.shortCompanyName||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>入住类别</text></view>
+      <view class="row-right"><text>{{returnInfo.liveInType||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>宿舍分类</text></view>
+      <view class="row-right"><text>{{returnInfo.liveType||'无'}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>宿舍楼栋</text></view>
+      <view class="row-right">
+        <picker mode="selector" value="{{buildIndex}}" range="{{freeBuildData}}" range-key="name" bindchange="bindPickerBuild">
+          <view class="picker" style="color: #4fa1f4;">
+            {{buildIndex === '' ? '请选择' : freeBuildData[buildIndex].name}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>宿舍楼层</text></view>
+      <view class="row-right">
+        <picker mode="selector" value="{{floorIndex}}" range="{{freeFloorData}}" range-key="index" bindchange="bindPickerFloor">
+          <view class="picker" style="color: #4fa1f4;">
+            {{floorIndex === '' ? '请选择' : freeFloorData[floorIndex].index}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>房间号</text></view>
+      <view class="row-right">
+        <picker mode="selector" value="{{roomIndex}}" range="{{freeRoomData}}" range-key="name" bindchange="bindPickerRoom">
+          <view class="picker" style="color: #4fa1f4;">
+            {{roomIndex === '' ? '请选择' : freeRoomData[roomIndex].name}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>床位号</text></view>
+      <view class="row-right">
+        <picker mode="selector" value="{{bedIndex}}" range="{{freeBedData}}" range-key="bedNo" bindchange="bindPickerBed">
+          <view class="picker" style="color: #4fa1f4;">
+            {{bedIndex === '' ? '请选择' : freeBedData[bedIndex].bedNo}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="tip">注：应深圳公安要求，所有入住人员必须如实填写个人的住宿信息，便于户籍民警网格化管理。</view>
+    <view class="buttom-check">
+      <switch type="checkbox" checked="{{agreePact}}" bindchange="switch2Change"/>
+      <text style="color: #4b4b4b;" bindtap="rediectPact">阅读并同意相关<text style="color: #5fa4f4;" bindtap="rediectPact">《宿舍公约》</text></text>
+    </view>
+    <view class="buttom-button">
+      <button class="sign-button" disabled="{{!canSubmit}}" bindtap="submitData">{{submitBtnName}}</button>
+    </view>
+  </view>
+</view>

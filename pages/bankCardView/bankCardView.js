@@ -63,6 +63,7 @@ Page({
       case "工商银行":
         return '../../assets/images/bankCard/gs_yh.png';
       case "建设银行":
+      case "中国建设银行":
         return '../../assets/images/bankCard/js_yh.png';
       case "招商银行":
         return '../../assets/images/bankCard/zs_yh.png';

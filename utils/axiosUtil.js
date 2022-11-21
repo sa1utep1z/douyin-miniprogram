@@ -20,7 +20,7 @@ const handleLoginInvalid = () => {
     url: '/pages/index/index'
   });
 }
-function _showToast(title = '网络错误', duration = 2000) {
+function _showToast(title = '网络错误', duration = 3000) {
   wx.showToast({
     title,
     icon: 'none',
