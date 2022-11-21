@@ -26,9 +26,9 @@ page{
   box-sizing: border-box;
 }
 .auth-none {
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #585858;
-  padding: 50rpx 0;
+  margin-top: 40vh;
 }
 .row {
   width: 638rpx;
