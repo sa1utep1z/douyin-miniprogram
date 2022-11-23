@@ -1,5 +1,6 @@
 // pages/dorm/dorm.js
 import { listDormLiveData, fetchButtonCheck, fetchCurrDormLiveInfo, submitDormLiveOutApply } from '../../api/dorm'
+import { uploadImage } from '../../api/commonApi'
 Page({
 
   /**
@@ -23,6 +24,15 @@ Page({
       {"title": "调迁宿舍", "value": "DORM_LIVE_OUT_TRANSFER"},
     ],
     liveOutDate: '',
+    showRepairDialog: false,
+    repairApplyTypeIndex: '', // 报修原因index
+    repairApplyTypeOptions: [
+      {"title": "类型1", "value": "DORM_LIVE_OUT_RESIGN"},
+      {"title": "类型2", "value": "DORM_LIVE_OUT_VIOLATE"},
+    ],
+    repairApplyContent: '',
+    imageList:[],
+    imageSubList:[],
   },
 
   /**
@@ -55,6 +65,16 @@ Page({
       outApplyReasonIndex: e.detail.value,
     })
   },
+  bindPickerRepairType: function(e) {
+    this.setData({
+      repairApplyTypeIndex: e.detail.value,
+    })
+  },
+  bindRepairApplyContent: function(e) {
+    this.setData({
+      repairApplyContent: e.detail.value,
+    })
+  },
   bindLiveOutDateChange: function(e) {
     this.setData({
       liveOutDate: e.detail.value,
@@ -69,8 +89,12 @@ Page({
           showLiveOutDialog: true,
         })
         break;
-      // case 'repair':
-        
+      case 'repair':
+        this.getCurrDormLiveInfo();
+        this.setData({
+          showRepairDialog: true,
+        })
+        break;
       case 'stay':
         wx.navigateTo({
           url: './pactSign/pactSign',
@@ -83,6 +107,53 @@ Page({
         });
         break;
     }
+  },
+  chooseImage: function(){
+    wx.showActionSheet({
+      itemList: ['从相册中选择', '拍照'],
+      itemColor: "#00000",
+      success: (res)=> {
+       if (!res.cancel) {
+        if (res.tapIndex == 0) {
+         this.chooseWxImage('album')
+        } else if (res.tapIndex == 1) {
+          this.chooseWxImage('camera')
+        }
+       }
+      }
+     })
+  },
+  chooseWxImage:function(type){
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: [type],
+      success:  (res) =>{
+       this.uploadImg(res.tempFilePaths[0])
+      }
+     }) 
+  },
+  uploadImg:async function(data){
+    const { imageList,imageSubList }=this.data;
+    const res = await uploadImage(data);
+    if (res.code == 0) { 
+      imageSubList.push(res.data.fileKey)
+      imageList.push(data)
+      this.setData({
+        imageSubList:imageSubList,
+        imageList:imageList
+      })
+    }
+  },
+  deleteImg:function(e){
+    const { imageList, imageSubList } =this.data
+    const _index = e.target.dataset.index
+    imageList.splice(_index,1)
+    imageSubList.splice(_index,1)
+    this.setData({
+      imageList:imageList,
+      imageSubList:imageSubList
+     })
   },
   getCurrDormLiveInfo: async function() {
     const res = await fetchCurrDormLiveInfo();
@@ -150,6 +221,20 @@ Page({
       liveOutDate: '',
     })
     this.getDormLiveData();
+  },
+  handleRepairCancel: function() {
+    this.setData({
+      showRepairDialog: false,
+      currDormLiveData: {},
+      repairApplyTypeIndex: '',
+      repairApplyContent: '',
+      imageList:[],
+      imageSubList:[],
+    })
+  },
+  handleRepairConfirm: async function() {
+    const { repairApplyTypeIndex, repairApplyTypeOptions, repairApplyContent, imageSubList } = this.data;
+    console.info(imageSubList);
   },
   onLoadMore: async function () {
     const { pageNumber, dataList, pageSize, loadingStatus} = this.data;

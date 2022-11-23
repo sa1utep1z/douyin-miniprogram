@@ -288,40 +288,23 @@ Page({
       duration: 3000,
       icon: 'none',
     });
-    // const  { userInfo } = this.data;
-    // if (userInfo.authRealName === true) {
-    //   //如果已经实名 进入提现页面
-    //   wx.navigateTo({
-    //     url: `../../pages/withdraw/withdraw?balance=${userInfo.balance}`,
-    //   });
-    // } else if (userInfo.authRealName === false)  {
-    //   wx.showModal({
-    //     title: '温馨提示',
-    //     content: '请先进行实名认证，实名认证时请填写真实信息，若与微信认证信息不一致，将无法成功提现',
-    //     confirmText: '去实名',
-    //     success: (res)=> {
-    //       if (res.confirm) {
-    //         //未实名 进入实名页面
-    //         wx.navigateTo({
-    //           url: '../../pages/authCenter/authCenter',
-    //         });
-    //       } 
-    //     }
-    //   })
-     
-    // }
   },
   qrCodeScan: function(e) {
     wx.scanCode({
       success(res) {
         console.info(res);
         const { scanType, result } = res;
+        const end = false;
         if (scanType !== 'QR_CODE') {
+          end = true;
           wx.showToast({
             title: '不支持该二维码',
-            duration: 3000,
+            duration: 2500,
             icon: 'none',
           });
+          // setTimeout(function() {
+            
+          // }, 2000)
           return;
         }
         if (!result) {
