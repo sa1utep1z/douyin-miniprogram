@@ -5,6 +5,8 @@ function parseType(type) {
     return '报修申请';
   } else if(type === 'DORM_OUT'){
     return '退宿申请';
+  } else if(type === 'RENT'){
+    return '个人外租';
   }
   return '';
 }
@@ -16,7 +18,7 @@ function parseStatus(type, status) {
     if(type === 'DORM_APPLY'){
       return '已通过';
     } else if(type === 'DORM_FIX'){
-      return '已报修';
+      return '已处理';
     } else if(type === 'DORM_OUT'){
       return '已退宿';
     }

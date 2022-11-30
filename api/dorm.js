@@ -28,6 +28,14 @@ export const fetchDormLiveInfo = () => {
 export const submitDormLive = (data) => {
   return ajax.request('/client/dormLive', data, 'POST');
  }
+ // 提交申请外宿
+export const submitRent = (data) => {
+  return ajax.request('/client/dormLive/rent', data, 'POST');
+ }
+  // 提交申请维修
+export const submitRepair= (data) => {
+  return ajax.request('/client/repair', data, 'POST');
+ }
  // 当前住宿信息回显
 export const fetchCurrDormLiveInfo = () => {
   return ajax.request('/client/dormLive/currLive/info', null, 'GET');

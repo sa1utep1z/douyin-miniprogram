@@ -167,6 +167,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/dorm/rentApply/rentApply",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

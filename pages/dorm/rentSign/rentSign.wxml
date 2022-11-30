@@ -1,0 +1,17 @@
+<!--pages/dorm/pactSign/pactSign.wxml-->
+<view class="container">
+  <view class="p_head">
+    <view class="text1" style="text-align: center">外租安全协议</view>
+    <view class="p_txt"><text>1、外租安全协议</text></view>
+    <view class="p_title" style="display: {{onlyView ? 'none' : 'block'}};"><text>本人已清楚并知悉以上条款内容，严格执行，如有违反上述条款本人自愿接受处罚！</text></view>
+  </view>
+  <view style="display: {{onlyView ? 'none' : 'block'}};">
+    <view class="buttom-check">
+      <switch type="checkbox" checked="{{agreePact}}" bindchange="switch2Change"/>
+      <text>阅读并同意《相关条款》</text>
+    </view>
+    <view class="buttom-button">
+      <button class="sign-button" bindtap="signClick" disabled="{{!canSign}}">{{signText}}</button>
+    </view>
+  </view>
+</view>

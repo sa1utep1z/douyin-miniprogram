@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    signImgKey: '',
     returnInfo: {}, // 回显的对象信息
     freeBuildData: [], // 空闲楼栋的层级数组(后台返回的，不可变动)
     freeFloorData: [], // 对应楼栋的楼层
@@ -25,15 +26,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.getDormLiveInfo().then(e => {
-      if (e) {
-        this.getRoutineFreeRoomHierarchy().then(r => {
-          if (r) {
-            this.getRandomDorm();
-          }
-        })
-      }
-    })
+    const { signImgKey } = options;
+    if (signImgKey) {
+      this.setData({
+        signImgKey,
+      })
+      this.getDormLiveInfo().then(e => {
+        if (e) {
+          this.getRoutineFreeRoomHierarchy().then(r => {
+            if (r) {
+              this.getRandomDorm();
+            }
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -152,7 +159,7 @@ Page({
     })
   },
   submitData: async function() {
-    const { agreePact, returnInfo, editHometown, bedIndex, freeBedData } = this.data;
+    const { agreePact, returnInfo, editHometown, bedIndex, freeBedData, signImgKey } = this.data;
     if (!agreePact) {
       wx.showToast({
         title: '请先勾选阅读条款',
@@ -178,6 +185,7 @@ Page({
       recruitFlowId: returnInfo.recruitFlowId,
       hometown: editHometown,
       roomBedId: freeBedData[bedIndex].id,
+      signImgKey,
     }
     await submitDormLive(params);
     this.setData({

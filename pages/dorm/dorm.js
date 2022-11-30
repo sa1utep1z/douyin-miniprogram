@@ -1,5 +1,5 @@
 // pages/dorm/dorm.js
-import { listDormLiveData, fetchButtonCheck, fetchCurrDormLiveInfo, submitDormLiveOutApply } from '../../api/dorm'
+import { listDormLiveData, fetchButtonCheck, fetchCurrDormLiveInfo, submitDormLiveOutApply, submitRepair } from '../../api/dorm'
 import { uploadImage } from '../../api/commonApi'
 Page({
 
@@ -14,7 +14,9 @@ Page({
     liveOutButton: false,
     liveFixButton: false,
     liveApplyButton: false,
+    rentButton: false,
     currDormLiveData: {},
+    showStayDialog: false,
     showLiveOutDialog: false,
     outApplyReasonIndex: '', // 退宿原因index
     outApplyReasonOptions: [
@@ -27,8 +29,17 @@ Page({
     showRepairDialog: false,
     repairApplyTypeIndex: '', // 报修原因index
     repairApplyTypeOptions: [
-      {"title": "类型1", "value": "DORM_LIVE_OUT_RESIGN"},
-      {"title": "类型2", "value": "DORM_LIVE_OUT_VIOLATE"},
+      {"title": "灯管类", "value": "DORM_REPAIR_LAMP"},
+      {"title": "门锁类", "value": "DORM_REPAIR_DOOR"},
+      {"title": "床类", "value": "DORM_REPAIR_BED"},
+      {"title": "管道堵塞", "value": "DORM_REPAIR_PIPE_BLOCKAGE"},
+      {"title": "马桶", "value": "DORM_REPAIR_CLOSESTOOL"},
+      {"title": "水龙头", "value": "DORM_REPAIR_TAP"},
+      {"title": "沐浴喷头", "value": "DORM_REPAIR_SHOWER_NOZZLE"},
+      {"title": "空调器", "value": "DORM_REPAIR_AIRCONDITION"},
+      {"title": "热水器", "value": "DORM_REPAIR_HEATER"},
+      {"title": "插座线路", "value": "DORM_REPAIR_SOCKET_LINE"},
+      {"title": "其他", "value": "DORM_REPAIR_OTHER"},
     ],
     repairApplyContent: '',
     imageList:[],
@@ -83,6 +94,11 @@ Page({
   handelClick: function(e) {
     const { tag } = e.currentTarget.dataset;
     switch(tag) {
+      case 'stayDialog':
+        this.setData({
+          showStayDialog: true,
+        })
+        break;
       case 'dropOut':
         this.getCurrDormLiveInfo();
         this.setData({
@@ -96,9 +112,20 @@ Page({
         })
         break;
       case 'stay':
+        this.setData({
+          showStayDialog: false,
+        })
         wx.navigateTo({
           url: './pactSign/pactSign',
         }); 
+        break;
+      case 'rent':
+        this.setData({
+          showStayDialog: false,
+        })
+        wx.navigateTo({
+          url: './rentSign/rentSign',
+        });
         break;
       default:
         wx.showToast({
@@ -107,6 +134,11 @@ Page({
         });
         break;
     }
+  },
+  closeStayDialog: function() {
+    this.setData({
+      showStayDialog: false,
+    })
   },
   chooseImage: function(){
     wx.showActionSheet({
@@ -169,11 +201,12 @@ Page({
   },
   getButtonCheck: async function() {
     const res = await fetchButtonCheck();
-    const { liveOutButton, liveFixButton, liveApplyButton } = res.data;
+    const { liveOutButton, liveFixButton, liveApplyButton, rentButton } = res.data;
     this.setData({
       liveOutButton,
       liveFixButton,
       liveApplyButton,
+      rentButton
     })
   },
   handleLiveOutCancel: function() {
@@ -234,7 +267,26 @@ Page({
   },
   handleRepairConfirm: async function() {
     const { repairApplyTypeIndex, repairApplyTypeOptions, repairApplyContent, imageSubList } = this.data;
-    console.info(imageSubList);
+    const params = {
+      repairContent: repairApplyContent,
+      type: repairApplyTypeOptions[repairApplyTypeIndex].value,
+      faultImgs: imageSubList,
+    };
+    await submitRepair(params);
+    wx.showToast({
+      title: '维修申请成功',
+      icon: 'success',
+      duration: 2000
+    });
+    this.setData({
+      showRepairDialog: false,
+      currDormLiveData: {},
+      repairApplyTypeIndex: '',
+      repairApplyContent: '',
+      imageList:[],
+      imageSubList:[],
+    })
+    this.getDormLiveData();
   },
   onLoadMore: async function () {
     const { pageNumber, dataList, pageSize, loadingStatus} = this.data;

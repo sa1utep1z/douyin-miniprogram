@@ -47,14 +47,14 @@ Page({
       setTimeout(function() {
         // 不会被返回到pactSign该页面
         wx.redirectTo({
-          url: '../stayApply/stayApply?signImgKey='+imgInfo.fileKey,
+          url: '../rentApply/rentApply?signImgKey='+imgInfo.fileKey,
         });
       }, 2000);
     }
   },
   onSign: async function(imgKey) {
     // 上传签字信息并完成签署
-    const params = { signImgKey: imgKey, type: 'DORM' }
+    const params = { signImgKey: imgKey, type: 'RENT' }
     return await signDorm(params).then((res) => {
       // 清空签署信息
       this.setData({

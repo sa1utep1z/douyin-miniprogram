@@ -4,7 +4,7 @@
 <view class="button-group">
   <button class="button-item" bindtap="handelClick" data-tag="dropOut" disabled="{{!liveOutButton}}">申请退宿</button>
   <button class="button-item" bindtap="handelClick" data-tag="repair" disabled="{{!liveFixButton}}">宿舍报修</button>
-  <button class="button-item" bindtap="handelClick" data-tag="stay" disabled="{{!liveApplyButton}}">申请住宿</button>
+  <button class="button-item" bindtap="handelClick" data-tag="stayDialog" disabled="{{liveFixButton}}">是否住宿</button>
 </view>
 <scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" class="scroll-view">
   <view class="container">
@@ -18,6 +18,21 @@
   </block>
   </view>
 </scroll-view>
+
+<van-overlay show ="{{showStayDialog}}"  custom-style="background: rgba(0,0,0,0.2) ">
+  <view class="dialog-container">
+    
+    <view class="dialog">
+      <view class="dialog-title">是否住宿<image src="/assets/images/public/icon_delete.png" class="close-img" bindtap="closeStayDialog"></image></view>
+      <scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" class="dialog-content" style="margin-top: 50rpx;">
+        <view class="input-view-required">
+          <button class="button-item" bindtap="handelClick" data-tag="rent" disabled="{{!rentButton}}">个人外租</button>
+          <button class="button-item" bindtap="handelClick" data-tag="stay" disabled="{{!liveApplyButton}}">公司宿舍</button>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</van-overlay>
 
 <van-overlay show ="{{showLiveOutDialog}}"  custom-style="background: rgba(0,0,0,0.5) ">
   <view class="dialog-container">
