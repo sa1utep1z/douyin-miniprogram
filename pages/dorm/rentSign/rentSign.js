@@ -6,10 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    agreePact: false,
+    agreePact: true,
     imgInfo: {}, // 表示的是签字生成的图片对象信息，由签完字返回。
     signText: '签字',
-    canSign: false,
+    canSign: true,
     onlyView: false,
   },
 

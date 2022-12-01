@@ -16,7 +16,7 @@ Page({
     floorIndex: '', // 选择的楼层下拉下标
     roomIndex: '', // 选择的房间下拉下标
     bedIndex: '', // 选择的床位下拉下标
-    agreePact: false,
+    agreePact: true,
     canSubmit: false,
     submitBtnName: '提交',
     editHometown: '',
@@ -110,7 +110,6 @@ Page({
     const { value } = e.detail;
     this.setData({
       agreePact: value,
-      canSign: value,
     })
   },
   rediectPact: function(e) {

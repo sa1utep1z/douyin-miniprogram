@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    agreePact: false,
-    canSubmit: false,
+    agreePact: true,
+    canSubmit: true,
     rentType: '',
     editHometown: '',
     signImgKey: '',
