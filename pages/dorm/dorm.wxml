@@ -108,7 +108,7 @@
         <view class="input-view-required">
           <text class="input-view-label">预计退宿时间</text>
           <view class="input-view-text">
-            <picker mode="date" bindchange="bindLiveOutDateChange">
+            <picker mode="date" start="{{tool2.formatTimeYMD(startDateLimit)}}" bindchange="bindLiveOutDateChange">
               <view class="picker" style="color: #4fa1f4;">
                 {{liveOutDate === '' ? '请选择' : tool2.formatTimeYMD(liveOutDate)}}
               </view>

@@ -18,6 +18,7 @@ Page({
     currDormLiveData: {},
     showStayDialog: false,
     showLiveOutDialog: false,
+    startDateLimit: new Date().setHours(0, 0, 0, 0),
     outApplyReasonIndex: '', // 退宿原因index
     outApplyReasonOptions: [
       {"title": "离职退宿", "value": "DORM_LIVE_OUT_RESIGN"},
