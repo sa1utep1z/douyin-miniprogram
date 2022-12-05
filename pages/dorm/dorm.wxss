@@ -125,10 +125,12 @@ page{
   display: flex;
   flex-direction: row;
   margin: 12rpx 0 6rpx 0;
-  align-items: center;
   padding: 20rpx 24rpx;
   box-sizing: border-box;
   font-size: 28rpx;
+}
+.input-center {
+  align-items: center;
 }
 .input-view-label {
   flex: 1;

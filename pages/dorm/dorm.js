@@ -268,6 +268,14 @@ Page({
   },
   handleRepairConfirm: async function() {
     const { repairApplyTypeIndex, repairApplyTypeOptions, repairApplyContent, imageSubList } = this.data;
+    if (repairApplyTypeIndex === '' || repairApplyContent === '') {
+      wx.showToast({
+        title: '报修事项和故障描述不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
     const params = {
       repairContent: repairApplyContent,
       type: repairApplyTypeOptions[repairApplyTypeIndex].value,

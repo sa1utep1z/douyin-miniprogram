@@ -201,7 +201,7 @@
             <textarea value="{{repairApplyContent}}" style="width: 100%;height: 240rpx;text-align: left;" bindinput="bindRepairApplyContent" maxlength="-1" placeholder="请输入故障描述..." />
           </view>
         </view>
-        <view class="input-view-required">
+        <view class="input-view-required input-center">
           <text class="input-view-label">故障照片</text>
           <view class="input-view-text">
             <block wx:for="{{imageList}}" wx:key="index">
