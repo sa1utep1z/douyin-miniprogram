@@ -307,7 +307,16 @@ Page({
           // }, 2000)
           return;
         }
-        if (!result) {
+        const arr = result.split('&');
+        const obj = {};
+        arr.forEach(e => {
+          const e_arr = e.split('=');
+          if (e_arr.length == 2) {
+            obj[e_arr[0]] = e_arr[1];
+          }
+        })
+        const { type, id } = obj;
+        if (!result || !type || !id) {
           wx.showToast({
             title: '二维码信息缺失',
             duration: 3000,
@@ -316,9 +325,25 @@ Page({
           return;
         }
         // 根绝类型做页面跳转
-        wx.navigateTo({
-          url: '../../pages/dorm/scanBed/scanBed?bedId=' + result,
-        });
+        switch(type) {
+          case "roomBed":
+            wx.navigateTo({
+              url: '../../pages/dorm/scanBed/scanBed?bedId=' + id,
+            });
+            break;
+          case "roomBuilding":
+            wx.navigateTo({
+              url: '../../pages/dorm/stayApply/stayApply?scanBuilding=true&roomBuildingId=' + id,
+            });
+            break;
+          default:
+            wx.showToast({
+              title: '类型错误',
+              duration: 3000,
+              icon: 'none',
+            });
+            break;
+        }
       },
     })
   },

@@ -1,5 +1,5 @@
 // pages/dorm/stayApply/stayApply.js
-import { routineFreeRoomHierarchy, fetchDormLiveInfo, submitDormLive, fetchRandomDorm } from '../../../api/dorm'
+import { routineFreeRoomHierarchy, routineFreeRoomHierarchyByRoomBuilding, fetchDormLiveInfo, submitDormLive, fetchRandomDorm, fetchRandomDormByRoomBuilding } from '../../../api/dorm'
 Page({
 
   /**
@@ -20,13 +20,14 @@ Page({
     canSubmit: false,
     submitBtnName: '提交',
     editHometown: '',
+    buildingScan: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const { signImgKey } = options;
+    const { signImgKey, scanBuilding, roomBuildingId } = options;
     if (signImgKey) {
       this.setData({
         signImgKey,
@@ -36,6 +37,19 @@ Page({
           this.getRoutineFreeRoomHierarchy().then(r => {
             if (r) {
               this.getRandomDorm();
+            }
+          })
+        }
+      })
+    } else if (scanBuilding && roomBuildingId) {
+      this.setData({
+        buildingScan: true,
+      })
+      this.getDormLiveInfo().then(e => {
+        if (e) {
+          this.getRoutineFreeRoomHierarchyByRoomBuilding(roomBuildingId).then(r => {
+            if (r) {
+              this.getRandomDormByRoomBuilding(roomBuildingId);
             }
           })
         }
@@ -83,6 +97,27 @@ Page({
     });
     
   },
+  getRoutineFreeRoomHierarchyByRoomBuilding: async function(roomBuildingId) {
+    return await routineFreeRoomHierarchyByRoomBuilding(roomBuildingId).then((res) => {
+      if (res.data.length === 0) {
+        this.setData({
+          canSubmit: false,
+          submitBtnName: '该楼栋无符合床位',
+        })
+        return false;
+      } else {
+        this.setData({
+          freeBuildData: res.data,
+          buildIndex: 0,
+          freeFloorData: res.data[0].floors,
+        })
+      }
+      return true;
+    }).catch((err) => {
+      return false;
+    });
+    
+  },
   getRandomDorm: async function() {
     const res = await fetchRandomDorm();
     const { freeBuildData } = this.data;
@@ -100,6 +135,25 @@ Page({
           freeRoomData,
           freeBedData,
           buildIndex,
+          floorIndex,
+          roomIndex,
+          bedIndex
+        })
+      }
+  },
+  getRandomDormByRoomBuilding: async function(roomBuildingId) {
+    const res = await fetchRandomDormByRoomBuilding(roomBuildingId);
+    const { freeFloorData } = this.data;
+    const { roomFloorId, roomId, roomBedId } = res.data;
+      if (roomFloorId && roomId && roomBedId) {
+        const floorIndex = freeFloorData.findIndex((v) => v.id === roomFloorId);
+        const freeRoomData = freeFloorData[floorIndex].rooms;
+        const roomIndex = freeRoomData.findIndex((v) => v.id === roomId);
+        const freeBedData = freeRoomData[roomIndex].beds;
+        const bedIndex = freeBedData.findIndex((v) => v.id === roomBedId);
+        this.setData({
+          freeRoomData,
+          freeBedData,
           floorIndex,
           roomIndex,
           bedIndex

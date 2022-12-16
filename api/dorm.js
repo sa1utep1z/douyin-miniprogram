@@ -16,9 +16,17 @@ export const signDorm = (data) => {
 export const routineFreeRoomHierarchy = () => {
  return ajax.request('/client/dormLive/dorm/hierarchy', null, 'GET');
 }
+// 获取男或女空闲常规宿舍(指定楼栋)
+export const routineFreeRoomHierarchyByRoomBuilding = (roomBuildingId) => {
+  return ajax.request(`/client/dormLive/dorm/hierarchy/roomBuilding/${roomBuildingId}`, null, 'GET');
+ }
 // 获取男或女空闲常规宿舍
 export const fetchRandomDorm = () => {
   return ajax.request('/client/dormLive/dorm/random', null, 'GET');
+ }
+// 获取男或女空闲常规宿舍(指定楼栋)
+export const fetchRandomDormByRoomBuilding = (roomBuildingId) => {
+  return ajax.request(`/client/dormLive/dorm/random/roomBuilding/${roomBuildingId}`, null, 'GET');
  }
 // 添加申请住宿信息回显
 export const fetchDormLiveInfo = () => {

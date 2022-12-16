@@ -67,8 +67,8 @@
     <view class="row">
       <view class="row-left"><text>宿舍楼栋</text></view>
       <view class="row-right">
-        <picker mode="selector" value="{{buildIndex}}" range="{{freeBuildData}}" range-key="name" bindchange="bindPickerBuild">
-          <view class="picker" style="color: #4fa1f4;">
+        <picker mode="selector" disabled="{{buildingScan}}" value="{{buildIndex}}" range="{{freeBuildData}}" range-key="name" bindchange="bindPickerBuild">
+          <view class="picker" style="color: {{buildingScan ? '#333333' : '#4fa1f4;'}}">
             {{buildIndex === '' ? '请选择' : freeBuildData[buildIndex].name}}
           </view>
         </picker>
