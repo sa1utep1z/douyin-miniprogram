@@ -1,5 +1,6 @@
 // pages/sharePost/sharePost.js
 import  urlConfig  from '../../utils/urlConfig';
+import { fetchPosterKeyList } from '../../api/share'
 const { baseUrl } = urlConfig();
 Page({
 
@@ -9,6 +10,8 @@ Page({
   data: {
     postUrl: '',
     jobId: '',
+    posterKeyList: [],
+    posterKeyIndex: 0, // posterKeyList下标。默认查看第一张海报，可以在posterKeyList切换
   },
 
   /**
@@ -19,9 +22,13 @@ Page({
     if (jobId) {
       this.setData({
         jobId,
-      })
-    } 
-    this.getSharePost(jobId);
+      });
+      this.getPosterKeyList().then(e => {
+        if (e) {
+          this.getSharePost(jobId);
+        }
+      }) 
+    }
   },
 
   /**
@@ -65,7 +72,22 @@ Page({
   onReachBottom: function () {
 
   },
-
+  posterTap: function() {
+    const { posterKeyList, posterKeyIndex, jobId } = this.data;
+    if (posterKeyList.length === 1) {
+      wx.showToast({
+        title: '只有该海报，无法切换',
+        icon: 'none'
+      })
+      return;
+    }
+    if (posterKeyIndex >= posterKeyList.length - 1) {
+      this.setData({posterKeyIndex: 0});
+    } else {
+      this.setData({posterKeyIndex: posterKeyIndex + 1});
+    }
+    this.getSharePost(jobId);
+  },
   downloadPost: function () {
     const { postUrl } = this.data;
     wx.saveImageToPhotosAlbum({
@@ -85,13 +107,30 @@ Page({
       }
     })
   },
-  getSharePost: function  (jobId) {
+  getPosterKeyList: async function() {
+    return await fetchPosterKeyList().then((res) => {
+      this.setData({
+        posterKeyList: res.data,
+      })
+      return true;
+    }).catch((err) => {
+      wx.showToast({
+        title: '获取模板失败',
+        icon: 'none'
+      })
+      return false;
+    });
+  },
+  getSharePost: function (jobId) {
     wx.showLoading({
       title: '正在生成海报...',
     })
     let api;
     if (jobId) {
-      api = `/client/member/invite/qrcode/${jobId}`;
+      const { posterKeyList, posterKeyIndex } = this.data;
+      console.info(posterKeyIndex)
+      console.info(posterKeyList)
+      api = `/client/member/invite/qrcode/${jobId}/${posterKeyList[posterKeyIndex]}`;
     } else {
       api = '/client/member/invite/qrcode';
     }
@@ -110,7 +149,7 @@ Page({
         if(res.statusCode ===200){
           this.setData({
             postUrl: res.tempFilePath,
-          }); 
+          });
         }
         wx.hideLoading({
           success: (res) => {},
