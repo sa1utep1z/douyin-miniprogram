@@ -81,7 +81,6 @@ Page({
     }
   },
   signClick: function (e) {
-    // todo：需要赋值给signDetailId
     const currId = e.currentTarget.dataset.id;
     if (currId) {
       this.setData({

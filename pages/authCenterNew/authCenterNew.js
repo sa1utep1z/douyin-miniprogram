@@ -65,14 +65,6 @@ Page({
    */
   handleConfirm: async function (e) {
     const { name, mobile, smsCode, idCard, oldName, oldMobile, oldIdCard } = this.data;
-    if (name === oldName && mobile === oldMobile && idCard === oldIdCard) {
-      wx.showToast({
-        title: '信息未变更',
-        icon:'none',
-        duration: 1800
-      });
-      return;
-    }
     if(name===null||name.length===0){
       wx.showToast({
         title: '请输入真实姓名',
@@ -132,14 +124,6 @@ Page({
   },
   handleSendCode: async function () {
     const { name, mobile, idCard, oldName, oldMobile, oldIdCard } = this.data;
-    if (name === oldName && mobile === oldMobile && idCard === oldIdCard) {
-      wx.showToast({
-        title: '信息未变更',
-        icon:'none',
-        duration: 1800
-      });
-      return;
-    }
     const reg_tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
      if (!reg_tel.test(mobile)) {
        wx.showToast({

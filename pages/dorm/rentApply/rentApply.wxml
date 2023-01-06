@@ -1,0 +1,30 @@
+<!--pages/dorm/stayApply/stayApply.wxml-->
+<view class="container">
+  <view class="apply-title">外租申请</view>
+  <view class="auth-display">
+    <view class="row row-first">
+      <view class="row-left"><text>外租类型</text></view>
+      <view class="row-right">
+        <radio-group bindchange="changeRentType">
+          <radio value="RENT_ALONE" />个人独租
+          <radio value="RENT_TOGETHER" style="margin-left: 30rpx;" />朋友合租
+        </radio-group>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view class="row-left"><text>外租地址</text></view>
+      <view class="row-right canEdit">
+        <input bindinput="bindRentAddress" value="{{rentAddress}}" placeholder="请输入外租地址"/>
+      </view>
+    </view>
+    <van-divider hairline />
+    <view class="buttom-check">
+      <switch type="checkbox" checked="{{agreePact}}" bindchange="switch2Change"/>
+      <text style="color: #4b4b4b;" bindtap="rediectPact">阅读并同意相关<text style="color: #5fa4f4;" bindtap="rediectPact">《外租安全协议》</text></text>
+    </view>
+    <view class="buttom-button">
+      <button class="sign-button" disabled="{{!canSubmit}}" bindtap="submitData">提交</button>
+    </view>
+  </view>
+</view>

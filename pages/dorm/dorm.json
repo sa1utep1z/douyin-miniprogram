@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "DormItem": "../../components/dormItem/dormItem",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-overlay": "@vant/weapp/overlay/index"
+    
+  },
+  "navigationBarTitleText": "宿舍服务"
+}

@@ -48,6 +48,11 @@ page {
   color: #333333;
   line-height: 50rpx;
 }
+.scan-img {
+  height: 50rpx;
+  float: right;
+  margin-right: 20rpx;
+}
 .info-slogan {
   height: 34rpx;
   font-size: 24rpx;

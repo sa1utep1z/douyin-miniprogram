@@ -1,6 +1,13 @@
 <!--pages/sharePost/sharePost.wxml-->
 <view class="container">
   <image  class="post-img" mode="widthFix" src="{{postUrl}}"></image>
-  <button wx:if="{{postUrl}}" class="btn-download" bindtap="downloadPost">保存海报到相册</button>
+  <view style="width: 580rpx;">
+    <view style="width: 46%; float: left; margin-left: 2%;">
+      <button wx:if="{{postUrl}}" class="btn-tap" bindtap="posterTap">切换海报</button>
+    </view>
+    <view style="width: 46%; float: right; margin-right: 2%;">
+      <button wx:if="{{postUrl}}" class="btn-download" bindtap="downloadPost">保存海报到相册</button>
+    </view>
+  </view>
 </view>
 

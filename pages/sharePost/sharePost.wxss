@@ -17,7 +17,6 @@ page{
   border-radius: 10rpx;
 }
 .btn-download{
-  width: 600rpx !important;
   height: 90rpx !important;
   border-radius: 45rpx;
   border: 1rpx solid #F1F1F1;
@@ -31,6 +30,16 @@ page{
   line-height: 90rpx;
 }
 
-.btn-orange {
-
+.btn-tap{
+  height: 90rpx !important;
+  border-radius: 45rpx;
+  border: 1rpx solid #F1F1F1;
+  margin-top: 60rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  text-align: center;
+  color: white !important;
+  background-color: #018EFF !important;
+  line-height: 90rpx;
 }

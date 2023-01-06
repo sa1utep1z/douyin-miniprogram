@@ -37,7 +37,13 @@
     "pages/payslip/payslip",
     "pages/sign/sign",
     "pages/advanceDetail/advanceDetail",
-    "pages/advance/advance"
+    "pages/advance/advance",
+    "pages/dorm/dorm",
+    "pages/dorm/pactSign/pactSign",
+    "pages/dorm/rentSign/rentSign",
+    "pages/dorm/stayApply/stayApply",
+    "pages/dorm/rentApply/rentApply",
+    "pages/dorm/scanBed/scanBed"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",
