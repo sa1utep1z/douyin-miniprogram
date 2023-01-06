@@ -124,6 +124,7 @@ Page({
   getSharePost: function (jobId) {
     wx.showLoading({
       title: '正在生成海报...',
+      mask: true,
     })
     let api;
     if (jobId) {
