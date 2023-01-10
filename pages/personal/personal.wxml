@@ -43,7 +43,7 @@
     </view>
     <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="expandPoster">
-      <image class="action-icon" src="../../assets/images/personal/icon_action_contacts.png"/>
+      <image class="action-icon" src="../../assets/images/personal/icon_action_poster.png"/>
       <view class="action-lable">推广海报</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
