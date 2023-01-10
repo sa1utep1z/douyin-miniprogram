@@ -1,6 +1,7 @@
 import { fecthIndexTabList, signUpClick } from '../../api/jobApi'
 import { fetchPostArguments } from '../../api/userApi'
 import { listBanners } from '../../api/commonApi'
+var startPoint;
 Page({
   data: {
     bannerList: [],
@@ -23,6 +24,11 @@ Page({
     jobId: '',
     keyWord: '',
     oldKeyWord: '', // 用于防止重复提交相同筛选条件
+    //按钮位置参数
+    buttonTop: 0,
+    buttonLeft: 0,
+    windowHeight: '',
+    windowWidth: '',
   },
 
   onLoad: function (options) {
@@ -47,7 +53,59 @@ Page({
         console.log(erro);
       },
     });
-  
+    // 获取购物车控件适配参数
+    var that =this;
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res);
+        // 屏幕宽度、高度
+        // 高度,宽度 单位为px
+        that.setData({
+          windowHeight:  res.windowHeight,
+          windowWidth:  res.windowWidth,
+          buttonTop:res.windowHeight*0.90,//这里定义按钮的初始位置
+          buttonLeft:res.windowWidth*0.80,//这里定义按钮的初始位置
+        })
+      }
+    })
+  },
+  //可拖动悬浮按钮点击事件
+  btn_Suspension_click:function(){
+    wx.navigateTo({
+      url: '/pages/prepareSignUp/prepareSignUp',
+    })
+  },
+  //以下是按钮拖动事件
+  buttonStart: function (e) {
+    startPoint = e.touches[0]//获取拖动开始点
+  },
+  buttonMove: function (e) {
+    var endPoint = e.touches[e.touches.length - 1]//获取拖动结束点
+    //计算在X轴上拖动的距离和在Y轴上拖动的距离
+    var translateX = endPoint.clientX - startPoint.clientX
+    var translateY = endPoint.clientY - startPoint.clientY
+    startPoint = endPoint//重置开始位置
+    var buttonTop = this.data.buttonTop + translateY
+    var buttonLeft = this.data.buttonLeft + translateX
+    //判断是移动否超出屏幕
+    if (buttonLeft+50 >= this.data.windowWidth){
+      buttonLeft = this.data.windowWidth-50;
+    }
+    if (buttonLeft<=0){
+      buttonLeft=0;
+    }
+    if (buttonTop<=0){
+      buttonTop=0
+    }
+    if (buttonTop + 50 >= this.data.windowHeight){
+      buttonTop = this.data.windowHeight-50;
+    }
+    this.setData({
+      buttonTop: buttonTop,
+      buttonLeft: buttonLeft
+    })
+  },
+  buttonEnd: function (e) {
   },
   onShow: function () {
     this.getStatusBarHeight();
@@ -65,8 +123,6 @@ Page({
     const { statusBarHeight } = wx.getSystemInfoSync();
     // 得到右上角菜单的位置尺寸
     const menuButtonObject = wx.getMenuButtonBoundingClientRect();
-    console.log(statusBarHeight);
-    console.log(menuButtonObject);
     const { top, height } = menuButtonObject;
     // 计算导航栏的高度
     // 此高度基于右上角菜单在导航栏位置垂直居中计算得到
@@ -90,9 +146,15 @@ Page({
   onBannerClick: function (e) {
     const { bean } = e.currentTarget.dataset;
     if (bean && bean.jumpType) {
-      wx.navigateTo({
-        url: '/pages/bannerView/bannerView?pageBean=' + encodeURIComponent(JSON.stringify(bean)),
-      })
+      if (bean.jumpType === 'mini_page') {
+        wx.navigateTo({
+          url: bean.url,
+        })
+      } else {
+        wx.navigateTo({
+          url: '/pages/bannerView/bannerView?pageBean=' + encodeURIComponent(JSON.stringify(bean)),
+        })
+      }
     }
   },
   onTabClicked: function (e) {

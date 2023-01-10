@@ -181,6 +181,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/resignApply/resignApply",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/expandPosterView/expandPosterView",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

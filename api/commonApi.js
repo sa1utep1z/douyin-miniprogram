@@ -34,4 +34,8 @@ export const listBanners = () => {
 export const ocrBank = (data) => {
   return ajax.uploadRequest('/ocr/bank', data);
 };
+// 身份证ocr识别
+export const ocrIdNo = (data) => {
+  return ajax.uploadRequest('/ocr', data);
+};
 

@@ -63,12 +63,12 @@
       <view class="dialog-content">
         <view class="dialog-title">编辑信息</view>
         <view class="input-view-required">
-            <text class="input-view-label">回访验证</text>
-            <radio-group class="edit-return-visit-switch" bindchange="changeReturnVisitVerify">
-              <radio value="false" /> 不通过
-              <radio value="true" style="margin-left: 30rpx;" /> 通过
-            </radio-group>
-          </view>
+          <text class="input-view-label">回访验证</text>
+          <radio-group class="edit-return-visit-switch" bindchange="changeReturnVisitVerify">
+            <radio value="false" /> 不通过
+            <radio value="true" style="margin-left: 30rpx;" /> 通过
+          </radio-group>
+        </view>
       </view>
       <view class="van-divider"></view>
       <view class="btn-row">

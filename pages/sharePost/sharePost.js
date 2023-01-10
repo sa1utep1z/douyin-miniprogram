@@ -28,6 +28,8 @@ Page({
           this.getSharePost(jobId);
         }
       }) 
+    } else {
+      this.getSharePost('');
     }
   },
 
@@ -129,8 +131,6 @@ Page({
     let api;
     if (jobId) {
       const { posterKeyList, posterKeyIndex } = this.data;
-      console.info(posterKeyIndex)
-      console.info(posterKeyList)
       api = `/client/member/invite/qrcode/${jobId}/${posterKeyList[posterKeyIndex]}`;
     } else {
       api = '/client/member/invite/qrcode';

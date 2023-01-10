@@ -1,4 +1,12 @@
 <!--index.wxml-->
+<!--可拖动按钮控件表-->
+<!--buttonStart和buttonEnd一定不能用catch事件，否则按钮点击事件会失效-->
+<view class="btn_Suspension" bindtap="btn_Suspension_click" catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd" style="top:{{buttonTop}}px;left:{{buttonLeft}}px;">
+  <view style="width: 130rpx; height: 65rpx; float: left;">
+    <image mode="widthFix" show-menu-by-longpress="true" class="Suspension_logo" src="../../assets/images/index/prepareSignUp.png"></image>
+  </view>
+  <view style="width: 130rpx; height: 65rpx; float: left; text-align: center;">预报名</view>
+</view>
 <view style= "height: {{statusNavBarHeight}}px;" class="navigator">
   <view  style="height: {{height}}px; margin-top: {{top}}px;" class="title-bar">
     <view class="search-box" style="height: {{height}}px">

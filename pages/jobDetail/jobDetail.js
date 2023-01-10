@@ -46,8 +46,6 @@ Page({
       this.getLocation();
     }
     // this.getData();
-   
-
   },
   getData: async function () {
 

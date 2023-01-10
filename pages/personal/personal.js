@@ -86,6 +86,11 @@ Page({
           url: '../../pages/member/member',
         })
         break;
+      case 'expandPoster':
+        wx.navigateTo({
+          url: '../../pages/expandPosterView/expandPosterView',
+        })
+        break;
       case 'resignApply':
         if (!userInfo.validation) {
           this.noVerifyRediect();

@@ -43,7 +43,10 @@
     "pages/dorm/rentSign/rentSign",
     "pages/dorm/stayApply/stayApply",
     "pages/dorm/rentApply/rentApply",
-    "pages/dorm/scanBed/scanBed"
+    "pages/dorm/scanBed/scanBed",
+    "pages/prepareSignUp/prepareSignUp",
+    "pages/expandPoster/expandPoster",
+    "pages/expandPosterView/expandPosterView"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",
