@@ -1,5 +1,6 @@
 // pages/prepareSignUp/prepareSignUp.js
 import { listPreSignUpMode, fetchPreSignUpMode, submitPreSignUp, fetchRecruiter } from '../../api/prepareSignUp'
+import { fetchDetailPostArguments} from '../../api/userApi'
 import { ocrIdNo } from '../../api/commonApi'
 Page({
 
@@ -26,14 +27,42 @@ Page({
     isSubmit: true,
     recruiterId: '',
     recruiterName: '',
+    isShareQrCode: false, // 是否是海报分享
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    console.info('prepareSignUp ------> onLoad');
+    // 这个是分享海报携带的分享参数id
+    if (options.scene){
+      wx.setStorageSync('isShare', true);
+      this.setData({
+        isShareQrCode: true,
+      })
+      this.parseScene(options.scene);
+    }
     this.getListPreSignUpMode();
   },
+  parseScene: async function (scene) {
+    try {
+      const res =  await fetchDetailPostArguments(scene);
+      console.info('prepareSignUp ---< parseScene', res)
+      const { recommendId, recruiterId, recruiterName } = res.data;
+      if (recommendId) {
+        wx.setStorageSync('recommendId', recommendId);
+      }
+      if (recruiterId) {
+        this.setData({
+          recruiterId,
+          recruiterName
+        })
+      }
+    } catch (error) {
+      console.log('获取分享信息失败');
+    }
+   },
   getListPreSignUpMode: async function() {
     const res = await listPreSignUpMode();
     this.setData({preSignUpModeOptions:  res.data})
@@ -69,10 +98,11 @@ Page({
   },
   bindIdNo: function(e) {
     const idNo_input = e.detail.value;
+    const { isShareQrCode } = this.data;
     this.setData({
       idNo: idNo_input
     })
-    if (idNo_input.length === 18) {
+    if (idNo_input.length === 18 && !isShareQrCode) {
       fetchRecruiter(idNo_input).then((res) => {
         this.setData({
           recruiterId: res.data.id,

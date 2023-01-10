@@ -26,11 +26,11 @@ Page({
     const { jobId, recommendId, shareSceneId } = options;
     if (recommendId) {
       wx.setStorageSync('recommendId', recommendId);
-      wx.setStorageSync('isSharePosition', true);
+      wx.setStorageSync('isShare', true);
     }
     // 这个是分享参数id
     if (shareSceneId) {
-      wx.setStorageSync('isSharePosition', true);
+      wx.setStorageSync('isShare', true);
       wx.setStorageSync('shareSceneId', shareSceneId);
     }
     if(jobId){
@@ -40,7 +40,7 @@ Page({
     }
     // 这个是分享海报携带的分享参数id
     if (options.scene){
-      wx.setStorageSync('isSharePosition', true);
+      wx.setStorageSync('isShare', true);
       this.parseScene(options.scene);
     } else {
       this.getLocation();

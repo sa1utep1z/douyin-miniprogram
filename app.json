@@ -48,6 +48,9 @@
     "pages/expandPoster/expandPoster",
     "pages/expandPosterView/expandPosterView"
   ],
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
   "window": {
     "backgroundColor": "#F8F8F8",
     "backgroundTextStyle": "light",

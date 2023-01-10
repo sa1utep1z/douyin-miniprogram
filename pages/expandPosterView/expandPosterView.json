@@ -3,5 +3,5 @@
     "van-divider": "@vant/weapp/divider/index",
     "van-overlay": "@vant/weapp/overlay/index"
   },
-  "navigationBarTitleText": "推广海报"
+  "navigationBarTitleText": "宣传海报"
 }

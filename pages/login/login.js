@@ -46,7 +46,7 @@ Page({
         });
       },
       fail: (err) => {
-        wx.hideLoading();  
+        wx.hideLoading();
       }
     });
   },
@@ -122,12 +122,12 @@ Page({
   handleLogin: function () {
     console.log('登录成功');
     //判断是不是岗位分享进来的，如果是回岗位详情
-    const isSharePosition = wx.getStorageSync('isSharePosition');
-    if (isSharePosition) {
+    const isShare = wx.getStorageSync('isShare');
+    if (isShare) {
       wx.navigateBack({
         delta: 0,
       });
-      wx.setStorageSync('isSharePosition', false);
+      wx.setStorageSync('isShare', false);
     } else {
       wx.switchTab({
         url: '../../pages/index/index',

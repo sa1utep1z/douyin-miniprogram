@@ -52,6 +52,10 @@ export const fetchShareUrlParam = (data) => {
   export const fetchPostArguments = (scene) => {
     return  ajax.request(`/client/noauth/qrcode/param/${scene}`,null,'GET');
    }
+  //获取详细的海报参数
+  export const fetchDetailPostArguments = (scene) => {
+    return  ajax.request(`/client/noauth/qrcode/param/${scene}/detail`,null,'GET');
+   }
 
   //获取招聘员实名信息
   export const fetchRecruiterAuthInfo = () => {

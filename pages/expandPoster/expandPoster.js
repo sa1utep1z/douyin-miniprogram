@@ -15,7 +15,6 @@ Page({
    */
   onLoad(options) {
     const { expandTempId } = options;
-    console.info(expandTempId);
     if (expandTempId) {
       this.getSharePost(expandTempId);
     }
@@ -35,7 +34,6 @@ Page({
         'X-Device': 'mini_program',
       },
       success: (res)=> {
-        console.log(res);
         if(res.statusCode ===200){
           this.setData({
             postUrl: res.tempFilePath,
@@ -46,7 +44,6 @@ Page({
         })
       },
       fail: (res) => {
-        console.log(res);
         wx.hideLoading({
           success: (res) => {},
         })
@@ -63,8 +60,7 @@ Page({
           icon: 'success'
         })
       },
-      fail: ( res) =>{
-        console.log(res);
+      fail: (res) =>{
         wx.showToast({
           title: '保存失败',
           icon: 'none'
