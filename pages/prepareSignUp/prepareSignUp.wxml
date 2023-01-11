@@ -13,10 +13,10 @@
       </view>
     </view>
     <van-divider hairline />
-    <view class="row" style="height: 240rpx; margin-bottom: 20rpx;">
-      <view><text style="display:block; margin-right: 10rpx; width: 130rpx !important;">预约/推荐奖励</text></view>
+    <view class="row" style="width: 638rpx; height: 240rpx !important; margin-bottom: 10rpx !important;">
+      <view><text style="display: block; width: 210rpx !important;">预约/推荐奖励</text></view>
       <view>
-        <textarea disabled="true" value="{{desc}}" style="height: 240rpx;" maxlength="-1" />
+        <textarea style="display: block; width: 428rpx; height: 240rpx;" disabled="true" value="{{desc}}" maxlength="-1" />
       </view>
     </view>
     <van-divider hairline />
