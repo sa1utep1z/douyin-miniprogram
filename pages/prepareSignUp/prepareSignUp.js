@@ -34,7 +34,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.info('prepareSignUp ------> onLoad');
     // 这个是分享海报携带的分享参数id
     if (options.scene){
       wx.setStorageSync('isShare', true);
@@ -48,7 +47,6 @@ Page({
   parseScene: async function (scene) {
     try {
       const res =  await fetchDetailPostArguments(scene);
-      console.info('prepareSignUp ---< parseScene', res)
       const { recommendId, recruiterId, recruiterName } = res.data;
       if (recommendId) {
         wx.setStorageSync('recommendId', recommendId);
@@ -65,7 +63,20 @@ Page({
    },
   getListPreSignUpMode: async function() {
     const res = await listPreSignUpMode();
-    this.setData({preSignUpModeOptions:  res.data})
+    if (res.data && res.data.length > 0) {
+      const resDetail = await fetchPreSignUpMode(res.data[0]['key']);
+      const {data} = resDetail;
+      this.setData({
+        preSignUpModeOptions:  res.data,
+        preSignUpModeIndex: 0,
+        desc: data.desc,
+        companyOptions: data.companyOptions,
+        companyIndex: '',
+        preDate: '',
+        preDateStart: data.startDate,
+        preDateEnd: data.endDate,
+      })
+    }
   },
   changePreSignUpMode: async function(e) {
     const { preSignUpModeOptions } = this.data;
@@ -205,7 +216,6 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: [type],
       success:  (res) =>{
-        console.info(res);
        this.uploadImg(res.tempFilePaths[0])
       }
      }) 

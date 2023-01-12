@@ -3,7 +3,7 @@
 <view class="container">
   <view class="auth-display">
     <view class="row">
-      <view class="row-title"><text><text class="input-required">*</text>岗位名称</text></view>
+      <view class="row-title"><text><text class="input-required">*</text>奖励模式</text></view>
       <view class="row-value">
         <picker mode="selector" value="{{preSignUpModeIndex}}" range="{{preSignUpModeOptions}}" range-key="value" bindchange="changePreSignUpMode">
           <view class="picker" style="color: #4fa1f4;">
@@ -13,10 +13,10 @@
       </view>
     </view>
     <van-divider hairline />
-    <view class="row" style="width: 638rpx; height: 240rpx !important; margin-bottom: 10rpx !important;">
+    <view class="row" style="width: 638rpx; height: 520rpx !important; margin-bottom: 10rpx !important;">
       <view><text style="display: block; width: 210rpx !important;">预约/推荐奖励</text></view>
       <view>
-        <textarea style="display: block; width: 428rpx; height: 240rpx;" disabled="true" value="{{desc}}" maxlength="-1" />
+        <textarea style="display: block; width: 428rpx; height: 520rpx;" disabled="true" value="{{desc}}" maxlength="-1" />
       </view>
     </view>
     <van-divider hairline />
@@ -59,7 +59,7 @@
       <view class="row-title"><text><text class="input-required">*</text>手机号</text></view>
       <view class="row-value"><input maxlength="11" type="number" value="{{mobile}}" bindinput="bindMobile" placeholder="请输入手机号"/></view>
     </view>
-    <van-divider hairline />
+    <!-- <van-divider hairline />
     <view class="row">
       <view class="row-title"><text>民族</text></view>
       <view class="row-value"><input bindinput="bindNation" value="{{nation}}" placeholder="请输入民族"/></view>
@@ -93,7 +93,7 @@
           <radio value="FACTORY" style="margin-left: 10rpx;" />自行到厂
         </radio-group>
       </view>
-    </view>
+    </view> -->
     <van-divider hairline />
     <view class="row">
       <view class="row-title"><text>专属招聘员</text></view>
