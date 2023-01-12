@@ -24,10 +24,8 @@ Page({
       title: '正在生成海报...',
       mask: true,
     })
-    const longitude = wx.getStorageSync('longitude');
-    const latitude = wx.getStorageSync('latitude');
     wx.downloadFile({
-      url: baseUrl + `/client/expand/posterTemplate/${expandTempId}/generate?longitude=${longitude}&latitude=${latitude}`,
+      url: baseUrl + `/client/expand/posterTemplate/${expandTempId}/generate`,
       header: {
         'X-User-Token': wx.getStorageSync('token') || '',
         'userId':  wx.getStorageSync('userId') || '',
