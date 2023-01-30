@@ -109,11 +109,11 @@ Page({
   },
   bindIdNo: function(e) {
     const idNo_input = e.detail.value;
-    const { isShareQrCode } = this.data;
+    const { isShareQrCode, recruiterId } = this.data;
     this.setData({
       idNo: idNo_input
     })
-    if (idNo_input.length === 18 && !isShareQrCode) {
+    if (idNo_input.length === 18 && !isShareQrCode && !recruiterId) {
       fetchRecruiter(idNo_input).then((res) => {
         this.setData({
           recruiterId: res.data.id,

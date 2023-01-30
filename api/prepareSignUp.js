@@ -4,6 +4,10 @@ import ajax from '../utils/axiosUtil';
 export const listPreSignUpMode = () => {
   return ajax.request('/client/noauth/prepareSignUp/mode/forSelect', null, 'GET');
 }
+// 是否有上架的岗位模式
+export const existPreSignUpMode = () => {
+  return ajax.request('/client/noauth/prepareSignUp/mode/exist', null, 'GET');
+}
 // 模式详情
 export const fetchPreSignUpMode = (modeId) => {
   return ajax.request(`/client/preSignUp/mode/${modeId}`, null, 'GET');

@@ -1,9 +1,11 @@
 import { fecthIndexTabList, signUpClick } from '../../api/jobApi'
 import { fetchPostArguments } from '../../api/userApi'
 import { listBanners } from '../../api/commonApi'
+import { existPreSignUpMode } from '../../api/prepareSignUp'
 var startPoint;
 Page({
   data: {
+    existPreMode: false,
     bannerList: [],
     listSearchType: 0,
     workType: [
@@ -32,7 +34,9 @@ Page({
   },
 
   onLoad: function (options) {
-    this.getBannerList();
+    this.getExistPreSignUpMode().then(e => {
+      this.getBannerList(e);
+    })
     const { recommendId, scene } =  options;
     if (recommendId) {
       wx.setStorageSync('recommendId', recommendId);
@@ -61,10 +65,10 @@ Page({
         // 屏幕宽度、高度
         // 高度,宽度 单位为px
         that.setData({
-          windowHeight:  res.windowHeight,
-          windowWidth:  res.windowWidth,
-          buttonTop:res.windowHeight*0.90,//这里定义按钮的初始位置
-          buttonLeft:res.windowWidth*0.80,//这里定义按钮的初始位置
+          windowHeight: res.windowHeight,
+          windowWidth: res.windowWidth,
+          buttonTop: res.windowHeight*0.90,//这里定义按钮的初始位置
+          buttonLeft: res.windowWidth*0.80,//这里定义按钮的初始位置
         })
       }
     })
@@ -110,13 +114,31 @@ Page({
   onShow: function () {
     this.getStatusBarHeight();
   },
-  getBannerList: async function () {
+  getBannerList: async function (isExistPreMode) {
     const res = await listBanners();
     if (res && res.code === 0) {
-      this.setData({
-        bannerList: res.data
-      })
+      if (isExistPreMode) {
+        this.setData({
+          bannerList: res.data
+        })
+      } else {
+        this.setData({
+          bannerList: res.data.filter((e) => e.jumpType !== 'mini_page')
+        })
+      }
     }
+  },
+  getExistPreSignUpMode: async function () {
+    return await existPreSignUpMode().then((res) => {
+      console.info(typeof res.data)
+      console.info(res.data)
+      this.setData({
+        existPreMode: res.data,
+      })
+      return res.data;
+    }).catch((err) => {
+      return false;
+    });
   },
   getStatusBarHeight: function () {
     // 获取状态栏高度
