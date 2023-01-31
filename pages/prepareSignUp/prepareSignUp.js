@@ -224,7 +224,7 @@ Page({
     const res = await ocrIdNo(imgData);
     if (res.code == 0) {
       const { data } = res;
-      const { userName, idNo, nation, address, authority, timeLimit } = this.data;
+      const { userName, idNo, nation, address, authority, timeLimit, isShareQrCode, recruiterId } = this.data;
       this.setData({
         userName: data.name ? data.name : userName,
         idNo: data.idNo ? data.idNo : idNo,
@@ -233,7 +233,7 @@ Page({
         authority: data.authority ? data.authority : authority,
         timeLimit: data.timeLimit ? data.timeLimit : timeLimit,
       })
-      if (data.idNo) {
+      if (data.idNo && !isShareQrCode && !recruiterId) {
         const idNoRes = await fetchRecruiter(data.idNo);
         this.setData({
           recruiterId: idNoRes.data.id,
