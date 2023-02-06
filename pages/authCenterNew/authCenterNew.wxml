@@ -21,6 +21,7 @@
     <view class="btn-confirm" bindtap="handleConfirm">提交认证</view>
   </view>
   <view class="law_text">
-    <text>提交认证代表您已同意</text><text class="law-text-blue" bindtap="jumpPrivacy" >众鼎人力《用户协议》、《隐私协议》</text>
+    <switch type="checkbox" checked="{{agreePact}}" bindchange="switch2Change"/>
+    <text>阅读并同意</text><text class="law-text-blue" bindtap="jumpPrivacy" >众鼎人力《用户协议》、《隐私协议》</text>
   </view>
 </view>

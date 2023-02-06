@@ -31,7 +31,6 @@ Page({
    * wx.login获取code
    */
   wxLogin: function () {
-    console.info('cuole...')
     wx.showLoading({
       title: '加载中',
       mask: true,
@@ -105,13 +104,49 @@ Page({
     }
   },
 
-  getUserInfo : function  (params) {
-    // wx.getUserProfile({
-    //   desc: '用于完善会员信息',
-    //   success: (res) => {
-    //     console.log(res.userInfo);
-    //   }
-    // });
+  register: async function() {
+    this.setData({ loading: true });
+    const { code } = this.data;
+    const channelCode = wx.getStorageSync('channelCode') || null;
+    const recommendId = wx.getStorageSync('recommendId')||null;
+    const shareSceneId = wx.getStorageSync('shareSceneId')||null;
+    const longitude = wx.getStorageSync('longitude');
+    const latitude = wx.getStorageSync('latitude');
+    let gps = null;
+    if (longitude && latitude){
+      gps = {
+        longitude,
+        latitude
+      }
+    }
+    const params = { code, channelCode, recommendId, shareSceneId, gps };
+    try {
+      const result = await wxBindPhoneLogin(params);
+      wx.hideLoading();
+      wx.setStorageSync('openId', result.data.openId)
+      wx.setStorageSync('unionId', result.data.unionId)
+      wx.setStorageSync('mobile', result.data.mobile)
+      wx.setStorageSync('userId', result.data.userId)
+      wx.setStorageSync('token', result.data.jwt)
+      // app.getGenerateId(result.data.openId)
+      console.log(result.data);
+      this.handleLogin();
+    } catch (err) {
+      wx.hideLoading();
+      console.log('err', err)
+      //如果报错 重新获取code
+      this.wxLogin();
+      if (err.code !== 0) {
+        wx.showToast({
+          title: err.msg,
+          icon: 'error',
+          duration: 3000,
+          icon: 'none'
+        });
+      }
+    } finally {
+      this.setData({ loading: false });
+    }
   },
 
   onMobileLogin: function () {

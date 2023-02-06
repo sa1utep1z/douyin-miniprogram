@@ -235,6 +235,21 @@ Page({
     } else {
       this.setLoadingNoMore();
     }
+    if (res.data.validation === false) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请完善简历信息',
+        confirmText: '去完善',
+        success: (res)=> {
+          if (res.confirm) {
+            //未实名 进入实名页面
+            wx.navigateTo({
+              url: '../../pages/authCenterNew/authCenterNew',
+            });
+          } 
+        }
+      })
+    }
   },
   //处理输入
   handleSearchInput: function (e) {

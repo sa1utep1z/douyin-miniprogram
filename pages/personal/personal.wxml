@@ -47,12 +47,12 @@
       <view class="action-lable">宣传海报</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline wx:if="{{userInfo.recruiter===true}}" />
+    <!-- <van-divider hairline wx:if="{{userInfo.recruiter===true}}" />
     <view class="action-row" bindtap="handelMenuClick" wx:if="{{userInfo.recruiter===true}}" hover-class="hover-class" data-tag="member">
       <image class="action-icon" src="../../assets/images/personal/icon_action_staff2.png"/>
       <view class="action-lable">邀请记录</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
-    </view>
+    </view> -->
     <!-- <van-divider hairline  wx:if="{{userInfo.recruiter===true}}" />
     <view class="action-row" wx:if="{{userInfo.recruiter===true}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="staff">
       <image class="action-icon" src="../../assets/images/personal/icon_action_member.png"/>

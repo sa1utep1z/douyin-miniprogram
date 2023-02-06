@@ -16,6 +16,7 @@ Page({
     smsCode: '',
     timer: null,
     sendBtnText: '获取验证码',
+    agreePact: true,
   },
 
   /**
@@ -58,13 +59,20 @@ Page({
       smsCode: e.detail.value,
     })
   },
+  switch2Change: function(e) {
+    const { value } = e.detail;
+    this.setData({
+      agreePact: value,
+    })
+  },
 
   /**
    * 提交实名
    * @param {*} e 
    */
   handleConfirm: async function (e) {
-    const { name, mobile, smsCode, idCard, oldName, oldMobile, oldIdCard } = this.data;
+    const { name, mobile, smsCode, idCard, agreePact } = this.data;
+    console.info(agreePact);
     if(name===null||name.length===0){
       wx.showToast({
         title: '请输入真实姓名',
@@ -93,6 +101,14 @@ Page({
     if(smsCode===null || smsCode.length!==6){
       wx.showToast({
         title: '请输入有效验证码',
+        icon:'none',
+        duration: 1800
+      });
+      return;
+    }
+    if (!agreePact) {
+      wx.showToast({
+        title: '请勾选同意协议',
         icon:'none',
         duration: 1800
       });
