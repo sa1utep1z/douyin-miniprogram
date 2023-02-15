@@ -1,24 +1,36 @@
 <!--pages/withdraw/withdraw.wxml-->
-<view>
-  <view class="container">
-    <view class="view-target">
-      <view class="view-target-title"><text>提现至</text></view>
-      <view class="view-target-row">
-        <image src="../../assets/images/public/ic_wx_logo.png" class="view-target-img"></image>
-        <view>
-          <view class="view-target-account"><text>微信零钱账户</text></view>
-          <view class="view-target-time"><text>预计2小时内到账</text></view>
-        </view>
+<view class="container">
+  <view class="auth-display">
+    <view class="row">
+      <view><text>提现金额</text></view>
+      <view style="width: 60%;">
+        <input adjust-position="{{false}}" type="text" bindinput="onInputValue" placeholder="满50元可提现" value="{{inputValue}}" class="input-view-input" placeholder-style="input-placeholder" />
       </view>
     </view>
-    <view class="amt-view">
-      <view class="amt-title"><text>提现金额</text></view>
-      <view class="amt-row">
-        <view class="amt-label"><text>￥</text></view>
-        <input bindinput="onInputValue" type="digit" class="amt-input" placeholder="请输入提现金额（满50元可提现）" value="{{inputValue}}" placeholder-style="input-placeholder"></input>
-      </view>
-      <view class="amt-tip-row amt-tip" ><text>当前钱包余额{{totalAmt}}元，</text><text class="action-all" bindtap="handleWithdrawAll">全部提现</text></view>
+    <view class="amt-tip" wx:if="{{showTip}}"><text>当前钱包余额{{withdrawInfo.balance || 0}}元，可提现金额{{(withdrawInfo.balance - withdrawInfo.frozenAmount) || 0}}元</text></view>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>持卡人</text></view>
+      <view style="width: 60%;"><text>{{withdrawInfo.bankUserName || ''}}</text></view>
     </view>
-    <button class="action-btn" disabled="{{inputValue===null||inputValue<=0}}" bindtap="handleWithdraw">确定</button>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>银行名称</text></view>
+      <view style="width: 60%;"><text>{{withdrawInfo.bankName || ''}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <view><text>银行账号</text></view>
+      <view style="width: 60%;"><text>{{withdrawInfo.bankAccount || ''}}</text></view>
+    </view>
+    <van-divider hairline />
+    <view style="font-size: 24rpx; color: #f30808; margin-top: 15rpx; line-height: 32rpx;">
+      <view>温馨提示：</view>
+      <view>1、请使用本人实名认证所绑定的银行账户，确保提现到本人的银行卡中；</view>
+      <view>2、提现金额需达到50元可申请提现，提交申请后，系统审核后直接发放至银行卡；</view>
+      <view>3、请使用本人实名认证名下的微信账号，有涉嫌从事违法违规活动，将无法提现；</view>
+      <view>4、若持非本人微信实名认证的微信账号，请勿使用非本人微信实名认证下的微信账号进行小程序实名认证，用户账户将无法提现。</view>
+    </view>
+    <button type="primary" style="margin-top: 40rpx;" disabled="{{!canSubmit || (inputValue === null || inputValue <= 0)}}" bindtap="handleWithdraw" plain="true">{{submitMess}}</button>
   </view>
 </view>

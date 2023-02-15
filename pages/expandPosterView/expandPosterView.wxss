@@ -1,7 +1,31 @@
 /* pages/expandPosterView/expandPosterView.wxss */
+.poster-button-container {
+  position: fixed;
+  top: 0;
+  left: 35rpx;
+  width: 642rpx;
+  margin: 0 auto;
+  background-color: #d3ebf7;
+  padding: 15rpx 20rpx 30rpx 20rpx;
+}
+.poster-button-view {
+  width: 160rpx;
+  height: 60rpx;
+  float: left;
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 60rpx;
+}
+.poster-button-view-active {
+  border-radius: 20rpx;
+  background-color: #56c6fd;
+  color: #f8f6f6;
+}
 .scroll-view {
+  position: fixed;
+  top: 150rpx;
+  left: 35rpx;
   width: 680rpx;
-  background-color: red;
   margin: 0 auto;
   max-height: 1600rpx;
   background-color: #d3ebf7;
