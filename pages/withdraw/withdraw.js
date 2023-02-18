@@ -23,11 +23,20 @@ Page({
 
   getWithdrawInfo: async function() {
     await fetchWithdraw().then((res) => {
-      this.setData({
-        withdrawInfo: res.data,
-        showTip: true,
-        canSubmit: true,
-      });
+      if (res.code === 0) {
+        this.setData({
+          withdrawInfo: res.data,
+          showTip: true,
+          canSubmit: true,
+        });
+      } else if (res.code === 2) {
+        this.setData({
+          withdrawInfo: res.data,
+          showTip: true,
+          canSubmit: false,
+          submitMess: res.msg,
+        });
+      }
     }).catch((err) => {
       this.setData({
         canSubmit: false,

@@ -38,14 +38,10 @@
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="auth">
       <image class="action-icon" src="../../assets/images/personal/icon_action_auth2.png"/>
       <view class="action-lable">实名认证</view>
-      <view class="action-tag" wx:if="{{userInfo.validation}}">已认证</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="expandPoster">
       <image class="action-icon" src="../../assets/images/personal/icon_action_poster.png"/>
       <view class="action-lable">宣传海报</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
     <!-- <van-divider hairline wx:if="{{userInfo.recruiter===true}}" />
     <view class="action-row" bindtap="handelMenuClick" wx:if="{{userInfo.recruiter===true}}" hover-class="hover-class" data-tag="member">
@@ -59,59 +55,41 @@
       <view class="action-lable">成员信息</view>
       <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view> -->
-    <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="contacts">
       <image class="action-icon" src="../../assets/images/personal/icon_action_contacts.png"/>
       <view class="action-lable">紧急联系人</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  wx:if="{{userInfo.recruiter===false}}"/>
     <view class="action-row"  wx:if="{{userInfo.recruiter===false}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="registration">
       <image class="action-icon" src="../../assets/images/personal/icon_action_register2.png"/>
       <view class="action-lable">我的报名</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="balance">
       <image class="action-icon" src="../../assets/images/personal/icon_action_blance2.png"/>
       <view class="action-lable">账单明细</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="bankCard">
       <image class="action-icon" src="../../assets/images/personal/icon_action_bankCard.png"/>
       <view class="action-lable">发薪卡</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="payslip">
       <image class="action-icon" src="../../assets/images/personal/icon_action_blance2.png"/>
       <view class="action-lable">工资条</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="advance">
       <image class="action-icon" src="../../assets/images/personal/icon_action_advance.png"/>
       <view class="action-lable">预支薪资</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline  />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="dorm">
       <image class="action-icon" src="../../assets/images/personal/icon_action_dorm.png"/>
       <view class="action-lable">宿舍服务</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="resignApply">
       <image class="action-icon" src="../../assets/images/personal/icon_action_resign.png"/>
       <view class="action-lable">离职报备</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
-    <van-divider hairline />
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="feedback">
       <image class="action-icon" src="../../assets/images/personal/icon_action_suggestion2.png"/>
       <view class="action-lable">意见反馈</view>
-      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
     </view>
   </view>
 </view>
