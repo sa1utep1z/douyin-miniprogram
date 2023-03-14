@@ -46,7 +46,8 @@
     "pages/dorm/scanBed/scanBed",
     "pages/prepareSignUp/prepareSignUp",
     "pages/expandPoster/expandPoster",
-    "pages/expandPosterView/expandPosterView"
+    "pages/expandPosterView/expandPosterView",
+    "pages/scanCar/scanCar"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

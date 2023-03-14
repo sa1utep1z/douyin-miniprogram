@@ -339,6 +339,11 @@ Page({
               url: '../../pages/dorm/stayApply/stayApply?scanBuilding=true&roomBuildingId=' + id,
             });
             break;
+          case "car":
+            wx.navigateTo({
+              url: '../../pages/scanCar/scanCar?carId=' + id,
+            });
+            break;
           default:
             wx.showToast({
               title: '类型错误',
