@@ -60,7 +60,7 @@
       <view class="detail-item-name">{{item.name}}</view>
       <view class="detail-item-value"><rich-text nodes="{{item.value || '/'}}" space="nbsp" /></view>
     </view>
-    <view class="detail-item">
+    <!-- <view class="detail-item">
       <view class="detail-item-name">行程码</view>
       <view class="detail-item-value"><rich-text nodes="{{detailBean.itineraryCode || '/'}}" space="nbsp" /></view>
     </view>
@@ -71,7 +71,7 @@
     <view class="detail-item">
       <view class="detail-item-name">疫苗接种</view>
       <view class="detail-item-value"><rich-text nodes="{{detailBean.vaccination || '/'}}" space="nbsp" /></view>
-    </view>
+    </view> -->
   </view>
   <view class="detail-block">
     <view class="detail-item-request">企业简介</view>
