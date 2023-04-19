@@ -119,7 +119,7 @@
                 <view class="title" style="background-color: {{item.pass == null ? '#fde498' : '#D0E8FF'}};">{{parse.parseApproveRole(item.role)}}{{item.pass === null ? '待审核' : '审核'}} {{parse.parseApproveResult(item)}}</view>
                 <view class="content">
                   {{parse.parseApproveRole(item.role)}}
-                  <block wx:if="{{'BELONG_RESIDENT_SINGLE' === item.role}}">【<span class="text-focus">{{item.userName}}</span>】<span class="text-focus" data-mobile="{{item.mobile}}" bindtap="callMobile">{{item.mobile}}</span></block>
+                  <block wx:if="{{'BELONG_RESIDENT' === item.role || 'BELONG_RESIDENT_SINGLE' === item.role}}">【<span class="text-focus">{{item.userName}}</span>】<span class="text-focus" data-mobile="{{item.mobile}}" bindtap="callMobile">{{item.mobile}}</span></block>
                   {{util.formatTime(item.time)}}
                 </view>
               </view>

@@ -10,6 +10,11 @@ export const uploadCommonImage = (data) => {
   return ajax.uploadRequest('/admin/file/upload', data);
 };
 
+// 提交反馈前回显
+export const fetchMemberInfo = () => {
+  return ajax.request('/client/member/feedback/info', null, 'GET');
+};
+
 // 提交反馈意见
 export const submitSuggestion = (data) => {
   return ajax.request('/client/member/feedback/submit', data, 'POST');

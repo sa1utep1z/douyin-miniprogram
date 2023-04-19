@@ -22,7 +22,7 @@ page{
 
 .row {
   width: 638rpx;
-  height: 40rpx;
+  /* height: 40rpx; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -34,6 +34,20 @@ page{
   line-height: 40rpx;
   padding: 20rpx 0;
 }
+.poster-button-view {
+  width: 160rpx;
+  height: 52rpx;
+  float: left;
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 52rpx;
+}
+.poster-button-view-active {
+  border-radius: 20rpx;
+  background-color: #56c6fd;
+  color: #f8f6f6;
+}
+
 .picker {
   color: #4faaf7;
   width: 220rpx;
