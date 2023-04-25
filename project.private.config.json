@@ -195,6 +195,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/contract/contract",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

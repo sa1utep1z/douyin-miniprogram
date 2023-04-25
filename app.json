@@ -47,7 +47,8 @@
     "pages/prepareSignUp/prepareSignUp",
     "pages/expandPoster/expandPoster",
     "pages/expandPosterView/expandPosterView",
-    "pages/scanCar/scanCar"
+    "pages/scanCar/scanCar",
+    "pages/contract/contract"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",
