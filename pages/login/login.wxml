@@ -6,6 +6,7 @@
   </view>
   <image src="../../assets/images/login/img_logo.png" class="logo"></image>
   <button class="login-wechat-btn" bindtap="register">微信一键登录</button>
+  <!-- <button class="login-wechat-btn"  open-type="getPhoneNumber"  bindgetphonenumber="getPhoneNumber" bindtap="getUserInfo">微信一键登录</button> -->
   <view class="law_text">
     <text>登录代表您已同意</text><text class="law-text-blue" bindtap="jumpPrivacy" >众鼎人力用户协议、隐私协议</text>
   </view>
