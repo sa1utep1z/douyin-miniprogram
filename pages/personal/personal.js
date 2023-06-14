@@ -71,6 +71,11 @@ Page({
     const { tag } = e.currentTarget.dataset;
     const { userInfo } = this.data;
     switch(tag) {
+      case 'contract':
+        wx.navigateTo({
+          url: '../../pages/contract/contract',
+        })
+        break;
       case 'registration':
         // wx.showToast({
         //   title: '系统升级中，请稍后提现，给您造成不便，请见谅！',

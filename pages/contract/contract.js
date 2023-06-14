@@ -1,3 +1,5 @@
+import { listContractData } from '../../api/contract'
+
 // pages/contract/contract.js
 Page({
 
@@ -5,45 +7,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    src: '',
-    base64: "",
-    baidutoken: "",
-    msg: null
-  },
-
-  //拍照并编码
-  takePhoto() {
-    var that = this;
-    //拍照
-    const ctx = wx.createCameraContext()
-    ctx.takePhoto({
-      quality: 'high',
-      success: (res) => {
-        that.setData({
-          src: res.tempImagePath
-        })
-        //图片base64编码
-        wx.getFileSystemManager().readFile({
-          filePath: that.data.src, //选择图片返回的相对路径
-          encoding: 'base64', //编码格式
-          success: res => { //成功的回调          
-            that.setData({
-              base64: res.data
-            })
-            that.checkPhoto();
-          }
-        })
-      }
-    })
-  },
-  checkPhoto() {
-    var that = this;
-    that.validPhoto();
-  },
-  validPhoto() {
-    var that = this;
-    //上传人脸进行 比对
-    
+    contractList: []
+    // contractList: [
+    //   {
+    //     contractId: '6482d2bb67896f71417c73fb',
+    //     title: '地方撒旦你设计费快点解封',
+    //     salaryStart: 1000,
+    //     salaryEnd: 2000,
+    //     companyName: '灯笼花CN',
+    //     typeOfWork: 'FORMAL_WORKER',
+    //     signUpTime: 1686214900258,
+    //     jobDate: 1686214900258,
+    //     contractStatus: 'PENDING',
+    //     viewUrl: 'https://labor-dev.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/20230606852dfee943f34dbb97db6dc0.pdf?Expires=1686281335&OSSAccessKeyId=LTAI5tMBEPU2B5rv3XfYcC7m&Signature=CRYjrq3aqJSNvN8oGAIq4svxXhk%3D'
+    //   },
+    // ]
   },
 
   /**
@@ -51,6 +29,13 @@ Page({
    */
   onLoad(options) {
     
+  },
+
+  getContractData: async function() {
+    const res = await listContractData()
+    this.setData({
+      contractList: res.data,
+    })
   },
 
   /**
@@ -64,7 +49,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.getContractData();
   },
 
   /**

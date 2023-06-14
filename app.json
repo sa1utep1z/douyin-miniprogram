@@ -94,5 +94,20 @@
       "desc": "你的位置信息将用于小程序为你推荐岗位信息"
     }
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "subpackages": [
+    {
+      "root": "pagesFace",
+      "name": "pagesFace",
+      "pages": [
+        "pages/index/index",
+        "pages/webview/webview",
+        "pages/middle/middle"
+      ]
+    }
+  ],
+  "navigateToMiniProgramAppIdList": [
+    "wxa1439f77c6d06a15",
+    "wx855361a721050c6b"
+  ]
 }

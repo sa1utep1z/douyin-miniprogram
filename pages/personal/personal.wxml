@@ -91,6 +91,10 @@
       <image class="action-icon" src="../../assets/images/personal/icon_action_suggestion2.png"/>
       <view class="action-lable">意见反馈</view>
     </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="contract">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_suggestion2.png"/>
+      <view class="action-lable">合同管理</view>
+    </view>
   </view>
 </view>
 
