@@ -24,7 +24,7 @@
   <view class="block-manager" wx:if="{{userInfo.recruiter===false&&userInfo.recruiterName!==null}}">
     <view class="manager-title">客服专员</view>
     <view class="flex-row">
-      <image class="manager-avatar" src="{{userInfo.recruiterAvatar===null?'../../assets/images/public/icon_default_head.png':userInfo.recruiterAvatar}}"></image>
+      <image class="manager-avatar" src="../../assets/images/public/header.png"></image>
       <view class="manager-column">
         <view class="manager-name">{{userInfo.recruiterName}}</view>
         <view class="manager-company">众鼎直聘</view>
