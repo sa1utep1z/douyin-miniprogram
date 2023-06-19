@@ -24,8 +24,8 @@
     <view class="job-title">签署日期：{{tool2.formatTime2(item.signDate) || ''}}</view>
   </view>
   <van-divider hairline></van-divider>
-  <view style="overflow: hidden;">
-    <view class="bottom-btn" catchtap="signContract" wx:if="{{item.contractStatus === 'PENDING' && !item.signDate && !alSign}}" data-contractid="{{item.contractId}}">签署合同</view>
+  <view style="display: flex;justify-content: flex-end;">
     <view class="bottom-btn" catchtap="viewContract" data-contractid="{{item.contractId}}" data-url="{{item.viewUrl}}">查看合同</view>
+    <view class="bottom-btn" catchtap="signContract" wx:if="{{item.contractStatus === 'PENDING' && !item.signDate && !alSign}}" data-contractid="{{item.contractId}}">签署合同</view>
   </view>
 </view>

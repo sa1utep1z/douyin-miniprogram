@@ -190,17 +190,18 @@
   line-height: 46rpx;
 }
 .bottom-btn {
-  float: right;
-  width: 132rpx;
-  height: 46rpx;
-  border-radius: 4rpx;
-  font-size: 28rpx;
+  flex: 1;
+  width: 180rpx;
+  height: 56rpx;
+  border-radius: 15rpx;
+  font-size: 30rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: bolder;
   text-align: center;
-  margin-left: 16rpx;
-  color: red;
-  line-height: 46rpx;
+  color: #fff;
+  margin: 0 8rpx;
+  background-color: #0c7d9d;
+  line-height: 56rpx;
 }
 .confirm-agree{
   width: 132rpx;
