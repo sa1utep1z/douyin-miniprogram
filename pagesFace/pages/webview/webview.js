@@ -8,7 +8,7 @@ Page({
   onLoad(options) {
     console.log('---wevbiew onload', options)
     this.setData({
-      url: decodeURIComponent(options.url).replace('https://realnameverify-test.fadada.com', 'https://realnameverify-test05.fadada.com'),
+      url: decodeURIComponent(options.url).replace('https://realnameverify.fadada.com', 'https://realnameverify04.fadada.com').replace('https://textapi.fadada.com', 'https://textapi05.fadada.com'),
     }) 
   },
 

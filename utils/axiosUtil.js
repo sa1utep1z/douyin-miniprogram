@@ -2,7 +2,6 @@ import urlConfig from './urlConfig';
 import eventBus from './bus';
 const authUrl = urlConfig().authUrl;
 const baseUrl = urlConfig().baseUrl;
-const traceUrl = urlConfig().traceUrl;
 
 const initHeader = {
   'content-type': 'application/json',

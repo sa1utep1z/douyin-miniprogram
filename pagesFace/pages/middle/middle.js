@@ -74,7 +74,7 @@ Page({
       const previous = pages[pages.length - 2]
       /** 重新加载认证页面 */
       if (previous.reloadPage && typeof previous.reloadPage === 'function') {
-        previous.reloadPage(miniProgramCallBackUrl.replace('https://realnameverify-test.fadada.com', 'https://realnameverify-test05.fadada.com'))
+        previous.reloadPage(miniProgramCallBackUrl.replace('https://realnameverify.fadada.com', 'https://realnameverify04.fadada.com'))
         wx.navigateBack({
           delta: 1,
         })
