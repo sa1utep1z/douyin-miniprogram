@@ -16,7 +16,7 @@ Page({
     smsCode: '',
     timer: null,
     sendBtnText: '获取验证码',
-    agreePact: true,
+    agreePact: false,
   },
 
   /**
