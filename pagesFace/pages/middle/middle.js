@@ -15,6 +15,7 @@ Page({
     // ******************** 认证回调信息 -- 结束 ********************
 
     // ******************** 签署回调信息 -- 开始 ********************
+    delay: 'no',
     // ******************** 签署回调信息 -- 结束 ********************
   },
 
@@ -36,20 +37,29 @@ Page({
   onLoad: function (options) {
     console.info('--- middle onLoad', options)
     // 这一步变量
-    const {bizToken = '', miniProgramAppId = '', miniProgramPath = '', miniProgramCallBackUrl='', status = '-1'} = options;
+    const {bizToken = '', miniProgramAppId = '', miniProgramPath = '', miniProgramCallBackUrl='', status = '-1', delay = 'no'} = options;
     this.setData({
       bizToken: decodeURIComponent(bizToken),
       miniProgramAppId: decodeURIComponent(miniProgramAppId),
       miniProgramPath: decodeURIComponent(miniProgramPath),
       miniProgramCallBackUrl: decodeURIComponent(miniProgramCallBackUrl),
-      status
+      status,
+      delay
     })
   },
 
   /** 生命周期函数--监听页面显示 */
   onShow: function () {
-    const {goFaceDone, miniProgramCallBackUrl, status} = this.data
+    const {goFaceDone, miniProgramCallBackUrl, status, delay} = this.data
     // 签署完成 || 直接认证成功的（没有跳转公证处人脸识别）
+    if ('yes' === delay) {
+      setTimeout(() => {
+        wx.reLaunch({
+          url: '/pages/contract/contract',
+        });
+      }, 700)
+      return;
+    }
     if ('2' === status) {
       // 不会被返回上一层页面
       wx.redirectTo({
