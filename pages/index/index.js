@@ -2,6 +2,8 @@ import { fecthIndexTabList, signUpClick } from '../../api/jobApi'
 import { fetchPostArguments } from '../../api/userApi'
 import { listBanners } from '../../api/commonApi'
 import { existPreSignUpMode } from '../../api/prepareSignUp'
+import { fetchMessageType } from '../../api/messageApi'
+import { setTabBarText } from '../../utils/tabBar'
 var startPoint;
 Page({
   data: {
@@ -113,6 +115,17 @@ Page({
   },
   onShow: function () {
     this.getStatusBarHeight();
+    this.getMessageType();
+  },
+  getMessageType: async function (e) {
+    const res = await fetchMessageType();
+    this.setData({
+      messageTypeList: res.data,
+    });
+    const unTotal = res.data.reduce(function(total, currentValue, currentIndex, arr) {
+      return total + currentValue.unReadMessageCount;
+    }, 0);
+    setTabBarText(2, unTotal + '');
   },
   getBannerList: async function (isExistPreMode) {
     const res = await listBanners();

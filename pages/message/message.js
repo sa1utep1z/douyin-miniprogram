@@ -1,5 +1,6 @@
 // pages/message/message.js
-import { fetchMessageType } from '../../api/messageApi'
+import { fetchMessageType, readAllUnReadMessage } from '../../api/messageApi'
+import { setTabBarText } from '../../utils/tabBar'
 Page({
 
   /**
@@ -7,9 +8,29 @@ Page({
    */
   data: {
     messageTypeList: [],
-  
+    statusNavBarHeight: 0,
+    navBarHeight: 0,
+    height: 0,
+    top: 0,
   },
-
+  getStatusBarHeight: function () {
+    // 获取状态栏高度
+    const { statusBarHeight } = wx.getSystemInfoSync();
+    // 得到右上角菜单的位置尺寸
+    const menuButtonObject = wx.getMenuButtonBoundingClientRect();
+    const { top, height } = menuButtonObject;
+    // 计算导航栏的高度
+    // 此高度基于右上角菜单在导航栏位置垂直居中计算得到
+    const navBarHeight = height + (top - statusBarHeight) * 3;
+    // 计算状态栏与导航栏的总高度
+    const statusNavBarHeight = statusBarHeight + navBarHeight;
+    this.setData({
+      navBarHeight,
+      statusNavBarHeight,
+      height,
+      top,
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -28,6 +49,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getStatusBarHeight();
+    this.getMessageType();
+  },
+  cleanUnRead: async function(e) {
+    await readAllUnReadMessage();
     this.getMessageType();
   },
   handelWorkMessage: function (e) {
@@ -53,6 +79,10 @@ Page({
     this.setData({
       messageTypeList: res.data,
     });
+    const unTotal = res.data.reduce(function(total, currentValue, currentIndex, arr) {
+      return total + currentValue.unReadMessageCount;
+    }, 0);
+    setTabBarText(2, unTotal + '');
   },
 
   /**

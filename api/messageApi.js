@@ -7,11 +7,16 @@ export const fetchMessageType = (data) => {
 
 //消息列表
 export const fetchMessageList = (data) => {
-  return  ajax.request('/client/member/message/query', data, 'POST');
+  return ajax.request('/client/member/message/query', data, 'POST');
  }
 
 //将消息置为已读
 export const readMessage = (messageId) => {
   return  ajax.request(`/client/member/message/read/${messageId}`, null, 'PUT');
+ }
+
+ //将消息置为已读
+export const readAllUnReadMessage = () => {
+  return  ajax.request(`/client/member/message/read/all`, null, 'PUT');
  }
 

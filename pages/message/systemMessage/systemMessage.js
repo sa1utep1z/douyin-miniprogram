@@ -77,6 +77,14 @@ Page({
       })
      await readMessage(messageList[index].messageId);
     }
+    // 判断是否跳转
+    const messObj = messageList[index];
+    const {redirectKey} = messObj;
+    if (redirectKey === 'contract') {
+     wx.navigateTo({
+       url: '/pages/contract/contract',
+     });
+    }
  },
   onLoadMore: async function (e) {
     const { pageNumber, pageSize, loadingStatus, messageType, messageList} = this.data;
