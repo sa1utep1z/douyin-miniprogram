@@ -1,0 +1,101 @@
+<wxs src="./lotteryView.wxs" module="tool"></wxs>
+<wxs src="/utils/util.wxs" module="dateTool"></wxs>
+<wxs src="/utils/privacyUtil.wxs" module="privacyTool"></wxs>
+<view class="lotteryContainer">
+  <!-- <view class="lottery-draw" bindtap="openDrawRecord">抽奖记录</view> -->
+  <view class="lottery-title">{{activityTitle}}</view>
+  <view style="padding: 30rpx 0;">
+    <lottery-turntable
+      data="{{datas}}"
+      prize-id="{{prizeId}}"
+      count="{{lotteryCount}}"
+      config="{{config}}"
+      cusDisable="{{trunTableDisable}}"
+      cusDisableExplain="{{trunTableDisableExplain}}"
+      bindLuckDraw="onLuckDrawHandle"
+      bindNotEnough="onNotEnoughHandle"
+      bindLuckDrawFinish="onLuckDrawFinishHandle"/>
+  </view>
+  <view class="lottery-bottom">
+    <tab tabs="{{tabs}}" bindTabHandle="onTabHandle">
+      <view slot="0" class="tabView">
+        <scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" style="max-height: 960rpx;">
+          <view class="activity-m">
+            <view class="activity-m-t">一、活动时间</view>
+            <view class="activity-m-b">{{dateTool.formatTime(activityExplain.startTime) || ''}} 至 {{dateTool.formatTime(activityExplain.endTime) || ''}}</view>
+          </view>
+          <view class="activity-m">
+            <view class="activity-m-t">二、参与方式</view>
+            <view class="activity-m-b">1、所有符合参与抽奖活动人员，需先完成实名认证</view>
+            <view class="activity-m-b">2、符合抽奖资格人员点击“抽奖”转盘开始转动，最终指针指着的即为您所中的奖品</view>
+          </view>
+          <view class="activity-m">
+            <view class="activity-m-t">三、参与抽奖人员资格与条件</view>
+            <view class="activity-m-b">
+              <view class="activity-model">
+                <view class="activity-model-l">适用企业：</view>
+                <view class="activity-model-r">{{activityExplain.companyNames.join('、') || '无限制'}}</view>
+              </view>
+              <view class="activity-model">
+                <view class="activity-model-l">是否满足在职：</view>
+                <view class="activity-model-r">{{tool.parseJobCondition(activityExplain.jobCondition)}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="activity-m">
+            <view class="activity-m-t">四、活动奖项</view>
+            <view class="activity-m-b" style="margin-left: 60rpx;">
+              <table-view
+                header-row-class-name="header-class"
+                cell-class-name="cell-class"
+                headers="{{tableHeader}}"
+                data="{{ activityExplain.prizes }}" />
+            </view>
+          </view>
+          <view class="activity-m">
+            <view class="activity-m-t">五、活动说明</view>
+            <view class="activity-m-b">
+              同一身份证号、同一手机号、同一设备终端号、同一微信号ID或其他合理显示为同一用户的情形，均视为同一用户。若用户存在违规行为，众鼎直聘有权取消用户领奖资格，收回奖励，情节严重则将追究其法律责任
+            </view>
+            <view class="activity-m-b">
+              1、总抽奖机会：{{null != activityExplain.lotteryNumsTotal ? ('每人最多有' + activityExplain.lotteryNumsTotal + '次抽奖机会') : '无限制'}}
+            </view>
+            <view class="activity-m-b">
+              2、每天可抽奖：{{null != activityExplain.lotteryNumsDay ? ('每人每天有' + activityExplain.lotteryNumsDay + '次抽奖机会') : '无限制'}}
+            </view>
+            <view class="activity-m-b">
+              3、中奖次数：{{null != activityExplain.lotteryWinningNums ? ('每人最多可中奖' + activityExplain.lotteryWinningNums + '次') : '无限制'}}
+            </view>
+            <view class="activity-m-b" style="padding-top: 15rpx; color: #d9262f;">
+              活动出现产品功能、规则等变更情况，众鼎直聘将在本页面做相应的调整通告。
+            </view>
+            <view class="activity-m-b" style="padding-top: 15rpx; color: #d9262f;">
+              本活动最终解释权贵众鼎人力所有。
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <view slot="1" class="tabView">
+        <scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" lower-threshold="50" bindscrolltolower="onLoadMore" class="scroll-view" >
+          <view class="draw-view" wx:for="{{drawList}}" wx:key="{{item}}">
+            <view class="draw-col-l">
+              <view class="col-top">{{privacyTool.hideUserName(item.userName)}}<text decode="true">&nbsp;&nbsp;&nbsp;</text>{{privacyTool.hideMobile(item.mobile)}}</view>
+              <view class="col-bot">{{dateTool.formatTime(item.winningTime) || ''}}</view>
+            </view>
+            <view class="draw-col-r">{{item.prizeLevelName || ''}}</view>
+          </view>
+          <block wx:if="{{loadingStatus === 1}}">
+            <view class="status-loading" id="status-loading">
+              <van-loading type="spinner" size="24rpx" color="#999999" >加载中...</van-loading>
+            </view>
+          </block >
+          <block wx:if="{{loadingStatus === 2}}">
+            <view class="status-finish">
+                <van-divider hairline  contentPosition="center" >{{memberList.length===0?'暂无记录':'由众鼎提供技术支持'}}</van-divider>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+    </tab>
+  </view>
+</view>

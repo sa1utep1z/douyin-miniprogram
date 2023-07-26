@@ -216,6 +216,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/lotteryView/lotteryView",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/drawRecord/drawRecord",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

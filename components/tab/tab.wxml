@@ -1,0 +1,13 @@
+<view class="tab-top">
+<!-- 待优化：这里使用了flex布局，不可支持滑动，所以tab太多会很难看 -->
+  <view wx:for="{{tabs}}" wx:key="index"
+    bindtap="clickTab" data-id="{{index}}" 
+    class="tab {{curIndex === index ? 'tab-active' : ''}}">
+    {{item.title}}
+  </view>
+</view>
+<view class="tab-content">
+  <view wx:for="{{tabs}}" wx:key="index">
+    <slot name="{{index}}" wx:if="{{curIndex === index}}"></slot>
+  </view>
+</view>

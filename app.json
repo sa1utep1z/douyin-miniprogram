@@ -48,7 +48,10 @@
     "pages/expandPoster/expandPoster",
     "pages/expandPosterView/expandPosterView",
     "pages/scanCar/scanCar",
-    "pages/contract/contract"
+    "pages/contract/contract",
+    "pages/lottery/lottery",
+    "pages/lotteryView/lotteryView",
+    "pages/winningRecord/winningRecord"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

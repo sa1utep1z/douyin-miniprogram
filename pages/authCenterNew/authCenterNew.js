@@ -71,8 +71,15 @@ Page({
    * @param {*} e 
    */
   handleConfirm: async function (e) {
-    const { name, mobile, smsCode, idCard, agreePact } = this.data;
-    console.info(agreePact);
+    const { name, mobile, smsCode, idCard, agreePact, oldIdCard } = this.data;
+    if (oldIdCard) {
+      wx.showToast({
+        title: '请勿重复实名',
+        icon:'none',
+        duration: 1800
+      });
+      return;
+    }
     if(name===null||name.length===0){
       wx.showToast({
         title: '请输入真实姓名',
@@ -149,6 +156,14 @@ Page({
        });
        return;
      }
+     if (oldIdCard) {
+      wx.showToast({
+        title: '请勿重复实名',
+        icon:'none',
+        duration: 1800
+      });
+      return;
+    }
      const res = await sendCode(mobile);
      if (res.code === 0) {
        this.onSendCodeSuccess();

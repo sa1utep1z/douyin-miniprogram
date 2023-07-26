@@ -76,6 +76,11 @@ Page({
           url: '../../pages/contract/contract',
         })
         break;
+      case 'lottery':
+        wx.navigateTo({
+          url: '/pages/lottery/lottery',
+        })
+        break;
       case 'registration':
         // wx.showToast({
         //   title: '系统升级中，请稍后提现，给您造成不便，请见谅！',
