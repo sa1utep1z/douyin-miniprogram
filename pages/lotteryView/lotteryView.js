@@ -16,7 +16,7 @@ Page({
     prizeId: '',  // 抽中结果id，通过属性方式传入组件
     config: { 		// 转盘配置，通过属性方式传入组件
       titleLength: 10,
-      bgColors: ['#bdd1a1','#cef797','#FFC53F','#e19f8a','#c3eb67','#b6db86','#ffe6ad','#e3f7c8','#ece0ad','#f3c55b','#e3c381','#b7c47f'],
+      bgColors: ['#fad47d','#f0e2af','#e19f8a','#d9f29d','#ffe6ad','#f29d9d','#f7bfad','#e3f7c8','#ffbaad','#ebc9be','#f0d495','#dff5ae','#e3c381','#edc5ad'],
       fontSize: 12,
       duration: 5000,
       ease: 'ease-in-out'

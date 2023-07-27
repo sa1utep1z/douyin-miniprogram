@@ -70,9 +70,6 @@
             <view class="activity-m-b">
               2、每天可抽奖：{{null != activityExplain.lotteryNumsDay ? ('每人每天有' + activityExplain.lotteryNumsDay + '次抽奖机会') : '无限制'}}
             </view>
-            <view class="activity-m-b">
-              3、中奖次数：{{null != activityExplain.lotteryWinningNums ? ('每人最多可中奖' + activityExplain.lotteryWinningNums + '次') : '无限制'}}
-            </view>
             <view class="activity-m-b" style="padding-top: 15rpx; color: #d9262f;">
               活动出现产品功能、规则等变更情况，众鼎直聘将在本页面做相应的调整通告。
             </view>
