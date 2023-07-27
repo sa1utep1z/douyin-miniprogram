@@ -13,8 +13,9 @@ page{
   font-size: 70rpx;
   font-weight: bolder;
   color: white;
-  height: 140rpx;
   line-height: 140rpx;
+  width: 92%;
+  margin: 0 auto;
 }
 .lottery-draw {
   color: white;
