@@ -13,6 +13,7 @@ Page({
     oldMobile: '',
     idCard: '',
     oldIdCard: '',
+    validation: false,
     smsCode: '',
     timer: null,
     sendBtnText: '获取验证码',
@@ -35,6 +36,7 @@ Page({
       oldIdCard: res.data.idNo,
       mobile: res.data.mobile,
       oldMobile: res.data.mobile,
+      validation: res.data.validation,
     });
   },
 
@@ -71,8 +73,8 @@ Page({
    * @param {*} e 
    */
   handleConfirm: async function (e) {
-    const { name, mobile, smsCode, idCard, agreePact, oldIdCard } = this.data;
-    if (oldIdCard) {
+    const { name, mobile, smsCode, idCard, agreePact, oldIdCard, validation } = this.data;
+    if (validation) {
       wx.showToast({
         title: '请勿重复实名',
         icon:'none',
@@ -146,7 +148,7 @@ Page({
     }
   },
   handleSendCode: async function () {
-    const { name, mobile, idCard, oldName, oldMobile, oldIdCard } = this.data;
+    const { name, mobile, idCard, oldName, oldMobile, oldIdCard, validation } = this.data;
     const reg_tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
      if (!reg_tel.test(mobile)) {
        wx.showToast({
@@ -156,7 +158,7 @@ Page({
        });
        return;
      }
-     if (oldIdCard) {
+     if (validation) {
       wx.showToast({
         title: '请勿重复实名',
         icon:'none',

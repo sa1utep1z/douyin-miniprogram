@@ -2,13 +2,13 @@
 <view class="container">
   <view class="dialog-content">
       <view class="input-view-required">
-        <input adjust-position="{{false}}" disabled="{{oldIdCard ? true : false}}" bindinput="onInputName" placeholder="请输入您的真实姓名" value="{{name}}" class="input-view-input"></input>
+        <input adjust-position="{{false}}" disabled="{{validation}}" bindinput="onInputName" placeholder="请输入您的真实姓名" value="{{name}}" class="input-view-input"></input>
       </view>
       <view class="info-view">
-        <input adjust-position="{{false}}" disabled="{{oldIdCard ? true : false}}" bindinput="onInputIDCard" maxlength="18" placeholder="请输入您的身份证号" type="idcard" value="{{idCard}}" placeholder-class="input-view-placeholder" class="input-view-input"></input>
+        <input adjust-position="{{false}}" disabled="{{validation}}" bindinput="onInputIDCard" maxlength="18" placeholder="请输入您的身份证号" type="idcard" value="{{idCard}}" placeholder-class="input-view-placeholder" class="input-view-input"></input>
       </view>
       <view class="input-view-required">
-        <input adjust-position="{{false}}" disabled="{{oldIdCard ? true : false}}" bindinput="onInputPhone" maxlength="11" type="number" placeholder="请输入您的电话号码" value="{{mobile}}" placeholder-class="input-view-placeholder" class="input-view-input"></input>
+        <input adjust-position="{{false}}" disabled="{{validation}}" bindinput="onInputPhone" maxlength="11" type="number" placeholder="请输入您的电话号码" value="{{mobile}}" placeholder-class="input-view-placeholder" class="input-view-input"></input>
       </view>
       <view class="action-row">
         <view class="action-view">

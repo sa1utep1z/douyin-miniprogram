@@ -22,7 +22,7 @@ export const fetchDrawResidueNums = (lotteryActivityId) => {
  }
   // 抽奖
 export const fetchLotteryPrizeId = (lotteryActivityId) => {
-  return ajax.request(`/client/lottery/draw/${lotteryActivityId}`, null, 'GET');
+  return ajax.request(`/client/lottery/draw/${lotteryActivityId}`, null, 'GET', false);
  }
    // 抽奖记录
 export const listDrawRecord = (data) => {

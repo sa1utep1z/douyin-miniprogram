@@ -77,9 +77,13 @@ Page({
         })
         break;
       case 'lottery':
-        wx.navigateTo({
-          url: '/pages/lottery/lottery',
-        })
+        if (!userInfo.validation) {
+          this.noVerifyRediect();
+        } else {
+          wx.navigateTo({
+            url: '/pages/lottery/lottery',
+          })
+        }
         break;
       case 'registration':
         // wx.showToast({

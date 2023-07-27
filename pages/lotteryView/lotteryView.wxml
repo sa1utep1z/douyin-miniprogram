@@ -26,20 +26,27 @@
           </view>
           <view class="activity-m">
             <view class="activity-m-t">二、参与方式</view>
-            <view class="activity-m-b">1、所有符合参与抽奖活动人员，需先完成实名认证</view>
-            <view class="activity-m-b">2、符合抽奖资格人员点击“抽奖”转盘开始转动，最终指针指着的即为您所中的奖品</view>
+            <view class="activity-m-b">1、所有符合参与抽奖活动人员，需先完成实名认证；</view>
+            <view class="activity-m-b">2、符合抽奖资格人员点击“抽奖”转盘开始转动，最终指针指着的即为您所中的奖品。</view>
           </view>
           <view class="activity-m">
             <view class="activity-m-t">三、参与抽奖人员资格与条件</view>
             <view class="activity-m-b">
-              <view class="activity-model">
-                <view class="activity-model-l">适用企业：</view>
-                <view class="activity-model-r">{{activityExplain.companyNames.join('、') || '无限制'}}</view>
-              </view>
-              <view class="activity-model">
-                <view class="activity-model-l">是否满足在职：</view>
-                <view class="activity-model-r">{{tool.parseJobCondition(activityExplain.jobCondition)}}</view>
-              </view>
+              <block wx:if="{{activityExplain.personCondition === true}}">
+                <view class="activity-model">
+                  <view class="activity-model-r">【仅限指定名单人员参与抽奖】</view>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="activity-model">
+                  <view class="activity-model-l">适用企业：</view>
+                  <view class="activity-model-r">{{activityExplain.companyNames.join('、') || '无限制'}}</view>
+                </view>
+                <view class="activity-model">
+                  <view class="activity-model-l">是否满足在职：</view>
+                  <view class="activity-model-r">{{tool.parseJobCondition(activityExplain.jobCondition)}}</view>
+                </view>
+              </block>
             </view>
           </view>
           <view class="activity-m">
@@ -55,7 +62,7 @@
           <view class="activity-m">
             <view class="activity-m-t">五、活动说明</view>
             <view class="activity-m-b">
-              同一身份证号、同一手机号、同一设备终端号、同一微信号ID或其他合理显示为同一用户的情形，均视为同一用户。若用户存在违规行为，众鼎直聘有权取消用户领奖资格，收回奖励，情节严重则将追究其法律责任
+              同一身份证号、同一手机号、同一设备终端号、同一微信号ID或其他合理显示为同一用户的情形，均视为同一用户。若用户存在违规行为，众鼎直聘有权取消用户领奖资格，收回奖励，情节严重则将追究其法律责任。
             </view>
             <view class="activity-m-b">
               1、总抽奖机会：{{null != activityExplain.lotteryNumsTotal ? ('每人最多有' + activityExplain.lotteryNumsTotal + '次抽奖机会') : '无限制'}}
@@ -70,7 +77,7 @@
               活动出现产品功能、规则等变更情况，众鼎直聘将在本页面做相应的调整通告。
             </view>
             <view class="activity-m-b" style="padding-top: 15rpx; color: #d9262f;">
-              本活动最终解释权贵众鼎人力所有。
+              本活动最终解释权归众鼎人力所有。
             </view>
           </view>
         </scroll-view>
@@ -91,7 +98,7 @@
           </block >
           <block wx:if="{{loadingStatus === 2}}">
             <view class="status-finish">
-                <van-divider hairline  contentPosition="center" >{{memberList.length===0?'暂无记录':'由众鼎提供技术支持'}}</van-divider>
+                <van-divider hairline  contentPosition="center" >{{drawList.length===0?'暂无记录':'由众鼎提供技术支持'}}</van-divider>
             </view>
           </block>
         </scroll-view>
