@@ -73,7 +73,7 @@ Page({
     }).catch((err) => {
       this.setData({
         trunTableDisable: true,
-        trunTableDisableExplain: '抽奖失败，请重新进入试试'
+        trunTableDisableExplain: err.msg
       })
       return false
     });

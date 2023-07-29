@@ -36,9 +36,8 @@ Page({
   },
 
   onLoad: function (options) {
-    this.getExistPreSignUpMode().then(e => {
-      this.getBannerList(e);
-    })
+    this.getBannerList();
+    this.getExistPreSignUpMode();
     const { recommendId, scene } =  options;
     if (recommendId) {
       wx.setStorageSync('recommendId', recommendId);
@@ -127,24 +126,16 @@ Page({
     }, 0);
     setTabBarText(2, unTotal + '');
   },
-  getBannerList: async function (isExistPreMode) {
+  getBannerList: async function () {
     const res = await listBanners();
     if (res && res.code === 0) {
-      if (isExistPreMode) {
-        this.setData({
-          bannerList: res.data
-        })
-      } else {
-        this.setData({
-          bannerList: res.data.filter((e) => e.jumpType !== 'mini_page')
-        })
-      }
+      this.setData({
+        bannerList: res.data
+      })
     }
   },
   getExistPreSignUpMode: async function () {
     return await existPreSignUpMode().then((res) => {
-      console.info(typeof res.data)
-      console.info(res.data)
       this.setData({
         existPreMode: res.data,
       })
