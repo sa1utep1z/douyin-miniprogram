@@ -103,3 +103,43 @@
     </tab>
   </view>
 </view>
+
+<van-overlay show ="{{drawDialogShow && drawDataValid}}" custom-style="background: rgba(0,0,0,0.5)" bindtap="onOverlayClick">
+  <view class="dialogContainer">
+    <view style="height: 80rpx;width: 720rpx;">
+      <image style="height: 100%;float: right;" src="/assets/images/public/no.png" mode="heightFix" bindtap="closeDrawDialog"></image>
+    </view>
+    <view style="width: 720rpx;">
+      <image wx:if="{{drawData.thanks === false}}" style="width: 100%;" src="/assets/images/lottery/winning_header.png" mode="widthFix"></image>
+      <image wx:if="{{drawData.thanks === true}}" style="width: 100%;" src="/assets/images/lottery/loster_header.png" mode="widthFix"></image>
+    </view>
+    <view class="dialog">
+      <view class="dialog-content">
+        <block wx:if="{{drawData.thanks === true}}">
+          <view class="thanks-view" style="width: 100%;">
+            <image style="width: 100%;" mode="widthFix" src="/assets/images/lottery/loster.png"></image>
+            <view style="color: #6b6a6a;text-align: center;">再接再厉吧~</view>
+          </view>
+        </block>
+        <block wx:if="{{drawData.thanks === false}}">
+          <view class="prize-leavl">{{drawData.levelName}}</view>
+            <view>
+              <view class="prize-img-view">
+                <image mode="widthFix" src="{{drawData.imgUrl}}" alt=""/>
+              </view>
+              <view class="prize-name">{{drawData.title}}</view>
+            </view>
+        </block>
+      </view>
+      <view class="btn-row">
+        <block wx:if="{{drawData.thanks === true}}">
+          <view class="btn-confirm" bindtap="againDraw">再抽一次</view>
+        </block>
+        <block wx:if="{{drawData.thanks === false}}">
+          <view class="btn-confirm" bindtap="receivePrize">立即领取</view>
+          <view class="btn-again" bindtap="againDraw">再抽一次>></view>
+        </block>
+      </view>
+    </view>
+  </view>
+</van-overlay>

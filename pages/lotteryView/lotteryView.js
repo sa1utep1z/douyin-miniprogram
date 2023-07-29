@@ -38,57 +38,10 @@ Page({
     pageNumber: 0,
     drawList: [],
     loadingStatus: 0,
-  },
-  /**
-   * 次数不足回调
-   * @param e
-   */
-  onNotEnoughHandle(e) {
-    wx.showToast({
-      icon: 'none',
-      title: e.detail
-    })
-  },
-  /**
-   * 抽奖回调
-   */
-  onLuckDrawHandle() {
-    this.getLotteryPrizeId(this.data.lotteryActivityId);
-  },
-  /**
-   * 动画旋转完成回调
-   */
-  onLuckDrawFinishHandle() {
-    const datas = this.data.datas;
-    const data = datas.find((item) => {
-      return item.id === this.data.prizeId;
-    });
-    if (data.thanks === true) {
-      wx.showToast({
-        icon: 'none',
-        title: `${data.title}`
-      })
-    } else {
-      wx.showToast({
-        icon: 'none',
-        title: `恭喜你抽中 ${data.title}`
-      })
-    }
-    this.setData({
-      prizeId: '',
-      lotteryCount: this.data.lotteryCount !== -1 ? this.data.lotteryCount - 1 : -1
-    });
-  },
-  // openDrawRecord: function () {
-  //   wx.navigateTo({
-  //     url: '/pages/drawRecord/drawRecord?lotteryActivityId=' + this.data.lotteryActivityId,
-  //   })
-  // },
-  onTabHandle: function(e) {
-    const tabIndex = e.detail
-    if (tabIndex === 1) {
-      this.onRefresh();
-    }
+    // 中奖弹窗
+    drawDialogShow: true,
+    drawData: {}, // 抽中的奖品信息
+    drawDataValid: false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -154,6 +107,73 @@ Page({
         prizeId: ''
       })
     });
+  },
+  /**
+   * 次数不足回调
+   * @param e
+   */
+  onNotEnoughHandle(e) {
+    wx.showToast({
+      icon: 'none',
+      title: e.detail
+    })
+  },
+  /**
+   * 抽奖回调
+   */
+  onLuckDrawHandle() {
+    this.getLotteryPrizeId(this.data.lotteryActivityId);
+  },
+  /**
+   * 动画旋转完成回调
+   */
+  onLuckDrawFinishHandle() {
+    const datas = this.data.datas;
+    const data = datas.find((item) => {
+      return item.id === this.data.prizeId;
+    });
+    // if (data.thanks === true) {
+    //   wx.showToast({
+    //     icon: 'none',
+    //     title: `${data.title}`
+    //   })
+    // } else {
+    //   wx.showToast({
+    //     icon: 'none',
+    //     title: `恭喜你抽中 ${data.title}`
+    //   })
+    // }
+    this.setData({
+      prizeId: '',
+      lotteryCount: this.data.lotteryCount !== -1 ? this.data.lotteryCount - 1 : -1,
+      drawDialogShow: true,
+      drawData: data,
+      drawDataValid: Object.keys(data).length > 0
+    });
+  },
+  receivePrize: function () {
+    this.closeDrawDialog();
+    wx.showToast({
+      title: '领取成功',
+      icon: 'success',
+    });
+  },
+  againDraw: function () {
+    this.closeDrawDialog();
+    this.onLuckDrawHandle();
+  },
+  closeDrawDialog: function(e) {
+    this.setData({
+      drawDialogShow: false,
+      drawData: {},
+      drawDataValid: false
+    })
+  },
+  onTabHandle: function(e) {
+    const tabIndex = e.detail
+    if (tabIndex === 1) {
+      this.onRefresh();
+    }
   },
   // =================================抽奖记录====================================
   onLoadMore: async function (e) {
