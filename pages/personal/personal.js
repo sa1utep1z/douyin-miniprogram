@@ -71,6 +71,20 @@ Page({
     const { tag } = e.currentTarget.dataset;
     const { userInfo } = this.data;
     switch(tag) {
+      case 'contract':
+        wx.navigateTo({
+          url: '../../pages/contract/contract',
+        })
+        break;
+      case 'lottery':
+        if (!userInfo.validation) {
+          this.noVerifyRediect();
+        } else {
+          wx.navigateTo({
+            url: '/pages/lottery/lottery',
+          })
+        }
+        break;
       case 'registration':
         // wx.showToast({
         //   title: '系统升级中，请稍后提现，给您造成不便，请见谅！',
@@ -84,6 +98,11 @@ Page({
       case 'member':
         wx.navigateTo({
           url: '../../pages/member/member',
+        })
+        break;
+      case 'expandPoster':
+        wx.navigateTo({
+          url: '../../pages/expandPosterView/expandPosterView',
         })
         break;
       case 'resignApply':
@@ -283,10 +302,8 @@ Page({
     });
   },
   handleWithdraw: function (e) {
-    wx.showToast({
-      title: '系统升级中，请稍后提现，给您造成不便，请见谅！',
-      duration: 3000,
-      icon: 'none',
+    wx.navigateTo({
+      url: '../../pages/withdraw/withdraw',
     });
   },
   qrCodeScan: function(e) {
@@ -334,6 +351,11 @@ Page({
           case "roomBuilding":
             wx.navigateTo({
               url: '../../pages/dorm/stayApply/stayApply?scanBuilding=true&roomBuildingId=' + id,
+            });
+            break;
+          case "car":
+            wx.navigateTo({
+              url: '../../pages/scanCar/scanCar?carId=' + id,
             });
             break;
           default:

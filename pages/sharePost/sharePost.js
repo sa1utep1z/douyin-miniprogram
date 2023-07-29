@@ -10,8 +10,8 @@ Page({
   data: {
     postUrl: '',
     jobId: '',
-    posterKeyList: [],
-    posterKeyIndex: 0, // posterKeyList下标。默认查看第一张海报，可以在posterKeyList切换
+    posterIdList: [],
+    posterKeyIndex: 0, // posterIdList下标。默认查看第一张海报，可以在posterIdList切换
   },
 
   /**
@@ -28,6 +28,8 @@ Page({
           this.getSharePost(jobId);
         }
       }) 
+    } else {
+      this.getSharePost('');
     }
   },
 
@@ -73,15 +75,15 @@ Page({
 
   },
   posterTap: function() {
-    const { posterKeyList, posterKeyIndex, jobId } = this.data;
-    if (posterKeyList.length === 1) {
+    const { posterIdList, posterKeyIndex, jobId } = this.data;
+    if (posterIdList.length === 1) {
       wx.showToast({
         title: '只有该海报，无法切换',
         icon: 'none'
       })
       return;
     }
-    if (posterKeyIndex >= posterKeyList.length - 1) {
+    if (posterKeyIndex >= posterIdList.length - 1) {
       this.setData({posterKeyIndex: 0});
     } else {
       this.setData({posterKeyIndex: posterKeyIndex + 1});
@@ -110,7 +112,7 @@ Page({
   getPosterKeyList: async function() {
     return await fetchPosterKeyList().then((res) => {
       this.setData({
-        posterKeyList: res.data,
+        posterIdList: res.data,
       })
       return true;
     }).catch((err) => {
@@ -128,10 +130,8 @@ Page({
     })
     let api;
     if (jobId) {
-      const { posterKeyList, posterKeyIndex } = this.data;
-      console.info(posterKeyIndex)
-      console.info(posterKeyList)
-      api = `/client/member/invite/qrcode/${jobId}/${posterKeyList[posterKeyIndex]}`;
+      const { posterIdList, posterKeyIndex } = this.data;
+      api = `/client/member/invite/qrcode/${jobId}/${posterIdList[posterKeyIndex]}`;
     } else {
       api = '/client/member/invite/qrcode';
     }

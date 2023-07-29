@@ -1,0 +1,31 @@
+<wxs src="./contractItem.wxs" module="tool"></wxs>
+<wxs src="../resignApplyItem/resignApply.wxs" module="tool2"></wxs>
+
+<view class="list-item item-position">
+  <view class="{{tool.getShapeType(item.contractStatus)}}" />
+  <view class="item-position-text">{{tool.getShapeText(item.contractStatus)}}</view>
+  <view class="item-row">
+    <view class="job-title" style="font-size: 32rpx;font-weight: bolder;margin-bottom: 20rpx;">{{item.title}}</view>
+  </view>
+  <view class="item-row" style="margin-bottom: 10rpx;">
+    <view>
+      <view class="job-title-item" style="color: #828282;">{{item.companyName}}</view>
+      <view class="job-title-item" style="font-size: 24rpx;line-height: 28rpx;padding: 5rpx; margin-top: 8rpx; color:#fff; background-color: #74aae3;">{{tool2.getWorkType(item.typeOfWork)}}</view>
+    </view>
+    <view class="job-title" style="font-size: 32rpx; font-weight: bolder; color: #e64346;">{{item.salaryStart || ''}}-{{item.salaryEnd || ''}}元</view>
+  </view>
+  <view class="item-row">
+    <view class="job-title">报名日期：{{tool2.formatTime2(item.signUpTime)}}</view>
+  </view>
+  <view class="item-row">
+    <view class="job-title">入职日期：{{tool2.formatTime2(item.jobDate)}}</view>
+  </view>
+  <view class="item-row">
+    <view class="job-title">签署日期：{{tool2.formatTime2(item.signDate) || ''}}</view>
+  </view>
+  <van-divider hairline></van-divider>
+  <view style="display: flex;justify-content: flex-end;">
+    <view class="bottom-btn" catchtap="viewContract" data-contractid="{{item.contractId}}" data-url="{{item.viewUrl}}">查看合同</view>
+    <view class="bottom-btn" catchtap="signContract" wx:if="{{item.contractStatus === 'PENDING' && !item.signDate && !alSign}}" data-contractid="{{item.contractId}}">签署合同</view>
+  </view>
+</view>

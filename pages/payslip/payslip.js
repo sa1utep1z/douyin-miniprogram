@@ -54,6 +54,11 @@ Page({
     const res = await listPayslips(queryYear, queryMonth);
     if (res.code === 0) {
       const { userInfo, content } = res.data;
+      // 在view中无法联合控制，只能在js中过滤了
+      for (var i = 0; i < content.length; i++) {
+        const item = content[i].detailItems;
+        content[i].detailItems = item.filter(e => e.title.indexOf('个税') !== -1 || (e.value !== '0' && e.value !== '0.0' && e.value !== '0.00'))
+      }
       this.setData({
         userInfo,
         dataList: content,

@@ -1,5 +1,5 @@
 // pages/withdraw/withdraw.js
-import { withdraw } from '../../api/bankApi' 
+import { fetchWithdraw, submitWithdraw } from '../../api/bankApi' 
 
 Page({
 
@@ -7,19 +7,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    amt: 100,
     inputValue: null,
-    totalAmt: 0,
+    showTip: false,
+    withdrawInfo: {},
+    canSubmit: false,
+    submitMess: '提交申请',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    const { balance } = options;
-    this.setData({
-      totalAmt: balance,
-    })
+  onLoad: function () {
+    this.getWithdrawInfo();
+  },
+
+  getWithdrawInfo: async function() {
+    await fetchWithdraw().then((res) => {
+      if (res.code === 0) {
+        this.setData({
+          withdrawInfo: res.data,
+          showTip: true,
+          canSubmit: true,
+        });
+      } else if (res.code === 2) {
+        this.setData({
+          withdrawInfo: res.data,
+          showTip: true,
+          canSubmit: false,
+          submitMess: res.msg,
+        });
+      }
+    }).catch((err) => {
+      this.setData({
+        canSubmit: false,
+        submitMess: err.msg,
+      })
+    });
   },
 
   /**
@@ -93,23 +116,23 @@ Page({
    */
   handleWithdraw: async function (e) {
     const { inputValue } = this.data;
-    const param = {
-      'amount': inputValue,
-   }
-   try {
-    const res = await withdraw(param);
-    wx.showModal({
-      title: '温馨提示',
-      content: '您的提现申请已经提交，请以实际提现结果为准，可在余额明细列表查看提现状态',
-      showCancel: false,
-      confirmText: '知道啦',
-      success: (res) => {
-        wx.navigateBack({
-          delta: 0,
-        });
-      }
+    const amout = {
+      'key': 'withdrawAmount',
+      'value': inputValue,
+    }
+   const param = [amout];
+   await submitWithdraw(param);
+   this.setData({
+    canSubmit: false,
+  })
+  wx.showToast({
+    title: '提交成功',
+    icon:'none',
+  });
+  setTimeout(function() {
+    wx.navigateBack({
+      delta: 0,
     })
-   } catch (error) {
-   }
+  }, 2000);
   }
 })

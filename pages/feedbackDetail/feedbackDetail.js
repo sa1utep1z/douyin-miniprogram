@@ -1,5 +1,5 @@
 // pages/resignApplyDetail/resignApplyDetail.js
-import { uploadImage, submitSuggestion } from '../../api/commonApi'
+import { uploadImage, submitSuggestion, fetchMemberInfo } from '../../api/commonApi'
 import { companySelectDatas } from '../../api/selectData'
 Page({
 
@@ -31,13 +31,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.fetchCompanyList();
+    this.fetchCompanyList().then(e => {
+      if (e) {
+        this.getMemberInfo();
+      }
+    })
+  },
+  onTabClicked: function (e) {
+    const { index } = e.currentTarget.dataset;
+    this.setData({
+      typeIndex: index,
+    });
+   },
+  getMemberInfo: async function() {
+    const res = await fetchMemberInfo();
+    const { data } = res;
+    const { companyOptions } = this.data;
+    this.setData({
+      userName: data.userName, // 姓名
+      mobile: data.mobile,
+      companySelectedId: data.companyId,
+      companySelectedName: data.companyId ? companyOptions.find(e => data.companyId === e.value)?.label : '',
+    });
   },
   fetchCompanyList: async function() {
-    const companyListRes = await companySelectDatas();
-    this.setData({
-      companyOptions: companyListRes.data,
+    return await companySelectDatas().then((companyListRes) => {
+      this.setData({
+        companyOptions: companyListRes.data,
+      });
+      return true;
+    }).catch((err) => {
+      return false;
     });
+    
   },
   chooseImage: function(){
     wx.showActionSheet({

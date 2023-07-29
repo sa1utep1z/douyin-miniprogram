@@ -1,0 +1,87 @@
+/* pages/member/member.wxss */
+page{
+  width: 100%;
+  height: 100%;
+  background-color:#FFFFFF;
+}
+.member-container {
+  width: 90%;
+  margin: 0 auto;
+  background: #FFFFFF;
+}
+.top-winning-btn {
+  float: right;
+  height: 60rpx;
+  width: 120rpx;
+  line-height: 60rpx;
+  text-align: center;
+  background-color: #ec3b3b;
+  color: white;
+  font-size: 26rpx;
+  padding: 0 20rpx;
+  border-radius: 10rpx;
+}
+.scroll-view {
+  clear: both;
+  padding-top: 30rpx;
+  max-height: 1600rpx;
+}
+.member-view {
+  margin-bottom: 50rpx;
+}
+.img-veiw {
+  width: 686rpx;
+  height: 292rpx;
+  margin-bottom: 30rpx;
+}
+.activity-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10rpx;
+}
+.ac-bottom {
+  display: flex;
+  line-height: 60rpx;
+}
+.ac-b-l {
+  flex: 3;
+  text-align: left;
+  padding: 5rpx 5rpx 5rpx 10rpx;
+  font-weight: bolder;
+}
+.ac-b-r {
+  flex: 1;
+  display: flex; /* 设置父 div 为 Flexbox 容器 */
+  justify-content: center; /* 子元素在主轴上（水平方向）居中 */
+  align-items: center; /* 子元素在交叉轴上（垂直方向）居中 */
+}
+.ac-b-r-btn {
+  text-align: center;
+  background-color: #ec3b3b;
+  color: white;
+  font-size: 26rpx;
+  padding: 0 20rpx;
+  border-radius: 10rpx;
+}
+.status-loading {
+  width: 100%;
+  padding: 24rpx 30rpx;
+  text-align: center;
+}
+.status-finish {
+  width: 100% ;
+  display: block;
+  padding: 30rpx 30rpx;
+  box-sizing: border-box;
+}
+.status-finish .van-divider {
+  color: #999999 !important;
+  width: 100% !important;
+  font-size: 24rpx !important;
+  margin: 0 !important;
+}
+.van-divider-container {
+  width: 100%;
+  display: block;
+}

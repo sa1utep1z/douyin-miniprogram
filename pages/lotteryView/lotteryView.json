@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "lottery-turntable":"../../components/lottery_turntable/index",
+    "table-view": "../../components/tableView/index",
+    "tab": "../../components/tab/tab",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-overlay": "@vant/weapp/overlay/index"
+  },
+  "navigationBarTitleText": "抽奖"
+}

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "ContractItem": "../../components/contractItem/contractItem",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "navigationBarTitleText": "合同列表"
+}

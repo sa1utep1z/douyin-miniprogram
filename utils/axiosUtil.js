@@ -2,7 +2,6 @@ import urlConfig from './urlConfig';
 import eventBus from './bus';
 const authUrl = urlConfig().authUrl;
 const baseUrl = urlConfig().baseUrl;
-const traceUrl = urlConfig().traceUrl;
 
 const initHeader = {
   'content-type': 'application/json',
@@ -71,7 +70,7 @@ class Ajax { // 创建一个类，相当于是创建一个构造函数
         success: (response) => {
           wx.hideLoading(); // 隐藏loading
           const httpResult = formatResponse(response);
-          if (httpResult && httpResult.code === 0) {
+          if (httpResult && httpResult.code !== 1) {
             resolve(httpResult);
           }
           if (httpResult && httpResult.code === 1) {

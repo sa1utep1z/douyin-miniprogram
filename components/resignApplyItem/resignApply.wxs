@@ -1,4 +1,7 @@
 function formatTime(time)  {
+  if (!time) {
+    return '';
+  }
   var date = getDate(time);
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -9,6 +12,9 @@ function formatTime(time)  {
   return  year+'年'+formatNumber(month)+'月'+formatNumber(day)+'日'+'  '+[hour, minute, second].map(formatNumber).join(':');
 }
 function formatTime2(time)  {
+  if (!time) {
+    return '';
+  }
   var date = getDate(time);
   var year = date.getFullYear()
   var month = date.getMonth() + 1

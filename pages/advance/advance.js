@@ -10,8 +10,8 @@ Page({
     applyStatusList: [
       { title: '全部', value: '', subKey: 'allNums'},
       { title: '审核中', value: 'PENDING', subKey: 'pendingNums'},
-      { title: '拒绝', value: 'FAIL', subKey: 'passNums'},
-      { title: '通过', value: 'PASS', subKey: 'failNums'},
+      { title: '拒绝', value: 'FAIL', subKey: 'failNums'},
+      { title: '通过', value: 'PASS', subKey: 'passNums'},
     ],
     pageSize: 15,
     pageNumber: 0,

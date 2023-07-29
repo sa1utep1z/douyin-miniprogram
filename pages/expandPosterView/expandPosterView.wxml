@@ -1,0 +1,20 @@
+<!--pages/expandPosterView/expandPosterView.wxml-->
+<view class="poster-button-container">
+  <view class="poster-button-view {{listSearchType===index?'poster-button-view-active':''}}" wx:for="{{posterTypes}}" wx:key="index" data-index="{{index}}" bindtap="onTabClicked">{{item.title}}</view>
+</view>
+<scroll-view show-scrollbar="{{false}}" scroll-y="{{true}}" lower-threshold="50" bindscrolltolower="onLoadMore" class="scroll-view" >
+  <view class="img-view" wx:for="{{imgList}}" wx:key="{{item}}" bindtap="posterImgClick" data-bean="{{item}}">
+    <image class="poster-img" src="{{item.url}}" alt=""/>
+    <view class="poster-name">{{item.name}}</view>
+  </view>
+  <block wx:if="{{loadingStatus === 1}}">
+    <view class="status-loading" id="status-loading">
+      <van-loading type="spinner" size="24rpx" color="#999999" >加载中...</van-loading>
+    </view>
+  </block >
+  <block wx:if="{{loadingStatus === 2}}">
+    <view class="status-finish">
+        <van-divider hairline  contentPosition="center" >{{memberList.length===0?'暂无记录':'暂无更多记录'}}</van-divider>
+    </view>
+  </block>
+</scroll-view>

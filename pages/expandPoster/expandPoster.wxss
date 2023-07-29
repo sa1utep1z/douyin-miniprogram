@@ -1,0 +1,46 @@
+/* pages/sharePost/sharePost.wxss */
+
+page{
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.post-img {
+  width: 580rpx;
+  margin-top: 50rpx;
+  border-radius: 10rpx;
+}
+.btn-download{
+  width: 100% !important;
+  height: 90rpx !important;
+  border-radius: 45rpx;
+  border: 1rpx solid #F1F1F1;
+  margin-top: 60rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  text-align: center;
+  color: white !important;
+  background-color: #018EFF !important;
+  line-height: 90rpx;
+}
+
+.btn-tap{
+  height: 90rpx !important;
+  border-radius: 45rpx;
+  border: 1rpx solid #F1F1F1;
+  margin-top: 60rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  text-align: center;
+  color: white !important;
+  background-color: #018EFF !important;
+  line-height: 90rpx;
+}

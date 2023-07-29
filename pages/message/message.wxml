@@ -1,8 +1,18 @@
 <!--pages/message/message.wxml-->
 <wxs module="tools" src="../../utils/util.wxs"></wxs>
 <view class="container">
+  <view style= "height: {{statusNavBarHeight}}px;" class="navigator">
+    <view  style="height: {{height}}px; margin-top: {{top}}px; width: 100%;">
+      <view style="width: 50%; float: left;text-align: right;">
+        <text style="padding-right: 15rpx; display: inline-block;height: {{height}}px; line-height: {{height}}px;">消息中心</text>
+      </view>
+      <view style="width: 50%; float: left;text-align: left;">
+        <image mode="heightFix" bindtap="cleanUnRead" show-menu-by-longpress="true" src="/assets/images/public/clean.png" style="height: {{height * 0.8}}px; margin-top: {{height * 0.1}}px;" />
+      </view>
+    </view>
+  </view>
   <block wx:for="{{ messageTypeList }}" wx:key="index">
-    <view wx:if="{{item.code === 'ANNOUNCEMENT'}}" class="message-row" bindtap="handelSystemMessage" hover-class="common-hover-class" data-bean="{{item}}">
+    <view style="margin-top: {{statusNavBarHeight}}px;" wx:if="{{item.code === 'ANNOUNCEMENT'}}" class="message-row" bindtap="handelSystemMessage" hover-class="common-hover-class" data-bean="{{item}}">
     <image class="message-item-image" src="../../assets/images/message/icon_message_system2.png"/>
     <view class="message-inner-column">
       <view class="message-row-between">

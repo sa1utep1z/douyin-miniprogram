@@ -2,14 +2,10 @@
 <wxs src="../../utils/util.wxs" module="tool"></wxs>
 <view class="container">
   <view class="auth-display">
-    <view class="row">
+    <view class="row" style="position: relative;">
       <view><span class="requiredColor">*</span><text>反馈类型</text></view>
-      <view>
-        <picker mode="selector" value="{{typeIndex}}" range="{{typeOptions}}" range-key="title" bindchange="bindPickerType">
-          <view class="picker" style="color: #4fa1f4;">
-            {{typeIndex === '' ? '请选择' : typeOptions[typeIndex].title}}
-          </view>
-        </picker>
+      <view style="flex: 1;">
+        <view class="poster-button-view {{typeIndex===index?'poster-button-view-active':''}}" wx:for="{{typeOptions}}" wx:key="index" data-index="{{index}}" bindtap="onTabClicked">{{item.title}}</view>
       </view>
     </view>
     <van-divider hairline />
@@ -38,7 +34,7 @@
     <view class="row">
       <view><span class="requiredColor">*</span><text>姓名</text></view>
       <view style="width: 220rpx">
-        <input bindinput="bindUserName" placeholder="请输入姓名"/>
+        <input bindinput="bindUserName" value="{{userName}}" placeholder="请输入姓名"/>
       </view>
     </view>
     <van-divider hairline />
@@ -55,7 +51,7 @@
     <view class="row">
       <view><span class="requiredColor">*</span><text>联系方式</text></view>
       <view style="width: 220rpx">
-        <input maxlength="11" type="number" bindinput="bindMobile" placeholder="请输入联系方式"/>
+        <input maxlength="11" type="number" value="{{mobile}}" bindinput="bindMobile" placeholder="请输入联系方式"/>
       </view>
     </view>
     <view class="feedback-sub">

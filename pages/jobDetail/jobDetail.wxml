@@ -24,7 +24,7 @@
     </view>
   </view>
   <view class="manager-view" wx:if="{{detailBean.recruiterInfo}}" >
-    <image class="manager-avatar" src="{{detailBean.recruiterInfo.avatar === null?'../../assets/images/public/icon_default_head.png' : detailBean.recruiterInfo.avatar}}"></image>
+    <image class="manager-avatar" src="../../assets/images/public/header.png"></image>
     <view class="manager-column">
       <view class="manager-name">{{detailBean.recruiterInfo.name}}</view>
       <view class="manager-company">众鼎直聘</view>
@@ -60,7 +60,7 @@
       <view class="detail-item-name">{{item.name}}</view>
       <view class="detail-item-value"><rich-text nodes="{{item.value || '/'}}" space="nbsp" /></view>
     </view>
-    <view class="detail-item">
+    <!-- <view class="detail-item">
       <view class="detail-item-name">行程码</view>
       <view class="detail-item-value"><rich-text nodes="{{detailBean.itineraryCode || '/'}}" space="nbsp" /></view>
     </view>
@@ -71,7 +71,7 @@
     <view class="detail-item">
       <view class="detail-item-name">疫苗接种</view>
       <view class="detail-item-value"><rich-text nodes="{{detailBean.vaccination || '/'}}" space="nbsp" /></view>
-    </view>
+    </view> -->
   </view>
   <view class="detail-block">
     <view class="detail-item-request">企业简介</view>
