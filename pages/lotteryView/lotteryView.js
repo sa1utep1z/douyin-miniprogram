@@ -39,7 +39,7 @@ Page({
     drawList: [],
     loadingStatus: 0,
     // 中奖弹窗
-    drawDialogShow: true,
+    drawDialogShow: false,
     drawData: {}, // 抽中的奖品信息
     drawDataValid: false,
   },
@@ -132,17 +132,6 @@ Page({
     const data = datas.find((item) => {
       return item.id === this.data.prizeId;
     });
-    // if (data.thanks === true) {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: `${data.title}`
-    //   })
-    // } else {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: `恭喜你抽中 ${data.title}`
-    //   })
-    // }
     this.setData({
       prizeId: '',
       lotteryCount: this.data.lotteryCount !== -1 ? this.data.lotteryCount - 1 : -1,

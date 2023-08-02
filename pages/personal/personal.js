@@ -309,19 +309,13 @@ Page({
   qrCodeScan: function(e) {
     wx.scanCode({
       success(res) {
-        console.info(res);
         const { scanType, result } = res;
-        const end = false;
         if (scanType !== 'QR_CODE') {
-          end = true;
-          wx.showToast({
-            title: '不支持该二维码',
-            duration: 2500,
-            icon: 'none',
-          });
-          // setTimeout(function() {
-            
-          // }, 2000)
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '不支持该二维码'
+          })
           return;
         }
         const arr = result.split('&');
@@ -334,11 +328,11 @@ Page({
         })
         const { type, id } = obj;
         if (!result || !type || !id) {
-          wx.showToast({
-            title: '二维码信息缺失',
-            duration: 3000,
-            icon: 'none',
-          });
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '二维码信息缺失'
+          })
           return;
         }
         // 根绝类型做页面跳转
@@ -359,11 +353,11 @@ Page({
             });
             break;
           default:
-            wx.showToast({
-              title: '类型错误',
-              duration: 3000,
-              icon: 'none',
-            });
+            wx.showModal({
+              title: '提示',
+              showCancel: false,
+              content: '类型错误'
+            })
             break;
         }
       },
