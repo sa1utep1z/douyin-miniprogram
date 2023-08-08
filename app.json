@@ -51,7 +51,8 @@
     "pages/contract/contract",
     "pages/lottery/lottery",
     "pages/lotteryView/lotteryView",
-    "pages/winningRecord/winningRecord"
+    "pages/winningRecord/winningRecord",
+    "pages/entryData/entryData"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

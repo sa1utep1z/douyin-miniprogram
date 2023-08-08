@@ -71,6 +71,11 @@ Page({
     const { tag } = e.currentTarget.dataset;
     const { userInfo } = this.data;
     switch(tag) {
+      case 'entryData':
+        wx.navigateTo({
+          url: '/pages/entryData/entryData',
+        })
+      break;
       case 'contract':
         wx.navigateTo({
           url: '../../pages/contract/contract',

@@ -35,6 +35,10 @@
   </view>
   <view class="block-action">
     <view class="action-title">常用功能</view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="entryData">
+      <image class="action-icon" src="../../assets/images/personal/entryData.png"/>
+      <view class="action-lable">完善资料</view>
+    </view>
     <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="auth">
       <image class="action-icon" src="../../assets/images/personal/icon_action_auth2.png"/>
       <view class="action-lable">实名认证</view>
