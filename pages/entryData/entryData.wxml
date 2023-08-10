@@ -45,7 +45,7 @@
   </van-divider>
   <van-field model:value="{{ qqNumber }}"  clearable label="QQ号" />
   <van-field title-width="200rpx" model:value="{{ urgentName }}" required clearable label="紧急联系人姓名" />
-  <van-field title-width="200rpx" model:value="{{ urgentMobile }}" required clearable label="紧急联系人电话" />
+  <van-field title-width="200rpx" model:value="{{ urgentMobile }}" type="number" maxlength="11" required clearable label="紧急联系人电话" />
   <view style="font-size:14px;color: #646566;padding-left: 10px;margin: 10px 0;display: flex;">
     <view style="max-width:6.2em;min-width:6.2em;margin-right: 12px;"><text style="color: red;">*</text>与其关系</view>
     <view>

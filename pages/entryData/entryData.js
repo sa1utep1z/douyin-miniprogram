@@ -76,19 +76,27 @@ Page({
       urgentRelation,
       otherEntryMaterials: entryImgs.map(e => ({fileKey: e.ossKey}))
     };
-    const res = await submitEntryDataInfo(params);
-    if (res.code === 0) {
+    await submitEntryDataInfo(params).then((res) => {
+      if (res.code === 0) {
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 3000
+        });
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 0,
+          });
+        }, 2500);
+      }
+    }).catch((err) => {
       wx.showToast({
-        title: '提交成功',
-        icon: 'success',
+        title: err.msg,
+        icon: 'none',
         duration: 3000
       });
-      setTimeout(() => {
-        wx.navigateBack({
-          delta: 0,
-        });
-      }, 2500);
-    }
+      this.setData({submitDisabled: false})
+    });
   },
   afterRead: async function(event) {
     const { file } = event.detail;
