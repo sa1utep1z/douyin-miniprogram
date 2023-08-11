@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index"
+    "van-divider": "@vant/weapp/divider/index",
+    "van-stepper": "@vant/weapp/stepper/index"
   },
   "navigationBarTitleText": "预支薪资"
 }

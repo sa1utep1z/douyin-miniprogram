@@ -115,7 +115,6 @@ Page({
     this.setData({ entryImgs });
   },
   uploadImg: async function(data){
-    const { entryImgs }=this.data;
     const res = await uploadImage(data);
     if (res.code == 0) { 
       imageSubList.push(res.data.fileKey)

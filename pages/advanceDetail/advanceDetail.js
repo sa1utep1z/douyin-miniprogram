@@ -9,6 +9,7 @@ Page({
     submitType: 'ADVANCE',
     pageBean: {},
     formFields: [],
+    advanceAmount: 100,
     amountIndex: 0,
     amountOptions: [
       {"title": "100元", "value": "100"},
@@ -41,6 +42,9 @@ Page({
    */
   onShow: function () {
     
+  },
+  onAmountChange: function(e) {
+    this.setData({advanceAmount: e.detail})
   },
   clickList: function(e) {
     wx.navigateTo({
@@ -80,7 +84,7 @@ Page({
     });
   },
   submitData: async function(e) {
-    const { pageBean, formFields, amountIndex, amountOptions, submitType } = this.data;
+    const { pageBean, formFields, amountIndex, amountOptions, submitType, advanceAmount } = this.data;
     if (formFields.length === 0) {
       wx.showToast({
         title: '不符合提交条件',
@@ -91,7 +95,7 @@ Page({
     }
     const paramsObj = {
       ...pageBean,
-      advanceAmount: amountOptions[amountIndex].value,
+      advanceAmount
     };
     const submitList = formFields.map((e) => {
       let value = e.value;
@@ -104,19 +108,26 @@ Page({
       };
       return res;
     })
-    await submitApprove(submitType, submitList); // JSON.stringify(params)
-    this.setData({
-      canSubmit: false,
-    })
-    wx.showToast({
-      title: '提交成功',
-      icon:'none',
-    });
-    setTimeout(function() {
-      wx.navigateTo({
-        url: '../../pages/advance/advance',
+    await submitApprove(submitType, submitList, false).then((res) => {
+      this.setData({
+        canSubmit: false,
+      })
+      wx.showToast({
+        title: '提交成功',
+        icon:'none',
       });
-    }, 2000);
+      setTimeout(function() {
+        wx.navigateTo({
+          url: '../../pages/advance/advance',
+        });
+      }, 2000);
+    }).catch(err => {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: err.msg
+      })
+    })
   },
 
   /**

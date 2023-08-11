@@ -126,7 +126,7 @@ Page({
       };
       return res;
     })
-    await submitApprove(submitType, submitList); // JSON.stringify(params)
+    await submitApprove(submitType, submitList, true); // JSON.stringify(params)
     wx.showToast({
       title: '报备成功',
       icon:'none',
