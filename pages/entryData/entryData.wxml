@@ -28,8 +28,8 @@
   <van-row>
     <van-col span="20">
       <view class="authMod">
-        <van-field value="{{ entryInfo.bankName }}" disabled required label="银行名称" />
-        <van-field value="{{ entryInfo.bankAccount }}" disabled required label="银行卡号" />
+        <van-field value="{{ entryInfo.bankName }}" disabled label="银行名称" />
+        <van-field value="{{ entryInfo.bankAccount }}" disabled label="银行卡号" />
       </view>
     </van-col>
     <van-col span="4">
@@ -44,10 +44,10 @@
     其他
   </van-divider>
   <van-field model:value="{{ qqNumber }}"  clearable label="QQ号" />
-  <van-field title-width="200rpx" model:value="{{ urgentName }}" required clearable label="紧急联系人姓名" />
-  <van-field title-width="200rpx" model:value="{{ urgentMobile }}" type="number" maxlength="11" required clearable label="紧急联系人电话" />
-  <view style="font-size:14px;color: #646566;padding-left: 10px;margin: 10px 0;display: flex;">
-    <view style="max-width:6.2em;min-width:6.2em;margin-right: 12px;"><text style="color: red;">*</text>与其关系</view>
+  <van-field title-width="200rpx" model:value="{{ urgentName }}" clearable label="紧急联系人姓名" />
+  <van-field title-width="200rpx" model:value="{{ urgentMobile }}" type="number" maxlength="11" clearable label="紧急联系人电话" />
+  <view style="font-size:14px;color: #646566;padding-left: 32rpx;margin: 10px 0;display: flex;">
+    <view style="width:200rpx;margin-right: 12px;">与其关系</view>
     <view>
       <van-radio-group model:value="{{ urgentRelation }}" direction="horizontal">
         <van-radio name="FRIEND">朋友</van-radio>
@@ -62,7 +62,7 @@
   <van-divider contentPosition="left" customStyle="margin: 30rpx 0;font-size: 30rpx;color:#6eaaff;border-color:#6eaaff;">
     入职资料照片
   </van-divider>
-  <van-uploader file-list="{{ entryImgs }}" bind:after-read="afterRead" bind:delete="deleteImg" />
+  <van-uploader multiple file-list="{{ entryImgs }}" bind:after-read="afterRead" bind:delete="deleteImg" />
   <view style="margin: 30rpx 0;"><van-button disabled="{{submitDisabled}}" round type="info" block bind:click="submitData">提交</van-button></view>
 </view>
 

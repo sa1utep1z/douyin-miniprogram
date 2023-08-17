@@ -60,14 +60,6 @@ Page({
       });
       return;
     }
-    if (!bankName || !bankAccount) {
-      wx.showToast({
-        title: '银行卡未完整，请点击去填写',
-        icon: 'none',
-        duration: 3000
-      });
-      return;
-    }
     this.setData({submitDisabled: true})
     const params = {
       qqNumber,
@@ -98,13 +90,15 @@ Page({
       this.setData({submitDisabled: false})
     });
   },
-  afterRead: async function(event) {
+  afterRead: function(event) {
     const { file } = event.detail;
-    // 上传
-    const res = await uploadImage(file.url);
+    file.forEach(f => this.uploadImgFile(f))
+  },
+  uploadImgFile: async function(f) {
+    const res = await uploadImage(f.url);
     if (res.code == 0) {
       const { entryImgs = [] } = this.data;
-      entryImgs.push({ ...file, ossKey: res.data.fileKey});
+      entryImgs.push({ ...f, ossKey: res.data.fileKey});
       this.setData({ entryImgs });
     }
   },
