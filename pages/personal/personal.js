@@ -358,9 +358,9 @@ Page({
             });
             break;
           case "giftActivity":
-            wx.navigateTo({
-              url: '/pages/giftScanReceive/giftScanReceive?giftActivityId=' + id,
-            });
+            // wx.navigateTo({
+            //   url: '/pages/giftScanReceive/giftScanReceive?giftActivityId=' + id,
+            // });
             break;
           default:
             wx.showModal({
