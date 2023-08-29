@@ -357,6 +357,11 @@ Page({
               url: '../../pages/scanCar/scanCar?carId=' + id,
             });
             break;
+          case "giftActivity":
+            wx.navigateTo({
+              url: '/pages/giftScanReceive/giftScanReceive?giftActivityId=' + id,
+            });
+            break;
           default:
             wx.showModal({
               title: '提示',
