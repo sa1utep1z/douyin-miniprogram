@@ -8,6 +8,6 @@
 <block wx:if="{{allowReceive === false}}">
   <view class="receiveV">
     <view class="imgV"><image mode="widthFix" src="/assets/images/public/fail.png"></image></view>
-    <view class="fontV">不符合领取条件</view>
+    <view class="fontV">不符合领取资格，请联系工作人员核实！</view>
   </view>
 </block>
