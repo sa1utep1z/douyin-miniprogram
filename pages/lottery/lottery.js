@@ -1,5 +1,6 @@
 // pages/lottery/lottery.js
 import { listLotteryActivity } from '../../api/opshub'
+import { fetchValidation } from '../../utils/validation'
 Page({
 
   /**
@@ -20,7 +21,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.onRefresh();
+    fetchValidation().then(r => {
+      if (r) {
+        this.onRefresh();
+      }
+    })
   },
   activityClick: function(e) {
     const {id} = e.currentTarget.dataset;

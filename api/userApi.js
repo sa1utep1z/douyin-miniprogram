@@ -131,3 +131,7 @@ export const updateNickName = (data) => {
  export const fetchBankUserName = () => {
   return ajax.request('/client/member/bankUserName', null, 'GET');
  }
+// 会员是否实名
+ export const checkValidation = () => {
+  return ajax.request('/client/member/validation', null, 'GET', true, false);
+ }
