@@ -46,18 +46,19 @@ Page({
     if (scene) {
       this.parseScene(scene);
     }
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res)=> {
-        wx.setStorageSync('latitude', res.latitude);
-        wx.setStorageSync('longitude', res.longitude);
-        this.getData();
-      },
-      fail:(erro)=>{
-       this.getData();
-        console.log(erro);
-      },
-    });
+    this.getData();
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success: (res)=> {
+    //     wx.setStorageSync('latitude', res.latitude);
+    //     wx.setStorageSync('longitude', res.longitude);
+    //     this.getData();
+    //   },
+    //   fail:(erro)=>{
+    //    this.getData();
+    //     console.log(erro);
+    //   },
+    // });
     // 获取购物车控件适配参数
     var that =this;
     wx.getSystemInfo({
