@@ -12,6 +12,11 @@ export const fetchSignUrl = (data) => {
 export const fetchViewUrl = (contractId) => {
   return ajax.request(`/client/contract/view/${contractId}`, null, 'GET');
  }
+
+ // 获取合同查看url
+export const fetchDownUrl = (contractId) => {
+  return ajax.request(`/client/contract/down/${contractId}`, null, 'GET');
+ }
   // 获取认证url
 export const fetchAuthUrl = () => {
   return ajax.request('/client/user/authUrl', null, 'GET');
