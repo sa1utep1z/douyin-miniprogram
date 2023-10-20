@@ -276,7 +276,7 @@ Page({
     })
     return  {
       imageUrl: detailBean.companyImages[0],
-      title: `${detailBean.jobName},好岗位，一起来`,
+      title: `${detailBean.jobName},众鼎日薪 天天发薪`,
       path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
     }
   },
