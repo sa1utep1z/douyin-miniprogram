@@ -16,7 +16,10 @@ Page({
       isHide: false,
       workerType: '',
       workEvnInfo: [],
-      employRequired: []
+      employRequired: [],
+      // 分享朋友圈信息。单独提取这个出来的目的：因为小程序分享朋友圈不支持异步，所以只能进入详情的时候直接生成分享信息
+      ownShareSceneId: '',
+      ownMemberId: ''
   },
 
   /**
@@ -46,6 +49,21 @@ Page({
       this.getLocation();
     }
     // this.getData();
+    // 设置分享朋友圈 ----- 开始
+    const token = wx.getStorageSync('token');
+    if (token) {
+      this.getShareUrlParam();
+    }
+    // 设置分享朋友圈 ----- 结束
+  },
+  getShareUrlParam: async function() {
+    // 因为现在经纬度不用了
+    const shareRes = await fetchShareUrlParam({});
+    const {shareSceneId, memberId} = shareRes.data;
+    this.setData({
+      ownShareSceneId: shareSceneId,
+      ownMemberId: memberId
+    })
   },
   getData: async function () {
 
@@ -218,7 +236,8 @@ Page({
       wx.showToast({
         title: res.msg,
         icon: 'error',
-      }); 
+      });
+      return;
     }
     wx.showToast({
       title: '报名成功',
@@ -253,32 +272,6 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: async function () {
-    const longitude = wx.getStorageSync('longitude');
-    const latitude = wx.getStorageSync('latitude');
-    let gps = null;
-    if (longitude && latitude){
-       gps = {
-        longitude,
-        latitude
-      }
-    }
-    const res = await fetchShareUrlParam(gps);
-    const {shareSceneId, memberId} = res.data;
-    const { jobId, detailBean } = this.data;
-    this.setData({
-      showShareDialog: false,
-    })
-    return  {
-      imageUrl: detailBean.companyImages[0],
-      title: `${detailBean.jobName},众鼎日薪 天天发薪`,
-      path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
-    }
   },
   
   onShare: function (e) {
@@ -315,8 +308,6 @@ Page({
       if (jobId) {
         wx.setStorageSync('jobId', jobId);
       }
-      console.log("获取到海报参数");
-      console.log("res.data.jobId");
       this.setData({
         jobId: res.data.jobId,
       });
@@ -334,5 +325,49 @@ Page({
       wx.makePhoneCall({
         phoneNumber: detailBean.recruiterInfo.mobile,
       });
-   }
+   },
+
+   /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: async function () {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+    const longitude = wx.getStorageSync('longitude');
+    const latitude = wx.getStorageSync('latitude');
+    let gps = null;
+    if (longitude && latitude){
+       gps = {
+        longitude,
+        latitude
+      }
+    }
+    const res = await fetchShareUrlParam(gps);
+    const {shareSceneId, memberId} = res.data;
+    const { jobId, detailBean } = this.data;
+    this.setData({
+      showShareDialog: false,
+    })
+    return  {
+      imageUrl: detailBean.companyImages[0],
+      title: `${detailBean.jobName},众鼎日薪 天天发薪`,
+      path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
+    }
+  },
+
+   /**
+   * 用户点击朋友圈分享
+   */
+  onShareTimeline: function (e) {
+    const { ownShareSceneId, ownMemberId, jobId, detailBean } = this.data;
+    if (ownShareSceneId && ownMemberId) {
+      return {
+        imageUrl: detailBean.companyImages[0],
+        title: `${detailBean.jobName},众鼎日薪 天天发薪`,
+        query: `jobId=${jobId}&recommendId=${ownMemberId}&shareSceneId=${ownShareSceneId}`
+      };
+    }
+  },
 })

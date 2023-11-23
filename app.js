@@ -63,6 +63,9 @@ App({
   checkNewVersion: function() {
     if(wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager();
+      if (!updateManager) {
+        return;
+      }
       updateManager.onCheckForUpdate((res) => {
         if (res.hasUpdate) {
           updateManager.onUpdateReady(() => {

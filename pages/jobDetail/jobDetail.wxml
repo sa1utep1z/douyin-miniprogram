@@ -40,7 +40,8 @@
     </view>
     <view  class="detail-item">
       <view class="detail-item-name">薪资详情</view>
-      <view class="detail-item-value"><rich-text nodes="{{detailBean.salaryDetails || '/'}}" space="nbsp" /></view>
+      <text class="detail-item-value">{{detailBean.salaryDetails || '/'}}</text>
+      <!-- <view class="detail-item-value"><rich-text nodes="{{detailBean.salaryDetails || '/'}}" space="nbsp" /></view> -->
     </view>
   </view>
   <view class="detail-block">
