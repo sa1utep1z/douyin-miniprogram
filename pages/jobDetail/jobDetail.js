@@ -14,7 +14,7 @@ Page({
       showShareDialog: false,
       detailBean: null,
       isHide: false,
-      workerType: '',
+      // workerType: '',
       workEvnInfo: [],
       employRequired: [],
       // 分享朋友圈信息。单独提取这个出来的目的：因为小程序分享朋友圈不支持异步，所以只能进入详情的时候直接生成分享信息
@@ -84,7 +84,6 @@ Page({
     const resData = res.data;
     this.setData({
       detailBean: resData,
-      workerType: parseWorkerType(resData),
       workEvnInfo: parseWorkEvnConstants(resData),
       employRequired: parseEmployRequiredConstants(resData)
     });
