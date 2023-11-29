@@ -13,6 +13,8 @@ Page({
       jobId: '',
       showShareDialog: false,
       detailBean: null,
+      recruiterName: '',
+      isShareTimeline: false,
       isHide: false,
       // workerType: '',
       workEvnInfo: [],
@@ -26,7 +28,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // recruiterName是由分享朋友圈带过来的
     const { jobId, recommendId, shareSceneId } = options;
+    const { query, scene } = wx.getLaunchOptionsSync();
     if (recommendId) {
       wx.setStorageSync('recommendId', recommendId);
       wx.setStorageSync('isShare', true);
@@ -39,6 +43,8 @@ Page({
     if(jobId){
       this.setData({
         jobId,
+        recruiterName: query?.recruiterName,
+        isShareTimeline: scene === 1154
       });
     }
     // 这个是分享海报携带的分享参数id
@@ -365,7 +371,7 @@ Page({
       return {
         imageUrl: detailBean.companyImages[0],
         title: `${detailBean.jobName},众鼎日薪 天天发薪`,
-        query: `jobId=${jobId}&recommendId=${ownMemberId}&shareSceneId=${ownShareSceneId}`
+        query: `jobId=${jobId}&recommendId=${ownMemberId}&shareSceneId=${ownShareSceneId}&recruiterName=${detailBean?.recruiterInfo?.name}`
       };
     }
   },
