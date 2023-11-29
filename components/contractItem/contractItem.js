@@ -1,4 +1,4 @@
-import { fetchSignUrl, fetchAuthUrl, fetchViewUrl } from '../../api/contract'
+import { fetchSignUrl, fetchAuthUrl, fetchViewUrl, fetchDownUrl } from '../../api/contract'
 
 Component({
   /**
@@ -29,18 +29,21 @@ Component({
         });
       }
     },
-    viewContract2: function(e) {
-      const {url} = e.currentTarget.dataset;
-      if (url) {
+    downloadContract: async function(e) {
+      const {contractid} = e.currentTarget.dataset;
+      if (contractid) {
+        const downRes = await fetchDownUrl(contractid)
+        wx.showLoading({
+          title: '下载中...',
+          mask: true,
+        })
         wx.downloadFile({
-          url: url,
+          url: downRes.data,
           success: function (res) {
+            wx.hideLoading(); // 隐藏loading
             wx.openDocument({
               showMenu: true,
-              filePath: res.tempFilePath,
-              fail: function () {
-                console.log('打开文档失败')
-              }
+              filePath: res.tempFilePath
             })
           }
         })

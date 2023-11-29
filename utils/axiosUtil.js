@@ -57,7 +57,7 @@ function formatResponse(response) {
 let isRefreshing = false; // 是否正在刷新token
 
 class Ajax { // 创建一个类，相当于是创建一个构造函数
-  request(url, data,method='GET',loading=true) { // 带Loading状态的请求
+  request(url, data,method='GET',loading=true, toast=true) { // 带Loading状态的请求
     ajaxInterceptorsRequest(loading);
     return new Promise((resolve, reject) => { // 返回一个Promise对象
       wx.request({ // 配合微信的wx.request方法
@@ -74,7 +74,9 @@ class Ajax { // 创建一个类，相当于是创建一个构造函数
             resolve(httpResult);
           }
           if (httpResult && httpResult.code === 1) {
-            _showToast(httpResult.msg);
+            if (toast) {
+              _showToast(httpResult.msg);
+            }
             reject(httpResult);
           }
           if (response.statusCode === 401 || response.statusCode === 403 || response.statusCode === 409) {
@@ -90,7 +92,9 @@ class Ajax { // 创建一个类，相当于是创建一个构造函数
                   eventBus.publish('refreshToken'); // 发布
                 }
               }).catch(err => {
-                _showToast(err.msg);
+                if (toast) {
+                  _showToast(err.msg);
+                }
               }).finally(() => {
                 isRefreshing = false;
                 eventBus.unSubscribe('refreshToken'); // 取消订阅

@@ -13,17 +13,24 @@ Page({
       jobId: '',
       showShareDialog: false,
       detailBean: null,
+      recruiterName: '',
+      isShareTimeline: false,
       isHide: false,
-      workerType: '',
+      // workerType: '',
       workEvnInfo: [],
-      employRequired: []
+      employRequired: [],
+      // 分享朋友圈信息。单独提取这个出来的目的：因为小程序分享朋友圈不支持异步，所以只能进入详情的时候直接生成分享信息
+      ownShareSceneId: '',
+      ownMemberId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // recruiterName是由分享朋友圈带过来的
     const { jobId, recommendId, shareSceneId } = options;
+    const { query, scene } = wx.getLaunchOptionsSync();
     if (recommendId) {
       wx.setStorageSync('recommendId', recommendId);
       wx.setStorageSync('isShare', true);
@@ -36,6 +43,8 @@ Page({
     if(jobId){
       this.setData({
         jobId,
+        recruiterName: query?.recruiterName,
+        isShareTimeline: scene === 1154
       });
     }
     // 这个是分享海报携带的分享参数id
@@ -46,6 +55,21 @@ Page({
       this.getLocation();
     }
     // this.getData();
+    // 设置分享朋友圈 ----- 开始
+    const token = wx.getStorageSync('token');
+    if (token) {
+      this.getShareUrlParam();
+    }
+    // 设置分享朋友圈 ----- 结束
+  },
+  getShareUrlParam: async function() {
+    // 因为现在经纬度不用了
+    const shareRes = await fetchShareUrlParam({});
+    const {shareSceneId, memberId} = shareRes.data;
+    this.setData({
+      ownShareSceneId: shareSceneId,
+      ownMemberId: memberId
+    })
   },
   getData: async function () {
 
@@ -66,66 +90,66 @@ Page({
     const resData = res.data;
     this.setData({
       detailBean: resData,
-      workerType: parseWorkerType(resData),
       workEvnInfo: parseWorkEvnConstants(resData),
       employRequired: parseEmployRequiredConstants(resData)
     });
   },
   getLocation: function () { 
-    wx.getLocation({
-      type: 'wgs84',
-      success: (res) => {
-        wx.setStorageSync('latitude', res.latitude)
-        wx.setStorageSync('longitude', res.longitude)
-        this.getData();
-      },
-      fail:(res) => {
-        this.getData();
-      }
-    });
+    this.getData();
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success: (res) => {
+    //     wx.setStorageSync('latitude', res.latitude)
+    //     wx.setStorageSync('longitude', res.longitude)
+    //     this.getData();
+    //   },
+    //   fail:(res) => {
+    //     this.getData();
+    //   }
+    // });
   },
   //如果获取位置失败，应当去列表授权
-  retryLocation: function (e) {
-    wx.getSetting({
-      success: (res) => {
-        if (!res.authSetting['scope.userLocation']) {
-          wx.showModal({
-            title: '提示',
-            content: '为方便精准推荐附近工作岗位，请先授权允许使用定位服务',
-            confirmText: '去开启',
-            confirmColor: '#018EFF',
-            success: (res) => {
-              if (res.confirm) {
-                wx.openSetting({
-                  success: () => {
-                    wx.getLocation({
-                      type: 'wgs84',
-                      success: (res) => {
-                        wx.setStorageSync('latitude', res.latitude)
-                        wx.setStorageSync('longitude', res.longitude)
-                        this.getData();
-                      }
-                    })
-                  },
-                  fail: () => {
-                    wx.showToast({
-                      title: '您未授予权限，部分功能将无法使用',
-                      icon: 'none',
-                    });
-                    this.getData();
-                  }
-                })
-              } else if (res.cancel) {
-                this.getData();
-              }
-            },
-          })
-        } else {
-          this.getData();
-        }
-      },
-    })  
-  },
+  // retryLocation: function (e) {
+  //   wx.getSetting({
+  //     success: (res) => {
+  //       if (!res.authSetting['scope.userLocation']) {
+  //         wx.showModal({
+  //           title: '提示',
+  //           content: '为方便精准推荐附近工作岗位，请先授权允许使用定位服务',
+  //           confirmText: '去开启',
+  //           confirmColor: '#018EFF',
+  //           success: (res) => {
+  //             if (res.confirm) {
+  //               wx.openSetting({
+  //                 success: () => {
+  //                   wx.getLocation({
+  //                     type: 'wgs84',
+  //                     success: (res) => {
+  //                       wx.setStorageSync('latitude', res.latitude)
+  //                       wx.setStorageSync('longitude', res.longitude)
+  //                       this.getData();
+  //                     }
+  //                   })
+  //                 },
+  //                 fail: () => {
+  //                   wx.showToast({
+  //                     title: '您未授予权限，部分功能将无法使用',
+  //                     icon: 'none',
+  //                   });
+  //                   this.getData();
+  //                 }
+  //               })
+  //             } else if (res.cancel) {
+  //               this.getData();
+  //             }
+  //           },
+  //         })
+  //       } else {
+  //         this.getData();
+  //       }
+  //     },
+  //   })  
+  // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -217,7 +241,8 @@ Page({
       wx.showToast({
         title: res.msg,
         icon: 'error',
-      }); 
+      });
+      return;
     }
     wx.showToast({
       title: '报名成功',
@@ -252,32 +277,6 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: async function () {
-    const longitude = wx.getStorageSync('longitude');
-    const latitude = wx.getStorageSync('latitude');
-    let gps = null;
-    if (longitude && latitude){
-       gps = {
-        longitude,
-        latitude
-      }
-    }
-    const res = await fetchShareUrlParam(gps);
-    const {shareSceneId, memberId} = res.data;
-    const { jobId, detailBean } = this.data;
-    this.setData({
-      showShareDialog: false,
-    })
-    return  {
-      imageUrl: detailBean.companyImages[0],
-      title: `${detailBean.jobName},好岗位，一起来`,
-      path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
-    }
   },
   
   onShare: function (e) {
@@ -314,8 +313,6 @@ Page({
       if (jobId) {
         wx.setStorageSync('jobId', jobId);
       }
-      console.log("获取到海报参数");
-      console.log("res.data.jobId");
       this.setData({
         jobId: res.data.jobId,
       });
@@ -333,5 +330,49 @@ Page({
       wx.makePhoneCall({
         phoneNumber: detailBean.recruiterInfo.mobile,
       });
-   }
+   },
+
+   /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: async function () {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+    const longitude = wx.getStorageSync('longitude');
+    const latitude = wx.getStorageSync('latitude');
+    let gps = null;
+    if (longitude && latitude){
+       gps = {
+        longitude,
+        latitude
+      }
+    }
+    const res = await fetchShareUrlParam(gps);
+    const {shareSceneId, memberId} = res.data;
+    const { jobId, detailBean } = this.data;
+    this.setData({
+      showShareDialog: false,
+    })
+    return  {
+      imageUrl: detailBean.companyImages[0],
+      title: `${detailBean.jobName},众鼎日薪 天天发薪`,
+      path: `/pages/jobDetail/jobDetail?jobId=${jobId}&recommendId=${memberId}&shareSceneId=${shareSceneId}`, 
+    }
+  },
+
+   /**
+   * 用户点击朋友圈分享
+   */
+  onShareTimeline: function (e) {
+    const { ownShareSceneId, ownMemberId, jobId, detailBean } = this.data;
+    if (ownShareSceneId && ownMemberId) {
+      return {
+        imageUrl: detailBean.companyImages[0],
+        title: `${detailBean.jobName},众鼎日薪 天天发薪`,
+        query: `jobId=${jobId}&recommendId=${ownMemberId}&shareSceneId=${ownShareSceneId}&recruiterName=${detailBean?.recruiterInfo?.name}`
+      };
+    }
+  },
 })

@@ -20,13 +20,11 @@
     "pages/feedback2/feedback2",
     "pages/feedbackDetail/feedbackDetail",
     "pages/sharePost/sharePost",
-    "pages/authCenter/authCenter",
     "pages/authCenterNew/authCenterNew",
     "pages/recruiterVerify/recruiterVerify",
     "pages/staffList/staffList",
     "pages/balanceRecord/blanceRecord",
     "pages/withdraw/withdraw",
-    "pages/authDisplay/authDisplay",
     "pages/authDisplayNew/authDisplayNew",
     "pages/privacyProtocol/privacyProtocol",
     "pages/resignApply/resignApply",
@@ -51,7 +49,9 @@
     "pages/contract/contract",
     "pages/lottery/lottery",
     "pages/lotteryView/lotteryView",
-    "pages/winningRecord/winningRecord"
+    "pages/winningRecord/winningRecord",
+    "pages/entryData/entryData",
+    "pages/giftScanReceive/giftScanReceive"
   ],
   "window": {
     "backgroundColor": "#F8F8F8",

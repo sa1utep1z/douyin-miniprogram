@@ -7,226 +7,29 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/login/login",
+          "name": "礼品扫码领取",
+          "pathName": "pages/giftScanReceive/giftScanReceive",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "登录",
           "pathName": "pages/login/login",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "name": "pages/login/loginMobile",
-          "pathName": "pages/login/loginMobile",
+          "name": "抽奖",
+          "pathName": "pages/lottery/lottery",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "name": "pages/message/message",
-          "pathName": "pages/message/message",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/personal/personal",
+          "name": "我的",
           "pathName": "pages/personal/personal",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/message/accountMessage/accountMessage",
-          "pathName": "pages/message/accountMessage/accountMessage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/message/workMessage/workMessage",
-          "pathName": "pages/message/workMessage/workMessage",
-          "query": "messageType=JOB_NOTIFICATION",
-          "scene": null
-        },
-        {
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/message/workMessage/workMessage",
-          "pathName": "pages/message/workMessage/workMessage",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/jobDetail/jobDetail",
-          "pathName": "pages/jobDetail/jobDetail",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/money/money",
-          "pathName": "pages/money/money",
-          "query": "scene=argument",
-          "scene": 1048
-        },
-        {
-          "name": "pages/registration/registration",
-          "pathName": "pages/registration/registration",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/search/search",
-          "pathName": "pages/search/search",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/member/member",
-          "pathName": "pages/member/member",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/feedback/feedback",
-          "pathName": "pages/feedback/feedback",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/sharePost/sharePost",
-          "pathName": "pages/sharePost/sharePost",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/authCenter/authCenter",
-          "pathName": "pages/authCenter/authCenter",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/staffList/staffList",
-          "pathName": "pages/staffList/staffList",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/balanceRecord/blanceRecord",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/withdraw/withdraw",
-          "pathName": "pages/withdraw/withdraw",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/authDisplay/authDisplay",
-          "pathName": "pages/authDisplay/authDisplay",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/bankCardView/bankCardView",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/payslip2/payslip2",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/payslip/payslip",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/dorm/dorm",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/dorm/stayApply/stayApply",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/dorm/scanBed/scanBed",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/dorm/rentApply/rentApply",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/dorm/rentSign/rentSign",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/resignApply/resignApply",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/expandPosterView/expandPosterView",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/contract/contract",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pagesFace/pages/index/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pagesFace/pages/middle/middle",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/lotteryView/lotteryView",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/drawRecord/drawRecord",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -235,5 +38,6 @@
     }
   },
   "projectname": "labor-miniprogram",
-  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html"
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "libVersion": "2.20.3"
 }

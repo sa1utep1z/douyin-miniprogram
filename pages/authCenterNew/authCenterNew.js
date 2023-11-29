@@ -1,6 +1,7 @@
 // pages/authCenter/AuthCenter.js
 import { fetchAuthInfo, twoFactorAuthentication, updateMobile, sendCode, fetchCertificationInfo } from '../../api/userApi'
 import {idCardNoCheck} from '../../utils/util'
+import { ocrIdNo } from '../../api/commonApi'
 Page({
 
   /**
@@ -13,6 +14,7 @@ Page({
     oldMobile: '',
     idCard: '',
     oldIdCard: '',
+    hometown: '',
     validation: false,
     smsCode: '',
     timer: null,
@@ -37,6 +39,7 @@ Page({
       mobile: res.data.mobile,
       oldMobile: res.data.mobile,
       validation: res.data.validation,
+      hometown: res.data.hometown
     });
   },
 
@@ -45,7 +48,11 @@ Page({
       name: e.detail.value,
     })
   },
-
+  onInputHometown: function (e) {
+    this.setData({
+      hometown: e.detail.value,
+    })
+  },
   onInputIDCard: function (e) {
     this.setData({
       idCard: e.detail.value,
@@ -73,15 +80,7 @@ Page({
    * @param {*} e 
    */
   handleConfirm: async function (e) {
-    const { name, mobile, smsCode, idCard, agreePact, oldIdCard, validation } = this.data;
-    if (validation) {
-      wx.showToast({
-        title: '请勿重复实名',
-        icon:'none',
-        duration: 1800
-      });
-      return;
-    }
+    const { name, mobile, smsCode, idCard, agreePact, oldIdCard, hometown } = this.data;
     if(name===null||name.length===0){
       wx.showToast({
         title: '请输入真实姓名',
@@ -93,6 +92,14 @@ Page({
     if(idCard===null || idCard.length===0 || !idCardNoCheck(idCard)){
       wx.showToast({
         title: '请输入有效身份证号',
+        icon:'none',
+        duration: 1800
+      });
+      return;
+    }
+    if(hometown===null||hometown.length===0){
+      wx.showToast({
+        title: '请输入籍贯地址',
         icon:'none',
         duration: 1800
       });
@@ -128,7 +135,8 @@ Page({
       name,
       idNo: idCard,
       mobile,
-      smsCode
+      smsCode,
+      hometown
     });
     if (res.code !== 0) {
       wx.showToast({
@@ -148,7 +156,7 @@ Page({
     }
   },
   handleSendCode: async function () {
-    const { name, mobile, idCard, oldName, oldMobile, oldIdCard, validation } = this.data;
+    const { name, mobile, idCard, oldName, oldMobile, oldIdCard } = this.data;
     const reg_tel = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
      if (!reg_tel.test(mobile)) {
        wx.showToast({
@@ -158,14 +166,6 @@ Page({
        });
        return;
      }
-     if (validation) {
-      wx.showToast({
-        title: '请勿重复实名',
-        icon:'none',
-        duration: 1800
-      });
-      return;
-    }
      const res = await sendCode(mobile);
      if (res.code === 0) {
        this.onSendCodeSuccess();
@@ -209,7 +209,43 @@ Page({
       url: '../privacyProtocol/privacyProtocol',
     })
   },
-
+  ocrClick: async function(e) {
+    wx.showActionSheet({
+      itemList: ['从相册中选择', '拍照'],
+      itemColor: "#00000",
+      success: (res)=> {
+       if (!res.cancel) {
+        if (res.tapIndex == 0) {
+         this.chooseWxImage('album')
+        } else if (res.tapIndex == 1) {
+          this.chooseWxImage('camera')
+        }
+       }
+      }
+    })
+  },
+  chooseWxImage:function(type){
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: [type],
+      success:  (res) =>{
+        console.info(res);
+       this.uploadImg(res.tempFilePaths[0])
+      }
+     }) 
+  },
+  uploadImg:async function(data){
+    const res = await ocrIdNo(data);
+    if (res.code == 0) { 
+      const { name, idNo, address } = res.data;
+      this.setData({
+        name,
+        idCard: idNo,
+        hometown: address
+      });
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

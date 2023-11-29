@@ -1,0 +1,14 @@
+/* pages/giftScanReceive/giftScanReceive.wxss */
+
+.imgV {
+  width: 30%;
+  margin: 120rpx auto 30rpx auto;
+}
+.imgV image {
+  width: 100%;
+}
+.fontV {
+  text-align: center;
+  color: #333;
+  font-weight: bolder;
+}

@@ -1,9 +1,9 @@
 // 开发环境地址
 const urlDev = { 
-  authUrl: 'http://192.168.110.79:8317/labormgt-backend',
-  baseUrl: 'http://192.168.110.79:8317/labormgt-backend', // 鉴权 192.168.110.79
-  contractBaseUrl: 'http://192.168.110.79:8317/labormgt-contract',
-  opshubBaseUrl: 'http://192.168.110.79:8317/labormgt-opshub',
+  authUrl: 'http://192.168.110.60:8317/labormgt-backend',
+  baseUrl: 'http://192.168.110.60:8317/labormgt-backend', // 鉴权 192.168.110.79
+  contractBaseUrl: 'http://192.168.110.60:8317/labormgt-contract',
+  opshubBaseUrl: 'http://192.168.110.60:8317/labormgt-opshub',
 };
 // uat环境地址 体验版
 const urlUat = {

@@ -7,6 +7,7 @@ Page({
     loading: false,
     code: '',
     time: new Date().getTime(),
+    agreePact: false
   },
     /**
    * 生命周期函数--监听页面加载
@@ -105,6 +106,16 @@ Page({
   },
 
   register: async function() {
+    const {agreePact} = this.data;
+    if (!agreePact) {
+      wx.showToast({
+        title: '请勾选协议',
+        icon: 'error',
+        duration: 3000,
+        icon: 'none'
+      });
+      return;
+    }
     this.setData({ loading: true });
     const { code } = this.data;
     const channelCode = wx.getStorageSync('channelCode') || null;
@@ -172,6 +183,12 @@ Page({
   jumpPrivacy(){
     wx.navigateTo({
       url: '../privacyProtocol/privacyProtocol',
+    })
+  },
+  switchAgreePact: function(e) {
+    const { value } = e.detail;
+    this.setData({
+      agreePact: value,
     })
   },
 })

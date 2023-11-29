@@ -32,3 +32,9 @@ export const listDrawRecord = (data) => {
 export const listWinningRecord = (data) => {
   return ajax.request('/client/lotteryDraw/winning', data, 'POST', false);
 }
+
+
+// 礼品领取
+export const giftReceive = (giftActivityId) => {
+  return ajax.request(`/client/gift/receive/${giftActivityId}`, null, 'GET', true, false);
+}

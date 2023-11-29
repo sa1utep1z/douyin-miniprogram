@@ -27,11 +27,12 @@
     <view class="row">
       <view><text>借款金额</text></view>
       <view>
-        <picker mode="selector" value="{{amountIndex}}" range="{{amountOptions}}" range-key="title" bindchange="bindPickerAmount">
+        <!-- <picker mode="selector" value="{{amountIndex}}" range="{{amountOptions}}" range-key="title" bindchange="bindPickerAmount">
           <view class="picker" style="color: #4fa1f4;">
             {{amountIndex === '' ? '请选择' : amountOptions[amountIndex].title}}
           </view>
-        </picker>
+        </picker> -->
+        <van-stepper value="{{ advanceAmount }}" bind:change="onAmountChange" integer step="50" max="{{pageBean.maxCanAdvanceAmount || 10000}}" input-width="64px" />
       </view>
     </view>
     <van-divider hairline />

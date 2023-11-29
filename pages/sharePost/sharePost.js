@@ -139,14 +139,14 @@ Page({
     const longitude = wx.getStorageSync('longitude');
     const latitude = wx.getStorageSync('latitude');
     wx.downloadFile({
-      url: `${url}?longitude=${longitude}&latitude=${latitude}`,
+      url: `${url}`, // ?longitude=${longitude}&latitude=${latitude}
       header: {
         'X-User-Token': wx.getStorageSync('token') || '',
         'userId':  wx.getStorageSync('userId') || '',
         'X-Device': 'mini_program',
       },
       success: (res)=> {
-        console.log(res);
+        console.log('success', res);
         if(res.statusCode ===200){
           this.setData({
             postUrl: res.tempFilePath,
@@ -157,7 +157,7 @@ Page({
         })
       },
       fail: (res) => {
-        console.log(res);
+        console.log('fail', res);
         wx.hideLoading({
           success: (res) => {},
         })

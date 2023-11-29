@@ -13,8 +13,8 @@ export const getResignApproveForm = (type) => {
   return ajax.request(`/admin/approve/temp/${type}/formField`, null, 'GET');
 }
 // 提交离职申请
-export const submitApprove = (type, data) => {
-  return ajax.request(`/admin/approve/submit/${type}`, data, 'POST');
+export const submitApprove = (type, data, toast) => {
+  return ajax.request(`/admin/approve/submit/${type}`, data, 'POST', true, toast);
 }
 // 撤销申请
 export const cancelApprove = (flowId) => {
