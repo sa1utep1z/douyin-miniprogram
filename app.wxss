@@ -1,4 +1,0 @@
-/**app.wxss**/
-.common-hover-class{
-  background-color: #fafafa;
-}

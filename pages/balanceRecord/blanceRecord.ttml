@@ -1,0 +1,36 @@
+<!--pages/balanceRecord/blanceRecord.ttml-->
+<sjs module="utils" src="../../utils/util.sjs" />
+<view class="container">
+  <view class="tab-view">
+    <view class="tab-index {{tabIndex ==='0' ? 'tab-select':''}}" bindtap="handleTab" data-index="0"><text>全部</text></view>
+    <view class="tab-index {{tabIndex ==='1' ? 'tab-select':''}}" bindtap="handleTab" data-index="1"><text>收入</text></view>
+    <view class="tab-index {{tabIndex ==='2' ? 'tab-select':''}}" bindtap="handleTab" data-index="2"><text>支出</text></view>
+  </view>
+  <view class="list-wrap">
+  <scroll-view class="list-view" scroll-y="{{true}}" lower-threshold="50" bindscrolltolower="onLoadMore">
+    <block tt:for="{{recordList}}" tt:key="index">
+      <view class="record-view van-hairline--bottom">
+        <view class="head-view">
+          <view class="item-type">{{item.actionDesc}}</view>
+          <view class="item-time">{{utils.formatTimeAll(item.createTime)}}</view>
+        </view>
+        <view class="right-view">
+          <view class="item-amt {{item.amount>=0?'item-amt-income':''}}">{{item.amount&&item.amount>=0?'+':''}}{{item.amount||''}}</view>
+          <view class="item-status"><text>{{utils.parseStatus(item.status)}} </text><text class="status-error">{{item.dealMsg||''}}</text></view>
+        </view>
+      </view>
+      <view tt:if="{{index!==recordList.length-1}}" class="divider"></view>
+    </block>
+    <block tt:if="{{loadingStatus === 1}}">
+      <view class="status-loading" id="status-loading">
+        <van-loading type="spinner" size="24rpx" color="#999999">加载中...</van-loading>
+      </view>
+    </block>
+    <block tt:if="{{loadingStatus === 2}}">
+      <view class="status-finish">
+          <van-divider hairline contentPosition="center">{{recordList.length===0?'暂无数据':'由众鼎提供技术支持'}}</van-divider>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+</view>

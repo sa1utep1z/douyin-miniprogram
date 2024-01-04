@@ -1,5 +1,5 @@
 // pages/dorm/scanBed/scanBed.js
-import { fetchScanBedInfo, submitConfirmBed } from '../../../api/dorm'
+import { fetchScanBedInfo, submitConfirmBed } from '../../../api/dorm';
 Page({
 
   /**
@@ -7,7 +7,7 @@ Page({
    */
   data: {
     scanBedInfo: {},
-    noneDataTip: '',
+    noneDataTip: ''
   },
 
   /**
@@ -19,8 +19,8 @@ Page({
       this.getScanBedInfo(bedId);
     } else {
       this.setData({
-        noneDataTip: '获取床位信息失败',
-      })
+        noneDataTip: '获取床位信息失败'
+      });
     }
   },
 
@@ -37,22 +37,22 @@ Page({
   onShow() {
 
   },
-  getScanBedInfo: async function(bedId) {
+  getScanBedInfo: async function (bedId) {
     await fetchScanBedInfo(bedId).then((res) => {
       this.setData({
-        scanBedInfo: res.data,
-      })
+        scanBedInfo: res.data
+      });
     }).catch((err) => {
       this.setData({
-        noneDataTip: err.msg,
-      })
+        noneDataTip: err.msg
+      });
     });
-    
+
   },
-  confirmLiveIn: async function() {
+  confirmLiveIn: async function () {
     const { scanBedInfo } = this.data;
     if (!scanBedInfo.id) {
-      wx.showToast({
+      tt.showToast({
         title: '信息缺失',
         icon: 'error',
         duration: 2000
@@ -63,9 +63,9 @@ Page({
     scanBedInfo.canLiveIn = false;
     scanBedInfo.buttonName = '已确认';
     this.setData({
-      scanBedInfo,
-    })
-    wx.showToast({
+      scanBedInfo
+    });
+    tt.showToast({
       title: '已确认',
       icon: 'success',
       duration: 2000
@@ -105,4 +105,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

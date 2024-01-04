@@ -1,5 +1,5 @@
 // pages/authDisplay/authDisplay.js
-import { fetchContactsInfo, submitContactsInfo } from '../../api/userApi'
+import { fetchContactsInfo, submitContactsInfo } from '../../api/userApi';
 Page({
 
   /**
@@ -11,13 +11,13 @@ Page({
     urgentRelation: '',
     typeIndex: '',
     typeOptions: [
-      { title: '朋友', value: 'FRIEND' },
-      { title: '父母', value: 'PARENT' },
-      { title: '儿女', value: 'CHILDREN' },
-      { title: '兄弟姐妹', value: 'BROTHER_OR_SISTERS' },
-      { title: '配偶', value: 'SPOUSE' },
-      { title: '亲戚', value: 'RELATIVE' },
-    ],
+    { title: '朋友', value: 'FRIEND' },
+    { title: '父母', value: 'PARENT' },
+    { title: '儿女', value: 'CHILDREN' },
+    { title: '兄弟姐妹', value: 'BROTHER_OR_SISTERS' },
+    { title: '配偶', value: 'SPOUSE' },
+    { title: '亲戚', value: 'RELATIVE' }]
+
 
   },
 
@@ -55,39 +55,39 @@ Page({
 
   submitData: async function (e) {
     const { urgentName, urgentMobile, typeIndex, typeOptions } = this.data;
-    const params = { 
-      urgentName, 
+    const params = {
+      urgentName,
       urgentMobile,
-      urgentRelation: typeOptions[typeIndex].value,
+      urgentRelation: typeOptions[typeIndex].value
     };
     await submitContactsInfo(params);
-    wx.showToast({
+    tt.showToast({
       title: '提交成功',
-      icon:'none',
+      icon: 'none',
       duration: 2500
     });
-    setTimeout(function() {
-      wx.navigateBack({
-        delta: 0,
-      })
+    setTimeout(function () {
+      tt.navigateBack({
+        delta: 0
+      });
     }, 2000);
 
 
   },
   onInputName: function (e) {
     this.setData({
-      urgentName: e.detail.value,
-    })
+      urgentName: e.detail.value
+    });
   },
   onInputMobile: function (e) {
     this.setData({
-      urgentMobile: e.detail.value,
-    })
+      urgentMobile: e.detail.value
+    });
   },
-  bindPickerType: function(e) {
+  bindPickerType: function (e) {
     this.setData({
       typeIndex: e.detail.value
-    })
+    });
   },
 
   /**
@@ -116,5 +116,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-})
+  }
+});

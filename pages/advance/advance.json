@@ -1,8 +1,8 @@
 {
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index",
-    "van-loading": "@vant/weapp/loading/index",
-    "van-overlay": "@vant/weapp/overlay/index"
-  },
-  "navigationBarTitleText": "预支列表"
+    "usingComponents": {
+        "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
+        "van-loading": "/miniprogram_npm/@vant/weapp/loading/index",
+        "van-overlay": "/miniprogram_npm/@vant/weapp/divider/index"
+    },
+    "navigationBarTitleText": "预支列表"
 }

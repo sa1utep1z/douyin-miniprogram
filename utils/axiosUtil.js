@@ -5,32 +5,32 @@ const baseUrl = urlConfig().baseUrl;
 
 const initHeader = {
   'content-type': 'application/json',
-  'Accept': 'application/json',
+  'Accept': 'application/json'
 };
 
 // 处理登录失效
 const handleLoginInvalid = () => {
   // 清除登录信息
-  wx.removeStorageSync('token');
-  wx.removeStorageSync('mobile');
-  wx.removeStorageSync('userId');
-  wx.removeStorageSync('openId');
-  wx.navigateTo({
+  tt.removeStorageSync('token');
+  tt.removeStorageSync('mobile');
+  tt.removeStorageSync('userId');
+  tt.removeStorageSync('openId');
+  tt.navigateTo({
     url: '/pages/index/index'
   });
-}
+};
 function _showToast(title = '网络错误', duration = 3000) {
-  wx.showToast({
+  tt.showToast({
     title,
     icon: 'none',
-    duration,
+    duration
   });
 }
 function _showLoading(title = '加载中') {
-  wx.showLoading({
+  tt.showLoading({
     title: '加载中',
-    mask: true,
-  })
+    mask: true
+  });
 }
 
 /**
@@ -40,11 +40,11 @@ function _showLoading(title = '加载中') {
 function ajaxInterceptorsRequest(needLoading = true, loadingTitle = '加载中') {
   if (needLoading) {
     _showLoading(loadingTitle);
-  } 
-  initHeader['X-User-Token'] = wx.getStorageSync('token') || '';
-  initHeader['userId'] = wx.getStorageSync('userId') || '';
+  }
+  initHeader['X-User-Token'] = tt.getStorageSync('token') || '';
+  initHeader['userId'] = tt.getStorageSync('userId') || '';
   initHeader['X-User-Platform'] = 'wechat';
-  initHeader['X-Device'] = 'mini_program'
+  initHeader['X-Device'] = 'mini_program';
 }
 
 function formatResponse(response) {
@@ -56,11 +56,11 @@ function formatResponse(response) {
 
 let isRefreshing = false; // 是否正在刷新token
 
-class Ajax { // 创建一个类，相当于是创建一个构造函数
-  request(url, data,method='GET',loading=true, toast=true) { // 带Loading状态的请求
+class Ajax {// 创建一个类，相当于是创建一个构造函数
+  request(url, data, method = 'GET', loading = true, toast = true) {// 带Loading状态的请求
     ajaxInterceptorsRequest(loading);
-    return new Promise((resolve, reject) => { // 返回一个Promise对象
-      wx.request({ // 配合微信的wx.request方法
+    return new Promise((resolve, reject) => {// 返回一个Promise对象
+      tt.request({ // 配合微信的wx.request方法
         url: baseUrl + url, // 默认拼接baseUrl
         data: data || {}, // 如果没有传data，默认为一个空对象
         header: initHeader,
@@ -68,7 +68,7 @@ class Ajax { // 创建一个类，相当于是创建一个构造函数
         dataType: 'json',
         responseType: 'text',
         success: (response) => {
-          wx.hideLoading(); // 隐藏loading
+          tt.hideLoading(); // 隐藏loading
           const httpResult = formatResponse(response);
           if (httpResult && httpResult.code !== 1) {
             resolve(httpResult);
@@ -87,11 +87,11 @@ class Ajax { // 创建一个类，相当于是创建一个构造函数
                 if (!token) {
                   handleLoginInvalid();
                 } else {
-                  const result = await this.request(url, data,method,loading);
+                  const result = await this.request(url, data, method, loading);
                   resolve(result);
                   eventBus.publish('refreshToken'); // 发布
                 }
-              }).catch(err => {
+              }).catch((err) => {
                 if (toast) {
                   _showToast(err.msg);
                 }
@@ -101,29 +101,29 @@ class Ajax { // 创建一个类，相当于是创建一个构造函数
               });
             } else {
               eventBus.subscribe('refreshToken', () => {
-                resolve(this.request(url,data,method,loading))
+                resolve(this.request(url, data, method, loading));
               });
             }
           }
         },
-        fail: (res) => { // 请求失败，执行reject
-          wx.hideLoading(); // 隐藏loading
+        fail: (res) => {// 请求失败，执行reject
+          tt.hideLoading(); // 隐藏loading
           reject(res);
-        },
+        }
       });
-    })
+    });
   }
-  uploadRequest(url,data,formData) {
+  uploadRequest(url, data, formData) {
     ajaxInterceptorsRequest(true, '上传中');
-    return new Promise((resolve,reject)=>{
-      wx.uploadFile({
+    return new Promise((resolve, reject) => {
+      tt.uploadFile({
         url: baseUrl + url,
         filePath: data,
         name: 'file',
         header: initHeader,
-        formData:formData|| {},
+        formData: formData || {},
         success: (response) => {
-          wx.hideLoading(); // 隐藏loading
+          tt.hideLoading(); // 隐藏loading
           const res = formatResponse(response);
           if (res && res.code === 0) {
             resolve(res);
@@ -132,28 +132,28 @@ class Ajax { // 创建一个类，相当于是创建一个构造函数
             reject(res.msg);
           }
         },
-        fail: (res) => { // 请求失败，执行reject
-          wx.hideLoading(); // 隐藏loading
+        fail: (res) => {// 请求失败，执行reject
+          tt.hideLoading(); // 隐藏loading
           reject(res);
-        },
-      })
-    })
+        }
+      });
+    });
   }
-  authRequest(url, method = 'GET', data, loading = true){
-    ajaxInterceptorsRequest(true, '加载中')
-    return new Promise((resolve, reject) => { // 返回一个Promise对象
-      wx.request({ // 配合微信的wx.request方法
+  authRequest(url, method = 'GET', data, loading = true) {
+    ajaxInterceptorsRequest(true, '加载中');
+    return new Promise((resolve, reject) => {// 返回一个Promise对象
+      tt.request({ // 配合微信的wx.request方法
         url: authUrl + url, // 默认拼接baseUrl
         data: data || {}, // 如果没有传data，默认为一个空对象
         header: {
           'content-type': 'application/json',
-          'Accept': 'application/json',
+          'Accept': 'application/json'
         },
-        method: method||'GET',
+        method: method || 'GET',
         dataType: 'json',
         responseType: 'text',
         success: (response) => {
-          wx.hideLoading(); // 隐藏loading
+          tt.hideLoading(); // 隐藏loading
           const res = formatResponse(response);
           if (res && res.code === 0) {
             resolve(res);
@@ -162,15 +162,15 @@ class Ajax { // 创建一个类，相当于是创建一个构造函数
             reject(res);
           }
         },
-        fail: (res) => { // 请求失败，执行reject
-          wx.hideLoading(); // 隐藏loading
+        fail: (res) => {// 请求失败，执行reject
+          tt.hideLoading(); // 隐藏loading
           reject(res);
-        },
+        }
       });
-    })
+    });
   }
 }
 
-const ajax = new Ajax() // 创建一个Ajax的实例
+const ajax = new Ajax(); // 创建一个Ajax的实例
 
-export default ajax // 如果想在page中使用Ajax的实例，则写这一句，new Ajax()返回的是一个Ajax实例，是promise对象
+export default ajax; // 如果想在page中使用Ajax的实例，则写这一句，new Ajax()返回的是一个Ajax实例，是promise对象

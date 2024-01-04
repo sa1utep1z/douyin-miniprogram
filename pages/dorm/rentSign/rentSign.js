@@ -1,5 +1,5 @@
 // pages/dorm/pactSign/pactSign.js
-import { signDorm } from '../../../api/dorm'
+import { signDorm } from '../../../api/dorm';
 Page({
 
   /**
@@ -10,7 +10,7 @@ Page({
     imgInfo: {}, // 表示的是签字生成的图片对象信息，由签完字返回。
     signText: '签字',
     canSign: true,
-    onlyView: false,
+    onlyView: false
   },
 
   /**
@@ -21,7 +21,7 @@ Page({
     if (onlyView) {
       this.setData({
         onlyView
-      })
+      });
     }
   },
 
@@ -41,56 +41,56 @@ Page({
     if (imgInfo.fileKey) {
       this.setData({
         signText: '已签字，正在跳转申请页面...',
-        canSign: false,
-      })
+        canSign: false
+      });
       // todo：跳转页面
-      setTimeout(function() {
+      setTimeout(function () {
         // 不会被返回到pactSign该页面
-        wx.redirectTo({
-          url: '../rentApply/rentApply?signImgKey='+imgInfo.fileKey,
+        tt.redirectTo({
+          url: '../rentApply/rentApply?signImgKey=' + imgInfo.fileKey
         });
       }, 2000);
     }
   },
-  onSign: async function(imgKey) {
+  onSign: async function (imgKey) {
     // 上传签字信息并完成签署
-    const params = { signImgKey: imgKey, type: 'RENT' }
+    const params = { signImgKey: imgKey, type: 'RENT' };
     return await signDorm(params).then((res) => {
       // 清空签署信息
       this.setData({
-        imgInfo: {},
-      })
+        imgInfo: {}
+      });
       return true;
     }).catch((err) => {
       this.setData({
         signText: err.msg,
-        canSign: false,
-      })
-      wx.showToast({
+        canSign: false
+      });
+      tt.showToast({
         title: err.msg,
-        icon: 'none',
+        icon: 'none'
       });
       return false;
     });
   },
-  switch2Change: function(e) {
+  switch2Change: function (e) {
     const { value } = e.detail;
     this.setData({
       agreePact: value,
-      canSign: value,
-    })
+      canSign: value
+    });
   },
   signClick: function (e) {
     const { agreePact } = this.data;
     if (!agreePact) {
-      wx.showToast({
+      tt.showToast({
         title: '请先勾选阅读条款',
-        icon: 'none',
+        icon: 'none'
       });
       return;
     }
-    wx.navigateTo({
-      url: '../../sign/sign',
+    tt.navigateTo({
+      url: '../../sign/sign'
     });
   },
   /**
@@ -127,4 +127,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

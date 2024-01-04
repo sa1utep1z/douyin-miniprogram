@@ -1,5 +1,5 @@
 // pages/search/search.js
-import { fecthSerarchResult } from '../../api/jobApi'
+import { fecthSerarchResult } from '../../api/jobApi';
 Page({
 
   /**
@@ -21,7 +21,7 @@ Page({
     jobId: '',
     emptyText: '请输入岗位名称或者公司名称进行搜索',
     emptyHint: '对不起，暂时没有找到相关岗位请换个条件试试',
-    phoneNumber: '',
+    phoneNumber: ''
   },
 
   /**
@@ -32,9 +32,9 @@ Page({
   },
   getStatusBarHeight: function () {
     // 获取状态栏高度
-    const { statusBarHeight } = wx.getSystemInfoSync();
+    const { statusBarHeight } = tt.getSystemInfoSync();
     // 得到右上角菜单的位置尺寸
-    const menuButtonObject = wx.getMenuButtonBoundingClientRect();
+    const menuButtonObject = tt.getMenuButtonBoundingClientRect();
     const { top, height } = menuButtonObject;
     // 计算导航栏的高度
     // 此高度基于右上角菜单在导航栏位置垂直居中计算得到
@@ -45,7 +45,7 @@ Page({
       navBarHeight,
       statusNavBarHeight,
       height,
-      top,
+      top
     });
   },
   /**
@@ -84,42 +84,42 @@ Page({
   //调用接口的方法
   fecthData: async function (e) {
     const { loadingStatus } = this.data;
-    const   { keyWord, pageNumber, pageSize, jobList ,emptyHint } = this.data;
-    if (loadingStatus !== 0 ||keyWord === '') {
+    const { keyWord, pageNumber, pageSize, jobList, emptyHint } = this.data;
+    if (loadingStatus !== 0 || keyWord === '') {
       console.log('抛弃无效请求');
       return;
-    } 
+    }
     this.setLoadingStart();
-    const longitude = wx.getStorageSync('longitude');
-    const latitude = wx.getStorageSync('latitude');
+    const longitude = tt.getStorageSync('longitude');
+    const latitude = tt.getStorageSync('latitude');
     const params = {
       keyWord,
       pageNumber,
       pageSize,
       gps: {
         latitude,
-        longitude,
+        longitude
       }
-    }
+    };
     const res = await fecthSerarchResult(params);
-    const totalPages = res.data.totalPages
+    const totalPages = res.data.totalPages;
     this.setData({
       jobList: res.data.content,
       totalPages: res.data.totalPages,
-      emptyText: emptyHint,
+      emptyText: emptyHint
     });
     if (pageNumber === 0) {
       this.setData({
-        jobList: res.data.content,
+        jobList: res.data.content
       });
     } else {
       this.setData({
-        jobList: jobList.content(res.data.content),
+        jobList: jobList.content(res.data.content)
       });
     }
-    if(pageNumber < totalPages-1) {
+    if (pageNumber < totalPages - 1) {
       this.setData({
-        pageNumber: pageNumber + 1,
+        pageNumber: pageNumber + 1
       });
       this.setLoadingReady();
     } else {
@@ -131,7 +131,7 @@ Page({
     console.log('handleSearchBlur');
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,
+      pageNumber: 0
     });
     this.fecthData();
   },
@@ -139,65 +139,65 @@ Page({
   handleSearchInput: function (e) {
     const { value } = e.detail;
     this.setData({
-      keyWord: value,
+      keyWord: value
     });
   },
   //重置输入框内容
   handleRest: function (e) {
     console.log(e);
     this.setData({
-      keyWord: '',
+      keyWord: ''
     });
   },
   setLoadingStart: function () {
     this.setData({
-      loadingStatus: 1,
-    }) 
+      loadingStatus: 1
+    });
   },
   setLoadingReady: function () {
     this.setData({
-      loadingStatus: 0,
-    }) 
+      loadingStatus: 0
+    });
   },
   setLoadingNoMore: function () {
     this.setData({
-      loadingStatus: 2,
-    }) 
+      loadingStatus: 2
+    });
   },
 
   onChangeDialog: function (e) {
-    this.setData(({
-      showSignDialog: e.detail,
-    }))
+    this.setData({
+      showSignDialog: e.detail
+    });
   },
   onSignUp: function (e) {
     const { id } = e.currentTarget.dataset;
     const { showSignDialog } = this.data;
     console.log(id);
-    if( !showSignDialog ) {
+    if (!showSignDialog) {
       this.setData({
         jobId: id,
-        showSignDialog: true,
+        showSignDialog: true
       });
-    }   
+    }
   },
   handleItemClick: function (e) {
     const { item } = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `../../pages/jobDetail/jobDetail?jobId=${item.id}`,
+    tt.navigateTo({
+      url: `../../pages/jobDetail/jobDetail?jobId=${item.id}`
     });
-  }, 
+  },
 
   handleBack: function (e) {
-    wx.navigateBack({
-      delta: 1,
+    tt.navigateBack({
+      delta: 1
     });
   },
 
   callPhone: function (params) {
     const { phoneNumber } = this.data;
-    wx.makePhoneCall({
-      phoneNumber,
+    tt.makePhoneCall({
+      phoneNumber
     });
   },
   /**
@@ -212,5 +212,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-})
+  }
+});

@@ -1,5 +1,5 @@
 // pages/workMessage/workMessage.js
-import { fetchMessageList, readMessage} from '../../../api/messageApi'
+import { fetchMessageList, readMessage } from '../../../api/messageApi';
 Page({
 
   /**
@@ -11,7 +11,7 @@ Page({
     pageSize: 15,
     pageNumber: 0,
     loadingStatus: 0,
-    messageType: '',
+    messageType: ''
   },
 
   /**
@@ -20,7 +20,7 @@ Page({
   onLoad: function (options) {
     const { messageType } = options;
     this.setData({
-      messageType,
+      messageType
     });
     this.onRefresh();
   },
@@ -66,30 +66,30 @@ Page({
   onReachBottom: function () {
 
   },
-  
+
   handleItemTab: async function (e) {
-     const { index } = e.currentTarget.dataset;
-     const { messageList } = this.data;
-     if (!messageList[index].hasRead) {
-       messageList[index].hasRead = true;
-       this.setData({
-        messageList,
-       })
-      await readMessage(messageList[index].messageId);
-     }
-     // 判断是否跳转
-     const messObj = messageList[index];
-     const {redirectKey, redirectParam} = messObj;
-     if (redirectKey === 'salary') {
-      wx.navigateTo({
-        url: `../../../pages/payslip/payslip?year=${redirectParam.year}&month=${redirectParam.month}`,
+    const { index } = e.currentTarget.dataset;
+    const { messageList } = this.data;
+    if (!messageList[index].hasRead) {
+      messageList[index].hasRead = true;
+      this.setData({
+        messageList
       });
-     }
+      await readMessage(messageList[index].messageId);
+    }
+    // 判断是否跳转
+    const messObj = messageList[index];
+    const { redirectKey, redirectParam } = messObj;
+    if (redirectKey === 'salary') {
+      tt.navigateTo({
+        url: `../../../pages/payslip/payslip?year=${redirectParam.year}&month=${redirectParam.month}`
+      });
+    }
   },
 
   onLoadMore: async function (e) {
-    const { pageNumber, pageSize, loadingStatus, messageType, messageList} = this.data;
-    if ( loadingStatus!==0 ) {
+    const { pageNumber, pageSize, loadingStatus, messageType, messageList } = this.data;
+    if (loadingStatus !== 0) {
       console.log('过滤无效请求');
       return;
     }
@@ -97,49 +97,49 @@ Page({
     const params = {
       pageNumber,
       pageSize,
-      messageType,
+      messageType
     };
-      const res = await fetchMessageList(params);
-      const totalPages = res.data.totalPages;
-      if(pageNumber === 0) {
-        this.setData({
-          messageList: res.data.content,
-          showEmptyView: res.data.content.length <= 0,
-        })
-      } else {
-        this.setData({
-          messageList: messageList.concat(res.data.content),
-        })
-      }
-      if(pageNumber < totalPages-1){
-        this.setLoadingReady();
-        this.setData({
-          pageNumber: pageNumber + 1,
-        });
-      } else {
-        this.setLoadingNoMore();
-      }
+    const res = await fetchMessageList(params);
+    const totalPages = res.data.totalPages;
+    if (pageNumber === 0) {
+      this.setData({
+        messageList: res.data.content,
+        showEmptyView: res.data.content.length <= 0
+      });
+    } else {
+      this.setData({
+        messageList: messageList.concat(res.data.content)
+      });
+    }
+    if (pageNumber < totalPages - 1) {
+      this.setLoadingReady();
+      this.setData({
+        pageNumber: pageNumber + 1
+      });
+    } else {
+      this.setLoadingNoMore();
+    }
   },
   onRefresh: function (e) {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,   
+      pageNumber: 0
     });
     this.onLoadMore();
   },
   setLoadingStart: function () {
     this.setData({
-      loadingStatus: 1,
-    }) 
+      loadingStatus: 1
+    });
   },
   setLoadingReady: function () {
     this.setData({
-      loadingStatus: 0,
-    }) 
+      loadingStatus: 0
+    });
   },
   setLoadingNoMore: function () {
     this.setData({
-      loadingStatus: 2,
-    }) 
-  },
-})
+      loadingStatus: 2
+    });
+  }
+});

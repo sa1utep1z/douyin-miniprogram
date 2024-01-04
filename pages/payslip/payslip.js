@@ -1,5 +1,5 @@
 // pages/payslip/payslip.js
-import { listPayslips, signPayslip, newestYM } from '../../api/payslip'
+import { listPayslips, signPayslip, newestYM } from '../../api/payslip';
 Page({
 
   /**
@@ -11,45 +11,45 @@ Page({
     imgInfo: {}, // 表示的是签字生成的图片对象信息，由签完字返回。
     signDetailId: '', // 签署的薪资单id
     queryYear: '', // 筛选的年份，可能是消息跳转过来自动转化的
-    queryMonth: '', // 筛选的月份，可能是消息跳转过来自动转化的
+    queryMonth: '' // 筛选的月份，可能是消息跳转过来自动转化的
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
     console.info(options);
-    const {year, month} = options;
-    if (year && month) { // 说明是消息跳转过来的
+    const { year, month } = options;
+    if (year && month) {// 说明是消息跳转过来的
       this.setData({
         queryYear: year,
-        queryMonth: month,
+        queryMonth: month
       });
       this.getData();
     } else {
       // 查询最新工资条的年月
       this.getNewestYM();
     }
-  }, 
-  getNewestYM: async function() {
+  },
+  getNewestYM: async function () {
     const res = await newestYM();
     if (res.code === 0) {
-      const {year, month} = res.data;
+      const { year, month } = res.data;
       if (year && month) {
         this.setData({
           queryYear: year,
-          queryMonth: month,
+          queryMonth: month
         });
       } else {
         const date = new Date();
         this.setData({
           queryYear: date.getFullYear(),
-          queryMonth: date.getMonth() + 1,
+          queryMonth: date.getMonth() + 1
         });
       }
       this.getData();
     }
   },
-  getData: async function() {
+  getData: async function () {
     const { queryYear, queryMonth } = this.data;
     const res = await listPayslips(queryYear, queryMonth);
     if (res.code === 0) {
@@ -57,11 +57,11 @@ Page({
       // 在view中无法联合控制，只能在js中过滤了
       for (var i = 0; i < content.length; i++) {
         const item = content[i].detailItems;
-        content[i].detailItems = item.filter(e => e.title.indexOf('个税') !== -1 || (e.value !== '0' && e.value !== '0.0' && e.value !== '0.00'))
+        content[i].detailItems = item.filter((e) => e.title.indexOf('个税') !== -1 || e.value !== '0' && e.value !== '0.0' && e.value !== '0.00');
       }
       this.setData({
         userInfo,
-        dataList: content,
+        dataList: content
       });
     }
   },
@@ -79,8 +79,8 @@ Page({
       if (oldQueryYear !== arr[0] || oldQueryMonth !== arr[1]) {
         this.setData({
           queryYear: arr[0],
-          queryMonth: arr[1],
-        })
+          queryMonth: arr[1]
+        });
         this.getData();
       }
     }
@@ -89,10 +89,10 @@ Page({
     const currId = e.currentTarget.dataset.id;
     if (currId) {
       this.setData({
-        signDetailId: currId,
-      })
-      wx.navigateTo({
-        url: '../../pages/sign/sign',
+        signDetailId: currId
+      });
+      tt.navigateTo({
+        url: '../../pages/sign/sign'
       });
     }
   },
@@ -107,15 +107,15 @@ Page({
       this.onSign(signDetailId, imgInfo.fileKey);
     }
   },
-  onSign: async function(signDetailId, imgKey) {
+  onSign: async function (signDetailId, imgKey) {
     // 上传签字信息并完成签署
-    const params = { signImgKey: imgKey }
+    const params = { signImgKey: imgKey };
     await signPayslip(signDetailId, params);
     // 清空签署信息
     this.setData({
       imgInfo: {},
-      signDetailId: '',
-    })
+      signDetailId: ''
+    });
     this.getData();
   },
 
@@ -131,8 +131,8 @@ Page({
   onUnload() {
     this.setData({
       imgInfo: {},
-      signDetailId: '',
-    })
+      signDetailId: ''
+    });
   },
 
   /**
@@ -155,4 +155,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

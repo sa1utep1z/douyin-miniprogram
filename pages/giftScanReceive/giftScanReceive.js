@@ -1,5 +1,5 @@
 // pages/giftScanReceive/giftScanReceive.js
-import { giftReceive } from '../../api/opshub'
+import { giftReceive } from '../../api/opshub';
 Page({
 
   /**
@@ -13,24 +13,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const { giftActivityId } = options
+    const { giftActivityId } = options;
     if (giftActivityId) {
       this.receiveGift(giftActivityId);
     }
   },
 
-  receiveGift: async function(giftActivityId) {
+  receiveGift: async function (giftActivityId) {
     await giftReceive(giftActivityId).then((res) => {
       this.setData({
         allowReceive: res.data
-      })
+      });
     }).catch((err) => {
-      wx.showModal({
+      tt.showModal({
         title: '提示',
         showCancel: false,
         content: err.msg
-      })
-    })
+      });
+    });
   },
 
   /**
@@ -81,4 +81,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

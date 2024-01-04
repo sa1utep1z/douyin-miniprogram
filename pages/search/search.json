@@ -1,9 +1,9 @@
 {
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index",
-    "van-loading": "@vant/weapp/loading/index",
-    "van-overlay": "@vant/weapp/overlay/index",
-    "SignUpInfo": "../../components/SignUpInfoDialog/SignUpInfoDialog"
-  },
-  "navigationStyle": "custom"
+    "usingComponents": {
+        "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
+        "van-loading": "/miniprogram_npm/@vant/weapp/loading/index",
+        "van-overlay": "/miniprogram_npm/@vant/weapp/divider/index",
+        "SignUpInfo": "../../components/SignUpInfoDialog/SignUpInfoDialog"
+    },
+    "navigationStyle": "custom"
 }

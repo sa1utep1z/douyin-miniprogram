@@ -1,5 +1,5 @@
 // pages/dorm/stayApply/stayApply.js
-import { submitRent } from '../../../api/dorm'
+import { submitRent } from '../../../api/dorm';
 Page({
 
   /**
@@ -10,7 +10,7 @@ Page({
     canSubmit: true,
     rentType: '',
     editHometown: '',
-    signImgKey: '',
+    signImgKey: ''
   },
 
   /**
@@ -20,8 +20,8 @@ Page({
     const { signImgKey } = options;
     if (signImgKey) {
       this.setData({
-        signImgKey,
-      })
+        signImgKey
+      });
     }
   },
 
@@ -36,72 +36,72 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    
+
   },
-  switch2Change: function(e) {
+  switch2Change: function (e) {
     const { value } = e.detail;
     this.setData({
       agreePact: value,
-      canSubmit: value,
-    })
+      canSubmit: value
+    });
   },
   changeRentType: function (e) {
     this.setData({
       rentType: e.detail.value
-    })
-  },
-  rediectPact: function(e) {
-    wx.navigateTo({
-      url: '../rentSign/rentSign?onlyView=true',
     });
   },
-  bindRentAddress: function(e) {
-    this.setData({
-      rentAddress: e.detail.value,
-    })
+  rediectPact: function (e) {
+    tt.navigateTo({
+      url: '../rentSign/rentSign?onlyView=true'
+    });
   },
-  submitData: async function() {
+  bindRentAddress: function (e) {
+    this.setData({
+      rentAddress: e.detail.value
+    });
+  },
+  submitData: async function () {
     const { agreePact, rentAddress, rentType, signImgKey } = this.data;
     if (!agreePact) {
-      wx.showToast({
+      tt.showToast({
         title: '请先勾选阅读条款',
-        icon: 'none',
+        icon: 'none'
       });
       return;
     }
     if (!rentType) {
-      wx.showToast({
+      tt.showToast({
         title: '请选择外租类型',
-        icon: 'none',
+        icon: 'none'
       });
       return;
     }
     if (!rentAddress) {
-      wx.showToast({
+      tt.showToast({
         title: '请输入外租地址',
-        icon: 'none',
+        icon: 'none'
       });
       return;
     }
     const params = {
       rentType,
       rentAddress,
-      signImgKey,
-    }
+      signImgKey
+    };
     await submitRent(params);
     this.setData({
-      canSubmit: false,
+      canSubmit: false
     });
-    wx.showToast({
+    tt.showToast({
       title: '提交成功',
       icon: 'success',
-      duration: 2000,
+      duration: 2000
     });
-    setTimeout(function() {
-      wx.navigateBack({
-        delta: 0,
-      })
-    }, 2000)
+    setTimeout(function () {
+      tt.navigateBack({
+        delta: 0
+      });
+    }, 2000);
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -137,4 +137,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

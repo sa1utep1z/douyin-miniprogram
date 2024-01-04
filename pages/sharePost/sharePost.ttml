@@ -1,0 +1,15 @@
+<!--pages/sharePost/sharePost.ttml-->
+<view class="container">
+  <image class="post-img" mode="widthFix" src="{{postUrl}}"></image>
+  <view style="width: 580rpx;">
+    <block tt:if="{{jobId}}">
+      <view style="width: 46%; float: left; margin-left: 2%;">
+        <button tt:if="{{postUrl}}" class="btn-tap" bindtap="posterTap">切换海报</button>
+      </view>
+    </block>
+    <view style="{{jobId ? 'width: 46%; float: right; margin-right: 2%;' : 'width: 90%; margin: 0 auto;'}}">
+      <button tt:if="{{postUrl}}" class="btn-download" bindtap="downloadPost">保存海报到相册</button>
+    </view>
+  </view>
+</view>
+

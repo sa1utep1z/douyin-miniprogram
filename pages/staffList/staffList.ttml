@@ -1,0 +1,45 @@
+<!--pages/staffList/staffList.ttml-->
+<sjs module="tools" src="../../utils/util.sjs"></sjs>
+<view class="container">
+  <view style="width: 100%;">
+    <van-cell title="日期区间" title-width="150rpx" is-link value="{{dateStr}}" bind:click="onDisplay" />
+  </view>
+  <van-calendar show="{{ show }}" type="range" bind:close="onClose" title="选择日期区间" bind:confirm="onConfirm" color="#018EFF" min-date="{{minDate}}" allow-same-day="{{true}}" />
+  <scroll-view scroll-y="{{true}}" lower-threshold="50" show-scrollbar="{{false}}" class="scroll-view" bindscrolltolower="onLoadMore">
+    <block tt:for="{{staffList}}" tt:key="id">
+      <view class="staff-view">
+        <view class="staff-row">
+          <view class="item_left"><text>微信昵称</text></view>
+          <view class="color_blue item_right" bindtap="handleNick" data-phone="{{item.mobile}}">{{item.weChatName===null?'无':item.weChatName}}</view>
+        </view>
+        <view class="staff-row">
+          <view class="item_left"><text>手机号码</text></view>
+          <view class="color_blue item_right" bindtap="handleCall" data-phone="{{item.mobile}}">{{item.mobile}}</view>
+        </view>
+        <view class="staff-row">
+          <view class="item_left"><text>用户来源</text></view>
+          <view class="item_right">{{item.userSource===null?'无':item.userSource}}</view>
+        </view>
+        <view class="staff-row">
+          <view class="item_left"><text>时间</text></view>
+          <view class="item_right">{{tools.formatTimeYMD(item.createdDate)}}</view>
+        </view>
+        <view class="staff-row">
+          <view class="item_left"><text>位置</text></view>
+          <view class="item_right">{{item.locationInfo}}</view>
+        </view>
+      </view>
+    </block>
+    <block tt:if="{{loadingStatus === 1}}">
+    <view class="status-loading" id="status-loading">
+      <van-loading type="spinner" size="24rpx" color="#999999">加载中...</van-loading>
+    </view>
+  </block>
+  <block tt:if="{{loadingStatus === 2}}">
+    <view class="status-finish">
+        <van-divider hairline contentPosition="center">{{staffList.length===0?'暂无数据':'由众鼎提供技术支持'}}</van-divider>
+    </view>
+  </block>
+  </scroll-view>
+</view>
+

@@ -1,0 +1,27 @@
+<sjs src="./feedbackItem.sjs" module="tool"></sjs>
+<sjs src="../resignApplyItem/resignApply.sjs" module="tool2"></sjs>
+
+<view class="list-item item-position" bindtap="onItemClick">
+  <view class="{{tool.getShapeType(item.status)}}" />
+  <view class="item-position-text">{{tool.getShapeText(item.status)}}</view>
+  <view class="item-row">
+    <view class="job-title">会员姓名：{{item.userName}}</view>
+  </view>
+  <view class="item-row">
+    <view class="job-title">联系方式：{{item.mobile}}</view>
+  </view>
+  <view class="item-row">
+    <view class="job-title">企业：{{item.companyShortName}}</view>
+  </view>
+  <view class="item-row">
+    <view class="job-title">反馈类型：{{tool.getFeedbackType(item.type)}}</view>
+  </view>
+  <view class="item-row">
+    <view class="job-title">反馈内容：{{item.content}}</view>
+  </view>
+  <van-divider hairline></van-divider>
+  <view class="time-view">
+    <view class="time-text">{{tool2.formatTime(item.createdDate)}}</view>
+    <view class="confirm-btn2" catchtap="onCancelApply" tt:if="{{item.status === 'PENDING'}}">取消申请</view>
+  </view>
+</view>

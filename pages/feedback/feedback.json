@@ -1,6 +1,1 @@
-{
-  "usingComponents": {
-    "v-button": "../../components/CustomButton/CustomButton"
-  },
-  "navigationBarTitleText": "意见反馈"
-}
+{"usingComponents":{"v-button":"../../components/CustomButton/CustomButton"},"navigationBarTitleText":"意见反馈"}

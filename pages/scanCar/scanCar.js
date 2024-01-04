@@ -1,5 +1,5 @@
 // pages/scanCar/scanCar.js
-import { submitRiding } from '../../api/place'
+import { submitRiding } from '../../api/place';
 Page({
 
   /**
@@ -17,43 +17,43 @@ Page({
     if (carId) {
       this.onScan(carId);
     } else {
-      wx.showToast({
+      tt.showToast({
         title: '车辆信息缺失',
         icon: 'error',
         duration: 3000
       });
-      setTimeout(function() {
-        wx.navigateBack({
-          delta: 0,
-        })
+      setTimeout(function () {
+        tt.navigateBack({
+          delta: 0
+        });
       }, 3000);
       return;
     }
   },
-  onScan: async function(carId) {
+  onScan: async function (carId) {
     const params = { carId };
     await submitRiding(params).then((res) => {
-      wx.showToast({
+      tt.showToast({
         title: '登记成功',
         icon: 'success',
         duration: 3000
       });
-      setTimeout(function() {
-        wx.navigateBack({
-          delta: 0,
-        })
+      setTimeout(function () {
+        tt.navigateBack({
+          delta: 0
+        });
       }, 3000);
       return;
     }).catch((err) => {
-      wx.showToast({
+      tt.showToast({
         title: err.msg,
         icon: 'none',
         duration: 3000
       });
-      setTimeout(function() {
-        wx.navigateBack({
-          delta: 0,
-        })
+      setTimeout(function () {
+        tt.navigateBack({
+          delta: 0
+        });
       }, 3000);
       return;
     });
@@ -106,4 +106,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

@@ -1,0 +1,90 @@
+<!--index.ttml-->
+<!--可拖动按钮控件表-->
+<!--buttonStart和buttonEnd一定不能用catch事件，否则按钮点击事件会失效-->
+<block tt:if="{{existPreMode}}">
+  <view class="btn_Suspension" bindtap="btn_Suspension_click" catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd" style="top:{{buttonTop}}px;left:{{buttonLeft}}px;">
+    <view style="width: 130rpx; height: 65rpx; float: left;">
+      <image mode="widthFix" show-menu-by-longpress="true" class="Suspension_logo" src="../../assets/images/index/prepareSignUp.png"></image>
+    </view>
+    <view style="width: 130rpx; height: 65rpx; float: left; text-align: center;">预报名</view>
+  </view>
+</block>
+<view style="height: {{statusNavBarHeight}}px;" class="navigator">
+  <view style="height: {{height}}px; margin-top: {{top}}px;" class="title-bar">
+    <view class="search-box" style="height: {{height}}px">
+      <image class="search-icon" src="../../assets/images/public/icon_search.png" />
+      <input value="{{keyWord}}" class="search-text" placeholder="请输入职位或公司" type="text" bindconfirm="handleSearchConfirm" bindinput="handleSearchInput"></input>
+      <image src="../../assets/images/public/icon_delete.png" tt:if="{{keyWord.length>0}}" class="clear-text" bindtap="handleRest" />
+    </view>
+  </view>
+</view>
+<scroll-view enhanced="{{true}}" show-scrollbar="{{false}}" scroll-y="true" class="scroll-view" lower-threshol="50" bindscrolltolower="onLoadMore">
+  <view class="container" style="padding-top: {{statusNavBarHeight}}px;">
+  <view class="swipe-view">
+    <swiper indicator-dots autoplay interval="{{4000}}" indicator-color="rgba(255,255,255, .5)" indicator-active-color="#ffffff">
+      <block tt:for="{{bannerList}}" tt:key="*this">
+        <swiper-item>
+          <image class="swiper-item" src="{{item.coverImage.url}}" bindtap="onBannerClick" data-bean="{{item}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="tab-view">
+    <block tt:for="{{workType}}" tt:key="index">
+      <view class="tab-item" bindtap="onTabClicked" data-index="{{index}}">
+        <view class="tab-item-title {{listSearchType===index?'tab-title-active':'tab-title-normal'}}">{{item.title}}</view>
+      </view>
+    </block>
+  </view>
+  <block tt:for="{{jobList}}" tt:key="index">
+    <view class="job-view" bindtap="handleItemClick" data-item="{{item}}">
+      <view class="job-head-row">
+        <image class="job-image" src="{{item.positionImage}}"></image>
+        <view class="job-right-column">
+          <view class="job-title">{{item.jobName || ''}}</view>
+          <block tt:if="{{item.tags.length<=3}}">
+            <view class="job-tag-row">
+              <view class="job-tag" tt:for="{{item.tags}}" tt:key="index">{{item}}</view>
+            </view>
+          </block>
+          <block tt:if="{{item.tags.length>3}}">
+            <view class="job-tag-row">
+              <view class="job-tag">{{item.tags[0]}}</view>
+              <view class="job-tag">{{item.tags[1]}}</view>
+              <view class="job-tag">{{item.tags[2]}}</view>
+            </view>
+          </block>
+         
+          <view class="job-price-row">
+            <view class="job-price">{{item.salaryStart || ''}}-{{item.salaryEnd || ''}}<text class="job-price-unit">元/月</text></view>
+            <view class="job-position">{{item.area}}</view>
+          </view>
+        </view>
+      </view>
+      <van-divider hairline class="van-divider-item" />
+      <view class="job-action-row">
+        <view class="job-des">{{item.recommendExplain || ''}}<span style="{{item.recommendAmount ? 'color: red; margin-right: 50rpx;' : 'color: red; margin-right: 0rpx;'}}">{{item.recommendAmount || ''}}</span>{{item.debtExplain || ''}}<span style="color: red;">{{item.debtAmount || ''}}</span></view>
+        <view class="job-des"></view>
+        <view class="job-inner-row">
+          <view class="job-register" catchtap="onSignUp" data-id="{{item.id}}">报名<span class="job-register-text">+</span></view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block tt:if="{{loadingStatus === 1}}">
+    <view class="status-loading" id="status-loading">
+      <van-loading type="spinner" size="24rpx" color="#999999">加载中...</van-loading>
+    </view>
+  </block>
+  <block tt:if="{{loadingStatus === 2}}">
+    <view class="status-finish">
+        <van-divider hairline contentPosition="center">{{jobList.length===0?'暂无数据':'由众鼎提供技术支持'}}</van-divider>
+    </view>
+  </block>
+  </view>
+  <van-overlay show="{{ showSuccess }}" bind:click="onClickHide">
+    <view class="wrapper">
+      <image class="success" src="https://labor-prod.oss-cn-shenzhen.aliyuncs.com/laborMgt/labor/miniProgram/img_register_success.png" />
+    </view>
+  </van-overlay>
+</scroll-view>

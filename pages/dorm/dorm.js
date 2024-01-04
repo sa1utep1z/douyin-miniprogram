@@ -1,6 +1,6 @@
 // pages/dorm/dorm.js
-import { listDormLiveData, fetchButtonCheck, fetchCurrDormLiveInfo, submitDormLiveOutApply, submitRepair } from '../../api/dorm'
-import { uploadImage } from '../../api/commonApi'
+import { listDormLiveData, fetchButtonCheck, fetchCurrDormLiveInfo, submitDormLiveOutApply, submitRepair } from '../../api/dorm';
+import { uploadImage } from '../../api/commonApi';
 Page({
 
   /**
@@ -21,30 +21,30 @@ Page({
     startDateLimit: new Date().setHours(0, 0, 0, 0),
     outApplyReasonIndex: '', // 退宿原因index
     outApplyReasonOptions: [
-      {"title": "离职退宿", "value": "DORM_LIVE_OUT_RESIGN"},
-      {"title": "违纪取消退宿", "value": "DORM_LIVE_OUT_VIOLATE"},
-      {"title": "个人外租退宿", "value": "DORM_LIVE_OUT_PERSONAL"},
-      {"title": "调迁宿舍", "value": "DORM_LIVE_OUT_TRANSFER"},
-    ],
+    { "title": "离职退宿", "value": "DORM_LIVE_OUT_RESIGN" },
+    { "title": "违纪取消退宿", "value": "DORM_LIVE_OUT_VIOLATE" },
+    { "title": "个人外租退宿", "value": "DORM_LIVE_OUT_PERSONAL" },
+    { "title": "调迁宿舍", "value": "DORM_LIVE_OUT_TRANSFER" }],
+
     liveOutDate: '',
     showRepairDialog: false,
     repairApplyTypeIndex: '', // 报修原因index
     repairApplyTypeOptions: [
-      {"title": "灯管类", "value": "DORM_REPAIR_LAMP"},
-      {"title": "门锁类", "value": "DORM_REPAIR_DOOR"},
-      {"title": "床类", "value": "DORM_REPAIR_BED"},
-      {"title": "管道堵塞", "value": "DORM_REPAIR_PIPE_BLOCKAGE"},
-      {"title": "马桶", "value": "DORM_REPAIR_CLOSESTOOL"},
-      {"title": "水龙头", "value": "DORM_REPAIR_TAP"},
-      {"title": "沐浴喷头", "value": "DORM_REPAIR_SHOWER_NOZZLE"},
-      {"title": "空调器", "value": "DORM_REPAIR_AIRCONDITION"},
-      {"title": "热水器", "value": "DORM_REPAIR_HEATER"},
-      {"title": "插座线路", "value": "DORM_REPAIR_SOCKET_LINE"},
-      {"title": "其他", "value": "DORM_REPAIR_OTHER"},
-    ],
+    { "title": "灯管类", "value": "DORM_REPAIR_LAMP" },
+    { "title": "门锁类", "value": "DORM_REPAIR_DOOR" },
+    { "title": "床类", "value": "DORM_REPAIR_BED" },
+    { "title": "管道堵塞", "value": "DORM_REPAIR_PIPE_BLOCKAGE" },
+    { "title": "马桶", "value": "DORM_REPAIR_CLOSESTOOL" },
+    { "title": "水龙头", "value": "DORM_REPAIR_TAP" },
+    { "title": "沐浴喷头", "value": "DORM_REPAIR_SHOWER_NOZZLE" },
+    { "title": "空调器", "value": "DORM_REPAIR_AIRCONDITION" },
+    { "title": "热水器", "value": "DORM_REPAIR_HEATER" },
+    { "title": "插座线路", "value": "DORM_REPAIR_SOCKET_LINE" },
+    { "title": "其他", "value": "DORM_REPAIR_OTHER" }],
+
     repairApplyContent: '',
-    imageList:[],
-    imageSubList:[],
+    imageList: [],
+    imageSubList: []
   },
 
   /**
@@ -67,140 +67,140 @@ Page({
   onShow() {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,
+      pageNumber: 0
     });
     this.getDormLiveData();
     this.getButtonCheck();
   },
-  bindPickerOutReason: function(e) {
+  bindPickerOutReason: function (e) {
     this.setData({
-      outApplyReasonIndex: e.detail.value,
-    })
+      outApplyReasonIndex: e.detail.value
+    });
   },
-  bindPickerRepairType: function(e) {
+  bindPickerRepairType: function (e) {
     this.setData({
-      repairApplyTypeIndex: e.detail.value,
-    })
+      repairApplyTypeIndex: e.detail.value
+    });
   },
-  bindRepairApplyContent: function(e) {
+  bindRepairApplyContent: function (e) {
     this.setData({
-      repairApplyContent: e.detail.value,
-    })
+      repairApplyContent: e.detail.value
+    });
   },
-  bindLiveOutDateChange: function(e) {
+  bindLiveOutDateChange: function (e) {
     this.setData({
-      liveOutDate: e.detail.value,
-    })
+      liveOutDate: e.detail.value
+    });
   },
-  handelClick: function(e) {
+  handelClick: function (e) {
     const { tag } = e.currentTarget.dataset;
-    switch(tag) {
+    switch (tag) {
       case 'stayDialog':
         this.setData({
-          showStayDialog: true,
-        })
+          showStayDialog: true
+        });
         break;
       case 'dropOut':
         this.getCurrDormLiveInfo();
         this.setData({
-          showLiveOutDialog: true,
-        })
+          showLiveOutDialog: true
+        });
         break;
       case 'repair':
         this.getCurrDormLiveInfo();
         this.setData({
-          showRepairDialog: true,
-        })
+          showRepairDialog: true
+        });
         break;
       case 'stay':
         this.setData({
-          showStayDialog: false,
-        })
-        wx.navigateTo({
-          url: './pactSign/pactSign',
-        }); 
+          showStayDialog: false
+        });
+        tt.navigateTo({
+          url: './pactSign/pactSign'
+        });
         break;
       case 'rent':
         this.setData({
-          showStayDialog: false,
-        })
-        wx.navigateTo({
-          url: './rentSign/rentSign',
+          showStayDialog: false
+        });
+        tt.navigateTo({
+          url: './rentSign/rentSign'
         });
         break;
       default:
-        wx.showToast({
+        tt.showToast({
           title: '此功能暂未开放',
-          icon: 'none',
+          icon: 'none'
         });
-        break;
-    }
+        break;}
+
   },
-  closeStayDialog: function() {
+  closeStayDialog: function () {
     this.setData({
-      showStayDialog: false,
-    })
+      showStayDialog: false
+    });
   },
-  chooseImage: function(){
-    wx.showActionSheet({
+  chooseImage: function () {
+    tt.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       itemColor: "#00000",
-      success: (res)=> {
-       if (!res.cancel) {
-        if (res.tapIndex == 0) {
-         this.chooseWxImage('album')
-        } else if (res.tapIndex == 1) {
-          this.chooseWxImage('camera')
+      success: (res) => {
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            this.chooseWxImage('album');
+          } else if (res.tapIndex == 1) {
+            this.chooseWxImage('camera');
+          }
         }
-       }
       }
-     })
+    });
   },
-  chooseWxImage:function(type){
-    wx.chooseImage({
+  chooseWxImage: function (type) {
+    tt.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: [type],
-      success:  (res) =>{
-       this.uploadImg(res.tempFilePaths[0])
+      success: (res) => {
+        this.uploadImg(res.tempFilePaths[0]);
       }
-     }) 
+    });
   },
-  uploadImg:async function(data){
-    const { imageList,imageSubList }=this.data;
+  uploadImg: async function (data) {
+    const { imageList, imageSubList } = this.data;
     const res = await uploadImage(data);
-    if (res.code == 0) { 
-      imageSubList.push(res.data.fileKey)
-      imageList.push(data)
+    if (res.code == 0) {
+      imageSubList.push(res.data.fileKey);
+      imageList.push(data);
       this.setData({
-        imageSubList:imageSubList,
-        imageList:imageList
-      })
+        imageSubList: imageSubList,
+        imageList: imageList
+      });
     }
   },
-  deleteImg:function(e){
-    const { imageList, imageSubList } =this.data
-    const _index = e.target.dataset.index
-    imageList.splice(_index,1)
-    imageSubList.splice(_index,1)
+  deleteImg: function (e) {
+    const { imageList, imageSubList } = this.data;
+    const _index = e.target.dataset.index;
+    imageList.splice(_index, 1);
+    imageSubList.splice(_index, 1);
     this.setData({
-      imageList:imageList,
-      imageSubList:imageSubList
-     })
+      imageList: imageList,
+      imageSubList: imageSubList
+    });
   },
-  getCurrDormLiveInfo: async function() {
+  getCurrDormLiveInfo: async function () {
     const res = await fetchCurrDormLiveInfo();
     this.setData({
-      currDormLiveData: res.data,
-    })
+      currDormLiveData: res.data
+    });
   },
-  getDormLiveData: async function() {
+  getDormLiveData: async function () {
     const res = await listDormLiveData();
     this.setData({
-      dataList: res.data,
-    })
+      dataList: res.data
+    });
   },
-  getButtonCheck: async function() {
+  getButtonCheck: async function () {
     const res = await fetchButtonCheck();
     const { liveOutButton, liveFixButton, liveApplyButton, rentButton } = res.data;
     this.setData({
@@ -208,21 +208,21 @@ Page({
       liveFixButton,
       liveApplyButton,
       rentButton
-    })
+    });
   },
-  handleLiveOutCancel: function() {
+  handleLiveOutCancel: function () {
     this.setData({
       showLiveOutDialog: false,
       currDormLiveData: {},
       outApplyReasonIndex: '',
-      liveOutDate: '',
-    })
+      liveOutDate: ''
+    });
   },
-  handleLiveOutConfirm: async function() {
+  handleLiveOutConfirm: async function () {
     const { currDormLiveData, outApplyReasonIndex, outApplyReasonOptions, liveOutDate } = this.data;
     const { id } = currDormLiveData;
     if (outApplyReasonIndex === '' || liveOutDate === '') {
-      wx.showToast({
+      tt.showToast({
         title: '请填写信息',
         icon: 'error',
         duration: 2000
@@ -230,7 +230,7 @@ Page({
       return;
     }
     if (!id) {
-      wx.showToast({
+      tt.showToast({
         title: '提交失败',
         icon: 'error',
         duration: 2000
@@ -239,10 +239,10 @@ Page({
     }
     const params = {
       liveOutDate,
-      liveOutReasonType: outApplyReasonOptions[outApplyReasonIndex].value,
+      liveOutReasonType: outApplyReasonOptions[outApplyReasonIndex].value
     };
     await submitDormLiveOutApply(id, params);
-    wx.showToast({
+    tt.showToast({
       title: '退宿申请成功',
       icon: 'success',
       duration: 2000
@@ -252,24 +252,24 @@ Page({
       showLiveOutDialog: false,
       currDormLiveData: {},
       outApplyReasonIndex: '',
-      liveOutDate: '',
-    })
+      liveOutDate: ''
+    });
     this.getDormLiveData();
   },
-  handleRepairCancel: function() {
+  handleRepairCancel: function () {
     this.setData({
       showRepairDialog: false,
       currDormLiveData: {},
       repairApplyTypeIndex: '',
       repairApplyContent: '',
-      imageList:[],
-      imageSubList:[],
-    })
+      imageList: [],
+      imageSubList: []
+    });
   },
-  handleRepairConfirm: async function() {
+  handleRepairConfirm: async function () {
     const { repairApplyTypeIndex, repairApplyTypeOptions, repairApplyContent, imageSubList } = this.data;
     if (repairApplyTypeIndex === '' || repairApplyContent === '') {
-      wx.showToast({
+      tt.showToast({
         title: '报修事项和故障描述不能为空',
         icon: 'none',
         duration: 2000
@@ -279,10 +279,10 @@ Page({
     const params = {
       repairContent: repairApplyContent,
       type: repairApplyTypeOptions[repairApplyTypeIndex].value,
-      faultImgs: imageSubList,
+      faultImgs: imageSubList
     };
     await submitRepair(params);
-    wx.showToast({
+    tt.showToast({
       title: '维修申请成功',
       icon: 'success',
       duration: 2000
@@ -292,56 +292,56 @@ Page({
       currDormLiveData: {},
       repairApplyTypeIndex: '',
       repairApplyContent: '',
-      imageList:[],
-      imageSubList:[],
-    })
+      imageList: [],
+      imageSubList: []
+    });
     this.getDormLiveData();
   },
   onLoadMore: async function () {
-    const { pageNumber, dataList, pageSize, loadingStatus} = this.data;
-    if ( loadingStatus!==0 ) {
+    const { pageNumber, dataList, pageSize, loadingStatus } = this.data;
+    if (loadingStatus !== 0) {
       console.log('过滤无效请求');
       return;
     }
     this.setLoadingStart();
     const params = {
       pageNumber,
-      pageSize,
+      pageSize
+    };
+    const res = await listResignApply(params);
+    const totalPages = res.data.totalPages;
+    if (pageNumber === 0) {
+      this.setData({
+        dataList: res.data.content
+      });
+    } else {
+      this.setData({
+        dataList: dataList.concat(res.data.content)
+      });
     }
-      const res = await listResignApply(params);
-      const totalPages = res.data.totalPages;
-      if(pageNumber === 0) {
-        this.setData({
-          dataList: res.data.content,
-        })
-      } else {
-        this.setData({
-          dataList: dataList.concat(res.data.content),
-        })
-      }
-      if(pageNumber < totalPages-1){
-        this.setLoadingReady();
-        this.setData({
-          pageNumber: pageNumber + 1,
-        });
-      } else {
-        this.setLoadingNoMore();
-      }
+    if (pageNumber < totalPages - 1) {
+      this.setLoadingReady();
+      this.setData({
+        pageNumber: pageNumber + 1
+      });
+    } else {
+      this.setLoadingNoMore();
+    }
   },
   setLoadingStart: function () {
     this.setData({
-      loadingStatus: 1,
-    }) 
+      loadingStatus: 1
+    });
   },
   setLoadingReady: function () {
     this.setData({
-      loadingStatus: 0,
-    }) 
+      loadingStatus: 0
+    });
   },
   setLoadingNoMore: function () {
     this.setData({
-      loadingStatus: 2,
-    }) 
+      loadingStatus: 2
+    });
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -377,4 +377,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

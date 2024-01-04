@@ -1,6 +1,6 @@
 // pages/entryData/entryData.js
-import { uploadImage } from '../../api/commonApi'
-import { fetchEntryDataInfo, submitEntryDataInfo } from '../../api/entryData'
+import { uploadImage } from '../../api/commonApi';
+import { fetchEntryDataInfo, submitEntryDataInfo } from '../../api/entryData';
 Page({
 
   /**
@@ -13,7 +13,7 @@ Page({
     urgentMobile: '',
     urgentRelation: '',
     entryImgs: [],
-    entryInfo: {},
+    entryInfo: {}
   },
 
   /**
@@ -28,95 +28,95 @@ Page({
   onShow() {
     this.getEntryDataInfo();
   },
-  jumpAuthCenterNew: function() {
-    wx.navigateTo({
+  jumpAuthCenterNew: function () {
+    tt.navigateTo({
       url: '/pages/authCenterNew/authCenterNew'
     });
   },
-  jumpBankCard: function() {
-    wx.navigateTo({
+  jumpBankCard: function () {
+    tt.navigateTo({
       url: '/pages/bankCard/bankCard'
     });
   },
-  getEntryDataInfo: async function() {
+  getEntryDataInfo: async function () {
     const res = await fetchEntryDataInfo();
-    const { qqNumber,urgentName,urgentMobile,urgentRelation } = res.data;
+    const { qqNumber, urgentName, urgentMobile, urgentRelation } = res.data;
     this.setData({
       qqNumber,
       urgentName,
       urgentMobile,
       urgentRelation,
       entryInfo: res.data
-    })
+    });
   },
-  submitData: async function() {
-    const { qqNumber,urgentName,urgentMobile,urgentRelation,entryImgs,entryInfo } = this.data;
-    const { userName,idNo,mobile,bankName,bankAccount } = entryInfo;
+  submitData: async function () {
+    const { qqNumber, urgentName, urgentMobile, urgentRelation, entryImgs, entryInfo } = this.data;
+    const { userName, idNo, mobile, bankName, bankAccount } = entryInfo;
     if (!userName || !idNo || !mobile) {
-      wx.showToast({
+      tt.showToast({
         title: '实名信息未完整，请点击去实名',
         icon: 'none',
         duration: 3000
       });
       return;
     }
-    this.setData({submitDisabled: true})
+    this.setData({ submitDisabled: true });
     const params = {
       qqNumber,
       urgentName,
       urgentMobile,
       urgentRelation,
-      otherEntryMaterials: entryImgs.map(e => ({fileKey: e.ossKey}))
+      otherEntryMaterials: entryImgs.map((e) => ({ fileKey: e.ossKey }))
     };
     await submitEntryDataInfo(params).then((res) => {
       if (res.code === 0) {
-        wx.showToast({
+        tt.showToast({
           title: '提交成功',
           icon: 'success',
           duration: 3000
         });
         setTimeout(() => {
-          wx.navigateBack({
-            delta: 0,
+          tt.navigateBack({
+            delta: 0
           });
         }, 2500);
       }
     }).catch((err) => {
-      wx.showToast({
+      tt.showToast({
         title: err.msg,
         icon: 'none',
         duration: 3000
       });
-      this.setData({submitDisabled: false})
+      this.setData({ submitDisabled: false });
     });
   },
-  afterRead: function(event) {
+  afterRead: function (event) {
     const { file } = event.detail;
-    file.forEach(f => this.uploadImgFile(f))
+    file.forEach((f) => this.uploadImgFile(f));
   },
-  uploadImgFile: async function(f) {
+  uploadImgFile: async function (f) {
     const res = await uploadImage(f.url);
     if (res.code == 0) {
       const { entryImgs = [] } = this.data;
-      entryImgs.push({ ...f, ossKey: res.data.fileKey});
+      entryImgs.push({ ...f, ossKey: res.data.fileKey });
       this.setData({ entryImgs });
     }
   },
-  deleteImg: function(event) {
+  deleteImg: function (event) {
     const { index } = event.detail;
     const { entryImgs } = this.data;
     entryImgs.splice(index, 1);
     this.setData({ entryImgs });
   },
-  uploadImg: async function(data){
+  uploadImg: async function (data) {
     const res = await uploadImage(data);
-    if (res.code == 0) { 
-      imageSubList.push(res.data.fileKey)
-      imageList.push(data)
+    if (res.code == 0) {
+      imageSubList.push(res.data.fileKey);
+      imageList.push(data);
       this.setData({
-        imageSubList:imageSubList,
-        imageList:imageList
-      })
+        imageSubList: imageSubList,
+        imageList: imageList
+      });
     }
   },
   /**
@@ -160,4 +160,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

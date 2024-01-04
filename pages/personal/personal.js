@@ -1,6 +1,6 @@
 // pages/personal/personal.js
-import { fetchWalletBalance, fetchSharePostPersoanl, updateNickName } from '../../api/userApi' 
-import { withdraw } from '../../api/bankApi'
+import { fetchWalletBalance, fetchSharePostPersoanl, updateNickName } from '../../api/userApi';
+import { withdraw } from '../../api/bankApi';
 Page({
 
   /**
@@ -9,7 +9,7 @@ Page({
   data: {
     userInfo: {},
     showAmt: false,
-    applyCount: 0,
+    applyCount: 0
   },
 
   /**
@@ -17,10 +17,10 @@ Page({
    */
   onLoad: function (options) {
     //是否展示金额明文
-    const showAmt = wx.getStorageSync('showAmt');
+    const showAmt = tt.getStorageSync('showAmt');
     this.setData({
-      showAmt,
-    })
+      showAmt
+    });
   },
 
   /**
@@ -39,30 +39,30 @@ Page({
 
   showUserInfoModel: function (params) {
     this.setData({
-      applyCount: 1,
-    })
-    wx.showModal({
-     title: '温馨提示',
-     content: '我们将申请您的微信昵称和头像，用于完善会员资料',
-     showCancel: false,
-     success: (res)=>{
-      wx.getUserProfile({
-        desc: '用于完善会员资料',
-        success: (res) => {
-          const param = {
-            weChatName: res.userInfo.nickName,
-            weChatIconUrl: res.userInfo.avatarUrl,
+      applyCount: 1
+    });
+    tt.showModal({
+      title: '温馨提示',
+      content: '我们将申请您的微信昵称和头像，用于完善会员资料',
+      showCancel: false,
+      success: (res) => {
+        tt.getUserProfile({
+          desc: '用于完善会员资料',
+          success: (res) => {
+            const param = {
+              weChatName: res.userInfo.nickName,
+              weChatIconUrl: res.userInfo.avatarUrl
+            };
+            const { userInfo } = this.data;
+            userInfo.weChatIconUrl = res.userInfo.avatarUrl;
+            userInfo.weChatName = res.userInfo.nickName;
+            this.setData({
+              userInfo
+            });
+            updateNickName(param);
           }
-          const { userInfo } = this.data;
-          userInfo.weChatIconUrl = res.userInfo.avatarUrl;
-          userInfo.weChatName = res.userInfo.nickName;
-          this.setData({
-            userInfo,
-          });
-          updateNickName(param);
-        }
-      });
-     }
+        });
+      }
     });
   },
 
@@ -70,24 +70,24 @@ Page({
   handelMenuClick: function (e) {
     const { tag } = e.currentTarget.dataset;
     const { userInfo } = this.data;
-    switch(tag) {
+    switch (tag) {
       case 'entryData':
-        wx.navigateTo({
-          url: '/pages/entryData/entryData',
-        })
-      break;
+        tt.navigateTo({
+          url: '/pages/entryData/entryData'
+        });
+        break;
       case 'contract':
-        wx.navigateTo({
-          url: '../../pages/contract/contract',
-        })
+        tt.navigateTo({
+          url: '../../pages/contract/contract'
+        });
         break;
       case 'lottery':
         if (!userInfo.validation) {
           this.noVerifyRediect();
         } else {
-          wx.navigateTo({
-            url: '/pages/lottery/lottery',
-          })
+          tt.navigateTo({
+            url: '/pages/lottery/lottery'
+          });
         }
         break;
       case 'registration':
@@ -96,62 +96,62 @@ Page({
         //   duration: 3000,
         //   icon: 'none',
         // });
-        wx.navigateTo({
-          url: '../../pages/registration/registration',
-        })
+        tt.navigateTo({
+          url: '../../pages/registration/registration'
+        });
         break;
       case 'member':
-        wx.navigateTo({
-          url: '../../pages/member/member',
-        })
+        tt.navigateTo({
+          url: '../../pages/member/member'
+        });
         break;
       case 'expandPoster':
-        wx.navigateTo({
-          url: '../../pages/expandPosterView/expandPosterView',
-        })
+        tt.navigateTo({
+          url: '../../pages/expandPosterView/expandPosterView'
+        });
         break;
       case 'resignApply':
         if (!userInfo.validation) {
           this.noVerifyRediect();
         } else {
           if (userInfo.memberStatus !== 'PREPARE_JOB_RESIGN' && userInfo.memberStatus !== 'JOB_ON') {
-            wx.showToast({
+            tt.showToast({
               title: '您还未入职',
-              icon: 'none',
+              icon: 'none'
             });
             return;
           }
-          wx.navigateTo({
-            url: '../../pages/resignApply/resignApply',
+          tt.navigateTo({
+            url: '../../pages/resignApply/resignApply'
           });
         }
         break;
       case 'feedback':
-        wx.navigateTo({
-          url: '../../pages/feedback2/feedback2',
-        })
+        tt.navigateTo({
+          url: '../../pages/feedback2/feedback2'
+        });
         break;
       case 'share':
-        wx.navigateTo({
-          url: '../../pages/sharePost/sharePost',
-        })
+        tt.navigateTo({
+          url: '../../pages/sharePost/sharePost'
+        });
         break;
       case 'auth':
-        wx.navigateTo({
-          url: '../../pages/authDisplayNew/authDisplayNew',
+        tt.navigateTo({
+          url: '../../pages/authDisplayNew/authDisplayNew'
         });
         break;
       case 'contacts':
-        wx.navigateTo({
-          url: '../../pages/contacts/contacts',
+        tt.navigateTo({
+          url: '../../pages/contacts/contacts'
         });
         break;
       case 'bankCard':
         if (!userInfo.validation) {
           this.noVerifyRediect();
         } else {
-          wx.navigateTo({
-            url: '../../pages/bankCardView/bankCardView',
+          tt.navigateTo({
+            url: '../../pages/bankCardView/bankCardView'
           });
         }
         break;
@@ -159,8 +159,8 @@ Page({
         if (!userInfo.validation) {
           this.noVerifyRediect();
         } else {
-          wx.navigateTo({
-            url: '../../pages/payslip/payslip',
+          tt.navigateTo({
+            url: '../../pages/payslip/payslip'
           });
         }
         break;
@@ -168,8 +168,8 @@ Page({
         if (!userInfo.validation) {
           this.noVerifyRediect();
         } else {
-          wx.navigateTo({
-            url: '../../pages/advanceDetail/advanceDetail',
+          tt.navigateTo({
+            url: '../../pages/advanceDetail/advanceDetail'
           });
         }
         break;
@@ -177,83 +177,83 @@ Page({
         if (!userInfo.validation) {
           this.noVerifyRediect();
         } else {
-          wx.navigateTo({
-            url: '../../pages/dorm/dorm',
+          tt.navigateTo({
+            url: '../../pages/dorm/dorm'
           });
         }
         break;
       case 'staff':
-        wx.navigateTo({
-          url: '../../pages/staffList/staffList',
+        tt.navigateTo({
+          url: '../../pages/staffList/staffList'
         });
         break;
       case 'balance':
-        wx.navigateTo({
-          url: '../../pages/balanceRecord/blanceRecord',
+        tt.navigateTo({
+          url: '../../pages/balanceRecord/blanceRecord'
         });
         break;
       case 'recruiter-verify':
-        wx.navigateTo({
-          url: '../../pages/recruiterVerify/recruiterVerify',
+        tt.navigateTo({
+          url: '../../pages/recruiterVerify/recruiterVerify'
         });
         break;
       default:
-        wx.showToast({
+        tt.showToast({
           title: '此功能暂未开放',
-          icon: 'none',
-        });
-    }
+          icon: 'none'
+        });}
+
   },
-  noVerifyRediect: function() {
-    wx.showModal({
+  noVerifyRediect: function () {
+    tt.showModal({
       title: '温馨提示',
       content: '请先进行实名认证',
       confirmText: '去实名',
-      success: (res)=> {
+      success: (res) => {
         if (res.confirm) {
           //未实名 进入实名页面
-          wx.navigateTo({
-            url: '../../pages/authCenterNew/authCenterNew',
+          tt.navigateTo({
+            url: '../../pages/authCenterNew/authCenterNew'
           });
-        } 
+        }
       }
-    })
+    });
   },
   handelPhoneCall: function (e) {
     const { userInfo } = this.data;
-    if (!userInfo.recruiterMobile) { 
-      wx.showToast({
+    if (!userInfo.recruiterMobile) {
+      tt.showToast({
         title: '未获取到手机号',
         icon: 'none'
       });
       return;
-     }
-    wx.makePhoneCall({
-      phoneNumber: userInfo.recruiterMobile,
+    }
+    tt.makePhoneCall({
+      phoneNumber: userInfo.recruiterMobile
     });
   },
   handelCopyWechat: function (e) {
     const { userInfo } = this.data;
-    if (!userInfo.recruiterWeChat) { 
-     wx.showToast({
-       title: '未获取到微信号',
-       icon: 'none'
-     });
-     return;
+    if (!userInfo.recruiterWeChat) {
+      tt.showToast({
+        title: '未获取到微信号',
+        icon: 'none'
+      });
+      return;
     }
-    wx.setClipboardData({
+    tt.setClipboardData({
       data: userInfo.recruiterWeChat,
-      success (res) {
-        wx.getClipboardData({
-          success (res) {
-            wx.showToast({
+      success(res) {
+        tt.getClipboardData({
+          success(res) {
+            tt.showToast({
               title: '微信号已复制',
-              icon: 'success',
+              icon: 'success'
             });
           }
-        })
+        });
       }
-    })
+    });
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -267,7 +267,7 @@ Page({
    */
   onUnload: function () {
     const { showAmt } = this.data;
-    wx.setStorageSync('showAmt', showAmt);
+    tt.setStorageSync('showAmt', showAmt);
 
   },
 
@@ -294,7 +294,7 @@ Page({
         this.showUserInfoModel();
       }
       this.setData({
-        userInfo,
+        userInfo
       });
     } catch (error) {
       console.log(error);
@@ -303,74 +303,74 @@ Page({
   handleEye: async function (e) {
     const { showAmt } = this.data;
     this.setData({
-      showAmt: !showAmt,
+      showAmt: !showAmt
     });
   },
   handleWithdraw: function (e) {
-    wx.navigateTo({
-      url: '../../pages/withdraw/withdraw',
+    tt.navigateTo({
+      url: '../../pages/withdraw/withdraw'
     });
   },
-  qrCodeScan: function(e) {
-    wx.scanCode({
+  qrCodeScan: function (e) {
+    tt.scanCode({
       success(res) {
         const { scanType, result } = res;
         if (scanType !== 'QR_CODE') {
-          wx.showModal({
+          tt.showModal({
             title: '提示',
             showCancel: false,
             content: '不支持该二维码'
-          })
+          });
           return;
         }
         const arr = result.split('&');
         const obj = {};
-        arr.forEach(e => {
+        arr.forEach((e) => {
           const e_arr = e.split('=');
           if (e_arr.length == 2) {
             obj[e_arr[0]] = e_arr[1];
           }
-        })
+        });
         const { type, id } = obj;
         if (!result || !type || !id) {
-          wx.showModal({
+          tt.showModal({
             title: '提示',
             showCancel: false,
             content: '二维码信息缺失'
-          })
+          });
           return;
         }
         // 根绝类型做页面跳转
-        switch(type) {
+        switch (type) {
           case "roomBed":
-            wx.navigateTo({
-              url: '../../pages/dorm/scanBed/scanBed?bedId=' + id,
+            tt.navigateTo({
+              url: '../../pages/dorm/scanBed/scanBed?bedId=' + id
             });
             break;
           case "roomBuilding":
-            wx.navigateTo({
-              url: '../../pages/dorm/stayApply/stayApply?scanBuilding=true&roomBuildingId=' + id,
+            tt.navigateTo({
+              url: '../../pages/dorm/stayApply/stayApply?scanBuilding=true&roomBuildingId=' + id
             });
             break;
           case "car":
-            wx.navigateTo({
-              url: '../../pages/scanCar/scanCar?carId=' + id,
+            tt.navigateTo({
+              url: '../../pages/scanCar/scanCar?carId=' + id
             });
             break;
           case "giftActivity":
-            wx.navigateTo({
-              url: '/pages/giftScanReceive/giftScanReceive?giftActivityId=' + id,
+            tt.navigateTo({
+              url: '/pages/giftScanReceive/giftScanReceive?giftActivityId=' + id
             });
             break;
           default:
-            wx.showModal({
+            tt.showModal({
               title: '提示',
               showCancel: false,
               content: '类型错误'
-            })
-            break;
-        }
-      },
-    })
-  },
-})
+            });
+            break;}
+
+      }
+    });
+  }
+});

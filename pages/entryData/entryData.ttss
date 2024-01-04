@@ -1,0 +1,12 @@
+/* pages/entryData/entryData.ttss */
+.entryContainer {
+  padding: 30rpx;
+}
+.auth-label {
+  max-width: 80px;
+}
+.entry-title {
+  color: #2e2e2e;
+  height: 60rpx;
+  line-height: 60rpx;
+}

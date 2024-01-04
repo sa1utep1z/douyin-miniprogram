@@ -1,6 +1,6 @@
 // pages/lottery/lottery.js
-import { listLotteryActivity } from '../../api/opshub'
-import { fetchValidation } from '../../utils/validation'
+import { listLotteryActivity } from '../../api/opshub';
+import { fetchValidation } from '../../utils/validation';
 Page({
 
   /**
@@ -10,55 +10,55 @@ Page({
     pageSize: 15,
     pageNumber: 0,
     activityList: [],
-    loadingStatus: 0,
+    loadingStatus: 0
   },
   openWinningRecord: function () {
-    wx.navigateTo({
-      url: '/pages/winningRecord/winningRecord',
-    })
+    tt.navigateTo({
+      url: '/pages/winningRecord/winningRecord'
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    fetchValidation().then(r => {
+    fetchValidation().then((r) => {
       if (r) {
         this.onRefresh();
       }
-    })
+    });
   },
-  activityClick: function(e) {
-    const {id} = e.currentTarget.dataset;
-    wx.navigateTo({
-      url: '/pages/lotteryView/lotteryView?lotteryActivityId=' + id,
-    })
+  activityClick: function (e) {
+    const { id } = e.currentTarget.dataset;
+    tt.navigateTo({
+      url: '/pages/lotteryView/lotteryView?lotteryActivityId=' + id
+    });
   },
   onLoadMore: async function (e) {
-    const { pageNumber, activityList, pageSize, loadingStatus} = this.data;
-    if ( loadingStatus!==0 ) {
+    const { pageNumber, activityList, pageSize, loadingStatus } = this.data;
+    if (loadingStatus !== 0) {
       console.log('过滤无效请求');
       return;
     }
     this.setLoadingStart();
     const params = {
       pageNumber,
-      pageSize,
+      pageSize
     };
     const res = await listLotteryActivity(params);
     const totalPages = res.data.totalPages;
-    if(pageNumber === 0) {
+    if (pageNumber === 0) {
       this.setData({
-        activityList: res.data.content,
-      })
+        activityList: res.data.content
+      });
     } else {
       this.setData({
-        activityList: activityList.concat(res.data.content),
-      })
+        activityList: activityList.concat(res.data.content)
+      });
     }
-    if(pageNumber < totalPages-1){
+    if (pageNumber < totalPages - 1) {
       this.setLoadingReady();
       this.setData({
-        pageNumber: pageNumber + 1,
+        pageNumber: pageNumber + 1
       });
     } else {
       this.setLoadingNoMore();
@@ -67,24 +67,24 @@ Page({
   onRefresh: function (e) {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,   
+      pageNumber: 0
     });
     this.onLoadMore();
   },
   setLoadingStart: function () {
     this.setData({
-      loadingStatus: 1,
-    }) 
+      loadingStatus: 1
+    });
   },
   setLoadingReady: function () {
     this.setData({
-      loadingStatus: 0,
-    }) 
+      loadingStatus: 0
+    });
   },
   setLoadingNoMore: function () {
     this.setData({
-      loadingStatus: 2,
-    }) 
+      loadingStatus: 2
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -134,4 +134,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

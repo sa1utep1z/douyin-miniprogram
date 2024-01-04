@@ -1,10 +1,9 @@
 {
-  "usingComponents": {
-    "DormItem": "../../components/dormItem/dormItem",
-    "van-divider": "@vant/weapp/divider/index",
-    "van-loading": "@vant/weapp/loading/index",
-    "van-overlay": "@vant/weapp/overlay/index"
-    
-  },
-  "navigationBarTitleText": "宿舍服务"
+    "usingComponents": {
+        "DormItem": "../../components/dormItem/dormItem",
+        "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
+        "van-loading": "/miniprogram_npm/@vant/weapp/loading/index",
+        "van-overlay": "/miniprogram_npm/@vant/weapp/divider/index"
+    },
+    "navigationBarTitleText": "宿舍服务"
 }

@@ -1,0 +1,35 @@
+<!--pages/login/loginMobile.ttml-->
+<view class="container">
+  <view class="brand">
+    <view class="brand-company">众鼎人力</view>
+    <view class="brand-slogan">众鼎slogan</view>
+  </view>
+  <view class="code">
+    <view class="row">
+      <input placeholder="请输入您的电话号码" maxlength="11" bindinput="onMobileInput" placeholder-class="placeholder-class" value="{{mobile}}" type="number" />
+      <image src="../../assets/images/public/icon_delete.png" tt:if="{{showDelete}}" class="clear-text" bindtap="handleDelete"></image>
+    </view>
+    <van-divider hairline />
+    <view class="row">
+      <input placeholder="请输入验证码" maxlength="6" bindinput="onSmsInput" placeholder-class="placeholder-class" value="{{smsCode}}" type="number" />
+      <view class="sms-btn {{sendBtnText==='获取验证码'?'':'sms-count'}}" bindtap="onSendCode">{{sendBtnText}}</view>
+    </view>
+    <van-divider hairline />
+  </view> 
+  <button class="login-btn" bindtap="onLogin">登录</button>
+  <view class="law_text">
+    <text>登录代表您已同意</text><text class="law-text-blue">众鼎人力用户协议、隐私协议</text>
+  </view>
+  <van-dialog use-slot title="请输入图形验证码" show="{{ showImageCode }}" show-cancel-button confirm-button-color="#018EFF" bind:close="onDialogClose" bind:confirm="onDialogComfirm" before-close="{{verify}}">
+  <view class="image-code">
+      <input class="code-image-input" type="text" placeholder="请输入图形验证码" maxlength="4" data-value="validationCode" value="{{validationCode}}" bindinput="inputChange" placeholder-class="input-placeholder" />
+      <view class="getcode" bindtap="getGrapgCode">
+        <view class="refresh-btn">
+          <image class="refresh-img" src="../../assets/images/public/icon_refresh.png"></image>
+        </view>
+        <image class="code-image" src="{{grapgCodeUrl}}"></image>
+      </view>
+  </view>
+  </van-dialog>
+</view>
+

@@ -1,7 +1,1 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-icon": "../icon/index",
-    "van-info": "../info/index"
-  }
-}
+{"component":true,"usingComponents":{"van-icon":"../icon/index","van-info":"../info/index"}}

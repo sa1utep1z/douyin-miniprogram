@@ -1,6 +1,6 @@
 // pages/sharePost/sharePost.js
-import  urlConfig  from '../../utils/urlConfig';
-import { fetchPosterKeyList } from '../../api/share'
+import urlConfig from '../../utils/urlConfig';
+import { fetchPosterKeyList } from '../../api/share';
 const { baseUrl } = urlConfig();
 Page({
 
@@ -11,7 +11,7 @@ Page({
     postUrl: '',
     jobId: '',
     posterIdList: [],
-    posterKeyIndex: 0, // posterIdList下标。默认查看第一张海报，可以在posterIdList切换
+    posterKeyIndex: 0 // posterIdList下标。默认查看第一张海报，可以在posterIdList切换
   },
 
   /**
@@ -21,13 +21,13 @@ Page({
     const { jobId } = options;
     if (jobId) {
       this.setData({
-        jobId,
+        jobId
       });
-      this.getPosterKeyList().then(e => {
+      this.getPosterKeyList().then((e) => {
         if (e) {
           this.getSharePost(jobId);
         }
-      }) 
+      });
     } else {
       this.getSharePost('');
     }
@@ -74,60 +74,60 @@ Page({
   onReachBottom: function () {
 
   },
-  posterTap: function() {
+  posterTap: function () {
     const { posterIdList, posterKeyIndex, jobId } = this.data;
     if (posterIdList.length === 1) {
-      wx.showToast({
+      tt.showToast({
         title: '只有该海报，无法切换',
         icon: 'none'
-      })
+      });
       return;
     }
     if (posterKeyIndex >= posterIdList.length - 1) {
-      this.setData({posterKeyIndex: 0});
+      this.setData({ posterKeyIndex: 0 });
     } else {
-      this.setData({posterKeyIndex: posterKeyIndex + 1});
+      this.setData({ posterKeyIndex: posterKeyIndex + 1 });
     }
     this.getSharePost(jobId);
   },
   downloadPost: function () {
     const { postUrl } = this.data;
-    wx.saveImageToPhotosAlbum({
+    tt.saveImageToPhotosAlbum({
       filePath: postUrl,
-      success: ( res) =>{
-        wx.showToast({
+      success: (res) => {
+        tt.showToast({
           title: '保存成功',
           icon: 'success'
-        })
+        });
       },
-      fail: ( res) =>{
+      fail: (res) => {
         console.log(res);
-        wx.showToast({
+        tt.showToast({
           title: '保存失败',
           icon: 'none'
-        })
+        });
       }
-    })
+    });
   },
-  getPosterKeyList: async function() {
+  getPosterKeyList: async function () {
     return await fetchPosterKeyList().then((res) => {
       this.setData({
-        posterIdList: res.data,
-      })
+        posterIdList: res.data
+      });
       return true;
     }).catch((err) => {
-      wx.showToast({
+      tt.showToast({
         title: '获取模板失败',
         icon: 'none'
-      })
+      });
       return false;
     });
   },
   getSharePost: function (jobId) {
-    wx.showLoading({
+    tt.showLoading({
       title: '正在生成海报...',
-      mask: true,
-    })
+      mask: true
+    });
     let api;
     if (jobId) {
       const { posterIdList, posterKeyIndex } = this.data;
@@ -135,33 +135,33 @@ Page({
     } else {
       api = '/client/member/invite/qrcode';
     }
-    const url =  baseUrl+ api;
-    const longitude = wx.getStorageSync('longitude');
-    const latitude = wx.getStorageSync('latitude');
-    wx.downloadFile({
+    const url = baseUrl + api;
+    const longitude = tt.getStorageSync('longitude');
+    const latitude = tt.getStorageSync('latitude');
+    tt.downloadFile({
       url: `${url}`, // ?longitude=${longitude}&latitude=${latitude}
       header: {
-        'X-User-Token': wx.getStorageSync('token') || '',
-        'userId':  wx.getStorageSync('userId') || '',
-        'X-Device': 'mini_program',
+        'X-User-Token': tt.getStorageSync('token') || '',
+        'userId': tt.getStorageSync('userId') || '',
+        'X-Device': 'mini_program'
       },
-      success: (res)=> {
+      success: (res) => {
         console.log('success', res);
-        if(res.statusCode ===200){
+        if (res.statusCode === 200) {
           this.setData({
-            postUrl: res.tempFilePath,
+            postUrl: res.tempFilePath
           });
         }
-        wx.hideLoading({
-          success: (res) => {},
-        })
+        tt.hideLoading({
+          success: (res) => {}
+        });
       },
       fail: (res) => {
         console.log('fail', res);
-        wx.hideLoading({
-          success: (res) => {},
-        })
+        tt.hideLoading({
+          success: (res) => {}
+        });
       }
     });
-  } 
-})
+  }
+});

@@ -1,5 +1,5 @@
 // pages/resignApplyDetail/resignApplyDetail.js
-import { fetchJobData, getResignApproveForm, submitApprove } from '../../api/applyApi'
+import { fetchJobData, getResignApproveForm, submitApprove } from '../../api/applyApi';
 Page({
 
   /**
@@ -10,100 +10,101 @@ Page({
     pageBean: {},
     expectResignDate: '',
     resignReasonOptions: [
-      {value: '返乡就业', name: '返乡就业', checked: false},
-      {value: '月收入低', name: '月收入低', checked: false},
-      {value: '不适应上夜班', name: '不适应上夜班', checked: false},
-      {value: '不适应流水线', name: '不适应流水线', checked: false},
-      {value: '不想穿无尘服', name: '不想穿无尘服', checked: false},
-      {value: '对伙食不满', name: '对伙食不满', checked: false},
-      {value: '对住宿不满', name: '对住宿不满', checked: false},
-      {value: '对车间管理不满', name: '对车间管理不满', checked: false},
-      {value: '其他', name: '其他', checked: false},
-    ],
+    { value: '返乡就业', name: '返乡就业', checked: false },
+    { value: '月收入低', name: '月收入低', checked: false },
+    { value: '不适应上夜班', name: '不适应上夜班', checked: false },
+    { value: '不适应流水线', name: '不适应流水线', checked: false },
+    { value: '不想穿无尘服', name: '不想穿无尘服', checked: false },
+    { value: '对伙食不满', name: '对伙食不满', checked: false },
+    { value: '对住宿不满', name: '对住宿不满', checked: false },
+    { value: '对车间管理不满', name: '对车间管理不满', checked: false },
+    { value: '其他', name: '其他', checked: false }],
+
     isShow: false,
     startDateLimit: new Date().setHours(0, 0, 0, 0),
     formFields: [],
     canSubmit: true,
-    submitBtnName: '提交',
+    submitBtnName: '提交'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const pBean = options.pageBean;
-    if (!pBean) {
-      pBean = {};
-    }
-    const newBean = JSON.parse(decodeURIComponent(pBean));
-    if (newBean.applyId) {
-      const resignRs = newBean.resignReasons;
-      const { resignReasonOptions } = this.data;
-      const newROptions = resignReasonOptions.map((e) => {
-        if (resignRs.indexOf(e.value) !== -1) {
-          return {...e, checked: true}
-        }
-        return e;
-      })
-      resignRs.for
-      this.setData({
-        resignReasonOptions: newROptions,
-        pageBean: newBean,
-        isShow: true,
-        expectResignDate: newBean.expectResignDate,
-      })
-    } else {
-      // 说明是新增
-      // 获取流程模板表单属性
-      this.getApproveTempForm();
-      // 获取在职信息
-      this.getJobData();
-    }
+    console.log('options', options);
+    // const pBean = options.pageBean;
+    // if (!pBean) {
+    //   pBean = {};
+    // }
+    // const newBean = JSON.parse(decodeURIComponent(pBean));
+    // if (newBean.applyId) {
+    //   const resignRs = newBean.resignReasons;
+    //   const { resignReasonOptions } = this.data;
+    //   const newROptions = resignReasonOptions.map((e) => {
+    //     if (resignRs.indexOf(e.value) !== -1) {
+    //       return { ...e, checked: true };
+    //     }
+    //     return e;
+    //   });
+    //   resignRs.for;
+    //   this.setData({
+    //     resignReasonOptions: newROptions,
+    //     pageBean: newBean,
+    //     isShow: true,
+    //     expectResignDate: newBean.expectResignDate
+    //   });
+    // } else {
+    //   // 说明是新增
+    //   // 获取流程模板表单属性
+    //   this.getApproveTempForm();
+    //   // 获取在职信息
+    //   this.getJobData();
+    // }
   },
-  getApproveTempForm: async function() {
+  getApproveTempForm: async function () {
     const { submitType } = this.data;
     await getResignApproveForm(submitType).then((res) => {
       this.setData({
-        formFields: res.data,
-      })
+        formFields: res.data
+      });
     }).catch((err) => {
       this.setData({
-        canSubmit: false,
-      })
+        canSubmit: false
+      });
     });
   },
-  getJobData: async function() {
+  getJobData: async function () {
     await fetchJobData().then((res) => {
       const { data } = res;
       this.setData({
         pageBean: { ...data }
-      })
+      });
     }).catch((err) => {
       this.setData({
         canSubmit: false,
-        submitBtnName: err.msg,
-      })
+        submitBtnName: err.msg
+      });
     });
   },
-  bindExpectResignDateChange: function(e) {
+  bindExpectResignDateChange: function (e) {
     this.setData({
-      expectResignDate: e.detail.value,
-    })
+      expectResignDate: e.detail.value
+    });
   },
-  bindFormSubmit: async function(e) {
+  bindFormSubmit: async function (e) {
     const { pageBean, expectResignDate, formFields, submitType } = this.data;
     if (!expectResignDate) {
-      wx.showToast({
+      tt.showToast({
         title: '请选择预离职日期',
-        icon:'none',
+        icon: 'none',
         duration: 3000
       });
       return;
     }
     if (formFields.length === 0) {
-      wx.showToast({
+      tt.showToast({
         title: '不符合提交条件',
-        icon:'none',
+        icon: 'none',
         duration: 3000
       });
       return;
@@ -113,8 +114,8 @@ Page({
       ...pageBean,
       ...formData,
       expectResignDate: new Date(expectResignDate).setHours(0, 0, 0, 0),
-      submitDate: new Date().getTime(),
-    }
+      submitDate: new Date().getTime()
+    };
     const submitList = formFields.map((e) => {
       let value = e.value;
       if (submitData[e.key]) {
@@ -122,20 +123,20 @@ Page({
       }
       const res = {
         ...e,
-        value,
+        value
       };
       return res;
-    })
+    });
     await submitApprove(submitType, submitList, true); // JSON.stringify(params)
-    wx.showToast({
+    tt.showToast({
       title: '报备成功',
-      icon:'none',
+      icon: 'none',
       duration: 3000
     });
-    setTimeout(function() {
-      wx.navigateBack({
-        delta: 0,
-      })
+    setTimeout(function () {
+      tt.navigateBack({
+        delta: 0
+      });
     }, 2500);
   },
 
@@ -187,4 +188,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

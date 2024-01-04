@@ -1,8 +1,0 @@
-<view wx:if="{{pageBean.jumpType === 'url'}}">
-  <web-view src="{{pageBean.url}}"></web-view>
-</view>
-<block wx:elif="{{pageBean.jumpType === 'image'}}">
-  <view class="img-container">
-    <image mode="widthFix" show-menu-by-longpress="true" class="content-img" wx:for="{{pageBean.contentImage}}" wx:key="index" src="{{item.url}}" />
-  </view>
-</block>

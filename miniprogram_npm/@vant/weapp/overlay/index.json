@@ -1,6 +1,1 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-transition": "../transition/index"
-  }
-}
+{"component":true,"usingComponents":{"van-transition":"../transition/index"}}

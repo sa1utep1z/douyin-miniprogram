@@ -1,12 +1,12 @@
 // pages/authDisplay/authDisplay.js
-import { fetchCertificationInfo } from '../../api/userApi'
+import { fetchCertificationInfo } from '../../api/userApi';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    authData: {},
+    authData: {}
   },
 
   /**
@@ -33,15 +33,15 @@ Page({
   getUserAuthInfo: async function (e) {
     const res = await fetchCertificationInfo();
     this.setData({
-      authData: res.data,
+      authData: res.data
     });
   },
   /**
    * 编辑实名信息
    */
   handleEdit: function () {
-    wx.navigateTo({
-      url: '../../pages/authCenterNew/authCenterNew',
+    tt.navigateTo({
+      url: '../../pages/authCenterNew/authCenterNew'
     });
   },
   /**
@@ -70,5 +70,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-})
+  }
+});

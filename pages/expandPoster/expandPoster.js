@@ -1,5 +1,5 @@
 // pages/expandPoster/expandPoster.js
-import  urlConfig  from '../../utils/urlConfig';
+import urlConfig from '../../utils/urlConfig';
 const { baseUrl } = urlConfig();
 Page({
 
@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    postUrl: '',
+    postUrl: ''
   },
 
   /**
@@ -20,51 +20,51 @@ Page({
     }
   },
   getSharePost: function (expandTempId) {
-    wx.showLoading({
+    tt.showLoading({
       title: '正在生成海报...',
-      mask: true,
-    })
-    wx.downloadFile({
+      mask: true
+    });
+    tt.downloadFile({
       url: baseUrl + `/client/expand/posterTemplate/${expandTempId}/generate`,
       header: {
-        'X-User-Token': wx.getStorageSync('token') || '',
-        'userId':  wx.getStorageSync('userId') || '',
-        'X-Device': 'mini_program',
+        'X-User-Token': tt.getStorageSync('token') || '',
+        'userId': tt.getStorageSync('userId') || '',
+        'X-Device': 'mini_program'
       },
-      success: (res)=> {
-        if(res.statusCode ===200){
+      success: (res) => {
+        if (res.statusCode === 200) {
           this.setData({
-            postUrl: res.tempFilePath,
+            postUrl: res.tempFilePath
           });
         }
-        wx.hideLoading({
-          success: (res) => {},
-        })
+        tt.hideLoading({
+          success: (res) => {}
+        });
       },
       fail: (res) => {
-        wx.hideLoading({
-          success: (res) => {},
-        })
+        tt.hideLoading({
+          success: (res) => {}
+        });
       }
     });
   },
   downloadPost: function () {
     const { postUrl } = this.data;
-    wx.saveImageToPhotosAlbum({
+    tt.saveImageToPhotosAlbum({
       filePath: postUrl,
-      success: ( res) =>{
-        wx.showToast({
+      success: (res) => {
+        tt.showToast({
           title: '保存成功',
           icon: 'success'
-        })
+        });
       },
-      fail: (res) =>{
-        wx.showToast({
+      fail: (res) => {
+        tt.showToast({
           title: '保存失败',
           icon: 'none'
-        })
+        });
       }
-    })
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -114,4 +114,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

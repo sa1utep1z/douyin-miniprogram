@@ -1,5 +1,5 @@
 // pages/resignApply/resignApply.js
-import { listResignApply } from '../../api/applyApi'
+import { listResignApply } from '../../api/applyApi';
 Page({
 
   /**
@@ -9,7 +9,7 @@ Page({
     applyList: [],
     pageSize: 15,
     pageNumber: 0,
-    loadingStatus: 0,
+    loadingStatus: 0
   },
 
   /**
@@ -32,56 +32,56 @@ Page({
   onShow() {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,
+      pageNumber: 0
     });
     this.onLoadMore();
   },
 
   onLoadMore: async function () {
-    const { pageNumber, applyList, pageSize, loadingStatus} = this.data;
-    if ( loadingStatus!==0 ) {
+    const { pageNumber, applyList, pageSize, loadingStatus } = this.data;
+    if (loadingStatus !== 0) {
       console.log('过滤无效请求');
       return;
     }
     this.setLoadingStart();
     const params = {
       pageNumber,
-      pageSize,
+      pageSize
+    };
+    const res = await listResignApply(params);
+    const totalPages = res.data.totalPages;
+    if (pageNumber === 0) {
+      this.setData({
+        applyList: res.data.content
+      });
+    } else {
+      this.setData({
+        applyList: applyList.concat(res.data.content)
+      });
     }
-      const res = await listResignApply(params);
-      const totalPages = res.data.totalPages;
-      if(pageNumber === 0) {
-        this.setData({
-          applyList: res.data.content,
-        })
-      } else {
-        this.setData({
-          applyList: applyList.concat(res.data.content),
-        })
-      }
-      if(pageNumber < totalPages-1){
-        this.setLoadingReady();
-        this.setData({
-          pageNumber: pageNumber + 1,
-        });
-      } else {
-        this.setLoadingNoMore();
-      }
+    if (pageNumber < totalPages - 1) {
+      this.setLoadingReady();
+      this.setData({
+        pageNumber: pageNumber + 1
+      });
+    } else {
+      this.setLoadingNoMore();
+    }
   },
   setLoadingStart: function () {
     this.setData({
-      loadingStatus: 1,
-    }) 
+      loadingStatus: 1
+    });
   },
   setLoadingReady: function () {
     this.setData({
-      loadingStatus: 0,
-    }) 
+      loadingStatus: 0
+    });
   },
   setLoadingNoMore: function () {
     this.setData({
-      loadingStatus: 2,
-    }) 
+      loadingStatus: 2
+    });
   },
 
   /**
@@ -118,4 +118,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

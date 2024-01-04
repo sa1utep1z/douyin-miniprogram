@@ -1,8 +1,1 @@
-{
-  "usingComponents": {
-    "FeedbackItem": "../../components/feedbackItem/feedbackItem",
-    "van-divider": "@vant/weapp/divider/index",
-    "van-loading": "@vant/weapp/loading/index"
-  },
-  "navigationBarTitleText": "意见反馈"
-}
+{"usingComponents":{"FeedbackItem":"../../components/feedbackItem/feedbackItem","van-divider":"/miniprogram_npm/@vant/weapp/divider/index","van-loading":"/miniprogram_npm/@vant/weapp/loading/index"},"navigationBarTitleText":"意见反馈"}

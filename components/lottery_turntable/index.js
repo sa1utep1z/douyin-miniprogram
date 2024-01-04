@@ -70,7 +70,7 @@ Component({
   },
   data: {
     lotteryCount: -1,
-    turnCanvasInfo: {width: 0, height: 0},
+    turnCanvasInfo: { width: 0, height: 0 },
     size: config.size,
     datas: [],
     disable: false,
@@ -81,10 +81,10 @@ Component({
   methods: {
     async getCanvasContainerInfo(id) {
       return new Promise((resolve) => {
-        const query = wx.createSelectorQuery().in(this);
+        const query = tt.createSelectorQuery().in(this);
         query.select(id).boundingClientRect(function (res) {
-          const {width, height} = res;
-          resolve({width, height});
+          const { width, height } = res;
+          resolve({ width, height });
         }).exec();
       });
     },
@@ -97,10 +97,10 @@ Component({
           });
           this.drawTurn();
         } else {
-          wx.showToast({
+          tt.showToast({
             icon: 'nont',
             title: '获取转盘宽高失败'
-          })
+          });
         }
       } catch (e) {
         if (retryCount <= 0) {
@@ -118,7 +118,7 @@ Component({
     drawTurn() {
       const turnCanvasInfo = this.data.turnCanvasInfo;
       const datas = this.properties.datas;
-      const ctx = wx.createCanvasContext('turn', this);
+      const ctx = tt.createCanvasContext('turn', this);
       // 计算没个扇区弧度
       const radian = Number((2 * Math.PI / datas.length).toFixed(2));
       // 绘制扇区并记录每个扇区信息
@@ -136,7 +136,7 @@ Component({
         clearTimeout(drawTimer);
       }
       drawTimer = setTimeout(() => {
-        wx.canvasToTempFilePath({
+        tt.canvasToTempFilePath({
           canvasId: 'turn',
           quality: 1,
           x: 0,
@@ -218,9 +218,9 @@ Component({
         }
         if (datas[i].imgUrl) {
           ctx.drawImage(datas[i].imgUrl,
-            turnCanvasInfo.width / 2 - config.iconWidth / 2,
-            config.titleMarginTop + config.fontSize * 2 + 2 + config.iconAndTextPadding,
-            config.iconWidth, config.iconHeight);
+          turnCanvasInfo.width / 2 - config.iconWidth / 2,
+          config.titleMarginTop + config.fontSize * 2 + 2 + config.iconAndTextPadding,
+          config.iconWidth, config.iconHeight);
         }
         ctx.closePath();
         ctx.restore();
@@ -238,12 +238,12 @@ Component({
       });
     },
     luckDrawHandle() {
-      const {cusDisable, cusDisableExplain, lotteryCount, disable, canvasImgUrl} = this.data
+      const { cusDisable, cusDisableExplain, lotteryCount, disable, canvasImgUrl } = this.data;
       if (cusDisable) {
-        wx.showToast({
+        tt.showToast({
           icon: 'none',
           title: cusDisableExplain
-        })
+        });
         return;
       }
       if (lotteryCount === 0) {
@@ -267,11 +267,11 @@ Component({
         return;
       }
       const currentAngle = preAngle;
-      preAngle += Math.floor((config.duration / 1000) / config.rate) * 360 + angle + preAngle360;
+      preAngle += Math.floor(config.duration / 1000 / config.rate) * 360 + angle + preAngle360;
       this.animate('#canvas-img', [
-        {rotate: currentAngle, ease: 'linear'},
-        {rotate: preAngle, ease: config.ease},
-      ], config.duration, () => {
+      { rotate: currentAngle, ease: 'linear' },
+      { rotate: preAngle, ease: config.ease }],
+      config.duration, () => {
         this.setData({
           disable: false
         });
@@ -281,7 +281,7 @@ Component({
     },
     downloadHandle(url) {
       return new Promise((resolve, reject) => {
-        wx.downloadFile({
+        tt.downloadFile({
           url: url, // 仅为示例，并非真实的资源
           success: (res) => {
             // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
@@ -302,7 +302,7 @@ Component({
       try {
         const downloadHandles = [];
         for (const url of imgs) {
-          if (this.isAbsoluteUrl(url)) { // 是网络地址
+          if (this.isAbsoluteUrl(url)) {// 是网络地址
             downloadHandles.push(this.downloadHandle(url));
           } else {
             downloadHandles.push(Promise.resolve(url));

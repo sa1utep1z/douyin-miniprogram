@@ -1,0 +1,23 @@
+<!--pages/dorm/pactSign/pactSign.ttml-->
+<view class="container">
+  <view class="p_head">
+    <view class="text1" style="text-align: center">员工外住协议</view>
+    <view class="p_txt"><text>由于本人自愿放弃深圳市众鼎人力资源有限公司提供的住宿条件而要求外住，在外住宿期间，如发生任何事情均由本人自行承担，与深圳市众鼎人力资源有限公司无关。现双方经平等协商，达成如下协议：</text></view>
+    <view class="p_txt"><text>1、本人自己外住所产生的任何费用自理。</text></view>
+    <view class="p_txt"><text>2、本人自己外住期间将严格遵守国家法律和法规，并加强自身安全防范。并保证在外住期间在厂外所发生的一切行为及后果（包括因此产生的纠纷，人身安全财产损失和影响工作及公司利益等）均由本人负责，公司不承担任何责任。</text></view>
+    <view class="p_txt"><text>3、本人须留下须留下有效联系电话和紧急联系人，如有变动，应及时通知甲方更新。</text></view>
+    <view class="p_txt"><text>4、本人外住期间，应注意自身的生命安全及财产安全。</text></view>
+    <view class="p_txt"><text>5、由于本人居住环境及配置设施的原因造成一切后果与深圳市众鼎人力资源有限公司无关。</text></view>
+    <view class="p_txt"><text>6、本人申请自愿个人外宿，深圳市众鼎人力资源有限公司不补助任何费用给外宿人员。</text></view>
+    <view class="p_txt"><text>7、申请外宿没有外宿补贴费用本协议自签署之日生效，属劳动合同补充协议。具有劳动合同同等法律效力。</text></view>
+  </view>
+  <view style="display: {{onlyView ? 'none' : 'block'}};">
+    <view class="buttom-check">
+      <switch type="checkbox" checked="{{agreePact}}" bindchange="switch2Change" />
+      <text>阅读并同意《相关协议》</text>
+    </view>
+    <view class="buttom-button">
+      <button class="sign-button" bindtap="signClick" disabled="{{!canSign}}">{{signText}}</button>
+    </view>
+  </view>
+</view>

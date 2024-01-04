@@ -1,0 +1,4 @@
+/**app.ttss**/
+.common-hover-class{
+  background-color: #fafafa;
+}

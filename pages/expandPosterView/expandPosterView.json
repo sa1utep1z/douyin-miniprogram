@@ -1,7 +1,7 @@
 {
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index",
-    "van-overlay": "@vant/weapp/overlay/index"
-  },
-  "navigationBarTitleText": "宣传海报"
+    "usingComponents": {
+        "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
+        "van-overlay": "/miniprogram_npm/@vant/weapp/divider/index"
+    },
+    "navigationBarTitleText": "宣传海报"
 }

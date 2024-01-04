@@ -1,4 +1,4 @@
-const app = getApp()
+const app = getApp();
 Component({
   properties: {
     text: {
@@ -7,14 +7,14 @@ Component({
     },
     disabled: {
       type: Boolean,
-      value: true,
+      value: true
     }
   },
   data: {},
   methods: {
-      // 处理click事件        
-      handleClick: function () {
-          this.triggerEvent('click', {})
-      },
+    // 处理click事件        
+    handleClick: function () {
+      this.triggerEvent('click', {});
+    }
   }
-})
+});

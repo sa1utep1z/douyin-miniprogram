@@ -1,0 +1,90 @@
+<!--pages/payslip/payslip.ttml-->
+<sjs src="../../utils/util.sjs" module="tool"></sjs>
+<view class="container">
+  <view class="block-manager">
+    <view class="flex-row">
+      <image class="manager-avatar" src="{{userInfo.imgKey ? userInfo.imgKey : '../../assets/images/public/icon_default_head.png'}}"></image>
+      <view class="manager-column">
+        <view class="name-status">
+          <view class="manager-name">{{userInfo.name}}</view>
+          <view class="manager-status">{{userInfo.jobOn ? '在职' : '离职'}}</view>
+        </view>
+        <view class="manager-company">工作辛苦了~</view>
+      </view>
+      <view class="manager-query">
+          <picker disabled="{{isShow}}" mode="date" fields="month" start="{{tool.formatTimeYMD(startDateLimit)}}" bindchange="bindQueryDateChange">
+            <view class="picker" style="color: #4fa1f4;">
+              {{queryYear === '' && queryMonth === '' ? '请选择' : queryYear +'年' + queryMonth + '月'}}
+            </view>
+          </picker>
+        </view>
+    </view>
+  </view>
+  <view class="block-manager block-scroll">
+    <block tt:if="{{dataList.length === 0}}">
+      <view class="data-none">暂无薪资信息</view>
+    </block>
+    <block tt:else="{{dataList.length > 0}}">
+      <view class="manager-title">薪资详情</view>
+      <view class="auth-display" tt:for="{{dataList}}" tt:key="id" tt:for-item="dataObj">
+        <view class="salary-title">薪资单{{index+1}}</view>
+        <block tt:if="{{!dataObj.sign}}">
+          <image data-id="{{dataObj.id}}" bindtap="signClick" mode="widthFix" style="display: block; width: 640rpx; margin: 30rpx auto;" src="../../assets/images/public/please_sign.jpg"></image>
+        </block>
+        <block tt:else="{{dataObj.sign}}">
+          <van-divider hairline />
+          <view class="row">
+            <view><text>薪资单编号</text></view>
+            <view><text>{{dataObj.salaryNo || '无'}}</text></view>
+          </view>
+          <van-divider hairline />
+          <view class="row">
+            <view><text>会员工号</text></view>
+            <view><text>{{dataObj.jobNo || '无'}}</text></view>
+          </view>
+          <van-divider hairline />
+          <view class="row">
+            <view><text>姓名</text></view>
+            <view><text>{{dataObj.name || '无'}}</text></view>
+          </view>
+          <van-divider hairline />
+          <view class="row">
+            <view><text>身份证号</text></view>
+            <view><text>{{dataObj.idNo || '无'}}</text></view>
+          </view>
+          <van-divider hairline />
+          <view class="row">
+            <view><text>入职企业</text></view>
+            <view><text>{{dataObj.shortCompanyName || '无'}}</text></view>
+          </view>
+          <van-divider hairline />
+          <view class="row">
+            <view><text>结算年份</text></view>
+            <view><text>{{dataObj.year}}年</text></view>
+          </view>
+          <van-divider hairline />
+          <view class="row">
+            <view><text>结算月份</text></view>
+            <view><text>{{dataObj.month}}月</text></view>
+          </view>
+          <van-divider hairline />
+          <view class="row">
+            <view><text>发薪日期</text></view>
+            <view><text>{{tool.formatTimeYMD(dataObj.date)||'无'}}</text></view>
+          </view>
+          <block tt:for="{{dataObj.detailItems}}" tt:key="index" tt:for-item="objItem">
+            <van-divider hairline />
+            <view class="row">
+              <view><text>{{objItem.title}}</text></view>
+              <view><text>{{objItem.value}}</text></view>
+            </view>
+          </block>
+        </block>
+        <van-divider hairline />
+        <view>
+          <button type="{{dataObj.sign ? 'default' : 'primary'}}" class="sign-btn" data-id="{{dataObj.id}}" bindtap="signClick" disabled="{{dataObj.sign}}">{{dataObj.sign ? '已签收' : '签收'}}</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

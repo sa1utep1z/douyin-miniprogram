@@ -56,5 +56,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-})
+  }
+});

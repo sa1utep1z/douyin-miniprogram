@@ -1,0 +1,88 @@
+<!--pages/message/accountMessage/accountMessage.ttml-->
+<view class="container">
+  <view class="message-box">
+    <view class="text-active message-titile">钱包提现提醒</view>
+    <view class="text-title">提现金额</view>
+    <view class="text-amt">9.90</view>
+    <view class="message-row">
+      <viwe class="text-title">提现银行</viwe>
+      <viwe class="text-active text-content">中国建设银行(尾号1170)</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">提现时间</viwe>
+      <viwe class="text-active text-content">2021-09-07  14:54:51</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">到账时间</viwe>
+      <viwe class="text-active text-content">2021-09-08  14:54:51</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">备注</viwe>
+      <viwe class="text-active text-content">你的钱包提现已到账至银行卡</viwe>
+    </view>
+  </view>
+  <view class="message-box">
+    <view class="text-active message-titile">钱包提现提醒</view>
+    <view class="text-title text-error">提现金额</view>
+    <view class="text-amt">9.90</view>
+    <view class="message-row">
+      <viwe class="text-title">提现银行</viwe>
+      <viwe class="text-active text-content">中国建设银行(尾号1170)</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">提现时间</viwe>
+      <viwe class="text-active text-content">2021-09-07  14:54:51</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">到账时间</viwe>
+      <viwe class="text-active text-content">2021-09-08  14:54:51</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">备注</viwe>
+      <viwe class="text-active text-content">你的钱包提现已到账至银行卡</viwe>
+    </view>
+  </view>
+  <view class="message-box">
+    <view class="text-active message-titile">钱包提现提醒</view>
+    <view class="text-title">提现金额</view>
+    <view class="text-amt">9.90</view>
+    <view class="message-row">
+      <viwe class="text-title">提现银行</viwe>
+      <viwe class="text-active text-content">中国建设银行(尾号1170)</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">提现时间</viwe>
+      <viwe class="text-active text-content">2021-09-07  14:54:51</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">到账时间</viwe>
+      <viwe class="text-active text-content">2021-09-08  14:54:51</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">备注</viwe>
+      <viwe class="text-active text-content">你的钱包提现已到账至银行卡</viwe>
+    </view>
+  </view>
+  <view class="message-box">
+    <view class="text-active message-titile">钱包提现提醒</view>
+    <view class="text-title text-error">提现金额</view>
+    <view class="text-amt">9.90</view>
+    <view class="message-row">
+      <viwe class="text-title">提现银行</viwe>
+      <viwe class="text-active text-content">中国建设银行(尾号1170)</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">提现时间</viwe>
+      <viwe class="text-active text-content">2021-09-07  14:54:51</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">到账时间</viwe>
+      <viwe class="text-active text-content">2021-09-08  14:54:51</viwe>
+    </view>
+    <view class="message-row">
+      <viwe class="text-title">备注</viwe>
+      <viwe class="text-active text-content">你的钱包提现已到账至银行卡</viwe>
+    </view>
+  </view>
+  
+</view>

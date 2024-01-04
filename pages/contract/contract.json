@@ -1,8 +1,1 @@
-{
-  "usingComponents": {
-    "ContractItem": "../../components/contractItem/contractItem",
-    "van-divider": "@vant/weapp/divider/index",
-    "van-loading": "@vant/weapp/loading/index"
-  },
-  "navigationBarTitleText": "合同列表"
-}
+{"usingComponents":{"ContractItem":"../../components/contractItem/contractItem","van-divider":"/miniprogram_npm/@vant/weapp/divider/index","van-loading":"/miniprogram_npm/@vant/weapp/loading/index"},"navigationBarTitleText":"合同列表"}

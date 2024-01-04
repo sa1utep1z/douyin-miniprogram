@@ -1,6 +1,1 @@
-{
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index"
-  },
-  "navigationBarTitleText": "宿舍服务"
-}
+{"usingComponents":{"van-divider":"/miniprogram_npm/@vant/weapp/divider/index"},"navigationBarTitleText":"宿舍服务"}

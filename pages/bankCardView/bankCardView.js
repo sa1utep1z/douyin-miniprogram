@@ -1,5 +1,5 @@
 // pages/authDisplay/authDisplay.js
-import { fetchBankCardInfo } from '../../api/userApi'
+import { fetchBankCardInfo } from '../../api/userApi';
 Page({
 
   /**
@@ -11,7 +11,7 @@ Page({
     bankCardTypeName: '',
     bankName: '',
     backImageUrl: '',
-    showAccount: false,
+    showAccount: false
   },
 
   /**
@@ -42,14 +42,14 @@ Page({
     const intactBankAccount = bankAccount || '';
     let bankAccount_ = '';
     if (bankAccount) {
-      bankAccount_ = bankAccount.substring(bankAccount.length - 4, bankAccount.length)
+      bankAccount_ = bankAccount.substring(bankAccount.length - 4, bankAccount.length);
     }
     this.setData({
       backImageUrl,
       intactBankAccount,
       bankCardTypeName: bankCardTypeName || '',
       bankAccount: bankAccount_,
-      bankName: bankName || '',
+      bankName: bankName || ''
     });
   },
 
@@ -86,49 +86,49 @@ Page({
       case "光大银行":
         return '../../assets/images/bankCard/gd_yh.png';
       default:
-        return '';
-    }
+        return '';}
+
   },
   targetClick() {
     const { bankAccount } = this.data;
     if (bankAccount) {
-      wx.showModal({
+      tt.showModal({
         title: '提示',
         content: '尊敬的用户您好！每个用户在系统中只有唯一的发薪卡，您再次提交后就会替换您当前的发薪卡，您确定要继续操作！',
         success: function (sm) {
           if (sm.confirm) {
-            wx.navigateTo({
-              url: '../../pages/bankCard/bankCard',
+            tt.navigateTo({
+              url: '../../pages/bankCard/bankCard'
             });
           }
         }
       });
     } else {
-      wx.navigateTo({
-        url: '../../pages/bankCard/bankCard',
+      tt.navigateTo({
+        url: '../../pages/bankCard/bankCard'
       });
     }
   },
   handleEye: async function (e) {
     const { showAccount } = this.data;
     this.setData({
-      showAccount: !showAccount,
+      showAccount: !showAccount
     });
   },
 
   copyAccount: function (e) {
     const { showAccount, intactBankAccount } = this.data;
     if (showAccount) {
-      wx.setClipboardData({
+      tt.setClipboardData({
         data: intactBankAccount,
-        success (res) {
-          wx.showToast({
+        success(res) {
+          tt.showToast({
             title: '复制成功',
-            icon:'none',
+            icon: 'none',
             duration: 1800
           });
         }
-      })
+      });
     }
   },
 
@@ -158,5 +158,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-})
+  }
+});

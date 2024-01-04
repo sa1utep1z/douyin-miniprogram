@@ -1,5 +1,5 @@
 // pages/drawRecord/drawRecord.js
-import { listWinningRecord } from '../../api/opshub'
+import { listWinningRecord } from '../../api/opshub';
 Page({
 
   /**
@@ -9,7 +9,7 @@ Page({
     pageSize: 15,
     pageNumber: 0,
     drawList: [],
-    loadingStatus: 0,
+    loadingStatus: 0
   },
 
   /**
@@ -19,8 +19,8 @@ Page({
     this.onRefresh();
   },
   onLoadMore: async function (e) {
-    const { pageNumber, drawList, pageSize, loadingStatus} = this.data;
-    if ( loadingStatus!==0 ) {
+    const { pageNumber, drawList, pageSize, loadingStatus } = this.data;
+    if (loadingStatus !== 0) {
       console.log('过滤无效请求');
       return;
     }
@@ -31,19 +31,19 @@ Page({
     };
     const res = await listWinningRecord(params);
     const totalPages = res.data.totalPages;
-    if(pageNumber === 0) {
+    if (pageNumber === 0) {
       this.setData({
-        drawList: res.data.content,
-      })
+        drawList: res.data.content
+      });
     } else {
       this.setData({
-        drawList: drawList.concat(res.data.content),
-      })
+        drawList: drawList.concat(res.data.content)
+      });
     }
-    if(pageNumber < totalPages-1){
+    if (pageNumber < totalPages - 1) {
       this.setLoadingReady();
       this.setData({
-        pageNumber: pageNumber + 1,
+        pageNumber: pageNumber + 1
       });
     } else {
       this.setLoadingNoMore();
@@ -52,24 +52,24 @@ Page({
   onRefresh: function (e) {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,   
+      pageNumber: 0
     });
     this.onLoadMore();
   },
   setLoadingStart: function () {
     this.setData({
-      loadingStatus: 1,
-    }) 
+      loadingStatus: 1
+    });
   },
   setLoadingReady: function () {
     this.setData({
-      loadingStatus: 0,
-    }) 
+      loadingStatus: 0
+    });
   },
   setLoadingNoMore: function () {
     this.setData({
-      loadingStatus: 2,
-    }) 
+      loadingStatus: 2
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -119,4 +119,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

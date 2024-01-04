@@ -9,9 +9,9 @@ Page({
     time: new Date().getTime(),
     agreePact: false
   },
-    /**
-   * 生命周期函数--监听页面加载
-   */
+  /**
+  * 生命周期函数--监听页面加载
+  */
   onLoad: function (options) {
     this.wxLogin();
   },
@@ -24,7 +24,7 @@ Page({
     let currentTime = new Date().getTime();
     let distance = currentTime - time;
     //如果离开超过两分钟 重新获取code
-    if (distance > 2*60*1000) {
+    if (distance > 2 * 60 * 1000) {
       this.wxLogin();
     }
   },
@@ -32,65 +32,65 @@ Page({
    * wx.login获取code
    */
   wxLogin: function () {
-    wx.showLoading({
+    tt.showLoading({
       title: '加载中',
-      mask: true,
+      mask: true
     });
-    wx.login({
+    tt.login({
       success: async (res) => {
         let time = new Date().getTime();
-        wx.hideLoading();
+        tt.hideLoading();
         this.setData({
           time,
-          code: res.code,
+          code: res.code
         });
       },
       fail: (err) => {
-        wx.hideLoading();
+        tt.hideLoading();
       }
     });
   },
 
-  async getPhoneNumber(e){
+  async getPhoneNumber(e) {
     this.setData({ loading: true });
-    if(e.detail.errMsg === 'getPhoneNumber:ok'){
-      wx.showLoading({
+    if (e.detail.errMsg === 'getPhoneNumber:ok') {
+      tt.showLoading({
         title: '加载中',
-        mask: true,
+        mask: true
       });
       const { iv, encryptedData } = e.detail;
       const { code } = this.data;
-      const channelCode = wx.getStorageSync('channelCode') || null;
-      const recommendId = wx.getStorageSync('recommendId')||null;
-      const shareSceneId = wx.getStorageSync('shareSceneId')||null;
-      const longitude = wx.getStorageSync('longitude');
-      const latitude = wx.getStorageSync('latitude');
+      const channelCode = tt.getStorageSync('channelCode') || null;
+      const recommendId = tt.getStorageSync('recommendId') || null;
+      const shareSceneId = tt.getStorageSync('shareSceneId') || null;
+      const longitude = tt.getStorageSync('longitude');
+      const latitude = tt.getStorageSync('latitude');
       let gps = null;
-      if (longitude && latitude){
+      if (longitude && latitude) {
         gps = {
           longitude,
           latitude
-        }
+        };
       }
       const params = { code, encryptedData, iv, channelCode, recommendId, shareSceneId, gps };
       try {
         const result = await wxBindPhoneLogin(params);
-        wx.hideLoading();
-        wx.setStorageSync('openId', result.data.openId)
-        wx.setStorageSync('unionId', result.data.unionId)
-        wx.setStorageSync('mobile', result.data.mobile)
-        wx.setStorageSync('userId', result.data.userId)
-        wx.setStorageSync('token', result.data.jwt)
+        tt.hideLoading();
+        tt.setStorageSync('openId', result.data.openId);
+        tt.setStorageSync('unionId', result.data.unionId);
+        tt.setStorageSync('mobile', result.data.mobile);
+        tt.setStorageSync('userId', result.data.userId);
+        tt.setStorageSync('token', result.data.jwt);
         // app.getGenerateId(result.data.openId)
         console.log(result.data);
         this.handleLogin();
       } catch (err) {
-        wx.hideLoading();
-        console.log('err', err)
+        tt.hideLoading();
+        console.log('err', err);
         //如果报错 重新获取code
         this.wxLogin();
         if (err.code !== 0) {
-          wx.showToast({
+          tt.showToast({
             title: err.msg,
             icon: 'error',
             duration: 3000,
@@ -100,15 +100,15 @@ Page({
       } finally {
         this.setData({ loading: false });
       }
-    }else {
+    } else {
       this.setData({ loading: false });
     }
   },
 
-  register: async function() {
-    const {agreePact} = this.data;
+  register: async function () {
+    const { agreePact } = this.data;
     if (!agreePact) {
-      wx.showToast({
+      tt.showToast({
         title: '请勾选协议',
         icon: 'error',
         duration: 3000,
@@ -118,37 +118,37 @@ Page({
     }
     this.setData({ loading: true });
     const { code } = this.data;
-    const channelCode = wx.getStorageSync('channelCode') || null;
-    const recommendId = wx.getStorageSync('recommendId')||null;
-    const shareSceneId = wx.getStorageSync('shareSceneId')||null;
-    const longitude = wx.getStorageSync('longitude');
-    const latitude = wx.getStorageSync('latitude');
+    const channelCode = tt.getStorageSync('channelCode') || null;
+    const recommendId = tt.getStorageSync('recommendId') || null;
+    const shareSceneId = tt.getStorageSync('shareSceneId') || null;
+    const longitude = tt.getStorageSync('longitude');
+    const latitude = tt.getStorageSync('latitude');
     let gps = null;
-    if (longitude && latitude){
+    if (longitude && latitude) {
       gps = {
         longitude,
         latitude
-      }
+      };
     }
     const params = { code, channelCode, recommendId, shareSceneId, gps };
     try {
       const result = await wxBindPhoneLogin(params);
-      wx.hideLoading();
-      wx.setStorageSync('openId', result.data.openId)
-      wx.setStorageSync('unionId', result.data.unionId)
-      wx.setStorageSync('mobile', result.data.mobile)
-      wx.setStorageSync('userId', result.data.userId)
-      wx.setStorageSync('token', result.data.jwt)
+      tt.hideLoading();
+      tt.setStorageSync('openId', result.data.openId);
+      tt.setStorageSync('unionId', result.data.unionId);
+      tt.setStorageSync('mobile', result.data.mobile);
+      tt.setStorageSync('userId', result.data.userId);
+      tt.setStorageSync('token', result.data.jwt);
       // app.getGenerateId(result.data.openId)
       console.log(result.data);
       this.handleLogin();
     } catch (err) {
-      wx.hideLoading();
-      console.log('err', err)
+      tt.hideLoading();
+      console.log('err', err);
       //如果报错 重新获取code
       this.wxLogin();
       if (err.code !== 0) {
-        wx.showToast({
+        tt.showToast({
           title: err.msg,
           icon: 'error',
           duration: 3000,
@@ -161,34 +161,34 @@ Page({
   },
 
   onMobileLogin: function () {
-    wx.navigateTo({
-      url: '../../pages/login/loginMobile',
-    })
+    tt.navigateTo({
+      url: '../../pages/login/loginMobile'
+    });
   },
   handleLogin: function () {
     console.log('登录成功');
     //判断是不是岗位分享进来的，如果是回岗位详情
-    const isShare = wx.getStorageSync('isShare');
+    const isShare = tt.getStorageSync('isShare');
     if (isShare) {
-      wx.navigateBack({
-        delta: 0,
+      tt.navigateBack({
+        delta: 0
       });
-      wx.setStorageSync('isShare', false);
+      tt.setStorageSync('isShare', false);
     } else {
-      wx.switchTab({
-        url: '../../pages/index/index',
-      })
+      tt.switchTab({
+        url: '../../pages/index/index'
+      });
     }
   },
-  jumpPrivacy(){
-    wx.navigateTo({
-      url: '../privacyProtocol/privacyProtocol',
-    })
+  jumpPrivacy() {
+    tt.navigateTo({
+      url: '../privacyProtocol/privacyProtocol'
+    });
   },
-  switchAgreePact: function(e) {
+  switchAgreePact: function (e) {
     const { value } = e.detail;
     this.setData({
-      agreePact: value,
-    })
-  },
-})
+      agreePact: value
+    });
+  }
+});

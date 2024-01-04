@@ -2,27 +2,27 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_1 = require("../common/component");
 (0, component_1.VantComponent)({
-    props: {
-        show: Boolean,
-        customStyle: String,
-        duration: {
-            type: null,
-            value: 300,
-        },
-        zIndex: {
-            type: Number,
-            value: 1,
-        },
-        lockScroll: {
-            type: Boolean,
-            value: true,
-        },
+  props: {
+    show: Boolean,
+    customStyle: String,
+    duration: {
+      type: null,
+      value: 300
     },
-    methods: {
-        onClick: function () {
-            this.$emit('click');
-        },
-        // for prevent touchmove
-        noop: function () { },
+    zIndex: {
+      type: Number,
+      value: 1
     },
+    lockScroll: {
+      type: Boolean,
+      value: true
+    }
+  },
+  methods: {
+    onClick: function () {
+      this.$emit('click');
+    },
+    // for prevent touchmove
+    noop: function () {}
+  }
 });

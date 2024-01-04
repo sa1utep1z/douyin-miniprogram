@@ -1,8 +1,1 @@
-{
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index",
-    "SignUpInfo": "../../components/SignUpInfoDialog/SignUpInfoDialog",
-    "van-popup": "@vant/weapp/popup/index"
-  },
-  "navigationBarTitleText": "岗位详情"
-}
+{"usingComponents":{"van-divider":"/miniprogram_npm/@vant/weapp/divider/index","SignUpInfo":"../../components/SignUpInfoDialog/SignUpInfoDialog","van-popup":"/miniprogram_npm/@vant/weapp/popup/index"},"navigationBarTitleText":"岗位详情"}

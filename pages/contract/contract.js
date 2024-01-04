@@ -1,4 +1,4 @@
-import { listContractData } from '../../api/contract'
+import { listContractData } from '../../api/contract';
 
 // pages/contract/contract.js
 Page({
@@ -28,14 +28,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    
+
   },
 
-  getContractData: async function() {
-    const res = await listContractData()
+  getContractData: async function () {
+    const res = await listContractData();
     this.setData({
-      contractList: res.data,
-    })
+      contractList: res.data
+    });
   },
 
   /**
@@ -86,4 +86,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

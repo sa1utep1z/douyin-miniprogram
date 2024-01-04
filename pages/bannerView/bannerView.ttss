@@ -1,0 +1,11 @@
+/* pages/bannerView/bannerView.ttss */
+.img-container {
+  margin-bottom: 60rpx;
+}
+.content-img {
+  width: 96%;
+  display: block;
+  margin: 15rpx auto;
+  border-radius: 20rpx;
+  border:2px solid darkslategray;
+}

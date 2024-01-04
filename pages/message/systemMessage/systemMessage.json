@@ -1,6 +1,1 @@
-{
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index"
-  },
-  "navigationBarTitleText": "系统消息"
-}
+{"usingComponents":{"van-divider":"/miniprogram_npm/@vant/weapp/divider/index"},"navigationBarTitleText":"系统消息"}

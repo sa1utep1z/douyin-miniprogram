@@ -1,0 +1,2 @@
+<!--components/CustomButton/CustomButton.ttml-->
+<button class="custom-button" bindtap="handleClick" disabled="{{ disabled }}">{{ text }}</button>

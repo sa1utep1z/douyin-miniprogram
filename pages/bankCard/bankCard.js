@@ -1,6 +1,6 @@
 // pages/authDisplay/authDisplay.js
-import { fetchBankUserName, submitBankCardInfo } from '../../api/userApi'
-import { ocrBank } from '../../api/commonApi'
+import { fetchBankUserName, submitBankCardInfo } from '../../api/userApi';
+import { ocrBank } from '../../api/commonApi';
 Page({
 
   /**
@@ -10,7 +10,7 @@ Page({
     bankAccount: '',
     bankName: '',
     bankUserName: '',
-    bankCardTypeName: '',
+    bankCardTypeName: ''
   },
 
   /**
@@ -37,39 +37,39 @@ Page({
   getBankUserNameInfo: async function (e) {
     const res = await fetchBankUserName();
     this.setData({
-      bankUserName: res.data,
+      bankUserName: res.data
     });
   },
-  ocrClick: async function(e) {
-    wx.showActionSheet({
+  ocrClick: async function (e) {
+    tt.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       itemColor: "#00000",
-      success: (res)=> {
-       if (!res.cancel) {
-        if (res.tapIndex == 0) {
-         this.chooseWxImage('album')
-        } else if (res.tapIndex == 1) {
-          this.chooseWxImage('camera')
+      success: (res) => {
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            this.chooseWxImage('album');
+          } else if (res.tapIndex == 1) {
+            this.chooseWxImage('camera');
+          }
         }
-       }
       }
-    })
+    });
   },
-  chooseWxImage:function(type){
-    wx.chooseImage({
+  chooseWxImage: function (type) {
+    tt.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: [type],
-      success:  (res) =>{
+      success: (res) => {
         console.info(res);
-       this.uploadImg(res.tempFilePaths[0])
+        this.uploadImg(res.tempFilePaths[0]);
       }
-     }) 
+    });
   },
-  uploadImg:async function(data){
+  uploadImg: async function (data) {
     console.info(data);
     const res = await ocrBank(data);
-    if (res.code == 0) { 
+    if (res.code == 0) {
       const { bankAccount, bankName, bankCardTypeName } = res.data;
       this.setData({
         bankAccount,
@@ -81,41 +81,41 @@ Page({
   submitData: function (e) {
     const { bankAccount, bankName, bankCardTypeName, bankUserName } = this.data;
     if (!/^[0-9]*$/.test(bankAccount)) {
-      wx.showToast({
+      tt.showToast({
         title: '银行账号格式错误',
-        icon:'fail',
+        icon: 'fail',
         duration: 3000
       });
       return;
     }
     if (!/^[\u4e00-\u9fa5]*$/.test(bankName)) {
-      wx.showToast({
+      tt.showToast({
         title: '银行名称格式错误',
-        icon:'fail',
+        icon: 'fail',
         duration: 3000
       });
       return;
     }
-    const params = { 
-      bankAccount, 
+    const params = {
+      bankAccount,
       bankName,
       bankCardTypeName,
       bankUserName
     };
-    submitBankCardInfo(params).then((res)=>{
-      wx.showToast({
+    submitBankCardInfo(params).then((res) => {
+      tt.showToast({
         title: '提交成功',
-        icon:'none',
+        icon: 'none',
         duration: 2500
       });
-      setTimeout(function() {
-        wx.navigateBack({
-          delta: 0,
-        })
+      setTimeout(function () {
+        tt.navigateBack({
+          delta: 0
+        });
       }, 2000);
     }).catch((err) => {
       if (err.code !== 0) {
-        wx.showModal({
+        tt.showModal({
           title: '提示',
           content: err.msg,
           success: function (sm) {
@@ -128,18 +128,18 @@ Page({
   },
   onInputBankAccount: function (e) {
     this.setData({
-      bankAccount: e.detail.value,
-    })
+      bankAccount: e.detail.value
+    });
   },
   onInputBankName: function (e) {
     this.setData({
-      bankName: e.detail.value,
-    })
+      bankName: e.detail.value
+    });
   },
-  onInputBankUserName: function(e) {
+  onInputBankUserName: function (e) {
     this.setData({
-      bankUserName: e.detail.value,
-    })
+      bankUserName: e.detail.value
+    });
   },
 
   /**
@@ -168,5 +168,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-})
+  }
+});

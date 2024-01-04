@@ -7,7 +7,7 @@ Component({
     tabs: {
       type: Array,
       value: []
-    },
+    }
   },
 
   // 启用插槽
@@ -19,13 +19,13 @@ Component({
    * 组件的初始数据
    */
   data: {
-    curIndex: 0, //tab栏选中标题的下标
-  }, 
+    curIndex: 0 //tab栏选中标题的下标
+  },
 
 
   ready: function () {
-    
-  }, 
+
+  },
 
   /**
    * 组件的方法列表
@@ -39,4 +39,4 @@ Component({
       this.triggerEvent('TabHandle', curIndex);
     }
   }
-})
+});

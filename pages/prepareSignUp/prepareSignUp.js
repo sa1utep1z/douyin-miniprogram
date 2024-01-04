@@ -1,7 +1,7 @@
 // pages/prepareSignUp/prepareSignUp.js
-import { listPreSignUpMode, fetchPreSignUpMode, submitPreSignUp, fetchRecruiter } from '../../api/prepareSignUp'
-import { fetchDetailPostArguments} from '../../api/userApi'
-import { ocrIdNo } from '../../api/commonApi'
+import { listPreSignUpMode, fetchPreSignUpMode, submitPreSignUp, fetchRecruiter } from '../../api/prepareSignUp';
+import { fetchDetailPostArguments } from '../../api/userApi';
+import { ocrIdNo } from '../../api/commonApi';
 Page({
 
   /**
@@ -27,7 +27,7 @@ Page({
     isSubmit: true,
     recruiterId: '',
     recruiterName: '',
-    isShareQrCode: false, // 是否是海报分享
+    isShareQrCode: false // 是否是海报分享
   },
 
   /**
@@ -35,53 +35,53 @@ Page({
    */
   onLoad(options) {
     // 这个是分享海报携带的分享参数id
-    if (options.scene){
-      wx.setStorageSync('isShare', true);
+    if (options.scene) {
+      tt.setStorageSync('isShare', true);
       this.setData({
-        isShareQrCode: true,
-      })
+        isShareQrCode: true
+      });
       this.parseScene(options.scene);
     }
     this.getListPreSignUpMode();
   },
   parseScene: async function (scene) {
     try {
-      const res =  await fetchDetailPostArguments(scene);
+      const res = await fetchDetailPostArguments(scene);
       const { recommendId, recruiterId, recruiterName } = res.data;
       if (recommendId) {
-        wx.setStorageSync('recommendId', recommendId);
+        tt.setStorageSync('recommendId', recommendId);
       }
       if (recruiterId) {
         this.setData({
           recruiterId,
           recruiterName
-        })
+        });
       }
     } catch (error) {
       console.log('获取分享信息失败');
     }
-   },
-  getListPreSignUpMode: async function() {
+  },
+  getListPreSignUpMode: async function () {
     const res = await listPreSignUpMode();
     if (res.data && res.data.length > 0) {
       const resDetail = await fetchPreSignUpMode(res.data[0]['key']);
-      const {data} = resDetail;
+      const { data } = resDetail;
       this.setData({
-        preSignUpModeOptions:  res.data,
+        preSignUpModeOptions: res.data,
         preSignUpModeIndex: 0,
         desc: data.desc,
         companyOptions: data.companyOptions,
         companyIndex: '',
         preDate: '',
         preDateStart: data.startDate,
-        preDateEnd: data.endDate,
-      })
+        preDateEnd: data.endDate
+      });
     }
   },
-  changePreSignUpMode: async function(e) {
+  changePreSignUpMode: async function (e) {
     const { preSignUpModeOptions } = this.data;
     const res = await fetchPreSignUpMode(preSignUpModeOptions[e.detail.value]['key']);
-    const {data} = res;
+    const { data } = res;
     this.setData({
       preSignUpModeIndex: e.detail.value,
       desc: data.desc,
@@ -89,86 +89,86 @@ Page({
       companyIndex: '',
       preDate: '',
       preDateStart: data.startDate,
-      preDateEnd: data.endDate,
-    })
+      preDateEnd: data.endDate
+    });
   },
-  changeCompany: function(e) {
+  changeCompany: function (e) {
     this.setData({
       companyIndex: e.detail.value
-    })
+    });
   },
-  changePreDate: function(e) {
+  changePreDate: function (e) {
     this.setData({
-      preDate: e.detail.value,
-    })
+      preDate: e.detail.value
+    });
   },
-  bindUserName: function(e) {
+  bindUserName: function (e) {
     this.setData({
       userName: e.detail.value
-    })
+    });
   },
-  bindIdNo: function(e) {
+  bindIdNo: function (e) {
     const idNo_input = e.detail.value;
     const { isShareQrCode, recruiterId } = this.data;
     this.setData({
       idNo: idNo_input
-    })
+    });
     if (idNo_input.length === 18 && !isShareQrCode && !recruiterId) {
       fetchRecruiter(idNo_input).then((res) => {
         this.setData({
           recruiterId: res.data.id,
-          recruiterName: res.data.name,
+          recruiterName: res.data.name
         });
       });
     }
   },
-  bindMobile: function(e) {
+  bindMobile: function (e) {
     this.setData({
       mobile: e.detail.value
-    })
+    });
   },
-  bindNation: function(e) {
+  bindNation: function (e) {
     this.setData({
       nation: e.detail.value
-    })
+    });
   },
-  bindAddress: function(e) {
+  bindAddress: function (e) {
     this.setData({
       address: e.detail.value
-    })
+    });
   },
-  bindAuthority: function(e) {
+  bindAuthority: function (e) {
     this.setData({
       authority: e.detail.value
-    })
+    });
   },
-  bindTimeLimit: function(e) {
+  bindTimeLimit: function (e) {
     this.setData({
       timeLimit: e.detail.value
-    })
+    });
   },
-  changeArrivalMode: function(e) {
+  changeArrivalMode: function (e) {
     this.setData({
       arrivalMode: e.detail.value
-    })
+    });
   },
-  submitData: async function() {
+  submitData: async function () {
     const { preSignUpModeOptions, preSignUpModeIndex, companyOptions, companyIndex, preDate, userName, idNo, mobile, nation, address, authority, timeLimit, arrivalMode, recruiterId } = this.data;
     if (preSignUpModeIndex === '' || companyIndex === '' || preDate === '' || userName === '' || idNo === '' || mobile === '' || arrivalMode === '') {
-      wx.showToast({
+      tt.showToast({
         title: '请完善信息',
         icon: 'error'
       });
       return;
     }
     if (recruiterId === '' || recruiterId === null) {
-      wx.showToast({
+      tt.showToast({
         title: '专属招聘员不能为空',
         icon: 'none'
       });
       return;
     }
-    this.setData({isSubmit: false})
+    this.setData({ isSubmit: false });
     const params = {
       preSignUpModeId: preSignUpModeOptions[preSignUpModeIndex]['key'],
       companyId: companyOptions[companyIndex]['companyId'],
@@ -184,43 +184,43 @@ Page({
       recruiterId
     };
     await submitPreSignUp(params);
-    wx.showToast({
+    tt.showToast({
       title: '提交成功',
-      icon:'none',
+      icon: 'none',
       duration: 3000
     });
-    setTimeout(function() {
-      wx.navigateBack({
-        delta: 0,
-      })
+    setTimeout(function () {
+      tt.navigateBack({
+        delta: 0
+      });
     }, 2500);
   },
-  ocrClick: async function(e) {
-    wx.showActionSheet({
+  ocrClick: async function (e) {
+    tt.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       itemColor: "#00000",
-      success: (res)=> {
-       if (!res.cancel) {
-        if (res.tapIndex == 0) {
-         this.chooseWxImage('album')
-        } else if (res.tapIndex == 1) {
-          this.chooseWxImage('camera')
+      success: (res) => {
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            this.chooseWxImage('album');
+          } else if (res.tapIndex == 1) {
+            this.chooseWxImage('camera');
+          }
         }
-       }
       }
-    })
+    });
   },
-  chooseWxImage:function(type){
-    wx.chooseImage({
+  chooseWxImage: function (type) {
+    tt.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: [type],
-      success:  (res) =>{
-       this.uploadImg(res.tempFilePaths[0])
+      success: (res) => {
+        this.uploadImg(res.tempFilePaths[0]);
       }
-     }) 
+    });
   },
-  uploadImg: async function(imgData){
+  uploadImg: async function (imgData) {
     const res = await ocrIdNo(imgData);
     if (res.code == 0) {
       const { data } = res;
@@ -231,13 +231,13 @@ Page({
         nation: data.nation ? data.nation : nation,
         address: data.address ? data.address : address,
         authority: data.authority ? data.authority : authority,
-        timeLimit: data.timeLimit ? data.timeLimit : timeLimit,
-      })
+        timeLimit: data.timeLimit ? data.timeLimit : timeLimit
+      });
       if (data.idNo && !isShareQrCode && !recruiterId) {
         const idNoRes = await fetchRecruiter(data.idNo);
         this.setData({
           recruiterId: idNoRes.data.id,
-          recruiterName: idNoRes.data.name,
+          recruiterName: idNoRes.data.name
         });
       }
     }
@@ -290,4 +290,4 @@ Page({
   onShareAppMessage() {
 
   }
-})
+});

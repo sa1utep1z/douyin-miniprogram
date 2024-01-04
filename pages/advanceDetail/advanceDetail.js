@@ -1,5 +1,5 @@
 // pages/authDisplay/authDisplay.js
-import { fetchAdvanceMemberInfo, getResignApproveForm, submitApprove } from '../../api/applyApi'
+import { fetchAdvanceMemberInfo, getResignApproveForm, submitApprove } from '../../api/applyApi';
 Page({
 
   /**
@@ -12,14 +12,14 @@ Page({
     advanceAmount: 100,
     amountIndex: 0,
     amountOptions: [
-      {"title": "100元", "value": "100"},
-      {"title": "200元", "value": "200"},
-      {"title": "300元", "value": "300"},
-      {"title": "400元", "value": "400"},
-      {"title": "500元", "value": "500"},
-    ],
+    { "title": "100元", "value": "100" },
+    { "title": "200元", "value": "200" },
+    { "title": "300元", "value": "300" },
+    { "title": "400元", "value": "400" },
+    { "title": "500元", "value": "500" }],
+
     canSubmit: false,
-    submitBtnName: '提交申请',
+    submitBtnName: '提交申请'
   },
 
   /**
@@ -41,32 +41,32 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
-  onAmountChange: function(e) {
-    this.setData({advanceAmount: e.detail})
+  onAmountChange: function (e) {
+    this.setData({ advanceAmount: e.detail });
   },
-  clickList: function(e) {
-    wx.navigateTo({
-      url: '../../pages/advance/advance',
+  clickList: function (e) {
+    tt.navigateTo({
+      url: '../../pages/advance/advance'
     });
   },
-  bindPickerAmount: function(e) {
+  bindPickerAmount: function (e) {
     this.setData({
       amountIndex: e.detail.value
-    })
+    });
   },
-  getApproveTempForm: async function() {
+  getApproveTempForm: async function () {
     const { submitType } = this.data;
     await getResignApproveForm(submitType).then((res) => {
       this.setData({
-        formFields: res.data,
-      })
+        formFields: res.data
+      });
     }).catch((err) => {
       this.setData({
         canSubmit: false,
-        submitBtnName: '获取模板失败',
-      })
+        submitBtnName: '获取模板失败'
+      });
     });
   },
   getAdvanceMemberInfo: async function (e) {
@@ -75,20 +75,20 @@ Page({
       this.setData({
         canSubmit: true,
         pageBean: { ...data }
-      })
+      });
     }).catch((err) => {
       this.setData({
         canSubmit: false,
-        submitBtnName: err.msg,
-      })
+        submitBtnName: err.msg
+      });
     });
   },
-  submitData: async function(e) {
+  submitData: async function (e) {
     const { pageBean, formFields, amountIndex, amountOptions, submitType, advanceAmount } = this.data;
     if (formFields.length === 0) {
-      wx.showToast({
+      tt.showToast({
         title: '不符合提交条件',
-        icon:'none',
+        icon: 'none',
         duration: 3000
       });
       return;
@@ -104,30 +104,30 @@ Page({
       }
       const res = {
         ...e,
-        value,
+        value
       };
       return res;
-    })
+    });
     await submitApprove(submitType, submitList, false).then((res) => {
       this.setData({
-        canSubmit: false,
-      })
-      wx.showToast({
-        title: '提交成功',
-        icon:'none',
+        canSubmit: false
       });
-      setTimeout(function() {
-        wx.navigateTo({
-          url: '../../pages/advance/advance',
+      tt.showToast({
+        title: '提交成功',
+        icon: 'none'
+      });
+      setTimeout(function () {
+        tt.navigateTo({
+          url: '../../pages/advance/advance'
         });
       }, 2000);
-    }).catch(err => {
-      wx.showModal({
+    }).catch((err) => {
+      tt.showModal({
         title: '提示',
         showCancel: false,
         content: err.msg
-      })
-    })
+      });
+    });
   },
 
   /**
@@ -156,5 +156,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-})
+  }
+});

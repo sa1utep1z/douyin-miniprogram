@@ -1,6 +1,1 @@
-{
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index"
-  },
-  "navigationBarTitleText": "紧急联系人"
-}
+{"usingComponents":{"van-divider":"/miniprogram_npm/@vant/weapp/divider/index"},"navigationBarTitleText":"紧急联系人"}

@@ -1,7 +1,1 @@
-{
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index",
-    "van-popup": "@vant/weapp/popup/index"
-  },
-  "navigationBarTitleText": "众鼎直聘"
-}
+{"usingComponents":{"van-divider":"/miniprogram_npm/@vant/weapp/divider/index","van-popup":"/miniprogram_npm/@vant/weapp/popup/index"},"navigationBarTitleText":"众鼎直聘"}

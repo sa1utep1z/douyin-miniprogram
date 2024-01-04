@@ -1,0 +1,108 @@
+<!--pages/personal/personal.ttml-->
+<view class="container">
+  <view class="block-info">
+    <view class="flex-row">
+      <image class="info-avatar" src="{{userInfo.weChatIconUrl===null?'../../assets/images/public/icon_default_head.png':userInfo.weChatIconUrl}}"></image>
+      <view class="info-column">
+        <view type="userNickName" class="info-name">
+          <text>{{userInfo.weChatName===null?'微信用户':userInfo.weChatName}}</text>
+        </view>
+        <view class="info-slogan">众鼎日薪 天天发薪</view>
+      </view>
+      <image mode="heightFix" bindtap="qrCodeScan" show-menu-by-longpress="true" class="scan-img" src="../../assets/images/public/scan.png"></image>
+    </view>
+  </view>
+  <view class="block-wallet">
+    <image src="../../assets/images/personal/img_personal_bg2.png" class="block-wallet-bg" />
+    <view class="wallet-title">我的余额(元)</view>
+    <view class="wallet-amount">{{showAmt===true?userInfo.balance:'****'}}</view>
+    <image class="wallet-eye" src="{{showAmt?'../../assets/images/personal/icon_eye_show.png':'../../assets/images/personal/icon_eye_hide.png'}}" bindtap="handleEye" />
+    <view class="wallet-widthdraw" bindtap="handleWithdraw">
+      <text>提现</text><image class="wallet-widthdraw-arrow" src="../../assets/images/personal/icon_right_arrrow.png" />
+    </view>
+  </view>
+  <view class="block-manager" tt:if="{{userInfo.recruiter===false&&userInfo.recruiterName!==null}}">
+    <view class="manager-title">客服专员</view>
+    <view class="flex-row">
+      <image class="manager-avatar" src="../../assets/images/public/header.png"></image>
+      <view class="manager-column">
+        <view class="manager-name">{{userInfo.recruiterName}}</view>
+        <view class="manager-company">众鼎直聘</view>
+      </view>
+      <view class="manager-phone" bindtap="handelPhoneCall">电话咨询</view>
+      <view class="manager-wechat" bindtap="handelCopyWechat">添加微信</view>
+    </view>
+  </view>
+  <view class="block-action">
+    <view class="action-title">常用功能</view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="entryData">
+      <image class="action-icon" src="../../assets/images/personal/entryData.png" />
+      <view class="action-lable">完善资料</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="auth">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_auth2.png" />
+      <view class="action-lable">实名认证</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="expandPoster">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_poster.png" />
+      <view class="action-lable">宣传海报</view>
+    </view>
+    <!-- <van-divider hairline wx:if="{{userInfo.recruiter===true}}" />
+    <view class="action-row" bindtap="handelMenuClick" wx:if="{{userInfo.recruiter===true}}" hover-class="hover-class" data-tag="member">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_staff2.png"/>
+      <view class="action-lable">邀请记录</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view> -->
+    <!-- <van-divider hairline  wx:if="{{userInfo.recruiter===true}}" />
+    <view class="action-row" wx:if="{{userInfo.recruiter===true}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="staff">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_member.png"/>
+      <view class="action-lable">成员信息</view>
+      <image class="action-link" src="../../assets/images/personal/icon_arrrow_grey.png"/>
+    </view> -->
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="contacts">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_contacts.png" />
+      <view class="action-lable">紧急联系人</view>
+    </view>
+    <view class="action-row" tt:if="{{userInfo.recruiter===false}}" bindtap="handelMenuClick" hover-class="hover-class" data-tag="registration">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_register2.png" />
+      <view class="action-lable">我的报名</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="balance">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_blance2.png" />
+      <view class="action-lable">账单明细</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="bankCard">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_bankCard.png" />
+      <view class="action-lable">发薪卡</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="payslip">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_blance2.png" />
+      <view class="action-lable">工资条</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="advance">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_advance.png" />
+      <view class="action-lable">预支薪资</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="dorm">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_dorm.png" />
+      <view class="action-lable">宿舍服务</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="resignApply">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_resign.png" />
+      <view class="action-lable">离职报备</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="feedback">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_suggestion2.png" />
+      <view class="action-lable">意见反馈</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="contract">
+      <image class="action-icon" src="../../assets/images/personal/icon_action_suggestion2.png" />
+      <view class="action-lable">合同管理</view>
+    </view>
+    <view class="action-row" bindtap="handelMenuClick" hover-class="hover-class" data-tag="lottery">
+      <image class="action-icon" src="../../assets/images/personal/draw.png" />
+      <view class="action-lable">抽奖活动</view>
+    </view>
+  </view>
+</view>
+

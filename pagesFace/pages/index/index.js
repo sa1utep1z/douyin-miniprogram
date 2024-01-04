@@ -7,37 +7,37 @@ Page({
 
   inputUrl(e) {
     this.setData({
-      url: e.detail.value,
-    })
+      url: e.detail.value
+    });
   },
 
   goScanCode() {
-    wx.scanCode({
+    tt.scanCode({
       onlyFromCamera: true,
-      success: ({result = ''}) => {
-        if(!result) {
-          wx.showToast({
+      success: ({ result = '' }) => {
+        if (!result) {
+          tt.showToast({
             title: '扫码失败',
             icon: 'error'
-          })
+          });
         }
         this.setData({
           url: result
-        }, this.goUrl)
+        }, this.goUrl);
       }
-    })
+    });
   },
 
   goUrl() {
-    const url = this.data.url
-    wx.navigateTo({
-      url: '/pagesFace/pages/webview/webview?url=' + encodeURIComponent(url),
-    })
+    const url = this.data.url;
+    tt.navigateTo({
+      url: '/pagesFace/pages/webview/webview?url=' + encodeURIComponent(url)
+    });
   },
 
   clearUrl() {
     this.setData({
-      url: '',
-    })
+      url: ''
+    });
   }
-})
+});

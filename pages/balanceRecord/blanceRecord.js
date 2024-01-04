@@ -11,8 +11,8 @@ Page({
     pageNumber: 0,
     pageSize: 15,
     loadingStatus: 0,
-    typeArr: ['','PAYOFF','WITHDRAW'],
-    type: '',
+    typeArr: ['', 'PAYOFF', 'WITHDRAW'],
+    type: ''
   },
 
   /**
@@ -48,7 +48,7 @@ Page({
     }
     this.setData({
       tabIndex: index,
-      type: typeArr[index],
+      type: typeArr[index]
     });
     this.onRefresh();
   },
@@ -82,8 +82,8 @@ Page({
   },
 
   onLoadMore: async function (e) {
-    const { pageNumber, pageSize, loadingStatus, recordList, type} = this.data;
-    if ( loadingStatus!==0 ) {
+    const { pageNumber, pageSize, loadingStatus, recordList, type } = this.data;
+    if (loadingStatus !== 0) {
       console.log('过滤无效请求');
       return;
     }
@@ -91,24 +91,24 @@ Page({
     const params = {
       pageNumber,
       pageSize,
-      type,
+      type
     };
     try {
       const res = await fetchBalanceDetail(params);
       const totalPages = res.data.totalPages;
-      if(pageNumber === 0) {
+      if (pageNumber === 0) {
         this.setData({
-          recordList: res.data.content,
-        })
+          recordList: res.data.content
+        });
       } else {
         this.setData({
-          recordList: recordList.concat(res.data.content),
-        })
+          recordList: recordList.concat(res.data.content)
+        });
       }
-      if(pageNumber < totalPages-1){
+      if (pageNumber < totalPages - 1) {
         this.setLoadingReady();
         this.setData({
-          pageNumber: pageNumber + 1,
+          pageNumber: pageNumber + 1
         });
       } else {
         this.setLoadingNoMore();
@@ -116,29 +116,29 @@ Page({
     } catch (error) {
       this.setLoadingNoMore();
     }
-      
+
   },
   onRefresh: function (e) {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,   
+      pageNumber: 0
     });
     this.onLoadMore();
   },
 
   setLoadingStart: function () {
     this.setData({
-      loadingStatus: 1,
-    }) 
+      loadingStatus: 1
+    });
   },
   setLoadingReady: function () {
     this.setData({
-      loadingStatus: 0,
-    }) 
+      loadingStatus: 0
+    });
   },
   setLoadingNoMore: function () {
     this.setData({
-      loadingStatus: 2,
-    }) 
-  },
-})
+      loadingStatus: 2
+    });
+  }
+});

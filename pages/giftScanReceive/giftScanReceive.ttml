@@ -1,0 +1,13 @@
+<!--pages/giftScanReceive/giftScanReceive.ttml-->
+<block tt:if="{{allowReceive === true}}">
+  <view class="receiveV">
+    <view class="imgV"><image mode="widthFix" src="/assets/images/public/success.png"></image></view>
+    <view class="fontV">符合领取</view>
+  </view>
+</block>
+<block tt:if="{{allowReceive === false}}">
+  <view class="receiveV">
+    <view class="imgV"><image mode="widthFix" src="/assets/images/public/fail.png"></image></view>
+    <view class="fontV">不符合领取资格，请联系工作人员核实！</view>
+  </view>
+</block>

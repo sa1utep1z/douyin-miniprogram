@@ -1,9 +1,9 @@
 {
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index",
-    "van-cell": "@vant/weapp/cell/index",
-    "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-calendar": "@vant/weapp/calendar/index"
-  },
-  "navigationBarTitleText": "成员信息"
+    "usingComponents": {
+        "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
+        "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
+        "van-cell-group": "/miniprogram_npm/@vant/weapp/cell-group/index",
+        "van-calendar": "/miniprogram_npm/@vant/weapp/calendar/index"
+    },
+    "navigationBarTitleText": "成员信息"
 }

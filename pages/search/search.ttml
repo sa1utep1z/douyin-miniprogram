@@ -1,0 +1,65 @@
+<!--pages/search/search.ttml-->
+
+<view style="height: {{statusNavBarHeight}}px;" class="navigator">
+  <view style="height: {{height}}px; margin-top: {{top}}px;" class="title-bar">
+    <image class="nav-back" src="../../assets/images/public/icon_back.png" catchtap="handleBack"></image> 
+    <view class="search-box" style="height: {{height}}px">
+      <image class="search-icon" src="../../assets/images/public/icon_search.png" />
+      <input value="{{keyWord}}" class="search-text" placeholder="请输入职位或公司" type="text" focus="{{true}}" bindblur="handleSearchBlur" bindinput="handleSearchInput"></input>
+      <image src="../../assets/images/public/icon_delete.png" tt:if="{{keyWord.length>0}}" class="clear-text" bindtap="handleRest" />
+    </view>
+  </view> 
+</view>
+    <scroll-view bindscroll="bindscroll" enhanced="{{true}}" show-scrollbar="{{false}}" scroll-y="true" class="scroll-view" height="100%" lower-threshol="50" tt:if="{{jobList.length > 0}}" bindscrolltolower="onLoadMore">
+      <view class="scroll-view-holder" style="padding-top: {{statusNavBarHeight}}px;">
+        <block tt:for="{{jobList}}" tt:key="item">
+          <view class="job-view" bindtap="handleItemClick" data-item="{{item}}">
+            <view class="job-head-row">
+              <image class="job-image" src="{{item.positionImage}}"></image>
+              <view class="job-right-column">
+                <view class="job-title">{{item.jobName}}</view>
+                <block tt:if="{{item.tags.length<=3}}">
+                  <view class="job-tag-row">
+                    <view class="job-tag" tt:for="{{item.tags}}" tt:key="index">{{item}}</view>
+                  </view>
+                </block>
+                <block tt:if="{{item.tags.length>3}}">
+                  <view class="job-tag-row">
+                    <view class="job-tag">{{item.tags[0]}}</view>
+                    <view class="job-tag">{{item.tags[1]}}</view>
+                    <view class="job-tag">{{item.tags[2]}}</view>
+                  </view>
+                </block>
+                <view class="job-price-row">
+                  <view class="job-price">{{item.salaryStart}}-{{item.salaryEnd}}<text class="job-price-unit">元/月</text></view>
+                  <view class="job-position">{{item.area}}</view>
+                </view>
+              </view>
+            </view>
+            <van-divider hairline class="van-divider-item" />
+            <view class="job-action-row">
+              <view class="job-des">{{item.recommendExplain || ''}}<span style="color: red;">{{item.recommendAmount || ''}}</span></view>
+              <view class="job-des">{{item.debtExplain || ''}}<span style="color: red;">{{item.debtAmount || ''}}</span></view>
+              <view class="job-inner-row">
+                <view class="job-register" catchtap="onSignUp" data-id="{{item.id}}">立即报名</view>
+              </view>
+            </view>
+          </view>
+        </block>  
+        <block tt:if="{{loadingStatus === 1}}">
+          <view class="status-loading" id="status-loading">
+            <van-loading type="spinner" size="24rpx" color="#999999">加载中...</van-loading>
+          </view>
+        </block>
+        <block tt:if="{{loadingStatus === 2}}">
+          <view class="status-finish">
+              <van-divider hairline contentPosition="center">我也是有底线的</van-divider>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  <view tt:else class="empty-view">
+    <view class="empty-text">{{emptyText}}</view>
+    <!-- <button class="empty-button" bindtap="callPhone">直接电话报名</button> -->
+  </view>
+  <SignUpInfo show="{{showSignDialog}}" position="{{jobId}}" bind:showSignInfo="onChangeDialog"></SignUpInfo>

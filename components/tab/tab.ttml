@@ -1,0 +1,11 @@
+<view class="tab-top">
+<!-- 待优化：这里使用了flex布局，不可支持滑动，所以tab太多会很难看 -->
+  <view tt:for="{{tabs}}" tt:key="index" bindtap="clickTab" data-id="{{index}}" class="tab {{curIndex === index ? 'tab-active' : ''}}">
+    {{item.title}}
+  </view>
+</view>
+<view class="tab-content">
+  <view tt:for="{{tabs}}" tt:key="index">
+    <slot name="{{index}}" tt:if="{{curIndex === index}}"></slot>
+  </view>
+</view>

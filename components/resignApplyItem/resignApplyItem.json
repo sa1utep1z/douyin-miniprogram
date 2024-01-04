@@ -1,6 +1,1 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-divider": "@vant/weapp/divider/index"
-  }
-}
+{"component":true,"usingComponents":{"van-divider":"/miniprogram_npm/@vant/weapp/divider/index"}}

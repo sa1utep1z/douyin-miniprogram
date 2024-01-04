@@ -1,8 +1,7 @@
 {
-  "component": true,
-  "usingComponents": {
-    "van-overlay": "@vant/weapp/overlay/index",
-    "van-divider": "@vant/weapp/divider/index"
-  }
-  
+    "component": true,
+    "usingComponents": {
+        "van-overlay": "/miniprogram_npm/@vant/weapp/divider/index",
+        "van-divider": "/miniprogram_npm/@vant/weapp/divider/index"
+    }
 }

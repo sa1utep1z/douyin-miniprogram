@@ -1,7 +1,7 @@
 {
-  "usingComponents": {
-    "Item": "../../components/registrationItem/registrationItem",
-    "van-divider": "@vant/weapp/divider/index",
-    "van-loading": "@vant/weapp/loading/index"
-  }
+    "usingComponents": {
+        "Item": "../../components/registrationItem/registrationItem",
+        "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
+        "van-loading": "/miniprogram_npm/@vant/weapp/loading/index"
+    }
 }

@@ -1,6 +1,1 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-field": "../field/index"
-  }
-}
+{"component":true,"usingComponents":{"van-field":"../field/index"}}

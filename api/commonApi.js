@@ -27,7 +27,7 @@ export const listFeedback = (data) => {
 
 // 提交反馈意见
 export const fetchFeedbackCategories = (data) => {
-  return ajax.request('/client/member/feedback/categories/inquiry', null,'GET');
+  return ajax.request('/client/member/feedback/categories/inquiry', null, 'GET');
 };
 
 // banner
@@ -43,4 +43,3 @@ export const ocrBank = (data) => {
 export const ocrIdNo = (data) => {
   return ajax.uploadRequest('/ocr', data);
 };
-

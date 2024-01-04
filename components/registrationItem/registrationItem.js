@@ -1,5 +1,5 @@
 // pages/registration/registrationItem/registrationItem.js
-import { userConfirmSignUp, userCancelSignUp } from '../../api/jobApi'
+import { userConfirmSignUp, userCancelSignUp } from '../../api/jobApi';
 Component({
   /**
    * 组件的属性列表
@@ -22,21 +22,21 @@ Component({
   methods: {
     onItemClick: function (e) {
       const { item } = this.data;
-      wx.navigateTo({
-        url: `../../pages/jobDetail/jobDetail?jobId=${item.positionOrderId}`,
-      })
+      tt.navigateTo({
+        url: `../../pages/jobDetail/jobDetail?jobId=${item.positionOrderId}`
+      });
     },
     onConfirmSignUp: async function (e) {
       const { item } = this.data;
       await userConfirmSignUp(item.id);
       item.status = 'SIGN_UP_CONFIRM';
       this.setData({
-        item,
+        item
       });
-      wx.showToast({
+      tt.showToast({
         title: '报名成功',
         icon: 'none',
-        duration: 2000,
+        duration: 2000
       });
     },
     onCancelSignUp: async function (e) {
@@ -44,13 +44,13 @@ Component({
       await userCancelSignUp(item.id);
       item.canCancelSignUp = false;
       this.setData({
-        item,
+        item
       });
-      wx.showToast({
+      tt.showToast({
         title: '已取消',
         icon: 'none',
-        duration: 2000,
+        duration: 2000
       });
-    },
-  },
-})
+    }
+  }
+});

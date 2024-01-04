@@ -1,5 +1,5 @@
 // pages/staffList/staffList.js
-import { fetchStaffList } from '../../api/userApi'
+import { fetchStaffList } from '../../api/userApi';
 Page({
 
   /**
@@ -12,9 +12,9 @@ Page({
     pageNumber: 0,
     pageSize: 15,
     loadingStatus: 0,
-    dateStr:'全部',
+    dateStr: '全部',
     show: false,
-    minDate: new Date(2020, 0, 1).getTime(),
+    minDate: new Date(2020, 0, 1).getTime()
   },
 
   /**
@@ -68,9 +68,9 @@ Page({
 
   handleCall: function (event) {
     const { phone } = event.currentTarget.dataset;
-    if( phone ) {
-      wx.makePhoneCall({
-        phoneNumber: phone,
+    if (phone) {
+      tt.makePhoneCall({
+        phoneNumber: phone
       });
     }
   },
@@ -80,7 +80,7 @@ Page({
   },
 
   formatDateArg: function () {
-   const date = new Date();
+    const date = new Date();
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   },
 
@@ -96,16 +96,16 @@ Page({
     const [start, end] = event.detail;
     this.setData({
       show: false,
-      startDate:`${this.formatDate(start)}`,
+      startDate: `${this.formatDate(start)}`,
       endDate: `${this.formatDate(end)}`,
-      dateStr: `${this.formatDate(start)} 至 ${this.formatDate(end)}`,
+      dateStr: `${this.formatDate(start)} 至 ${this.formatDate(end)}`
     });
     this.onRefresh();
   },
 
   onLoadMore: async function (e) {
-    const { pageNumber, pageSize, startDate, endDate, loadingStatus, staffList} = this.data;
-    if ( loadingStatus!==0 ) {
+    const { pageNumber, pageSize, startDate, endDate, loadingStatus, staffList } = this.data;
+    if (loadingStatus !== 0) {
       console.log('过滤无效请求');
       return;
     }
@@ -114,24 +114,24 @@ Page({
       pageNumber,
       pageSize,
       startDate,
-      endDate,
+      endDate
     };
     try {
       const res = await fetchStaffList(params);
       const totalPages = res.data.totalPages;
-      if(pageNumber === 0) {
+      if (pageNumber === 0) {
         this.setData({
-          staffList: res.data.content,
-        })
+          staffList: res.data.content
+        });
       } else {
         this.setData({
-          staffList: staffList.concat(res.data.content),
-        })
+          staffList: staffList.concat(res.data.content)
+        });
       }
-      if(pageNumber < totalPages-1){
+      if (pageNumber < totalPages - 1) {
         this.setLoadingReady();
         this.setData({
-          pageNumber: pageNumber + 1,
+          pageNumber: pageNumber + 1
         });
       } else {
         this.setLoadingNoMore();
@@ -139,29 +139,29 @@ Page({
     } catch (error) {
       this.setLoadingNoMore();
     }
-      
+
   },
   onRefresh: function (e) {
     this.setLoadingReady();
     this.setData({
-      pageNumber: 0,   
+      pageNumber: 0
     });
     this.onLoadMore();
   },
 
   setLoadingStart: function () {
     this.setData({
-      loadingStatus: 1,
-    }) 
+      loadingStatus: 1
+    });
   },
   setLoadingReady: function () {
     this.setData({
-      loadingStatus: 0,
-    }) 
+      loadingStatus: 0
+    });
   },
   setLoadingNoMore: function () {
     this.setData({
-      loadingStatus: 2,
-    }) 
-  },
-})
+      loadingStatus: 2
+    });
+  }
+});

@@ -1,6 +1,6 @@
 // pages/message/message.js
-import { fetchMessageType, readAllUnReadMessage } from '../../api/messageApi'
-import { setTabBarText } from '../../utils/tabBar'
+import { fetchMessageType, readAllUnReadMessage } from '../../api/messageApi';
+import { setTabBarText } from '../../utils/tabBar';
 Page({
 
   /**
@@ -11,13 +11,13 @@ Page({
     statusNavBarHeight: 0,
     navBarHeight: 0,
     height: 0,
-    top: 0,
+    top: 0
   },
   getStatusBarHeight: function () {
     // 获取状态栏高度
-    const { statusBarHeight } = wx.getSystemInfoSync();
+    const { statusBarHeight } = tt.getSystemInfoSync();
     // 得到右上角菜单的位置尺寸
-    const menuButtonObject = wx.getMenuButtonBoundingClientRect();
+    const menuButtonObject = tt.getMenuButtonBoundingClientRect();
     const { top, height } = menuButtonObject;
     // 计算导航栏的高度
     // 此高度基于右上角菜单在导航栏位置垂直居中计算得到
@@ -28,7 +28,7 @@ Page({
       navBarHeight,
       statusNavBarHeight,
       height,
-      top,
+      top
     });
   },
   /**
@@ -52,34 +52,34 @@ Page({
     this.getStatusBarHeight();
     this.getMessageType();
   },
-  cleanUnRead: async function(e) {
+  cleanUnRead: async function (e) {
     await readAllUnReadMessage();
     this.getMessageType();
   },
   handelWorkMessage: function (e) {
-    const { bean } =  e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `../../pages/message/workMessage/workMessage?messageType=${bean.code}`,
+    const { bean } = e.currentTarget.dataset;
+    tt.navigateTo({
+      url: `../../pages/message/workMessage/workMessage?messageType=${bean.code}`
     });
   },
   handelSystemMessage: function (e) {
-    const { bean } =  e.currentTarget.dataset;
-    wx.navigateTo({
-      url: `../../pages/message/systemMessage/systemMessage?messageType=${bean.code}`,
+    const { bean } = e.currentTarget.dataset;
+    tt.navigateTo({
+      url: `../../pages/message/systemMessage/systemMessage?messageType=${bean.code}`
     });
   },
   handelAccountMessage: function () {
-    wx.navigateTo({
-      url: '../../pages/message/accountMessage/accountMessage',
+    tt.navigateTo({
+      url: '../../pages/message/accountMessage/accountMessage'
     });
   },
 
   getMessageType: async function (e) {
     const res = await fetchMessageType();
     this.setData({
-      messageTypeList: res.data,
+      messageTypeList: res.data
     });
-    const unTotal = res.data.reduce(function(total, currentValue, currentIndex, arr) {
+    const unTotal = res.data.reduce(function (total, currentValue, currentIndex, arr) {
       return total + currentValue.unReadMessageCount;
     }, 0);
     setTabBarText(2, unTotal + '');
@@ -111,5 +111,5 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-})
+  }
+});
